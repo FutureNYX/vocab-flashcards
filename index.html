@@ -255,7 +255,8 @@ function deck(){
   const built = (window.WORDS||[]).map(w => ({
     id: w.word, custom:false,
     word: w.word, pos: w.part_of_speech, ex: w.example,
-    def: w.definition, en: w.english_synonyms, ru: w.russian_synonyms
+    def: w.definition, rudef: w.russian_definition,
+    en: w.english_synonyms, ru: w.russian_synonyms
   }));
   const mine = S.custom.map(c => ({id:c.id, custom:true, word:c.front, back:c.back}));
   return built.concat(mine);
@@ -441,12 +442,14 @@ function render(){
   $('bBody').innerHTML = w.custom
     ? '<div class="freeform"></div>'
     : '<div class="sect"><h4>Definition</h4><p></p></div>' +
+      '<div class="sect ru"><h4>Russian definition</h4><p></p></div>' +
       '<div class="sect"><h4>English synonyms</h4><p></p></div>' +
       '<div class="sect ru"><h4>Russian synonyms</h4><p></p></div>';
   if(w.custom){ $('bBody').querySelector('.freeform').textContent = w.back; }
   else {
     const p = $('bBody').querySelectorAll('p');
-    p[0].textContent = w.def; p[1].textContent = w.en; p[2].textContent = w.ru;
+    p[0].textContent = w.def;   p[1].textContent = w.rudef;
+    p[2].textContent = w.en;    p[3].textContent = w.ru;
   }
 
   const now = Date.now();

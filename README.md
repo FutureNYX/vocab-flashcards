@@ -10,7 +10,7 @@ Add it to your home screen (Share > Add to Home Screen) and it opens full-screen
 
 - **Front:** the word, its part of speech, and an example sentence with the word highlighted.
 - **Tap the card** to flip.
-- **Back:** the word again, then three sections: definition, English synonyms, Russian synonyms.
+- **Back:** the word again, then four sections: English definition, Russian definition, English synonyms, Russian synonyms.
 - **Speaker button** reads the word aloud (top right on both faces).
 - **Wrong / Hard / Easy** at the bottom, each showing when the card comes back.
 
@@ -39,7 +39,7 @@ The **+** button adds a card with free-form front and back. No template, write w
 `words.csv` is the source of truth. Columns:
 
 ```
-word, part_of_speech, definition, english_synonyms, russian_synonyms, example
+word, part_of_speech, definition, russian_definition, english_synonyms, russian_synonyms, example
 ```
 
 In `example`, wrap the target word in asterisks (`*exacerbate*`) and that span gets highlighted, whatever form the word takes in the sentence.
