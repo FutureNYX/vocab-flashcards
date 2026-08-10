@@ -10,7 +10,7 @@ Add it to your home screen (Share > Add to Home Screen) and it opens full-screen
 
 - **Front:** the word, its part of speech, and an example sentence with the word highlighted.
 - **Tap the card** to flip.
-- **Back:** the word again, then four sections: Definition, Значение, English synonyms, Синонимы. The Russian sections are labelled in Russian because the reader is a native speaker.
+- **Back:** the word again, then one block per language. English gives Definition and Synonyms; Russian gives Значение and Синонимы, labelled in Russian because the reader is a native speaker. Synonyms are chips, tinted the same as the highlight on the front.
 - **Speaker button** reads the word aloud (top right on both faces). It defaults to a British female voice; left alone, iOS picks Daniel, which is the deep robotic one. The **Voice** picker on the home screen overrides the choice and remembers it, since voice names differ on every device.
 - **Wrong / Hard / Easy** at the bottom, each showing when the card comes back.
 
@@ -33,6 +33,20 @@ The button on the home screen switches to a completely separate deck of progress
 ## Your own cards
 
 The **+** button adds a card with free-form front and back. No template, write whatever you want on either side. Your cards join the same review queue and can be deleted from the same sheet.
+
+## Changing the colours
+
+Three earthy palettes are defined at the top of `index.html`. Switch by editing one attribute on the `<html>` tag:
+
+```html
+<html lang="en" data-palette="moss">
+```
+
+- `moss` (current) deep forest base, sage green accent
+- `clay` warm brown earth base, soft olive accent
+- `fern` cool near-black green, fresh mint accent
+
+Every colour in the app comes from those variables, so nothing else needs touching. If you change palette, also update the `theme-color` meta tag to match the new `--bg` so the iPhone status bar blends in.
 
 ## Editing the word list
 

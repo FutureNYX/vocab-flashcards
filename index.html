@@ -1,26 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-palette="moss">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="theme-color" content="#0A0A0C">
+<meta name="theme-color" content="#0E1311">
 <meta name="color-scheme" content="dark">
 <title>Vocab</title>
 <style>
+/* Palettes. Switch by changing data-palette on <html>: moss | clay | fern */
+:root, [data-palette="moss"]{        /* deep green, sage accent */
+  --bg:#0E1311;  --card:#161D19;  --card-2:#1F2823;
+  --text:#ECF1ED; --muted:#8B978F; --line:#29332D; --ru-text:#C6D2C8;
+  --accent:#86B26A; --on-accent:#0E1311;
+  --wrong:#E07A5F; --hard:#E0A458; --easy:#86B26A;
+  --hl-bg:rgba(134,178,106,.22); --hl-text:#AFD298;
+}
+[data-palette="clay"]{               /* warm earth, olive accent */
+  --bg:#14110E;  --card:#1E1A16;  --card-2:#282320;
+  --text:#F3EDE5; --muted:#9C9086; --line:#342D27; --ru-text:#DED6CA;
+  --accent:#A8B98C; --on-accent:#14110E;
+  --wrong:#CF7B62; --hard:#DBA75E; --easy:#A8B98C;
+  --hl-bg:rgba(168,185,140,.24); --hl-text:#C7D5AD;
+}
+[data-palette="fern"]{               /* cool near-black green, mint accent */
+  --bg:#0A100C;  --card:#121A15;  --card-2:#1A241D;
+  --text:#E9F1EA; --muted:#7E8C83; --line:#22302A; --ru-text:#C3D2C7;
+  --accent:#6FC192; --on-accent:#08120C;
+  --wrong:#D97B7B; --hard:#D3AA63; --easy:#6FC192;
+  --hl-bg:rgba(111,193,146,.20); --hl-text:#95D6B1;
+}
 :root{
-  --bg:#0A0A0C;
-  --card:#17171C;
-  --card-2:#1F1F26;
-  --text:#F5F5F7;
-  --muted:#8E8E96;
-  --line:#2C2C34;
-  --wrong:#FF453A;
-  --hard:#FF9F0A;
-  --easy:#30D158;
-  --accent:#0A84FF;
   --pad-bottom: max(14px, env(safe-area-inset-bottom));
   --pad-top: max(10px, env(safe-area-inset-top));
 }
@@ -46,21 +58,15 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .stat{flex:1; background:var(--card); border-radius:16px; padding:14px 8px;}
 .stat b{display:block; font-size:24px; font-weight:700; letter-spacing:-.02em;}
 .stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
-.btn-main{width:100%; max-width:420px; background:var(--accent); color:#fff; font-weight:650;
+.btn-main{width:100%; max-width:420px; background:var(--accent); color:var(--on-accent); font-weight:700;
   font-size:17px; padding:16px; border-radius:16px;}
 .btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
   font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
 .demo-tag{position:fixed; top:var(--pad-top); left:0; right:0; text-align:center;
   font-size:11px; letter-spacing:.14em; color:#000; font-weight:700;}
-.demo-tag i{background:var(--hard); padding:3px 10px; border-radius:20px; font-style:normal;}
+.demo-tag i{background:var(--hard); color:var(--on-accent); padding:3px 10px; border-radius:20px; font-style:normal;}
 body.demo .demo-tag{display:block;}
 .demo-tag{display:none;}
-.voice-row{display:flex; align-items:center; gap:10px; width:100%; max-width:420px; margin-top:22px;
-  color:var(--muted); font-size:13px;}
-.voice-row span{flex:0 0 auto; letter-spacing:.04em;}
-.voice-row select{flex:1; min-width:0; background:var(--card); color:var(--text); border:1px solid var(--line);
-  border-radius:12px; padding:11px 12px; font-size:14px; font-family:inherit; -webkit-appearance:none;
-  appearance:none; text-align:left;}
 
 /* ---------- STUDY ---------- */
 #study{padding-left:12px; padding-right:12px;}
@@ -89,7 +95,7 @@ body.demo .demo-tag{display:block;}
   background:var(--card-2); display:grid; place-items:center;
   backface-visibility:hidden; -webkit-backface-visibility:hidden;}
 .speaker svg{width:26px; height:26px; fill:var(--text);}
-.speaker:active{background:#2C2C34;}
+.speaker:active{background:var(--line);}
 
 .front-body{flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;
   padding:74px 22px 26px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch;}
@@ -99,7 +105,7 @@ body.demo .demo-tag{display:block;}
 .pos{margin-top:12px; color:var(--muted); font-size:13px; letter-spacing:.06em; text-transform:uppercase;}
 .example{margin-top:26px; padding-top:22px; border-top:1px solid var(--line); max-width:330px;
   font-size:16px; line-height:1.55; color:#A9A9B2;}
-.example .hl{background:rgba(10,132,255,.20); color:#8FC7FF; font-weight:650;
+.example .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:650;
   padding:1px 5px; border-radius:6px;}
 .example:empty{display:none;}
 
@@ -110,14 +116,18 @@ body.demo .demo-tag{display:block;}
   place-items:center; flex:0 0 auto;
   backface-visibility:hidden; -webkit-backface-visibility:hidden;}
 .spk-sm svg{width:21px; height:21px; fill:var(--text);}
-.spk-sm:active{background:#2C2C34;}
+.spk-sm:active{background:var(--line);}
 .back-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;}
 .sect{padding:16px 22px; border-bottom:1px solid var(--line);}
 .sect:last-child{border-bottom:none;}
 .sect h4{margin:0 0 7px; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
   color:var(--muted); font-weight:650;}
+.sect h4.sub{margin-top:17px;}
 .sect p{margin:0; font-size:16.5px; line-height:1.45;}
-.sect.ru p{color:#C9C9D1;}
+.sect.ru p{color:var(--ru-text);}
+.chips{display:flex; flex-wrap:wrap; gap:7px;}
+.chip{background:var(--hl-bg); color:var(--hl-text); font-weight:600; font-size:15px;
+  padding:5px 11px; border-radius:9px; line-height:1.3;}
 .freeform{padding:20px 22px; font-size:17px; line-height:1.5; white-space:pre-wrap;}
 
 .hint{flex:0 0 auto; text-align:center; color:var(--muted); font-size:13px; padding:20px 0 22px;}
@@ -137,7 +147,7 @@ body.demo .demo-tag{display:block;}
 
 /* ---------- FAB + SHEET ---------- */
 .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px);
-  width:58px; height:58px; border-radius:50%; background:var(--accent); color:#fff;
+  width:58px; height:58px; border-radius:50%; background:var(--accent); color:var(--on-accent);
   font-size:31px; font-weight:300; line-height:1; display:grid; place-items:center;
   box-shadow:0 8px 26px rgba(0,0,0,.55); z-index:40;}
 .fab:active{transform:scale(.94);}
@@ -158,7 +168,7 @@ body.demo .demo-tag{display:block;}
 .sheet .row{display:flex; gap:10px; margin-top:2px;}
 .sheet .row button{flex:1; padding:15px; border-radius:15px; font-size:16px; font-weight:600;}
 .cancel{background:var(--card);}
-.save{background:var(--accent); color:#fff;}
+.save{background:var(--accent); color:var(--on-accent);}
 .save:disabled{opacity:.4;}
 .mine{margin-top:20px; border-top:1px solid var(--line); padding-top:14px; overflow-y:auto;}
 .mine .item{display:flex; align-items:center; gap:10px; padding:11px 0; border-bottom:1px solid var(--line);}
@@ -182,10 +192,6 @@ body.demo .demo-tag{display:block;}
   <button class="btn-main" id="goStudy">Start</button>
   <button class="btn-ghost" id="toggleMode">Demo mode</button>
   <button class="btn-ghost" id="resetDemo" style="display:none; color:var(--wrong)">Reset demo data</button>
-  <div class="voice-row">
-    <span>Voice</span>
-    <select id="voiceSel"></select>
-  </div>
 </section>
 
 <!-- ============ STUDY ============ -->
@@ -392,20 +398,12 @@ function nextDueText(){
    and per OS version, so score candidates rather than hard-coding one. */
 const FEMALE = /serena|kate|stephanie|martha|sonia|libby|hazel|fiona|moira|tessa|samantha|karen|zira|susan|catherine|linda|amy|emma|jenny|aria|ava|clara|female/i;
 const MALE   = /daniel|arthur|oliver|george|ryan|thomas|alex|fred|gordon|rishi|aaron|david|mark|james|guy|eric|christopher|brandon|liam|nathan|william/i;
-const VOICE_KEY = 'vocab.voice';
 
 let voice = null;
-function englishVoices(){
-  return speechSynthesis.getVoices().filter(v => v.lang && v.lang.replace('_','-').toLowerCase().indexOf('en') === 0);
-}
 function pickVoice(){
-  const all = englishVoices();
+  const all = speechSynthesis.getVoices()
+    .filter(v => v.lang && v.lang.replace('_','-').toLowerCase().indexOf('en') === 0);
   if(!all.length) return;
-  const saved = localStorage.getItem(VOICE_KEY);
-  if(saved){
-    const hit = all.find(v => v.name === saved);
-    if(hit){ voice = hit; return; }
-  }
   // Voice names differ wildly per device, so score rather than hard-code.
   // British first, then female: iOS otherwise defaults to Daniel, the deep one.
   const score = v => {
@@ -421,22 +419,9 @@ function pickVoice(){
   };
   voice = all.slice().sort((a,b) => score(b) - score(a))[0] || null;
 }
-function fillVoicePicker(){
-  const sel = $('voiceSel'); if(!sel) return;
-  const all = englishVoices();
-  if(!all.length){ sel.innerHTML = '<option>Default voice</option>'; return; }
-  sel.innerHTML = '';
-  all.forEach(v => {
-    const o = document.createElement('option');
-    o.value = v.name;
-    o.textContent = v.name.replace(/^Microsoft |^Google /,'') + '  ·  ' + v.lang;
-    if(voice && v.name === voice.name) o.selected = true;
-    sel.appendChild(o);
-  });
-}
 if('speechSynthesis' in window){
   pickVoice();
-  speechSynthesis.onvoiceschanged = function(){ pickVoice(); fillVoicePicker(); };
+  speechSynthesis.onvoiceschanged = pickVoice;
 }
 function speak(text){
   if(!('speechSynthesis' in window) || !text) return;
@@ -486,6 +471,29 @@ function renderExample(el, text){
   });
 }
 
+/* One language per block: its definition and its synonyms sit together under
+   a single divider, with the synonyms as chips so they read as a set rather
+   than a run-on line. */
+function meaningBlock(defLabel, defText, synLabel, synText, isRussian){
+  const sect = document.createElement('div');
+  sect.className = 'sect' + (isRussian ? ' ru' : '');
+  const h1 = document.createElement('h4'); h1.textContent = defLabel;
+  const p  = document.createElement('p');  p.textContent  = defText || '';
+  sect.appendChild(h1); sect.appendChild(p);
+
+  const words = String(synText || '').split(',').map(s => s.trim()).filter(Boolean);
+  if(words.length){
+    const h2 = document.createElement('h4'); h2.className = 'sub'; h2.textContent = synLabel;
+    const chips = document.createElement('div'); chips.className = 'chips';
+    words.forEach(t => {
+      const c = document.createElement('span'); c.className = 'chip'; c.textContent = t;
+      chips.appendChild(c);
+    });
+    sect.appendChild(h2); sect.appendChild(chips);
+  }
+  return sect;
+}
+
 function render(){
   current = pickNext();
   if(!current){ $('doneSub').textContent = nextDueText(); show('done'); return; }
@@ -506,17 +514,14 @@ function render(){
   renderExample($('fEx'), w.custom ? '' : w.ex);
   $('bWord').textContent = front;
 
-  $('bBody').innerHTML = w.custom
-    ? '<div class="freeform"></div>'
-    : '<div class="sect"><h4>Definition</h4><p></p></div>' +
-      '<div class="sect ru"><h4>Значение</h4><p></p></div>' +
-      '<div class="sect"><h4>English synonyms</h4><p></p></div>' +
-      '<div class="sect ru"><h4>Синонимы</h4><p></p></div>';
-  if(w.custom){ $('bBody').querySelector('.freeform').textContent = w.back; }
-  else {
-    const p = $('bBody').querySelectorAll('p');
-    p[0].textContent = w.def;   p[1].textContent = w.rudef;
-    p[2].textContent = w.en;    p[3].textContent = w.ru;
+  $('bBody').textContent = '';
+  if(w.custom){
+    const ff = document.createElement('div');
+    ff.className = 'freeform'; ff.textContent = w.back;
+    $('bBody').appendChild(ff);
+  } else {
+    $('bBody').appendChild(meaningBlock('Definition', w.def, 'Synonyms', w.en, false));
+    $('bBody').appendChild(meaningBlock('Значение', w.rudef, 'Синонимы', w.ru, true));
   }
 
   const now = Date.now();
@@ -607,14 +612,8 @@ $('saveAdd').addEventListener('click', () => {
   save(); closeSheet(); refreshHome();
 });
 
-$('voiceSel').addEventListener('change', function(){
-  localStorage.setItem(VOICE_KEY, this.value);
-  pickVoice();
-  speak('vocabulary');          // so you hear the choice straight away
-});
-
 /* go */
-load(); show('home'); fillVoicePicker();
+load(); show('home');
 </script>
 </body>
 </html>
