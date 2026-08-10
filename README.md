@@ -26,9 +26,19 @@ Deliberately short-term. A word you keep getting right tops out at 10 days rathe
 
 Ceiling is 10 days. A typical Easy run goes 2d, 4d, 10d and then holds there.
 
-## Your own cards
+## Requesting a word
 
-The **+** button adds a card with free-form front and back. No template, write whatever you want on either side. Your cards join the same review queue and can be deleted from the same sheet.
+The **+** button opens a request box. Type a word, press Send, and it POSTs to `/word-request` on the `claude-buffer` Cloudflare Worker, which pings Elijah on Telegram and stores the request in KV.
+
+Statuses in that sheet are derived, not pushed back:
+
+- **not sent yet** (yellow) queued on the phone, no network yet. Retried every time the sheet opens.
+- **pending** (yellow) delivered to the worker, not yet in the deck.
+- **✓ added** (green) the word now exists in `words.csv`, so publishing it *is* the reply. No status API needed.
+
+That endpoint is deliberately not behind `BUFFER_TOKEN`: this is a public page, and shipping the token would expose the whole Telegram buffer to any visitor. Instead it is write-only, capped at 60 characters, and rate limited to 10 per IP per hour and 100 a day.
+
+To collect the requests, ask Claude in chat: it reads `GET /<BUFFER_TOKEN>/word-requests` and appends them to `requests.csv`.
 
 ## Changing the colours
 

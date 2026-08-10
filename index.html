@@ -17,6 +17,7 @@
   --accent:#86B26A; --on-accent:#0E1311;
   --wrong:#E07A5F; --hard:#E0A458; --easy:#86B26A;
   --hl-bg:rgba(134,178,106,.22); --hl-text:#AFD298;
+  --hard-soft:rgba(224,164,88,.17); --easy-soft:rgba(134,178,106,.17);
 }
 [data-palette="clay"]{               /* warm earth, olive accent */
   --bg:#14110E;  --card:#1E1A16;  --card-2:#282320;
@@ -24,6 +25,7 @@
   --accent:#A8B98C; --on-accent:#14110E;
   --wrong:#CF7B62; --hard:#DBA75E; --easy:#A8B98C;
   --hl-bg:rgba(168,185,140,.24); --hl-text:#C7D5AD;
+  --hard-soft:rgba(219,167,94,.17); --easy-soft:rgba(168,185,140,.17);
 }
 [data-palette="fern"]{               /* cool near-black green, mint accent */
   --bg:#0A100C;  --card:#121A15;  --card-2:#1A241D;
@@ -31,6 +33,7 @@
   --accent:#6FC192; --on-accent:#08120C;
   --wrong:#D97B7B; --hard:#D3AA63; --easy:#6FC192;
   --hl-bg:rgba(111,193,146,.20); --hl-text:#95D6B1;
+  --hard-soft:rgba(211,170,99,.17); --easy-soft:rgba(111,193,146,.17);
 }
 :root{
   --pad-bottom: max(14px, env(safe-area-inset-bottom));
@@ -96,7 +99,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   padding:74px 22px 26px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch;}
 .front-word{font-size:40px; font-weight:750; letter-spacing:-.025em; line-height:1.1; word-break:break-word;}
 .front-word.long{font-size:28px;}
-.front-word.xlong{font-size:21px; font-weight:600; line-height:1.35; white-space:pre-wrap; text-align:left; width:100%;}
 .pos{margin-top:12px; color:var(--muted); font-size:13px; letter-spacing:.06em; text-transform:uppercase;}
 .example{margin-top:26px; padding-top:22px; border-top:1px solid var(--line); max-width:330px;
   font-size:16px; line-height:1.55; color:#A9A9B2;}
@@ -123,7 +125,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .chips{display:flex; flex-wrap:wrap; gap:7px;}
 .chip{background:var(--hl-bg); color:var(--hl-text); font-weight:600; font-size:15px;
   padding:5px 11px; border-radius:9px; line-height:1.3;}
-.freeform{padding:20px 22px; font-size:17px; line-height:1.5; white-space:pre-wrap;}
 
 .hint{flex:0 0 auto; text-align:center; color:var(--muted); font-size:13px; padding:20px 0 22px;}
 .answers{flex:0 0 auto; display:none; gap:8px;}
@@ -154,13 +155,17 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .sheet.on{display:flex;}
 .grab{width:38px; height:5px; border-radius:3px; background:var(--line); margin:6px auto 12px;}
 .sheet h3{margin:0 0 14px; font-size:19px; font-weight:700; letter-spacing:-.01em;}
-.sheet label{display:block; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
-  color:var(--muted); margin:0 0 6px; font-weight:650;}
-.sheet textarea{width:100%; background:var(--card); border:1px solid var(--line); border-radius:14px;
-  color:var(--text); padding:13px; font-size:16px; line-height:1.45; resize:none; margin-bottom:14px;
-  font-family:inherit;}
-.sheet textarea:focus{outline:none; border-color:var(--accent);}
-.sheet .row{display:flex; gap:10px; margin-top:2px;}
+.req-row{display:flex; gap:9px;}
+.req-row input{flex:1; min-width:0; background:var(--card); border:1px solid var(--line);
+  border-radius:14px; color:var(--text); padding:13px; font-size:16px; font-family:inherit;}
+.req-row input:focus{outline:none; border-color:var(--accent);}
+.req-row button{flex:0 0 auto; padding:13px 22px; border-radius:14px; font-size:16px; font-weight:650;}
+.req-note{font-size:12.5px; line-height:1.45; color:var(--muted); margin:11px 2px 0;}
+.status{font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; flex:0 0 auto;
+  letter-spacing:.02em;}
+.status.pending{background:var(--hard-soft); color:var(--hard);}
+.status.added{background:var(--easy-soft); color:var(--easy);}
+.sheet .row{display:flex; gap:10px; margin-top:14px;}
 .sheet .row button{flex:1; padding:15px; border-radius:15px; font-size:16px; font-weight:600;}
 .cancel{background:var(--card);}
 .save{background:var(--accent); color:var(--on-accent);}
@@ -236,16 +241,15 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 <div class="sheet-bg" id="sheetBg"></div>
 <div class="sheet" id="sheet">
   <div class="grab"></div>
-  <h3>New card</h3>
-  <label>Front</label>
-  <textarea id="inFront" rows="2" placeholder="Anything you want on the front"></textarea>
-  <label>Back</label>
-  <textarea id="inBack" rows="5" placeholder="Anything you want on the back"></textarea>
-  <div class="row">
-    <button class="cancel" id="cancelAdd">Cancel</button>
-    <button class="save" id="saveAdd" disabled>Add card</button>
+  <h3>Request a word</h3>
+  <div class="req-row">
+    <input id="reqInput" type="text" inputmode="text" autocomplete="off" autocapitalize="none"
+           autocorrect="off" placeholder="Word or phrase">
+    <button class="save" id="reqSend" disabled>Send</button>
   </div>
+  <p class="req-note">Sent straight to Elijah. It turns green once the word is in the deck.</p>
   <div class="mine" id="mine"></div>
+  <div class="row"><button class="cancel" id="closeSheet">Done</button></div>
 </div>
 
 <script src="words.js"></script>
@@ -258,23 +262,19 @@ let S = null;
 
 function load(){
   try { S = JSON.parse(localStorage.getItem(KEY)) || null; } catch(e){ S = null; }
-  if(!S || typeof S !== 'object') S = {cards:{}, custom:[], seq:1};
-  S.cards  = S.cards  || {};
-  S.custom = S.custom || [];
-  S.seq    = S.seq    || 1;
+  if(!S || typeof S !== 'object') S = {cards:{}, requests:[]};
+  S.cards    = S.cards    || {};
+  S.requests = S.requests || [];
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
-/* deck = built-in words + the user's own cards */
 function deck(){
-  const built = (window.WORDS||[]).map(w => ({
-    id: w.word, custom:false,
+  return (window.WORDS||[]).map(w => ({
+    id: w.word,
     word: w.word, pos: w.part_of_speech, ex: w.example,
     def: w.definition, rudef: w.russian_definition,
     en: w.english_synonyms, ru: w.russian_synonyms
   }));
-  const mine = S.custom.map(c => ({id:c.id, custom:true, word:c.front, back:c.back}));
-  return built.concat(mine);
 }
 
 /* ============================================================
@@ -498,22 +498,15 @@ function render(){
   $('answers').classList.remove('on');
   $('hint').style.display = '';
 
-  const front = w.custom ? w.word : w.word;
-  $('fWord').textContent = front;
-  $('fWord').className = 'front-word' + (front.length > 46 ? ' xlong' : front.length > 15 ? ' long' : '');
-  $('fPos').textContent = w.custom ? '' : (w.pos || '');
-  renderExample($('fEx'), w.custom ? '' : w.ex);
-  $('bWord').textContent = front;
+  $('fWord').textContent = w.word;
+  $('fWord').className = 'front-word' + (w.word.length > 15 ? ' long' : '');
+  $('fPos').textContent = w.pos || '';
+  renderExample($('fEx'), w.ex);
+  $('bWord').textContent = w.word;
 
   $('bBody').textContent = '';
-  if(w.custom){
-    const ff = document.createElement('div');
-    ff.className = 'freeform'; ff.textContent = w.back;
-    $('bBody').appendChild(ff);
-  } else {
-    $('bBody').appendChild(meaningBlock('Definition', w.def, 'Synonyms', w.en, false));
-    $('bBody').appendChild(meaningBlock('Значение', w.rudef, 'Синонимы', w.ru, true));
-  }
+  $('bBody').appendChild(meaningBlock('Definition', w.def, 'Synonyms', w.en, false));
+  $('bBody').appendChild(meaningBlock('Значение', w.rudef, 'Синонимы', w.ru, true));
 
   const now = Date.now();
   $('tW').textContent = '(' + gap(c,'wrong',now) + ')';
@@ -547,7 +540,7 @@ function answer(r){
 $('cardWrap').addEventListener('click', e => { if(!e.target.closest('[data-speak]')) flip(); });
 document.querySelectorAll('[data-speak]').forEach(b => b.addEventListener('click', e => {
   e.stopPropagation();
-  if(current) speak(current.w.custom ? current.w.word : current.w.word);
+  if(current) speak(current.w.word);
 }));
 document.querySelectorAll('.ans').forEach(b => b.addEventListener('click', () => answer(b.dataset.r)));
 $('back').addEventListener('click', () => show('home'));
@@ -558,37 +551,75 @@ $('undo').addEventListener('click', () => {
   if(undoSnap.prev) S.cards[undoSnap.id] = undoSnap.prev; else delete S.cards[undoSnap.id];
   undoSnap = null; save(); render();
 });
-/* add-your-own-card sheet */
+/* ============================================================
+   REQUEST A WORD
+   The request goes to Elijah's buffer worker, which pings him on
+   Telegram. A request counts as "added" the moment the word turns up in
+   the deck, so no reply channel is needed: publishing the word is the
+   answer. Anything that fails to send stays queued and retries, since
+   this gets used on a phone with patchy signal.
+   ============================================================ */
+const REQUEST_URL = 'https://claude-buffer.elijahrobineau.workers.dev/word-request';
+
+function isInDeck(text){
+  const t = text.trim().toLowerCase();
+  return (window.WORDS || []).some(w => w.word.toLowerCase() === t);
+}
 function openSheet(){
   $('sheetBg').classList.add('on'); $('sheet').classList.add('on');
-  $('inFront').value = ''; $('inBack').value = ''; $('saveAdd').disabled = true;
-  renderMine(); $('inFront').focus();
+  $('reqInput').value = ''; $('reqSend').disabled = true;
+  renderRequests(); flushQueue();
 }
-function closeSheet(){ $('sheetBg').classList.remove('on'); $('sheet').classList.remove('on'); }
-function renderMine(){
-  if(!S.custom.length){ $('mine').innerHTML = ''; return; }
-  $('mine').innerHTML = '<label>My cards</label>';
-  S.custom.forEach(c => {
-    const row = document.createElement('div');
-    row.className = 'item';
-    const p = document.createElement('p'); p.textContent = c.front;
-    const del = document.createElement('button'); del.textContent = 'Delete';
-    del.onclick = () => {
-      S.custom = S.custom.filter(x => x.id !== c.id);
-      delete S.cards[c.id]; save(); renderMine(); refreshHome();
-    };
-    row.appendChild(p); row.appendChild(del); $('mine').appendChild(row);
+function closeSheet(){
+  $('sheetBg').classList.remove('on'); $('sheet').classList.remove('on');
+  $('reqInput').blur();
+}
+function renderRequests(){
+  const list = $('mine');
+  list.textContent = '';
+  if(!S.requests.length) return;
+  S.requests.slice().reverse().forEach(r => {
+    const added = isInDeck(r.text);
+    const row = document.createElement('div'); row.className = 'item';
+    const p = document.createElement('p'); p.textContent = r.text;
+    const tag = document.createElement('span');
+    tag.className = 'status ' + (added ? 'added' : 'pending');
+    tag.textContent = added ? '✓ added' : (r.sent ? 'pending' : 'not sent yet');
+    row.appendChild(p); row.appendChild(tag); list.appendChild(row);
+  });
+}
+const inflight = new Set();   // a send in progress is not yet "sent", but must not be repeated
+function flushQueue(){
+  S.requests.filter(r => !r.sent && !inflight.has(r.text)).forEach(r => {
+    inflight.add(r.text);
+    fetch(REQUEST_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({word: r.text, at: r.ts})
+    }).then(res => {
+      if(res.ok){ r.sent = true; save(); renderRequests(); }
+    }).catch(() => {})        // stays queued, retried next time the sheet opens
+      .then(() => inflight.delete(r.text));
   });
 }
 $('fab').addEventListener('click', openSheet);
 $('sheetBg').addEventListener('click', closeSheet);
-$('cancelAdd').addEventListener('click', closeSheet);
-['inFront','inBack'].forEach(id => $(id).addEventListener('input', () => {
-  $('saveAdd').disabled = !($('inFront').value.trim() && $('inBack').value.trim());
-}));
-$('saveAdd').addEventListener('click', () => {
-  S.custom.push({id: 'c' + (S.seq++), front: $('inFront').value.trim(), back: $('inBack').value.trim()});
-  save(); closeSheet(); refreshHome();
+$('closeSheet').addEventListener('click', closeSheet);
+$('reqInput').addEventListener('input', function(){
+  $('reqSend').disabled = !this.value.trim();
+});
+$('reqInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && this.value.trim()) $('reqSend').click();
+});
+$('reqSend').addEventListener('click', () => {
+  const text = $('reqInput').value.trim().slice(0, 60);
+  if(!text) return;
+  if(!S.requests.some(r => r.text.toLowerCase() === text.toLowerCase())){
+    S.requests.push({text, ts: new Date().toISOString(), sent: false});
+    save();
+  }
+  $('reqInput').value = ''; $('reqSend').disabled = true;
+  renderRequests(); flushQueue();
 });
 
 /* go */
