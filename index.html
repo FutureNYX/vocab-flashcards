@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vocab">
+<meta name="theme-color" content="#0A0A0C">
+<meta name="color-scheme" content="dark">
+<title>Vocab</title>
+<style>
+:root{
+  --bg:#0A0A0C;
+  --card:#17171C;
+  --card-2:#1F1F26;
+  --text:#F5F5F7;
+  --muted:#8E8E96;
+  --line:#2C2C34;
+  --wrong:#FF453A;
+  --hard:#FF9F0A;
+  --easy:#30D158;
+  --accent:#0A84FF;
+  --pad-bottom: max(14px, env(safe-area-inset-bottom));
+  --pad-top: max(10px, env(safe-area-inset-top));
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  touch-action:manipulation;
+  overscroll-behavior:none;
+}
+button{font:inherit; color:inherit; background:none; border:none; cursor:pointer;}
+.screen{position:fixed; inset:0; display:none; flex-direction:column;
+  padding:var(--pad-top) 14px var(--pad-bottom);}
+.screen.on{display:flex;}
+
+/* ---------- HOME ---------- */
+#home{justify-content:center; align-items:center; text-align:center; gap:6px;}
+#home h1{font-size:34px; font-weight:800; letter-spacing:-.02em; margin:0;}
+#home .sub{color:var(--muted); font-size:15px; margin-bottom:26px;}
+.stats{display:flex; gap:10px; width:100%; max-width:420px; margin-bottom:26px;}
+.stat{flex:1; background:var(--card); border-radius:16px; padding:14px 8px;}
+.stat b{display:block; font-size:24px; font-weight:700; letter-spacing:-.02em;}
+.stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
+.btn-main{width:100%; max-width:420px; background:var(--accent); color:#fff; font-weight:650;
+  font-size:17px; padding:16px; border-radius:16px;}
+.btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
+  font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
+.demo-tag{position:fixed; top:var(--pad-top); left:0; right:0; text-align:center;
+  font-size:11px; letter-spacing:.14em; color:#000; font-weight:700;}
+.demo-tag i{background:var(--hard); padding:3px 10px; border-radius:20px; font-style:normal;}
+body.demo .demo-tag{display:block;}
+.demo-tag{display:none;}
+
+/* ---------- STUDY ---------- */
+#study{padding-left:12px; padding-right:12px;}
+.top{display:flex; align-items:center; justify-content:space-between; height:38px; flex:0 0 auto;}
+.top .counts{display:flex; gap:14px; font-size:12px; color:var(--muted);
+  font-variant-numeric:tabular-nums;}
+.top .counts em{font-style:normal; color:var(--text); font-weight:650;}
+.icon-btn{width:38px; height:38px; display:grid; place-items:center; color:var(--muted); font-size:19px;}
+.icon-btn:disabled{opacity:.25;}
+
+.card-wrap{flex:1 1 auto; position:relative; perspective:1400px; margin:8px 0 12px; min-height:0;}
+.card{position:absolute; inset:0; transform-style:preserve-3d;
+  transition:transform .42s cubic-bezier(.22,.68,.28,1);}
+.card.flipped{transform:rotateY(180deg);}
+.face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  background:var(--card); border-radius:24px; display:flex; flex-direction:column; overflow:hidden;}
+.face.back{transform:rotateY(180deg);}
+
+.speaker{position:absolute; top:14px; right:14px; width:56px; height:56px; border-radius:50%;
+  background:var(--card-2); display:grid; place-items:center; z-index:5;}
+.speaker svg{width:26px; height:26px; fill:var(--text);}
+.speaker:active{background:#2C2C34;}
+
+.front-body{flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;
+  padding:74px 22px 26px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+.front-word{font-size:40px; font-weight:750; letter-spacing:-.025em; line-height:1.1; word-break:break-word;}
+.front-word.long{font-size:28px;}
+.front-word.xlong{font-size:21px; font-weight:600; line-height:1.35; white-space:pre-wrap; text-align:left; width:100%;}
+.pos{margin-top:12px; color:var(--muted); font-size:13px; letter-spacing:.06em; text-transform:uppercase;}
+.example{margin-top:26px; padding-top:22px; border-top:1px solid var(--line); max-width:330px;
+  font-size:16px; line-height:1.55; color:#A9A9B2;}
+.example .hl{background:rgba(10,132,255,.20); color:#8FC7FF; font-weight:650;
+  padding:1px 5px; border-radius:6px;}
+.example:empty{display:none;}
+
+.back-head{display:flex; align-items:center; gap:12px; padding:20px 74px 14px 22px;
+  border-bottom:1px solid var(--line); flex:0 0 auto;}
+.back-word{font-size:23px; font-weight:700; letter-spacing:-.02em; flex:1; word-break:break-word;}
+.spk-sm{width:40px; height:40px; border-radius:50%; background:var(--card-2); display:grid;
+  place-items:center; flex:0 0 auto; position:absolute; right:16px; top:18px;}
+.spk-sm svg{width:20px; height:20px; fill:var(--text);}
+.back-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+.sect{padding:16px 22px; border-bottom:1px solid var(--line);}
+.sect:last-child{border-bottom:none;}
+.sect h4{margin:0 0 7px; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted); font-weight:650;}
+.sect p{margin:0; font-size:16.5px; line-height:1.45;}
+.sect.ru p{color:#C9C9D1;}
+.freeform{padding:20px 22px; font-size:17px; line-height:1.5; white-space:pre-wrap;}
+
+.hint{flex:0 0 auto; text-align:center; color:var(--muted); font-size:13px; padding:20px 0 22px;}
+.answers{flex:0 0 auto; display:none; gap:8px;}
+.answers.on{display:flex;}
+.ans{flex:1; border-radius:16px; padding:12px 4px 10px; background:var(--card);
+  display:flex; flex-direction:column; align-items:center; gap:2px;}
+.ans b{font-size:15.5px; font-weight:650;}
+.ans span{font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums;}
+.ans:active{filter:brightness(1.35);}
+.ans.w b{color:var(--wrong);} .ans.h b{color:var(--hard);} .ans.e b{color:var(--easy);}
+
+/* ---------- DONE ---------- */
+#done{justify-content:center; align-items:center; text-align:center; gap:8px;}
+#done .big{font-size:26px; font-weight:750; letter-spacing:-.02em;}
+#done .sub{color:var(--muted); font-size:15px; margin-bottom:24px;}
+
+/* ---------- FAB + SHEET ---------- */
+.fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px);
+  width:58px; height:58px; border-radius:50%; background:var(--accent); color:#fff;
+  font-size:31px; font-weight:300; line-height:1; display:grid; place-items:center;
+  box-shadow:0 8px 26px rgba(0,0,0,.55); z-index:40;}
+.fab:active{transform:scale(.94);}
+.sheet-bg{position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; display:none;}
+.sheet-bg.on{display:block;}
+.sheet{position:fixed; left:0; right:0; bottom:0; z-index:51; background:var(--bg);
+  border-radius:22px 22px 0 0; padding:8px 16px var(--pad-bottom); max-height:92vh;
+  display:none; flex-direction:column; transform:translateY(0);}
+.sheet.on{display:flex;}
+.grab{width:38px; height:5px; border-radius:3px; background:var(--line); margin:6px auto 12px;}
+.sheet h3{margin:0 0 14px; font-size:19px; font-weight:700; letter-spacing:-.01em;}
+.sheet label{display:block; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted); margin:0 0 6px; font-weight:650;}
+.sheet textarea{width:100%; background:var(--card); border:1px solid var(--line); border-radius:14px;
+  color:var(--text); padding:13px; font-size:16px; line-height:1.45; resize:none; margin-bottom:14px;
+  font-family:inherit;}
+.sheet textarea:focus{outline:none; border-color:var(--accent);}
+.sheet .row{display:flex; gap:10px; margin-top:2px;}
+.sheet .row button{flex:1; padding:15px; border-radius:15px; font-size:16px; font-weight:600;}
+.cancel{background:var(--card);}
+.save{background:var(--accent); color:#fff;}
+.save:disabled{opacity:.4;}
+.mine{margin-top:20px; border-top:1px solid var(--line); padding-top:14px; overflow-y:auto;}
+.mine .item{display:flex; align-items:center; gap:10px; padding:11px 0; border-bottom:1px solid var(--line);}
+.mine .item p{flex:1; margin:0; font-size:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.mine .item button{color:var(--wrong); font-size:14px; padding:6px 8px;}
+</style>
+</head>
+<body>
+
+<div class="demo-tag"><i>DEMO</i></div>
+
+<!-- ============ HOME ============ -->
+<section id="home" class="screen on">
+  <h1>Vocab</h1>
+  <div class="sub" id="homeSub">IELTS high-band words</div>
+  <div class="stats">
+    <div class="stat"><b id="sDue">0</b><span>Due</span></div>
+    <div class="stat"><b id="sNew">0</b><span>New</span></div>
+    <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
+  </div>
+  <button class="btn-main" id="goStudy">Start</button>
+  <button class="btn-ghost" id="toggleMode">Demo mode</button>
+  <button class="btn-ghost" id="resetDemo" style="display:none; color:var(--wrong)">Reset demo data</button>
+</section>
+
+<!-- ============ STUDY ============ -->
+<section id="study" class="screen">
+  <div class="top">
+    <button class="icon-btn" id="back">&#10005;</button>
+    <div class="counts">
+      <span>Due <em id="cDue">0</em></span>
+      <span>New <em id="cNew">0</em></span>
+    </div>
+    <button class="icon-btn" id="undo" disabled>&#8634;</button>
+  </div>
+
+  <div class="card-wrap" id="cardWrap">
+    <div class="card" id="card">
+      <div class="face front">
+        <button class="speaker" data-speak><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg></button>
+        <div class="front-body">
+          <div class="front-word" id="fWord"></div>
+          <div class="pos" id="fPos"></div>
+          <div class="example" id="fEx"></div>
+        </div>
+      </div>
+      <div class="face back">
+        <div class="back-head">
+          <div class="back-word" id="bWord"></div>
+          <button class="spk-sm" data-speak><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg></button>
+        </div>
+        <div class="back-body" id="bBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hint" id="hint">Tap the card to reveal</div>
+  <div class="answers" id="answers">
+    <button class="ans w" data-r="wrong"><b>Wrong</b><span id="tW">1m</span></button>
+    <button class="ans h" data-r="hard"><b>Hard</b><span id="tH">5m</span></button>
+    <button class="ans e" data-r="easy"><b>Easy</b><span id="tE">10m</span></button>
+  </div>
+</section>
+
+<!-- ============ DONE ============ -->
+<section id="done" class="screen">
+  <div class="big">All caught up</div>
+  <div class="sub" id="doneSub"></div>
+  <button class="btn-main" id="doneHome">Back to start</button>
+</section>
+
+<button class="fab" id="fab">+</button>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet">
+  <div class="grab"></div>
+  <h3>New card</h3>
+  <label>Front</label>
+  <textarea id="inFront" rows="2" placeholder="Anything you want on the front"></textarea>
+  <label>Back</label>
+  <textarea id="inBack" rows="5" placeholder="Anything you want on the back"></textarea>
+  <div class="row">
+    <button class="cancel" id="cancelAdd">Cancel</button>
+    <button class="save" id="saveAdd" disabled>Add card</button>
+  </div>
+  <div class="mine" id="mine"></div>
+</div>
+
+<script src="words.js"></script>
+<script>
+/* ============================================================
+   STORAGE  —  main and demo are completely separate
+   ============================================================ */
+const KEY = {main:'vocab.main.v2', demo:'vocab.demo.v2'};
+let mode = 'main';
+let S = null;
+
+function load(){
+  try { S = JSON.parse(localStorage.getItem(KEY[mode])) || null; } catch(e){ S = null; }
+  if(!S || typeof S !== 'object') S = {cards:{}, custom:[], seq:1};
+  S.cards  = S.cards  || {};
+  S.custom = S.custom || [];
+  S.seq    = S.seq    || 1;
+}
+function save(){ try{ localStorage.setItem(KEY[mode], JSON.stringify(S)); }catch(e){} }
+
+/* deck = built-in words + the user's own cards */
+function deck(){
+  const built = (window.WORDS||[]).map(w => ({
+    id: w.word, custom:false,
+    word: w.word, pos: w.part_of_speech, ex: w.example,
+    def: w.definition, en: w.english_synonyms, ru: w.russian_synonyms
+  }));
+  const mine = S.custom.map(c => ({id:c.id, custom:true, word:c.front, back:c.back}));
+  return built.concat(mine);
+}
+
+/* ============================================================
+   SPACED REPETITION
+   Deliberately short-term: a word you keep getting right tops
+   out at 10 days rather than vanishing for a month.
+   ============================================================ */
+const MIN = 60000, DAY = 1440;              // DAY measured in minutes
+const LEARN = [1, 10];                       // minutes
+const GRADUATE = DAY;                        // first real interval: 1 day
+const EASY_FIRST = 2 * DAY;                  // knew it cold on sight
+const MAX_IVL = 10 * DAY;                    // ceiling: 10 days
+const EASE0 = 2.2, EASE_MIN = 1.3, EASE_MAX = 2.8;
+
+function fresh(id){ return {id, stage:'new', step:0, ivl:0, ease:EASE0, due:0, reps:0, lapses:0}; }
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+
+/* Pure: returns the next state of a card for a given answer. */
+function apply(c, r, now){
+  const n = Object.assign({}, c);
+  n.reps++;
+  if(n.stage === 'new' || n.stage === 'learning'){
+    n.stage = 'learning';
+    if(r === 'wrong'){ n.step = 0; n.due = now + LEARN[0]*MIN; }
+    else if(r === 'hard'){
+      // Hard still moves you forward, just in smaller hops than Easy —
+      // otherwise a word you always find hard would loop in the learning
+      // steps forever and never earn a day-scale interval.
+      n.step++;
+      if(n.step >= LEARN.length){ n.stage='review'; n.ivl = GRADUATE; n.due = now + n.ivl*MIN; }
+      else { n.due = now + LEARN[n.step]*MIN; }
+    }
+    else { n.stage='review'; n.ivl = EASY_FIRST; n.due = now + n.ivl*MIN; }
+  }
+  else if(n.stage === 'relearn'){
+    if(r === 'wrong'){ n.due = now + 5*MIN; }
+    else if(r === 'hard'){ n.due = now + 10*MIN; }
+    else { n.stage='review'; n.due = now + n.ivl*MIN; }
+  }
+  else { /* review */
+    if(r === 'wrong'){
+      n.lapses++; n.ease = clamp(n.ease-0.2, EASE_MIN, EASE_MAX);
+      n.ivl = clamp(Math.round(n.ivl*0.4), DAY, MAX_IVL);
+      n.stage = 'relearn'; n.step = 0; n.due = now + 5*MIN;
+    } else if(r === 'hard'){
+      n.ease = clamp(n.ease-0.15, EASE_MIN, EASE_MAX);
+      // cap last, so a card sitting at the ceiling stays there
+      n.ivl = Math.min(MAX_IVL, Math.max(Math.round(n.ivl*1.3), n.ivl+720));
+      n.due = now + n.ivl*MIN;
+    } else {
+      n.ivl = Math.min(MAX_IVL, Math.max(Math.round(n.ivl*n.ease), n.ivl+DAY));
+      n.ease = clamp(n.ease+0.1, EASE_MIN, EASE_MAX);
+      n.due = now + n.ivl*MIN;
+    }
+  }
+  return n;
+}
+
+/* How long until this card comes back, in words. */
+function gap(c, r, now){
+  const n = apply(c, r, now);
+  return human(Math.round((n.due - now)/MIN));
+}
+function human(m){
+  if(m < 60) return Math.max(1,Math.round(m)) + 'm';
+  if(m < DAY) return Math.round(m/60) + 'h';
+  const d = m/DAY;
+  return (d < 10 ? +d.toFixed(d % 1 && d < 3 ? 1 : 0) : Math.round(d)) + 'd';
+}
+
+/* ============================================================
+   QUEUE
+   ============================================================ */
+function stateOf(id){ return S.cards[id] || null; }
+function counts(){
+  const now = Date.now(), all = deck();
+  let due = 0, neu = 0, known = 0;
+  all.forEach(w => {
+    const c = stateOf(w.id);
+    if(!c){ neu++; return; }
+    if(c.due <= now) due++;
+    if(c.stage === 'review') known++;
+  });
+  return {due, neu, known, total: all.length};
+}
+function pickNext(){
+  const now = Date.now(), all = deck();
+  const seen = all.filter(w => stateOf(w.id)).map(w => ({w, c: stateOf(w.id)}));
+  const ready = seen.filter(x => x.c.due <= now).sort((a,b) => a.c.due - b.c.due);
+  if(ready.length) return ready[0];
+  const soon = seen
+    .filter(x => (x.c.stage==='learning'||x.c.stage==='relearn') && x.c.due - now <= 20*MIN)
+    .sort((a,b) => a.c.due - b.c.due);
+  if(soon.length) return soon[0];
+  const first = all.find(w => !stateOf(w.id));
+  if(first) return {w: first, c: fresh(first.id)};
+  return null;
+}
+function nextDueText(){
+  const now = Date.now();
+  const times = deck().map(w => stateOf(w.id)).filter(Boolean).map(c => c.due).filter(t => t > now);
+  if(!times.length) return 'Nothing left to review.';
+  return 'Next card in ' + human(Math.round((Math.min.apply(null,times) - now)/MIN)) + '.';
+}
+
+/* ============================================================
+   SPEECH
+   ============================================================ */
+let voice = null;
+function pickVoice(){
+  const v = speechSynthesis.getVoices();
+  voice = v.find(x => x.lang === 'en-GB') || v.find(x => x.lang && x.lang.indexOf('en') === 0) || null;
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function speak(text){
+  if(!('speechSynthesis' in window) || !text) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-GB'; u.rate = .92;
+  if(voice) u.voice = voice;
+  speechSynthesis.speak(u);
+}
+
+/* ============================================================
+   UI
+   ============================================================ */
+const $ = id => document.getElementById(id);
+let current = null, flipped = false, undoSnap = null;
+
+function show(name){
+  ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
+  $('fab').style.display = (name === 'study') ? 'none' : 'grid';
+  if(name === 'home') refreshHome();
+}
+function refreshHome(){
+  const k = counts();
+  $('sDue').textContent = k.due; $('sNew').textContent = k.neu; $('sKnown').textContent = k.known;
+  $('homeSub').textContent = mode === 'demo'
+    ? 'Demo deck: nothing here touches your real progress'
+    : 'IELTS high-band words';
+  $('goStudy').textContent = (k.due + k.neu) ? 'Start' : 'Review anyway';
+}
+
+/* Example sentences mark the target word with *asterisks* in words.csv,
+   so the highlight lands on the right span whatever form the word takes
+   (exacerbate -> *exacerbated*). Built as nodes, never innerHTML. */
+function renderExample(el, text){
+  el.textContent = '';
+  if(!text) return;
+  text.split(/(\*[^*]+\*)/).forEach(part => {
+    if(!part) return;
+    if(part[0] === '*' && part.length > 2){
+      const s = document.createElement('span');
+      s.className = 'hl';
+      s.textContent = part.slice(1, -1);
+      el.appendChild(s);
+    } else el.appendChild(document.createTextNode(part));
+  });
+}
+
+function render(){
+  current = pickNext();
+  if(!current){ $('doneSub').textContent = nextDueText(); show('done'); return; }
+  const {w, c} = current;
+  flipped = false;
+  $('card').classList.remove('flipped');
+  $('answers').classList.remove('on');
+  $('hint').style.display = '';
+
+  const front = w.custom ? w.word : w.word;
+  $('fWord').textContent = front;
+  $('fWord').className = 'front-word' + (front.length > 46 ? ' xlong' : front.length > 15 ? ' long' : '');
+  $('fPos').textContent = w.custom ? '' : (w.pos || '');
+  renderExample($('fEx'), w.custom ? '' : w.ex);
+  $('bWord').textContent = front;
+
+  $('bBody').innerHTML = w.custom
+    ? '<div class="freeform"></div>'
+    : '<div class="sect"><h4>Definition</h4><p></p></div>' +
+      '<div class="sect"><h4>English synonyms</h4><p></p></div>' +
+      '<div class="sect ru"><h4>Russian synonyms</h4><p></p></div>';
+  if(w.custom){ $('bBody').querySelector('.freeform').textContent = w.back; }
+  else {
+    const p = $('bBody').querySelectorAll('p');
+    p[0].textContent = w.def; p[1].textContent = w.en; p[2].textContent = w.ru;
+  }
+
+  const now = Date.now();
+  $('tW').textContent = '(' + gap(c,'wrong',now) + ')';
+  $('tH').textContent = '(' + gap(c,'hard', now) + ')';
+  $('tE').textContent = '(' + gap(c,'easy', now) + ')';
+
+  const k = counts();
+  $('cDue').textContent = k.due; $('cNew').textContent = k.neu;
+  $('undo').disabled = !undoSnap;
+  $('bBody').scrollTop = 0;
+}
+
+function flip(){
+  if(!current) return;
+  flipped = !flipped;
+  $('card').classList.toggle('flipped', flipped);
+  $('answers').classList.toggle('on', flipped);
+  $('hint').style.display = flipped ? 'none' : '';
+}
+
+function answer(r){
+  if(!current || !flipped) return;
+  const {w, c} = current;
+  undoSnap = {id: w.id, prev: S.cards[w.id] ? JSON.parse(JSON.stringify(S.cards[w.id])) : null};
+  S.cards[w.id] = apply(c, r, Date.now());
+  save();
+  render();
+}
+
+/* events */
+$('cardWrap').addEventListener('click', e => { if(!e.target.closest('[data-speak]')) flip(); });
+document.querySelectorAll('[data-speak]').forEach(b => b.addEventListener('click', e => {
+  e.stopPropagation();
+  if(current) speak(current.w.custom ? current.w.word : current.w.word);
+}));
+document.querySelectorAll('.ans').forEach(b => b.addEventListener('click', () => answer(b.dataset.r)));
+$('back').addEventListener('click', () => show('home'));
+$('doneHome').addEventListener('click', () => show('home'));
+$('goStudy').addEventListener('click', () => { undoSnap = null; show('study'); render(); });
+$('undo').addEventListener('click', () => {
+  if(!undoSnap) return;
+  if(undoSnap.prev) S.cards[undoSnap.id] = undoSnap.prev; else delete S.cards[undoSnap.id];
+  undoSnap = null; save(); render();
+});
+$('toggleMode').addEventListener('click', () => {
+  mode = (mode === 'main') ? 'demo' : 'main';
+  document.body.classList.toggle('demo', mode === 'demo');
+  $('toggleMode').textContent = (mode === 'demo') ? 'Leave demo' : 'Demo mode';
+  $('resetDemo').style.display = (mode === 'demo') ? 'block' : 'none';
+  undoSnap = null; load(); refreshHome();
+});
+$('resetDemo').addEventListener('click', () => {
+  if(!confirm('Wipe all demo progress and demo cards?')) return;
+  localStorage.removeItem(KEY.demo); load(); refreshHome();
+});
+
+/* add-your-own-card sheet */
+function openSheet(){
+  $('sheetBg').classList.add('on'); $('sheet').classList.add('on');
+  $('inFront').value = ''; $('inBack').value = ''; $('saveAdd').disabled = true;
+  renderMine(); $('inFront').focus();
+}
+function closeSheet(){ $('sheetBg').classList.remove('on'); $('sheet').classList.remove('on'); }
+function renderMine(){
+  if(!S.custom.length){ $('mine').innerHTML = ''; return; }
+  $('mine').innerHTML = '<label>My cards</label>';
+  S.custom.forEach(c => {
+    const row = document.createElement('div');
+    row.className = 'item';
+    const p = document.createElement('p'); p.textContent = c.front;
+    const del = document.createElement('button'); del.textContent = 'Delete';
+    del.onclick = () => {
+      S.custom = S.custom.filter(x => x.id !== c.id);
+      delete S.cards[c.id]; save(); renderMine(); refreshHome();
+    };
+    row.appendChild(p); row.appendChild(del); $('mine').appendChild(row);
+  });
+}
+$('fab').addEventListener('click', openSheet);
+$('sheetBg').addEventListener('click', closeSheet);
+$('cancelAdd').addEventListener('click', closeSheet);
+['inFront','inBack'].forEach(id => $(id).addEventListener('input', () => {
+  $('saveAdd').disabled = !($('inFront').value.trim() && $('inBack').value.trim());
+}));
+$('saveAdd').addEventListener('click', () => {
+  S.custom.push({id: 'c' + (S.seq++), front: $('inFront').value.trim(), back: $('inBack').value.trim()});
+  save(); closeSheet(); refreshHome();
+});
+
+/* go */
+load(); show('home');
+</script>
+</body>
+</html>
