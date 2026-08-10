@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-palette="moss">
+<html lang="en" data-palette="fern">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="theme-color" content="#0E1311">
+<meta name="theme-color" content="#0A100C">
 <meta name="color-scheme" content="dark">
 <title>Vocab</title>
 <style>
@@ -62,11 +62,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   font-size:17px; padding:16px; border-radius:16px;}
 .btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
   font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
-.demo-tag{position:fixed; top:var(--pad-top); left:0; right:0; text-align:center;
-  font-size:11px; letter-spacing:.14em; color:#000; font-weight:700;}
-.demo-tag i{background:var(--hard); color:var(--on-accent); padding:3px 10px; border-radius:20px; font-style:normal;}
-body.demo .demo-tag{display:block;}
-.demo-tag{display:none;}
 
 /* ---------- STUDY ---------- */
 #study{padding-left:12px; padding-right:12px;}
@@ -178,8 +173,6 @@ body.demo .demo-tag{display:block;}
 </head>
 <body>
 
-<div class="demo-tag"><i>DEMO</i></div>
-
 <!-- ============ HOME ============ -->
 <section id="home" class="screen on">
   <h1>Vocab</h1>
@@ -190,8 +183,6 @@ body.demo .demo-tag{display:block;}
     <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
   </div>
   <button class="btn-main" id="goStudy">Start</button>
-  <button class="btn-ghost" id="toggleMode">Demo mode</button>
-  <button class="btn-ghost" id="resetDemo" style="display:none; color:var(--wrong)">Reset demo data</button>
 </section>
 
 <!-- ============ STUDY ============ -->
@@ -260,20 +251,19 @@ body.demo .demo-tag{display:block;}
 <script src="words.js"></script>
 <script>
 /* ============================================================
-   STORAGE  —  main and demo are completely separate
+   STORAGE  —  progress lives in this browser, on this device
    ============================================================ */
-const KEY = {main:'vocab.main.v2', demo:'vocab.demo.v2'};
-let mode = 'main';
+const KEY = 'vocab.main.v2';
 let S = null;
 
 function load(){
-  try { S = JSON.parse(localStorage.getItem(KEY[mode])) || null; } catch(e){ S = null; }
+  try { S = JSON.parse(localStorage.getItem(KEY)) || null; } catch(e){ S = null; }
   if(!S || typeof S !== 'object') S = {cards:{}, custom:[], seq:1};
   S.cards  = S.cards  || {};
   S.custom = S.custom || [];
   S.seq    = S.seq    || 1;
 }
-function save(){ try{ localStorage.setItem(KEY[mode], JSON.stringify(S)); }catch(e){} }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
 /* deck = built-in words + the user's own cards */
 function deck(){
@@ -375,12 +365,16 @@ function pickNext(){
   const seen = all.filter(w => stateOf(w.id)).map(w => ({w, c: stateOf(w.id)}));
   const ready = seen.filter(x => x.c.due <= now).sort((a,b) => a.c.due - b.c.due);
   if(ready.length) return ready[0];
+  // A card you just answered must not come straight back, so an unseen word
+  // takes priority over one that is merely due soon.
+  const first = all.find(w => !stateOf(w.id));
+  if(first) return {w: first, c: fresh(first.id)};
+  // Only once the deck is exhausted is it worth showing a learning card early,
+  // rather than parking you on "all caught up" for the sake of a few minutes.
   const soon = seen
     .filter(x => (x.c.stage==='learning'||x.c.stage==='relearn') && x.c.due - now <= 20*MIN)
     .sort((a,b) => a.c.due - b.c.due);
   if(soon.length) return soon[0];
-  const first = all.find(w => !stateOf(w.id));
-  if(first) return {w: first, c: fresh(first.id)};
   return null;
 }
 function nextDueText(){
@@ -448,9 +442,6 @@ function show(name){
 function refreshHome(){
   const k = counts();
   $('sDue').textContent = k.due; $('sNew').textContent = k.neu; $('sKnown').textContent = k.known;
-  $('homeSub').textContent = mode === 'demo'
-    ? 'Demo deck: nothing here touches your real progress'
-    : 'IELTS high-band words';
   $('goStudy').textContent = (k.due + k.neu) ? 'Start' : 'Review anyway';
 }
 
@@ -567,18 +558,6 @@ $('undo').addEventListener('click', () => {
   if(undoSnap.prev) S.cards[undoSnap.id] = undoSnap.prev; else delete S.cards[undoSnap.id];
   undoSnap = null; save(); render();
 });
-$('toggleMode').addEventListener('click', () => {
-  mode = (mode === 'main') ? 'demo' : 'main';
-  document.body.classList.toggle('demo', mode === 'demo');
-  $('toggleMode').textContent = (mode === 'demo') ? 'Leave demo' : 'Demo mode';
-  $('resetDemo').style.display = (mode === 'demo') ? 'block' : 'none';
-  undoSnap = null; load(); refreshHome();
-});
-$('resetDemo').addEventListener('click', () => {
-  if(!confirm('Wipe all demo progress and demo cards?')) return;
-  localStorage.removeItem(KEY.demo); load(); refreshHome();
-});
-
 /* add-your-own-card sheet */
 function openSheet(){
   $('sheetBg').classList.add('on'); $('sheet').classList.add('on');

@@ -26,10 +26,6 @@ Deliberately short-term. A word you keep getting right tops out at 10 days rathe
 
 Ceiling is 10 days. A typical Easy run goes 2d, 4d, 10d and then holds there.
 
-## Demo mode
-
-The button on the home screen switches to a completely separate deck of progress, stored under its own key. Nothing you do in demo touches your real cards, and "Reset demo data" wipes only the demo side.
-
 ## Your own cards
 
 The **+** button adds a card with free-form front and back. No template, write whatever you want on either side. Your cards join the same review queue and can be deleted from the same sheet.
@@ -42,9 +38,9 @@ Three earthy palettes are defined at the top of `index.html`. Switch by editing 
 <html lang="en" data-palette="moss">
 ```
 
-- `moss` (current) deep forest base, sage green accent
+- `fern` (current) cool near-black green, fresh mint accent
+- `moss` deep forest base, sage green accent
 - `clay` warm brown earth base, soft olive accent
-- `fern` cool near-black green, fresh mint accent
 
 Every colour in the app comes from those variables, so nothing else needs touching. If you change palette, also update the `theme-color` meta tag to match the new `--bg` so the iPhone status bar blends in.
 
