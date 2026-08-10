@@ -55,6 +55,12 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .demo-tag i{background:var(--hard); padding:3px 10px; border-radius:20px; font-style:normal;}
 body.demo .demo-tag{display:block;}
 .demo-tag{display:none;}
+.voice-row{display:flex; align-items:center; gap:10px; width:100%; max-width:420px; margin-top:22px;
+  color:var(--muted); font-size:13px;}
+.voice-row span{flex:0 0 auto; letter-spacing:.04em;}
+.voice-row select{flex:1; min-width:0; background:var(--card); color:var(--text); border:1px solid var(--line);
+  border-radius:12px; padding:11px 12px; font-size:14px; font-family:inherit; -webkit-appearance:none;
+  appearance:none; text-align:left;}
 
 /* ---------- STUDY ---------- */
 #study{padding-left:12px; padding-right:12px;}
@@ -69,12 +75,19 @@ body.demo .demo-tag{display:block;}
 .card{position:absolute; inset:0; transform-style:preserve-3d;
   transition:transform .42s cubic-bezier(.22,.68,.28,1);}
 .card.flipped{transform:rotateY(180deg);}
+/* a new card should snap to its front, not reverse-flip and flash its answer */
+.card.noanim, .card.noanim .face{transition:none !important;}
 .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
-  background:var(--card); border-radius:24px; display:flex; flex-direction:column; overflow:hidden;}
+  background:var(--card); border-radius:24px; display:flex; flex-direction:column; overflow:hidden;
+  /* An identity transform gives each face its own 3D context, so the speaker
+     button is flattened onto the face instead of floating on its own plane
+     mid-turn. Without this the button visibly detaches while the card flips. */
+  transform:rotateY(0deg);}
 .face.back{transform:rotateY(180deg);}
 
 .speaker{position:absolute; top:14px; right:14px; width:56px; height:56px; border-radius:50%;
-  background:var(--card-2); display:grid; place-items:center; z-index:5;}
+  background:var(--card-2); display:grid; place-items:center;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;}
 .speaker svg{width:26px; height:26px; fill:var(--text);}
 .speaker:active{background:#2C2C34;}
 
@@ -90,12 +103,14 @@ body.demo .demo-tag{display:block;}
   padding:1px 5px; border-radius:6px;}
 .example:empty{display:none;}
 
-.back-head{display:flex; align-items:center; gap:12px; padding:20px 74px 14px 22px;
+.back-head{display:flex; align-items:center; gap:12px; padding:18px 18px 14px 22px;
   border-bottom:1px solid var(--line); flex:0 0 auto;}
 .back-word{font-size:23px; font-weight:700; letter-spacing:-.02em; flex:1; word-break:break-word;}
-.spk-sm{width:40px; height:40px; border-radius:50%; background:var(--card-2); display:grid;
-  place-items:center; flex:0 0 auto; position:absolute; right:16px; top:18px;}
-.spk-sm svg{width:20px; height:20px; fill:var(--text);}
+.spk-sm{width:44px; height:44px; border-radius:50%; background:var(--card-2); display:grid;
+  place-items:center; flex:0 0 auto;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;}
+.spk-sm svg{width:21px; height:21px; fill:var(--text);}
+.spk-sm:active{background:#2C2C34;}
 .back-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;}
 .sect{padding:16px 22px; border-bottom:1px solid var(--line);}
 .sect:last-child{border-bottom:none;}
@@ -167,6 +182,10 @@ body.demo .demo-tag{display:block;}
   <button class="btn-main" id="goStudy">Start</button>
   <button class="btn-ghost" id="toggleMode">Demo mode</button>
   <button class="btn-ghost" id="resetDemo" style="display:none; color:var(--wrong)">Reset demo data</button>
+  <div class="voice-row">
+    <span>Voice</span>
+    <select id="voiceSel"></select>
+  </div>
 </section>
 
 <!-- ============ STUDY ============ -->
@@ -368,20 +387,64 @@ function nextDueText(){
 /* ============================================================
    SPEECH
    ============================================================ */
+/* Pick a British female voice. Left to itself iOS grabs Daniel, the default
+   en-GB voice, which is the deep robotic one. Named voices differ per device
+   and per OS version, so score candidates rather than hard-coding one. */
+const FEMALE = /serena|kate|stephanie|martha|sonia|libby|hazel|fiona|moira|tessa|samantha|karen|zira|susan|catherine|linda|amy|emma|jenny|aria|ava|clara|female/i;
+const MALE   = /daniel|arthur|oliver|george|ryan|thomas|alex|fred|gordon|rishi|aaron|david|mark|james|guy|eric|christopher|brandon|liam|nathan|william/i;
+const VOICE_KEY = 'vocab.voice';
+
 let voice = null;
+function englishVoices(){
+  return speechSynthesis.getVoices().filter(v => v.lang && v.lang.replace('_','-').toLowerCase().indexOf('en') === 0);
+}
 function pickVoice(){
-  const v = speechSynthesis.getVoices();
-  voice = v.find(x => x.lang === 'en-GB') || v.find(x => x.lang && x.lang.indexOf('en') === 0) || null;
+  const all = englishVoices();
+  if(!all.length) return;
+  const saved = localStorage.getItem(VOICE_KEY);
+  if(saved){
+    const hit = all.find(v => v.name === saved);
+    if(hit){ voice = hit; return; }
+  }
+  // Voice names differ wildly per device, so score rather than hard-code.
+  // British first, then female: iOS otherwise defaults to Daniel, the deep one.
+  const score = v => {
+    const lang = v.lang.replace('_','-');
+    let s = 0;
+    if(lang === 'en-GB') s += 100;
+    else if(/^en-(AU|IE|NZ|ZA)$/i.test(lang)) s += 40;
+    if(FEMALE.test(v.name)) s += 50;
+    else if(MALE.test(v.name)) s -= 60;      // checked second so "female" never reads as "male"
+    if(/enhanced|premium|natural|neural/i.test(v.name)) s += 15;
+    if(/compact|eloquence/i.test(v.name)) s -= 20;
+    return s;
+  };
+  voice = all.slice().sort((a,b) => score(b) - score(a))[0] || null;
+}
+function fillVoicePicker(){
+  const sel = $('voiceSel'); if(!sel) return;
+  const all = englishVoices();
+  if(!all.length){ sel.innerHTML = '<option>Default voice</option>'; return; }
+  sel.innerHTML = '';
+  all.forEach(v => {
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name.replace(/^Microsoft |^Google /,'') + '  ·  ' + v.lang;
+    if(voice && v.name === voice.name) o.selected = true;
+    sel.appendChild(o);
+  });
 }
 if('speechSynthesis' in window){
   pickVoice();
-  speechSynthesis.onvoiceschanged = pickVoice;
+  speechSynthesis.onvoiceschanged = function(){ pickVoice(); fillVoicePicker(); };
 }
 function speak(text){
   if(!('speechSynthesis' in window) || !text) return;
+  if(!voice) pickVoice();               // iOS often fills the list only after first use
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'en-GB'; u.rate = .92;
+  u.lang = (voice && voice.lang) || 'en-GB';
+  u.rate = .9; u.pitch = 1.05;
   if(voice) u.voice = voice;
   speechSynthesis.speak(u);
 }
@@ -428,7 +491,11 @@ function render(){
   if(!current){ $('doneSub').textContent = nextDueText(); show('done'); return; }
   const {w, c} = current;
   flipped = false;
-  $('card').classList.remove('flipped');
+  const card = $('card');
+  card.classList.add('noanim');
+  card.classList.remove('flipped');
+  void card.offsetWidth;                    // commit the snap before animation returns
+  card.classList.remove('noanim');
   $('answers').classList.remove('on');
   $('hint').style.display = '';
 
@@ -442,9 +509,9 @@ function render(){
   $('bBody').innerHTML = w.custom
     ? '<div class="freeform"></div>'
     : '<div class="sect"><h4>Definition</h4><p></p></div>' +
-      '<div class="sect ru"><h4>Russian definition</h4><p></p></div>' +
+      '<div class="sect ru"><h4>Значение</h4><p></p></div>' +
       '<div class="sect"><h4>English synonyms</h4><p></p></div>' +
-      '<div class="sect ru"><h4>Russian synonyms</h4><p></p></div>';
+      '<div class="sect ru"><h4>Синонимы</h4><p></p></div>';
   if(w.custom){ $('bBody').querySelector('.freeform').textContent = w.back; }
   else {
     const p = $('bBody').querySelectorAll('p');
@@ -540,8 +607,14 @@ $('saveAdd').addEventListener('click', () => {
   save(); closeSheet(); refreshHome();
 });
 
+$('voiceSel').addEventListener('change', function(){
+  localStorage.setItem(VOICE_KEY, this.value);
+  pickVoice();
+  speak('vocabulary');          // so you hear the choice straight away
+});
+
 /* go */
-load(); show('home');
+load(); show('home'); fillVoicePicker();
 </script>
 </body>
 </html>

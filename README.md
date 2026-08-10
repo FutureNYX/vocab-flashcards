@@ -10,8 +10,8 @@ Add it to your home screen (Share > Add to Home Screen) and it opens full-screen
 
 - **Front:** the word, its part of speech, and an example sentence with the word highlighted.
 - **Tap the card** to flip.
-- **Back:** the word again, then four sections: English definition, Russian definition, English synonyms, Russian synonyms.
-- **Speaker button** reads the word aloud (top right on both faces).
+- **Back:** the word again, then four sections: Definition, Значение, English synonyms, Синонимы. The Russian sections are labelled in Russian because the reader is a native speaker.
+- **Speaker button** reads the word aloud (top right on both faces). It defaults to a British female voice; left alone, iOS picks Daniel, which is the deep robotic one. The **Voice** picker on the home screen overrides the choice and remembers it, since voice names differ on every device.
 - **Wrong / Hard / Easy** at the bottom, each showing when the card comes back.
 
 ## The scheduling
