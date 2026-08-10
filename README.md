@@ -11,7 +11,7 @@ Add it to your home screen (Share > Add to Home Screen) and it opens full-screen
 - **Front:** the word, its part of speech, and an example sentence with the word highlighted.
 - **Tap the card** to flip.
 - **Back:** the word again, then one block per language. English gives Definition and Synonyms; Russian gives Значение and Синонимы, labelled in Russian because the reader is a native speaker. Synonyms are chips, tinted the same as the highlight on the front.
-- **Speaker button** reads the word aloud (top right on both faces). It defaults to a British female voice; left alone, iOS picks Daniel, which is the deep robotic one. The **Voice** picker on the home screen overrides the choice and remembers it, since voice names differ on every device.
+- **Speaker button** reads the word aloud (top right on both faces). Voices are scored so a British female one wins where available; left to itself, iOS picks Daniel, which is the deep robotic one.
 - **Wrong / Hard / Easy** at the bottom, each showing when the card comes back.
 
 ## The scheduling
