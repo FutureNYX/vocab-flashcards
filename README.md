@@ -40,19 +40,27 @@ That endpoint is deliberately not behind `BUFFER_TOKEN`: this is a public page, 
 
 To collect the requests, ask Claude in chat: it reads `GET /<BUFFER_TOKEN>/word-requests` and appends them to `requests.csv`.
 
+## Type
+
+Fraunces (display serif) sets the word itself, the app title and the section headings; Manrope sets everything else and carries the Cyrillic. Both are self-hosted from `fonts/` as variable woff2, about 107 KB in total, so the app makes no third-party request from the phone and still renders correctly offline.
+
+Fraunces has an optical-size axis, and each place that uses it sets its own `font-variation-settings:'opsz'`: 144 on the hero word, 72 on the back, 60 on the stat numbers. That is why the big word reads as display type rather than as a small letterform blown up. Its `unicode-range` is Latin only, so any Cyrillic falls through to Manrope automatically.
+
 ## Changing the colours
 
-Three earthy palettes are defined at the top of `index.html`. Switch by editing one attribute on the `<html>` tag:
+Five palettes are defined at the top of `index.html`. Switch by editing one attribute on the `<html>` tag:
 
 ```html
-<html lang="en" data-palette="moss">
+<html lang="en" data-palette="linen">
 ```
 
-- `fern` (current) cool near-black green, fresh mint accent
+- `grove` (current) warm forest-floor dark, oat text, leaf-green accent
+- `linen` the daylight version: beige paper, deep green ink
+- `fern` cool near-black green, fresh mint accent
 - `moss` deep forest base, sage green accent
 - `clay` warm brown earth base, soft olive accent
 
-Every colour in the app comes from those variables, so nothing else needs touching. If you change palette, also update the `theme-color` meta tag to match the new `--bg` so the iPhone status bar blends in.
+Every colour in the app comes from those variables, so nothing else needs touching. If you change palette, also update the `theme-color` meta tag to match the new `--bg` so the iPhone status bar blends in. Switching to `linen` additionally wants `color-scheme` set to `light`.
 
 ## Editing the word list
 

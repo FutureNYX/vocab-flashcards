@@ -1,17 +1,68 @@
 <!doctype html>
-<html lang="en" data-palette="fern">
+<html lang="en" data-palette="grove">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="theme-color" content="#0A100C">
+<meta name="theme-color" content="#10130C">
 <meta name="color-scheme" content="dark">
 <title>Vocab</title>
 <style>
-/* Palettes. Switch by changing data-palette on <html>: moss | clay | fern */
-:root, [data-palette="moss"]{        /* deep green, sage accent */
+/* ---------- TYPE ----------
+   Both faces are self-hosted from fonts/, so the app still works with no
+   network and makes no third-party request from the phone.
+   Fraunces is the display serif (English words only, hence the latin range);
+   Manrope carries everything else and covers Cyrillic for the Russian side. */
+@font-face{
+  font-family:'Fraunces'; src:url('fonts/fraunces-latin.woff2') format('woff2');
+  font-weight:400 700; font-style:normal; font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+    U+2000-206F,U+2122,U+2212,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Manrope'; src:url('fonts/manrope-latin.woff2') format('woff2');
+  font-weight:400 800; font-style:normal; font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+    U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Manrope'; src:url('fonts/manrope-cyrillic.woff2') format('woff2');
+  font-weight:400 800; font-style:normal; font-display:swap;
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
+@font-face{
+  font-family:'Manrope'; src:url('fonts/manrope-cyrillic-ext.woff2') format('woff2');
+  font-weight:400 800; font-style:normal; font-display:swap;
+  unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+}
+:root{
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:'Fraunces',ui-serif,Georgia,'Times New Roman',serif;
+}
+/* Display type carries an optical-size axis: each place that uses Fraunces sets
+   its own 'opsz' so the big word is drawn as display type and the small
+   headings are drawn as text, rather than one outline scaled up and down. */
+
+/* Palettes. Switch by changing data-palette on <html>: grove | linen | moss | clay | fern */
+:root, [data-palette="grove"]{       /* warm forest floor, oat text, leaf accent */
+  --bg:#10130C;  --card:#1D2318;  --card-2:#2A3122;
+  --text:#EFE9D9; --muted:#9B9C85; --line:#2F3527; --ru-text:#D9D3C0;
+  --accent:#9DBE79; --on-accent:#12160E;
+  --wrong:#C8705A; --hard:#D7A55D; --easy:#9DBE79;
+  --hl-bg:rgba(157,190,121,.20); --hl-text:#C3D9A2;
+  --hard-soft:rgba(215,165,93,.16); --easy-soft:rgba(157,190,121,.16);
+}
+[data-palette="linen"]{              /* the daylight version: beige paper, deep green ink */
+  --bg:#EFE9DC;  --card:#F8F4EA;  --card-2:#E7E0D0;
+  --text:#1F251A; --muted:#7C7B69; --line:#DDD5C4; --ru-text:#39402F;
+  --accent:#4C6B3C; --on-accent:#F8F4EA;
+  --wrong:#A9503C; --hard:#9A6E22; --easy:#4C6B3C;
+  --hl-bg:rgba(76,107,60,.15); --hl-text:#3B5730;
+  --hard-soft:rgba(154,110,34,.14); --easy-soft:rgba(76,107,60,.13);
+}
+[data-palette="moss"]{               /* deep green, sage accent */
   --bg:#0E1311;  --card:#161D19;  --card-2:#1F2823;
   --text:#ECF1ED; --muted:#8B978F; --line:#29332D; --ru-text:#C6D2C8;
   --accent:#86B26A; --on-accent:#0E1311;
@@ -43,7 +94,7 @@
 html,body{height:100%;}
 body{
   margin:0; background:var(--bg); color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-family:var(--sans);
   -webkit-font-smoothing:antialiased;
   touch-action:manipulation;
   overscroll-behavior:none;
@@ -55,11 +106,13 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 /* ---------- HOME ---------- */
 #home{justify-content:center; align-items:center; text-align:center; gap:6px;}
-#home h1{font-size:34px; font-weight:800; letter-spacing:-.02em; margin:0;}
+#home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:40px;
+  font-weight:600; letter-spacing:-.01em; margin:0;}
 #home .sub{color:var(--muted); font-size:15px; margin-bottom:26px;}
 .stats{display:flex; gap:10px; width:100%; max-width:420px; margin-bottom:26px;}
-.stat{flex:1; background:var(--card); border-radius:16px; padding:14px 8px;}
-.stat b{display:block; font-size:24px; font-weight:700; letter-spacing:-.02em;}
+.stat{flex:1; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 8px;}
+.stat b{display:block; font-family:var(--serif); font-variation-settings:'opsz' 60;
+  font-size:26px; font-weight:600; letter-spacing:0;}
 .stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
 .btn-main{width:100%; max-width:420px; background:var(--accent); color:var(--on-accent); font-weight:700;
   font-size:17px; padding:16px; border-radius:16px;}
@@ -82,7 +135,8 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* a new card should snap to its front, not reverse-flip and flash its answer */
 .card.noanim, .card.noanim .face{transition:none !important;}
 .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
-  background:var(--card); border-radius:24px; display:flex; flex-direction:column; overflow:hidden;
+  background:var(--card); border:1px solid var(--line);
+  border-radius:24px; display:flex; flex-direction:column; overflow:hidden;
   /* An identity transform gives each face its own 3D context, so the speaker
      button is flattened onto the face instead of floating on its own plane
      mid-turn. Without this the button visibly detaches while the card flips. */
@@ -97,18 +151,21 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 .front-body{flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;
   padding:74px 22px 26px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch;}
-.front-word{font-size:40px; font-weight:750; letter-spacing:-.025em; line-height:1.1; word-break:break-word;}
-.front-word.long{font-size:28px;}
-.pos{margin-top:12px; color:var(--muted); font-size:13px; letter-spacing:.06em; text-transform:uppercase;}
+.front-word{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:46px;
+  font-weight:600; letter-spacing:-.008em; line-height:1.08; word-break:break-word;}
+.front-word.long{font-size:31px;}
+.pos{margin-top:13px; color:var(--muted); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:600;}
 .example{margin-top:26px; padding-top:22px; border-top:1px solid var(--line); max-width:330px;
-  font-size:16px; line-height:1.55; color:#A9A9B2;}
+  font-size:16px; line-height:1.6; color:var(--text); opacity:.76;}
 .example .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:650;
   padding:1px 5px; border-radius:6px;}
 .example:empty{display:none;}
 
 .back-head{display:flex; align-items:center; gap:12px; padding:18px 18px 14px 22px;
   border-bottom:1px solid var(--line); flex:0 0 auto;}
-.back-word{font-size:23px; font-weight:700; letter-spacing:-.02em; flex:1; word-break:break-word;}
+.back-word{font-family:var(--serif); font-variation-settings:'opsz' 72; font-size:26px;
+  font-weight:600; letter-spacing:-.005em; flex:1; word-break:break-word;}
 .spk-sm{width:44px; height:44px; border-radius:50%; background:var(--card-2); display:grid;
   place-items:center; flex:0 0 auto;
   backface-visibility:hidden; -webkit-backface-visibility:hidden;}
@@ -130,6 +187,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .answers{flex:0 0 auto; display:none; gap:8px;}
 .answers.on{display:flex;}
 .ans{flex:1; border-radius:16px; padding:12px 4px 10px; background:var(--card);
+  border:1px solid var(--line);
   display:flex; flex-direction:column; align-items:center; gap:2px;}
 .ans b{font-size:15.5px; font-weight:650;}
 .ans span{font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums;}
@@ -138,14 +196,15 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 /* ---------- DONE ---------- */
 #done{justify-content:center; align-items:center; text-align:center; gap:8px;}
-#done .big{font-size:26px; font-weight:750; letter-spacing:-.02em;}
+#done .big{font-family:var(--serif); font-variation-settings:'opsz' 96; font-size:30px;
+  font-weight:600; letter-spacing:-.005em;}
 #done .sub{color:var(--muted); font-size:15px; margin-bottom:24px;}
 
 /* ---------- FAB + SHEET ---------- */
 .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px);
   width:58px; height:58px; border-radius:50%; background:var(--accent); color:var(--on-accent);
   font-size:31px; font-weight:300; line-height:1; display:grid; place-items:center;
-  box-shadow:0 8px 26px rgba(0,0,0,.55); z-index:40;}
+  box-shadow:0 8px 24px rgba(0,0,0,.34); z-index:40;}
 .fab:active{transform:scale(.94);}
 .sheet-bg{position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; display:none;}
 .sheet-bg.on{display:block;}
@@ -154,7 +213,8 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   display:none; flex-direction:column; transform:translateY(0);}
 .sheet.on{display:flex;}
 .grab{width:38px; height:5px; border-radius:3px; background:var(--line); margin:6px auto 12px;}
-.sheet h3{margin:0 0 14px; font-size:19px; font-weight:700; letter-spacing:-.01em;}
+.sheet h3{margin:0 0 14px; font-family:var(--serif); font-variation-settings:'opsz' 72;
+  font-size:22px; font-weight:600; letter-spacing:-.005em;}
 .req-row{display:flex; gap:9px;}
 .req-row input{flex:1; min-width:0; background:var(--card); border:1px solid var(--line);
   border-radius:14px; color:var(--text); padding:13px; font-size:16px; font-family:inherit;}
