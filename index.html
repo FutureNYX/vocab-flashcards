@@ -121,28 +121,28 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .screen.on{display:flex;}
 
 /* ---------- HOME ----------
-   The home screen wears the icon: bright green ground, black ink, the same
-   pairing as the V on the app tile. Only this screen. The cards, the study
-   screen and the sheet stay on the dark ground. */
-#home{justify-content:center; align-items:center; text-align:center; gap:6px;
-  background:var(--accent); color:var(--on-accent);}
-#home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:40px;
+   Built as a card, so the app opens on the same object it teaches with:
+   the card surface, the beige edge and the radius are the ones from .face. */
+#home{justify-content:center; align-items:center; text-align:center;}
+.home-card{width:100%; max-width:420px; min-height:56vh;
+  background:var(--card); border:1px solid var(--edge); border-radius:24px;
+  padding:34px 22px 30px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:6px;}
+#home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:44px;
   font-weight:600; letter-spacing:-.01em; margin:0;}
-#home .sub{color:rgba(0,0,0,.62); font-size:15px; margin-bottom:26px;}
-.stats{display:flex; gap:10px; width:100%; max-width:420px; margin-bottom:26px;}
-.stat{flex:1; background:rgba(0,0,0,.07); border:1px solid rgba(0,0,0,.20); border-radius:16px;
+#home .sub{color:var(--muted); font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:600; margin-top:12px; margin-bottom:30px;}
+.stats{display:flex; gap:10px; width:100%; margin-bottom:26px;}
+.stat{flex:1; background:var(--card-2); border:1px solid var(--line); border-radius:16px;
   padding:14px 8px;}
 .stat b{display:block; font-family:var(--serif); font-variation-settings:'opsz' 60;
   font-size:26px; font-weight:600; letter-spacing:0;}
-.stat span{font-size:11px; color:rgba(0,0,0,.58); text-transform:uppercase; letter-spacing:.09em;}
-/* inverted on the green: black button, green lettering, same pairing as the icon */
-.btn-main{width:100%; max-width:420px; background:var(--on-accent); color:var(--accent); font-weight:700;
+.stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
+.btn-main{width:100%; max-width:420px; background:var(--accent); color:var(--on-accent); font-weight:700;
   font-size:17px; padding:16px; border-radius:16px;}
 .btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
   font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
-#home .note{max-width:340px; margin:20px 0 0; font-size:12.5px; line-height:1.5; color:rgba(0,0,0,.62);}
-/* the done screen keeps the dark ground, so its button keeps the green fill */
-#done .btn-main{background:var(--accent); color:var(--on-accent);}
+#home .note{max-width:340px; margin:20px 0 0; font-size:12.5px; line-height:1.5; color:var(--muted);}
 
 /* ---------- STUDY ---------- */
 #study{padding-left:12px; padding-right:12px;}
@@ -241,7 +241,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   font-size:31px; font-weight:300; line-height:1; display:grid; place-items:center;
   box-shadow:0 8px 24px rgba(0,0,0,.34); z-index:40;}
 .fab:active{transform:scale(.94);}
-.fab.on-green{background:var(--on-accent); color:var(--accent); box-shadow:0 8px 24px rgba(0,0,0,.22);}
 .sheet-bg{position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; display:none;}
 .sheet-bg.on{display:block;}
 .sheet{position:fixed; left:0; right:0; bottom:0; z-index:51; background:var(--bg);
@@ -276,16 +275,18 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 <!-- ============ HOME ============ -->
 <section id="home" class="screen on">
-  <h1>Vocab</h1>
-  <div class="sub" id="homeSub">IELTS high-band words</div>
-  <div class="stats">
-    <div class="stat"><b id="sDue">0</b><span>Due</span></div>
-    <div class="stat"><b id="sNew">0</b><span>New</span></div>
-    <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
+  <!-- The home screen is itself a card: same surface, same beige edge, same
+       radius as the ones you study, so the app opens on its own vocabulary. -->
+  <div class="home-card">
+    <h1>Vocab</h1>
+    <div class="sub" id="homeSub">IELTS high-band words</div>
+    <div class="stats">
+      <div class="stat"><b id="sDue">0</b><span>Due</span></div>
+      <div class="stat"><b id="sNew">0</b><span>New</span></div>
+      <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
+    </div>
+    <button class="btn-main" id="goStudy">Start</button>
   </div>
-  <button class="btn-main" id="goStudy">Start</button>
-  <p class="note" id="voiceNote" hidden>For a natural voice, download it once:
-    Settings &rsaquo; Accessibility &rsaquo; Spoken Content &rsaquo; Voices &rsaquo; English (UK) &rsaquo; Serena.</p>
 </section>
 
 <!-- ============ STUDY ============ -->
@@ -530,7 +531,7 @@ function nextDueText(){
 /* ============================================================
    SPEECH
    Every headword ships as an MP3 in audio/, spoken by a British
-   female voice (Jenny, Dioco dataset) rendered offline with Piper.
+   female voice (Cori, LibriVox) rendered offline with Piper.
    That is the whole point: iOS defaults to a compact voice that
    sounds robotic, and the only way to improve it on the device is
    to go and download one in Settings. Shipping the clips means the
@@ -582,11 +583,6 @@ if('speechSynthesis' in window){
   pickVoice();
   speechSynthesis.onvoiceschanged = pickVoice;
 }
-/* True when the best voice available is one of iOS's compact ones, which is
-   what makes it sound robotic. Nothing the page can do about that except say so. */
-function voiceIsCompact(){
-  return !!voice && /compact/i.test((voice.voiceURI || '') + ' ' + voice.name);
-}
 function synthesise(text){
   if(!('speechSynthesis' in window) || !text) return;
   if(!voice) pickVoice();               // iOS often fills the list only after first use
@@ -625,20 +621,12 @@ let current = null, flipped = false, undoSnap = null;
 function show(name){
   ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
   $('fab').style.display = (name === 'study') ? 'none' : 'grid';
-  // home is the green screen, so its furniture inverts and the iPhone status
-  // bar has to follow or it sits on a strip of the wrong colour
-  const green = (name === 'home');
-  $('fab').classList.toggle('on-green', green);
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if(meta) meta.setAttribute('content', green ? cssVar('--accent') : cssVar('--bg'));
-  if(green) refreshHome();
+  if(name === 'home') refreshHome();
 }
-const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function refreshHome(){
   const k = counts();
   $('sDue').textContent = k.due; $('sNew').textContent = k.neu; $('sKnown').textContent = k.known;
   $('goStudy').textContent = (k.due + k.neu) ? 'Start' : 'Review anyway';
-  $('voiceNote').hidden = !voiceIsCompact();
 }
 
 /* Written out in full: "ADJ" and "PREP" are extra decoding work for someone

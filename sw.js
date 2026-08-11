@@ -11,7 +11,10 @@
  * localStorage and is never touched here, so clearing or versioning this cache
  * cannot cost the user their reviews.
  */
-const CACHE = 'vocab-shell-v4';
+/* Bump on every deploy that changes a cached file under the same name: the
+   clips were re-rendered in a different voice, and a cache-first policy would
+   otherwise keep serving the old ones forever. */
+const CACHE = 'vocab-shell-v5';
 const SHELL = [
   './',
   './index.html',

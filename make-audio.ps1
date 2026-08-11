@@ -5,14 +5,17 @@
 # Needs Piper (https://github.com/rhasspy/piper/releases) and ffmpeg on PATH.
 #
 #   powershell -File make-audio.ps1 -Piper C:\tools\piper\piper.exe `
-#                                   -Model C:\tools\voices\en_GB-jenny_dioco-medium.onnx
+#                                   -Model C:\tools\voices\en_GB-cori-medium.onnx
+#
+# Voice must be English, not Irish or Scottish: jenny_dioco is a Dublin speaker
+# and alba is Scottish, both of which read as wrong for an English exam.
 #
 # Only missing clips are rendered; pass -Force to redo the lot after a voice
 # change. Clip filenames are slugs of the word, so words.csv stays the source
 # of truth and a renamed entry simply gets a new clip.
 param(
   [string]$Piper = 'C:\tools\piper\piper.exe',
-  [string]$Model = 'C:\tools\voices\en_GB-jenny_dioco-medium.onnx',
+  [string]$Model = 'C:\tools\voices\en_GB-cori-medium.onnx',
   [switch]$Force
 )
 $ErrorActionPreference = 'Continue'

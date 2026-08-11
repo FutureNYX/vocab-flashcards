@@ -13,21 +13,25 @@ Add it to your home screen (Share > Add to Home Screen) and it opens full-screen
 - **Back:** the word again, then one block per language. English gives Definition and Synonyms; Russian gives Значение and Синонимы, labelled in Russian because the reader is a native speaker. Synonyms are chips with light text on green.
 - **Speaker button**, bottom right, reads the word aloud. It sits outside the flipping card rather than on a face: Safari's hit testing inside a `preserve-3d` subtree routed taps to the card underneath, so the old button flipped the card instead of speaking. One button serves both sides.
 - **Wrong / Hard / Easy** at the bottom, each showing when the card comes back.
-- **Home screen** wears the app icon's colours, bright green with black lettering. Only that screen: the cards and the study screen keep the dark ground, and the iPhone status bar colour is swapped to match whichever screen is showing.
+- **Home screen** is itself a card: the same surface, beige edge and radius as the ones you study, on the same dark ground.
 
 ## The voice
 
 **Every headword ships as an MP3.** The phone's own speech engine is not used unless a clip is missing. That is deliberate: iOS defaults to a compact voice that sounds robotic, and the only way to improve it on the device is to go into Settings and download a better one. Bundling the audio means it sounds the same on every phone, needs no setup, and works offline.
 
-The clips are rendered by [Piper](https://github.com/rhasspy/piper) with the British female voice **Jenny (Dioco)**, 121 files, about 650 KB in total. To rebuild them, install Piper and a voice model and run:
+The clips are rendered by [Piper](https://github.com/rhasspy/piper) with **Cori**, an English female voice trained on public-domain LibriVox recordings. 121 files, about 710 KB. To rebuild them, install Piper and a voice model and run:
 
 ```
-powershell -File make-audio.ps1 -Piper <path>\piper.exe -Model <path>\en_GB-jenny_dioco-medium.onnx
+powershell -File make-audio.ps1 -Piper <path>\piper.exe -Model <path>\en_GB-cori-medium.onnx
 ```
 
-It only renders clips that are missing, writes `audio-manifest.json` for the service worker, and lists any orphans left behind by a deleted word. Pass `-Force` after changing voice. Filenames are slugs of the word, so `words.csv` stays the source of truth. Alternative voice that is public domain: `en_GB-cori-medium` (LibriVox). Note `en_GB-cori-high` will not load in the 2023.11 Piper build.
+It only renders clips that are missing, writes `audio-manifest.json` for the service worker, and lists any orphans left behind by a deleted word. Pass `-Force` after changing voice. Filenames are slugs of the word, so `words.csv` stays the source of truth.
+
+Check the accent, not just the language tag, when picking a voice. Piper files these under `en_GB` but `jenny_dioco` is a Dublin speaker and `alba` is Scottish, neither of which is right for an English exam. Also note `en_GB-cori-high` fails to load in the 2023.11 Piper build; use the medium model.
 
 The fallback path still scores the device's own voices, and reads the quality tier from `voiceURI` rather than `name`: on iOS the default `com.apple.voice.compact.en-GB.Daniel` and the good `...voice.enhanced.en-GB.Serena` differ only in the URI, so scoring on the name alone lets the robotic one win.
+
+Nothing in the app tells the user to go and change a phone setting, and nothing should. If some future change makes that genuinely unavoidable, say so in conversation rather than putting a hint on the screen.
 
 ## Installing it on the phone
 
