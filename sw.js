@@ -11,12 +11,13 @@
  * localStorage and is never touched here, so clearing or versioning this cache
  * cannot cost the user their reviews.
  */
-const CACHE = 'vocab-shell-v3';
+const CACHE = 'vocab-shell-v4';
 const SHELL = [
   './',
   './index.html',
   './words.js',
   './manifest.json',
+  './audio-manifest.json',
   './fonts/fraunces-latin.woff2',
   './fonts/manrope-latin.woff2',
   './fonts/manrope-cyrillic.woff2',
@@ -40,10 +41,27 @@ self.addEventListener('activate', e => {
     caches.keys()
       .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
+      .then(cacheClips)
   );
 });
 
-const isStatic = url => /\/(fonts|icons)\//.test(url.pathname);
+/* The spoken words, about 650 KB across 121 files. Pulled after activation
+ * rather than during install, so a slow connection delays nothing the user is
+ * waiting on, and fetched one at a time to stay out of the way. A worker
+ * cannot list a directory, hence the manifest written by make-audio.ps1. */
+function cacheClips(){
+  return fetch('audio-manifest.json')
+    .then(r => r.json())
+    .then(({clips}) => caches.open(CACHE).then(c =>
+      (clips || []).reduce(
+        (chain, name) => chain.then(() =>
+          c.match('audio/' + name).then(hit => hit || c.add('audio/' + name).catch(() => {}))),
+        Promise.resolve())
+    ))
+    .catch(() => {});
+}
+
+const isStatic = url => /\/(fonts|icons|audio)\//.test(url.pathname);
 
 self.addEventListener('fetch', e => {
   const req = e.request;

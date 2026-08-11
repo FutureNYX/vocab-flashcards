@@ -36,6 +36,15 @@ window.WORDS = [
         "example":  "The flat is lovely, *albeit* a little small for two people."
     },
     {
+        "word":  "a blessing in disguise",
+        "part_of_speech":  "idiom",
+        "definition":  "Something that seems bad at first but turns out to be good",
+        "russian_definition":  "то, что сначала кажется неудачей, но оборачивается благом",
+        "english_synonyms":  "a hidden benefit, a lucky setback",
+        "russian_synonyms":  "скрытое благо, все к лучшему, нет худа без добра",
+        "example":  "Missing that train was *a blessing in disguise*; I met my wife on the next one."
+    },
+    {
         "word":  "inherently",
         "part_of_speech":  "adv",
         "definition":  "As a basic, permanent quality that cannot be separated out",
@@ -70,6 +79,15 @@ window.WORDS = [
         "english_synonyms":  "accidentally, unintentionally, unwittingly",
         "russian_synonyms":  "непреднамеренно, случайно, ненароком",
         "example":  "I *inadvertently* deleted the photos while clearing space on my phone."
+    },
+    {
+        "word":  "the tip of the iceberg",
+        "part_of_speech":  "idiom",
+        "definition":  "The small visible part of a much bigger problem",
+        "russian_definition":  "лишь малая видимая часть гораздо большей проблемы",
+        "english_synonyms":  "just the start, the visible part",
+        "russian_synonyms":  "верхушка айсберга, только начало, малая часть",
+        "example":  "The broken window was just *the tip of the iceberg*; the whole house needed work."
     },
     {
         "word":  "paradoxically",
@@ -108,6 +126,15 @@ window.WORDS = [
         "example":  "Colds are more *prevalent* in winter, when everyone stays indoors."
     },
     {
+        "word":  "a double-edged sword",
+        "part_of_speech":  "idiom",
+        "definition":  "Something with a good side and a bad side at once",
+        "russian_definition":  "то, у чего есть и хорошая, и плохая сторона",
+        "english_synonyms":  "a mixed blessing, it cuts both ways",
+        "russian_synonyms":  "палка о двух концах, неоднозначная вещь, есть и минусы",
+        "example":  "Working from home is *a double-edged sword*: more time, but less company."
+    },
+    {
         "word":  "detrimental",
         "part_of_speech":  "adj",
         "definition":  "Causing harm or damage",
@@ -142,6 +169,15 @@ window.WORDS = [
         "english_synonyms":  "feasible, workable, practicable",
         "russian_synonyms":  "жизнеспособный, осуществимый, реальный",
         "example":  "Cycling to work is only *viable* if there is somewhere safe to leave the bike."
+    },
+    {
+        "word":  "cut corners",
+        "part_of_speech":  "idiom",
+        "definition":  "To do something cheaply or quickly, and badly as a result",
+        "russian_definition":  "делать наспех и небрежно, экономя на качестве",
+        "english_synonyms":  "skimp, do it on the cheap",
+        "russian_synonyms":  "делать спустя рукава, халтурить, экономить на качестве",
+        "example":  "They *cut corners* on the building, and the roof leaked within a year."
     },
     {
         "word":  "sustainable",
@@ -180,6 +216,15 @@ window.WORDS = [
         "example":  "His excuse sounded *plausible*, but I later found out none of it was true."
     },
     {
+        "word":  "bite the bullet",
+        "part_of_speech":  "idiom",
+        "definition":  "To make yourself do something unpleasant that you cannot avoid",
+        "russian_definition":  "решиться и сделать неприятное дело",
+        "english_synonyms":  "grit your teeth, get it over with",
+        "russian_synonyms":  "стиснуть зубы, взять себя в руки, решиться наконец",
+        "example":  "I finally *bit the bullet* and booked the dentist."
+    },
+    {
         "word":  "ambiguous",
         "part_of_speech":  "adj",
         "definition":  "Open to more than one interpretation; unclear",
@@ -214,6 +259,15 @@ window.WORDS = [
         "english_synonyms":  "sturdy, resilient, sound",
         "russian_synonyms":  "надежный, крепкий, устойчивый",
         "example":  "These boots are *robust* enough to survive years of walking in the hills."
+    },
+    {
+        "word":  "get the hang of",
+        "part_of_speech":  "idiom",
+        "definition":  "To learn how to do something after some practice",
+        "russian_definition":  "научиться чему-то с практикой, приноровиться",
+        "english_synonyms":  "get used to, pick it up",
+        "russian_synonyms":  "приноровиться, освоиться, набить руку",
+        "example":  "Driving felt impossible at first, but I *got the hang of* it in a month."
     },
     {
         "word":  "profound",
@@ -252,6 +306,15 @@ window.WORDS = [
         "example":  "My Spanish is *rudimentary*: I can order food and not much else."
     },
     {
+        "word":  "on the same page",
+        "part_of_speech":  "idiom",
+        "definition":  "In agreement, understanding something the same way",
+        "russian_definition":  "одинаково понимать ситуацию, быть заодно",
+        "english_synonyms":  "in agreement, of one mind",
+        "russian_synonyms":  "быть заодно, понимать друг друга, договориться",
+        "example":  "Before we start, let us make sure we are *on the same page* about the budget."
+    },
+    {
         "word":  "arduous",
         "part_of_speech":  "adj",
         "definition":  "Requiring great and sustained effort",
@@ -288,6 +351,15 @@ window.WORDS = [
         "example":  "That teacher played a *pivotal* role in my decision to study medicine."
     },
     {
+        "word":  "in the long run",
+        "part_of_speech":  "idiom",
+        "definition":  "Over a long period, rather than immediately",
+        "russian_definition":  "в конечном счете, на длинной дистанции",
+        "english_synonyms":  "eventually, over time",
+        "russian_synonyms":  "в конечном счете, со временем, в перспективе",
+        "example":  "Buying good shoes is cheaper *in the long run*."
+    },
+    {
         "word":  "exacerbate",
         "part_of_speech":  "v",
         "definition":  "To make an existing problem noticeably worse",
@@ -313,6 +385,15 @@ window.WORDS = [
         "english_synonyms":  "ease, relieve, soothe",
         "russian_synonyms":  "облегчать, снимать, смягчать",
         "example":  "A hot bath helps *alleviate* the pain in my back."
+    },
+    {
+        "word":  "take it with a pinch of salt",
+        "part_of_speech":  "idiom",
+        "definition":  "To not believe something completely",
+        "russian_definition":  "не принимать за чистую монету, отнестись с сомнением",
+        "english_synonyms":  "be sceptical, doubt it",
+        "russian_synonyms":  "не принимать за чистую монету, отнестись с сомнением, поставить под вопрос",
+        "example":  "He says he never gets nervous, but I take that *with a pinch of salt*."
     },
     {
         "word":  "undermine",
@@ -351,6 +432,15 @@ window.WORDS = [
         "example":  "A heavy bag will *hinder* you on a long walk."
     },
     {
+        "word":  "go the extra mile",
+        "part_of_speech":  "idiom",
+        "definition":  "To do more than you have to",
+        "russian_definition":  "делать больше, чем требуется",
+        "english_synonyms":  "make an extra effort, go above and beyond",
+        "russian_synonyms":  "выкладываться, делать сверх нормы, стараться изо всех сил",
+        "example":  "She always *goes the extra mile* for her students."
+    },
+    {
         "word":  "curb",
         "part_of_speech":  "v",
         "definition":  "To limit or control something harmful",
@@ -385,6 +475,15 @@ window.WORDS = [
         "english_synonyms":  "carry out, enact, execute",
         "russian_synonyms":  "внедрять, осуществлять, реализовывать",
         "example":  "It is easy to plan a new diet; the hard part is *implementing* it."
+    },
+    {
+        "word":  "hit the nail on the head",
+        "part_of_speech":  "idiom",
+        "definition":  "To say exactly the right thing about something",
+        "russian_definition":  "попасть в точку, сказать точно по сути",
+        "english_synonyms":  "be exactly right, put your finger on it",
+        "russian_synonyms":  "попасть в точку, в самую суть, точно подметить",
+        "example":  "You *hit the nail on the head*: it is not the money, it is the hours."
     },
     {
         "word":  "prioritise",
@@ -423,6 +522,15 @@ window.WORDS = [
         "example":  "My grandmother *exemplifies* kindness: she feeds anyone who visits."
     },
     {
+        "word":  "out of the blue",
+        "part_of_speech":  "idiom",
+        "definition":  "Suddenly and with no warning at all",
+        "russian_definition":  "внезапно, без всякого предупреждения",
+        "english_synonyms":  "suddenly, unexpectedly",
+        "russian_synonyms":  "как гром среди ясного неба, внезапно, ни с того ни с сего",
+        "example":  "She called me *out of the blue* after ten years."
+    },
+    {
         "word":  "perpetuate",
         "part_of_speech":  "v",
         "definition":  "To cause something to continue indefinitely, often something bad",
@@ -457,6 +565,15 @@ window.WORDS = [
         "english_synonyms":  "simplify, rationalise, optimise",
         "russian_synonyms":  "оптимизировать, упрощать, рационализировать",
         "example":  "Ordering online has *streamlined* the process; it now takes two minutes."
+    },
+    {
+        "word":  "second nature",
+        "part_of_speech":  "idiom",
+        "definition":  "So familiar that you do it without thinking",
+        "russian_definition":  "привычно до автоматизма, само собой",
+        "english_synonyms":  "automatic, instinctive",
+        "russian_synonyms":  "на автомате, вошло в привычку, само собой",
+        "example":  "After a year in Spain, speaking Spanish became *second nature*."
     },
     {
         "word":  "deter",
@@ -495,6 +612,15 @@ window.WORDS = [
         "example":  "The smell of fresh bread *permeated* the whole house."
     },
     {
+        "word":  "a steep learning curve",
+        "part_of_speech":  "idiom",
+        "definition":  "A lot to learn in a short time",
+        "russian_definition":  "надо быстро освоить очень много нового",
+        "english_synonyms":  "hard at first, a lot to take in",
+        "russian_synonyms":  "сложное начало, много нового сразу, тяжелый старт",
+        "example":  "The new job has *a steep learning curve*, but I am enjoying it."
+    },
+    {
         "word":  "reconcile",
         "part_of_speech":  "v",
         "definition":  "To bring conflicting things or people into agreement",
@@ -529,6 +655,15 @@ window.WORDS = [
         "english_synonyms":  "inconsistency, mismatch, gap",
         "russian_synonyms":  "расхождение, несоответствие, разночтение",
         "example":  "There was a *discrepancy* between the price on the shelf and the price at the checkout."
+    },
+    {
+        "word":  "a grey area",
+        "part_of_speech":  "idiom",
+        "definition":  "A situation where the rules are not clear",
+        "russian_definition":  "ситуация, где правила неясны",
+        "english_synonyms":  "an unclear case, not black and white",
+        "russian_synonyms":  "серая зона, неясный случай, спорный момент",
+        "example":  "Whether you can claim that on expenses is *a grey area*."
     },
     {
         "word":  "disparity",
@@ -567,6 +702,15 @@ window.WORDS = [
         "example":  "The one *drawback* of this flat is that there is no lift."
     },
     {
+        "word":  "a wake-up call",
+        "part_of_speech":  "idiom",
+        "definition":  "A shock that makes you change something",
+        "russian_definition":  "тревожный сигнал, который заставляет измениться",
+        "english_synonyms":  "a warning, a shock",
+        "russian_synonyms":  "тревожный звонок, сигнал к переменам, отрезвляющий момент",
+        "example":  "The results were *a wake-up call*; I started revising properly."
+    },
+    {
         "word":  "catalyst",
         "part_of_speech":  "n",
         "definition":  "Something that triggers a significant change",
@@ -592,6 +736,15 @@ window.WORDS = [
         "english_synonyms":  "outcry, resistance, reaction",
         "russian_synonyms":  "негативная реакция, отпор, волна возмущения",
         "example":  "There was a *backlash* from parents when the school changed the uniform."
+    },
+    {
+        "word":  "play it by ear",
+        "part_of_speech":  "idiom",
+        "definition":  "To decide as you go, without a plan",
+        "russian_definition":  "действовать по обстоятельствам, без плана",
+        "english_synonyms":  "improvise, see how it goes",
+        "russian_synonyms":  "действовать по обстоятельствам, импровизировать, решать на месте",
+        "example":  "We have not booked anything; we will *play it by ear*."
     },
     {
         "word":  "trade-off",
@@ -630,6 +783,15 @@ window.WORDS = [
         "example":  "Doctors are worried about the *prevalence* of back pain among office workers."
     },
     {
+        "word":  "the best of both worlds",
+        "part_of_speech":  "idiom",
+        "definition":  "Both advantages at the same time, with neither disadvantage",
+        "russian_definition":  "сразу оба преимущества, без минусов каждого",
+        "english_synonyms":  "two benefits at once, win-win",
+        "russian_synonyms":  "и то и другое сразу, оба плюса, лучшее из двух",
+        "example":  "Living just outside the city gives you *the best of both worlds*."
+    },
+    {
         "word":  "adversity",
         "part_of_speech":  "n",
         "definition":  "Serious and continuing difficulty or hardship",
@@ -664,6 +826,15 @@ window.WORDS = [
         "english_synonyms":  "split, division, polarity",
         "russian_synonyms":  "дихотомия, разделение, противопоставление",
         "example":  "He sees a *dichotomy* between city and country life, but you can enjoy both."
+    },
+    {
+        "word":  "see eye to eye",
+        "part_of_speech":  "idiom",
+        "definition":  "To agree with someone",
+        "russian_definition":  "сходиться во мнениях, соглашаться",
+        "english_synonyms":  "agree, think alike",
+        "russian_synonyms":  "сходиться во взглядах, находить общий язык, соглашаться",
+        "example":  "We do not *see eye to eye* on politics, but we get on well."
     },
     {
         "word":  "nuance",
@@ -702,6 +873,15 @@ window.WORDS = [
         "example":  "She gave such a *vivid* description that I could picture the room."
     },
     {
+        "word":  "food for thought",
+        "part_of_speech":  "idiom",
+        "definition":  "Something worth thinking about carefully",
+        "russian_definition":  "повод задуматься",
+        "english_synonyms":  "something to consider, worth pondering",
+        "russian_synonyms":  "пища для размышлений, повод задуматься, есть о чем подумать",
+        "example":  "Her comment about spending less time online gave me *food for thought*."
+    },
+    {
         "word":  "immersive",
         "part_of_speech":  "adj",
         "definition":  "Surrounding you so completely that you forget everything else",
@@ -736,6 +916,15 @@ window.WORDS = [
         "english_synonyms":  "banal, humdrum, run-of-the-mill",
         "russian_synonyms":  "обыденный, будничный, заурядный",
         "example":  "Washing up and folding clothes are *mundane* but somebody has to do them."
+    },
+    {
+        "word":  "break the ice",
+        "part_of_speech":  "idiom",
+        "definition":  "To make people feel relaxed at the start of a meeting",
+        "russian_definition":  "разрядить обстановку в начале общения",
+        "english_synonyms":  "ease the tension, get people talking",
+        "russian_synonyms":  "растопить лед, разрядить обстановку, завязать разговор",
+        "example":  "He told a small joke to *break the ice* with the new team."
     },
     {
         "word":  "tedious",
@@ -774,6 +963,15 @@ window.WORDS = [
         "example":  "The garden was *serene*, with only the birds breaking the silence."
     },
     {
+        "word":  "burn the candle at both ends",
+        "part_of_speech":  "idiom",
+        "definition":  "To exhaust yourself by doing far too much",
+        "russian_definition":  "изматывать себя, работая на износ",
+        "english_synonyms":  "overdo it, wear yourself out",
+        "russian_synonyms":  "работать на износ, выматываться, не давать себе отдыха",
+        "example":  "You cannot work all day and study all night; you are *burning the candle at both ends*."
+    },
+    {
         "word":  "chaotic",
         "part_of_speech":  "adj",
         "definition":  "Completely disordered and out of control",
@@ -810,6 +1008,15 @@ window.WORDS = [
         "example":  "Snow here is *ephemeral*; it has melted by lunchtime."
     },
     {
+        "word":  "jump on the bandwagon",
+        "part_of_speech":  "idiom",
+        "definition":  "To join something only because it has become popular",
+        "russian_definition":  "примкнуть к чему-то только потому, что это стало модным",
+        "english_synonyms":  "follow the trend, join the crowd",
+        "russian_synonyms":  "идти за модой, подхватить тренд, примкнуть к толпе",
+        "example":  "Every cafe *jumped on the bandwagon* and started selling the same drink."
+    },
+    {
         "word":  "relentless",
         "part_of_speech":  "adj",
         "definition":  "Never stopping, easing, or showing mercy",
@@ -844,6 +1051,15 @@ window.WORDS = [
         "english_synonyms":  "conjure, summon, elicit",
         "russian_synonyms":  "вызывать, пробуждать, навевать",
         "example":  "The smell of the sea *evokes* childhood holidays."
+    },
+    {
+        "word":  "a blessing and a curse",
+        "part_of_speech":  "idiom",
+        "definition":  "Something that helps you and causes problems at the same time",
+        "russian_definition":  "то, что одновременно и помогает, и создает проблемы",
+        "english_synonyms":  "a mixed blessing, it cuts both ways",
+        "russian_synonyms":  "и благо и проклятие, палка о двух концах, неоднозначная вещь",
+        "example":  "Having my phone with me all the time is *a blessing and a curse*."
     },
     {
         "word":  "yearn",

@@ -120,21 +120,29 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   padding:var(--pad-top) 14px var(--pad-bottom);}
 .screen.on{display:flex;}
 
-/* ---------- HOME ---------- */
-#home{justify-content:center; align-items:center; text-align:center; gap:6px;}
+/* ---------- HOME ----------
+   The home screen wears the icon: bright green ground, black ink, the same
+   pairing as the V on the app tile. Only this screen. The cards, the study
+   screen and the sheet stay on the dark ground. */
+#home{justify-content:center; align-items:center; text-align:center; gap:6px;
+  background:var(--accent); color:var(--on-accent);}
 #home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:40px;
   font-weight:600; letter-spacing:-.01em; margin:0;}
-#home .sub{color:var(--muted); font-size:15px; margin-bottom:26px;}
+#home .sub{color:rgba(0,0,0,.62); font-size:15px; margin-bottom:26px;}
 .stats{display:flex; gap:10px; width:100%; max-width:420px; margin-bottom:26px;}
-.stat{flex:1; background:var(--card); border:1px solid var(--edge); border-radius:16px; padding:14px 8px;}
+.stat{flex:1; background:rgba(0,0,0,.07); border:1px solid rgba(0,0,0,.20); border-radius:16px;
+  padding:14px 8px;}
 .stat b{display:block; font-family:var(--serif); font-variation-settings:'opsz' 60;
   font-size:26px; font-weight:600; letter-spacing:0;}
-.stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
-.btn-main{width:100%; max-width:420px; background:var(--accent); color:var(--on-accent); font-weight:700;
+.stat span{font-size:11px; color:rgba(0,0,0,.58); text-transform:uppercase; letter-spacing:.09em;}
+/* inverted on the green: black button, green lettering, same pairing as the icon */
+.btn-main{width:100%; max-width:420px; background:var(--on-accent); color:var(--accent); font-weight:700;
   font-size:17px; padding:16px; border-radius:16px;}
 .btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
   font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
-#home .note{max-width:340px; margin:20px 0 0; font-size:12.5px; line-height:1.5; color:var(--muted);}
+#home .note{max-width:340px; margin:20px 0 0; font-size:12.5px; line-height:1.5; color:rgba(0,0,0,.62);}
+/* the done screen keeps the dark ground, so its button keeps the green fill */
+#done .btn-main{background:var(--accent); color:var(--on-accent);}
 
 /* ---------- STUDY ---------- */
 #study{padding-left:12px; padding-right:12px;}
@@ -179,12 +187,17 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    no extra width in the line: padding would push the following comma away from
    the word and leave a hole in the sentence. */
 .example .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
-  border-radius:5px; box-shadow:0 0 0 4px var(--hl-bg);}
+  border-radius:5px; box-shadow:0 0 0 3px var(--hl-bg);
+  /* idioms are several words long and wrap: clone gives each line fragment its
+     own rounded box instead of one shape stretched across the break */
+  -webkit-box-decoration-break:clone; box-decoration-break:clone;}
 .example:empty{display:none;}
 .front-word{margin-top:30px; padding-top:26px; border-top:1px solid var(--line);
   align-self:stretch; font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:38px;
   font-weight:600; letter-spacing:-.008em; line-height:1.08; word-break:break-word;}
-.front-word.long{font-size:27px;}
+/* idioms are whole phrases, so the display size steps down by length */
+.front-word.long{font-size:28px;}
+.front-word.longer{font-size:22px; line-height:1.2;}
 .pos{margin-top:11px; color:var(--muted); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
   font-weight:600;}
 
@@ -228,6 +241,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   font-size:31px; font-weight:300; line-height:1; display:grid; place-items:center;
   box-shadow:0 8px 24px rgba(0,0,0,.34); z-index:40;}
 .fab:active{transform:scale(.94);}
+.fab.on-green{background:var(--on-accent); color:var(--accent); box-shadow:0 8px 24px rgba(0,0,0,.22);}
 .sheet-bg{position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; display:none;}
 .sheet-bg.on{display:block;}
 .sheet{position:fixed; left:0; right:0; bottom:0; z-index:51; background:var(--bg);
@@ -515,7 +529,23 @@ function nextDueText(){
 
 /* ============================================================
    SPEECH
+   Every headword ships as an MP3 in audio/, spoken by a British
+   female voice (Jenny, Dioco dataset) rendered offline with Piper.
+   That is the whole point: iOS defaults to a compact voice that
+   sounds robotic, and the only way to improve it on the device is
+   to go and download one in Settings. Shipping the clips means the
+   app sounds the same on every phone and works with no signal.
+   The phone's own engine is kept only as a fallback for anything
+   with no clip, which today is nothing.
    ============================================================ */
+const CLIP_DIR = 'audio/';
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+/* One element, reused: iOS only lets audio start inside a user gesture, and a
+   single element that has already played once stays unlocked. */
+const clip = new Audio();
+clip.preload = 'auto';
+
 /* Pick a British female voice. Left to itself iOS grabs Daniel, the default
    en-GB voice, which is the deep robotic one. Named voices differ per device
    and per OS version, so score candidates rather than hard-coding one. */
@@ -557,7 +587,7 @@ if('speechSynthesis' in window){
 function voiceIsCompact(){
   return !!voice && /compact/i.test((voice.voiceURI || '') + ' ' + voice.name);
 }
-function speak(text){
+function synthesise(text){
   if(!('speechSynthesis' in window) || !text) return;
   if(!voice) pickVoice();               // iOS often fills the list only after first use
   speechSynthesis.cancel();
@@ -565,10 +595,25 @@ function speak(text){
   u.lang = (voice && voice.lang) || 'en-GB';
   u.rate = .92; u.pitch = 1;
   if(voice) u.voice = voice;
-  const btn = $('spk');
-  u.onstart = () => btn && btn.classList.add('speaking');
-  u.onend = u.onerror = () => btn && btn.classList.remove('speaking');
+  u.onstart = () => busy(true);
+  u.onend = u.onerror = () => busy(false);
   speechSynthesis.speak(u);
+}
+function busy(on){ const b = $('spk'); if(b) b.classList.toggle('speaking', on); }
+
+function speak(text){
+  if(!text) return;
+  const src = CLIP_DIR + slug(text) + '.mp3';
+  try{ speechSynthesis.cancel(); }catch(e){}
+  // Re-pointing src at the same file still restarts it, so a second tap
+  // replays rather than doing nothing.
+  clip.src = src;
+  clip.currentTime = 0;
+  clip.onplaying = () => busy(true);
+  clip.onended = () => busy(false);
+  clip.onerror = () => { busy(false); synthesise(text); };   // no clip for this word
+  const p = clip.play();
+  if(p && p.catch) p.catch(() => { busy(false); synthesise(text); });
 }
 
 /* ============================================================
@@ -580,8 +625,15 @@ let current = null, flipped = false, undoSnap = null;
 function show(name){
   ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
   $('fab').style.display = (name === 'study') ? 'none' : 'grid';
-  if(name === 'home') refreshHome();
+  // home is the green screen, so its furniture inverts and the iPhone status
+  // bar has to follow or it sits on a strip of the wrong colour
+  const green = (name === 'home');
+  $('fab').classList.toggle('on-green', green);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute('content', green ? cssVar('--accent') : cssVar('--bg'));
+  if(green) refreshHome();
 }
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function refreshHome(){
   const k = counts();
   $('sDue').textContent = k.due; $('sNew').textContent = k.neu; $('sKnown').textContent = k.known;
@@ -654,7 +706,8 @@ function render(){
   $('hint').style.display = '';
 
   $('fWord').textContent = w.word;
-  $('fWord').className = 'front-word' + (w.word.length > 15 ? ' long' : '');
+  $('fWord').className = 'front-word' +
+    (w.word.length > 24 ? ' longer' : w.word.length > 15 ? ' long' : '');
   $('fPos').textContent = posName(w.pos);
   renderExample($('fEx'), w.ex);
   $('bWord').textContent = w.word;

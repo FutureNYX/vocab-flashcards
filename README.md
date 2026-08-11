@@ -13,12 +13,21 @@ Add it to your home screen (Share > Add to Home Screen) and it opens full-screen
 - **Back:** the word again, then one block per language. English gives Definition and Synonyms; Russian gives Значение and Синонимы, labelled in Russian because the reader is a native speaker. Synonyms are chips with light text on green.
 - **Speaker button**, bottom right, reads the word aloud. It sits outside the flipping card rather than on a face: Safari's hit testing inside a `preserve-3d` subtree routed taps to the card underneath, so the old button flipped the card instead of speaking. One button serves both sides.
 - **Wrong / Hard / Easy** at the bottom, each showing when the card comes back.
+- **Home screen** wears the app icon's colours, bright green with black lettering. Only that screen: the cards and the study screen keep the dark ground, and the iPhone status bar colour is swapped to match whichever screen is showing.
 
 ## The voice
 
-Voices are scored on language, then on gender, then on quality tier, and the tier is read from `voiceURI` rather than `name`. That matters on iOS: the default `com.apple.voice.compact.en-GB.Daniel` and the good `...voice.enhanced.en-GB.Serena` differ only in the URI, so scoring on the name alone lets the robotic one win.
+**Every headword ships as an MP3.** The phone's own speech engine is not used unless a clip is missing. That is deliberate: iOS defaults to a compact voice that sounds robotic, and the only way to improve it on the device is to go into Settings and download a better one. Bundling the audio means it sounds the same on every phone, needs no setup, and works offline.
 
-The compact voices sound synthetic no matter what the page does. If the best available voice is a compact one, the home screen shows a line pointing at **Settings › Accessibility › Spoken Content › Voices › English (UK) › Serena**, which downloads the natural one once, for every app on the phone.
+The clips are rendered by [Piper](https://github.com/rhasspy/piper) with the British female voice **Jenny (Dioco)**, 121 files, about 650 KB in total. To rebuild them, install Piper and a voice model and run:
+
+```
+powershell -File make-audio.ps1 -Piper <path>\piper.exe -Model <path>\en_GB-jenny_dioco-medium.onnx
+```
+
+It only renders clips that are missing, writes `audio-manifest.json` for the service worker, and lists any orphans left behind by a deleted word. Pass `-Force` after changing voice. Filenames are slugs of the word, so `words.csv` stays the source of truth. Alternative voice that is public domain: `en_GB-cori-medium` (LibriVox). Note `en_GB-cori-high` will not load in the 2023.11 Piper build.
+
+The fallback path still scores the device's own voices, and reads the quality tier from `voiceURI` rather than `name`: on iOS the default `com.apple.voice.compact.en-GB.Daniel` and the good `...voice.enhanced.en-GB.Serena` differ only in the URI, so scoring on the name alone lets the robotic one win.
 
 ## Installing it on the phone
 
@@ -95,6 +104,10 @@ word, part_of_speech, definition, russian_definition, english_synonyms, russian_
 In `example`, wrap the target word in asterisks (`*exacerbate*`) and that span gets highlighted, whatever form the word takes in the sentence.
 
 Sentences are the first thing the learner reads, so keep them in plain everyday English: no rare words other than the target, and enough context that the meaning is guessable. `examples.json` holds them keyed by word, which is the easy way to rewrite a batch of them; applying it back to the CSV is a few lines of PowerShell.
+
+121 cards: 97 single words and 24 idioms (`idioms.json` holds the idioms as first written). **File order is running order**, because new cards are introduced top to bottom, so the idioms are interleaved through the CSV rather than appended, roughly one every four words. If you add more, spread them the same way. Idioms belong in Speaking rather than Writing Task 2, which wants a formal register.
+
+After adding a word, run `make-audio.ps1` as well as `build.ps1`, or that card falls back to the phone's robotic voice.
 
 After editing the CSV, regenerate the data file:
 
