@@ -8,11 +8,33 @@ Add it to your home screen (Share > Add to Home Screen) and it opens full-screen
 
 ## How it works
 
-- **Front:** the word, its part of speech, and an example sentence with the word highlighted.
+- **Front:** the example sentence first and largest, with the word highlighted, and the word itself underneath with its part of speech written out in full. Context before label: the point is to meet the word in use and only then name it. Sentences use everyday vocabulary so the meaning is inferable without the back of the card.
 - **Tap the card** to flip.
-- **Back:** the word again, then one block per language. English gives Definition and Synonyms; Russian gives Значение and Синонимы, labelled in Russian because the reader is a native speaker. Synonyms are chips, tinted the same as the highlight on the front.
-- **Speaker button** reads the word aloud (top right on both faces). Voices are scored so a British female one wins where available; left to itself, iOS picks Daniel, which is the deep robotic one.
+- **Back:** the word again, then one block per language. English gives Definition and Synonyms; Russian gives Значение and Синонимы, labelled in Russian because the reader is a native speaker. Synonyms are chips with light text on green.
+- **Speaker button**, bottom right, reads the word aloud. It sits outside the flipping card rather than on a face: Safari's hit testing inside a `preserve-3d` subtree routed taps to the card underneath, so the old button flipped the card instead of speaking. One button serves both sides.
 - **Wrong / Hard / Easy** at the bottom, each showing when the card comes back.
+
+## The voice
+
+Voices are scored on language, then on gender, then on quality tier, and the tier is read from `voiceURI` rather than `name`. That matters on iOS: the default `com.apple.voice.compact.en-GB.Daniel` and the good `...voice.enhanced.en-GB.Serena` differ only in the URI, so scoring on the name alone lets the robotic one win.
+
+The compact voices sound synthetic no matter what the page does. If the best available voice is a compact one, the home screen shows a line pointing at **Settings › Accessibility › Spoken Content › Voices › English (UK) › Serena**, which downloads the natural one once, for every app on the phone.
+
+## Installing it on the phone
+
+Open the site in Safari, Share, Add to Home Screen. `manifest.json` and `sw.js` make it behave like an app once installed:
+
+- it launches full screen with the green **V** icon rather than a black screenshot,
+- `sw.js` caches the page, the words and the fonts, so it opens with no signal (the app itself is network-first, so a new version still arrives as soon as there is a connection; fonts and icons are cache-first),
+- `navigator.storage.persist()` asks Safari not to evict the progress, which it otherwise may do for a site left unused for weeks.
+
+To change the icon, edit `icon-src.html` and run `powershell -File make-icons.ps1`, which rasterises it to the three PNG sizes iOS and Android ask for.
+
+## Progress, and not losing it
+
+Progress is keyed by the word itself, never by its position in the deck, so words can be added, reordered or deleted and every remaining card keeps its schedule. **Do not ever change `KEY` in `index.html`** (`vocab.main.v2`): that single string is the difference between shipping an update and wiping someone's reviews. `load()` repairs whatever it finds rather than discarding it, and leaves unknown fields alone so an older build cannot destroy data written by a newer one.
+
+Due dates are absolute epoch milliseconds, which is the phone's own clock: a VPN, a flight or a timezone change cannot move them. The one thing that would is the device clock jumping backwards, which would push every card into the future and leave nothing to review, so the app records when it last ran and slides all due dates by the same amount if it finds time has gone backwards by more than five minutes.
 
 ## The scheduling
 
@@ -71,6 +93,8 @@ word, part_of_speech, definition, russian_definition, english_synonyms, russian_
 ```
 
 In `example`, wrap the target word in asterisks (`*exacerbate*`) and that span gets highlighted, whatever form the word takes in the sentence.
+
+Sentences are the first thing the learner reads, so keep them in plain everyday English: no rare words other than the target, and enough context that the meaning is guessable. `examples.json` holds them keyed by word, which is the easy way to rewrite a batch of them; applying it back to the CSV is a few lines of PowerShell.
 
 After editing the CSV, regenerate the data file:
 

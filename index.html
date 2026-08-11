@@ -8,6 +8,9 @@
 <meta name="apple-mobile-web-app-title" content="Vocab">
 <meta name="theme-color" content="#10130C">
 <meta name="color-scheme" content="dark">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
 <title>Vocab</title>
 <style>
 /* ---------- TYPE ----------
@@ -45,45 +48,58 @@
    its own 'opsz' so the big word is drawn as display type and the small
    headings are drawn as text, rather than one outline scaled up and down. */
 
-/* Palettes. Switch by changing data-palette on <html>: grove | linen | moss | clay | fern */
+/* Palettes. Switch by changing data-palette on <html>: grove | linen | moss | clay | fern
+   --bright is the sentence on the front, the one thing on the card that is
+   near-white; --edge is the beige card outline; --chip-* keeps synonym text
+   light inside its green pill rather than green-on-green. */
 :root, [data-palette="grove"]{       /* warm forest floor, oat text, leaf accent */
   --bg:#10130C;  --card:#1D2318;  --card-2:#2A3122;
-  --text:#EFE9D9; --muted:#9B9C85; --line:#2F3527; --ru-text:#D9D3C0;
+  --text:#EFE9D9; --bright:#FCFAF3; --muted:#A3A48D; --line:#333A2A; --ru-text:#E2DCC9;
+  --edge:rgba(216,203,168,.42);
   --accent:#9DBE79; --on-accent:#12160E;
-  --wrong:#C8705A; --hard:#D7A55D; --easy:#9DBE79;
-  --hl-bg:rgba(157,190,121,.20); --hl-text:#C3D9A2;
+  --wrong:#D57F68; --hard:#DFAF66; --easy:#9DBE79;
+  --hl-bg:rgba(157,190,121,.30); --hl-text:#F6F3E6;
+  --chip-bg:rgba(157,190,121,.26); --chip-text:#F2EFE1;
   --hard-soft:rgba(215,165,93,.16); --easy-soft:rgba(157,190,121,.16);
 }
 [data-palette="linen"]{              /* the daylight version: beige paper, deep green ink */
   --bg:#EFE9DC;  --card:#F8F4EA;  --card-2:#E7E0D0;
-  --text:#1F251A; --muted:#7C7B69; --line:#DDD5C4; --ru-text:#39402F;
+  --text:#1F251A; --bright:#141810; --muted:#7C7B69; --line:#DDD5C4; --ru-text:#39402F;
+  --edge:rgba(120,106,74,.35);
   --accent:#4C6B3C; --on-accent:#F8F4EA;
   --wrong:#A9503C; --hard:#9A6E22; --easy:#4C6B3C;
-  --hl-bg:rgba(76,107,60,.15); --hl-text:#3B5730;
+  --hl-bg:rgba(76,107,60,.88); --hl-text:#F8F4EA;
+  --chip-bg:rgba(76,107,60,.85); --chip-text:#F8F4EA;
   --hard-soft:rgba(154,110,34,.14); --easy-soft:rgba(76,107,60,.13);
 }
 [data-palette="moss"]{               /* deep green, sage accent */
   --bg:#0E1311;  --card:#161D19;  --card-2:#1F2823;
-  --text:#ECF1ED; --muted:#8B978F; --line:#29332D; --ru-text:#C6D2C8;
+  --text:#ECF1ED; --bright:#FBFDFA; --muted:#8B978F; --line:#29332D; --ru-text:#C6D2C8;
+  --edge:rgba(206,214,196,.34);
   --accent:#86B26A; --on-accent:#0E1311;
   --wrong:#E07A5F; --hard:#E0A458; --easy:#86B26A;
-  --hl-bg:rgba(134,178,106,.22); --hl-text:#AFD298;
+  --hl-bg:rgba(134,178,106,.32); --hl-text:#F4F8EE;
+  --chip-bg:rgba(134,178,106,.28); --chip-text:#F1F6EB;
   --hard-soft:rgba(224,164,88,.17); --easy-soft:rgba(134,178,106,.17);
 }
 [data-palette="clay"]{               /* warm earth, olive accent */
   --bg:#14110E;  --card:#1E1A16;  --card-2:#282320;
-  --text:#F3EDE5; --muted:#9C9086; --line:#342D27; --ru-text:#DED6CA;
+  --text:#F3EDE5; --bright:#FEFBF6; --muted:#9C9086; --line:#342D27; --ru-text:#DED6CA;
+  --edge:rgba(222,206,180,.38);
   --accent:#A8B98C; --on-accent:#14110E;
   --wrong:#CF7B62; --hard:#DBA75E; --easy:#A8B98C;
-  --hl-bg:rgba(168,185,140,.24); --hl-text:#C7D5AD;
+  --hl-bg:rgba(168,185,140,.32); --hl-text:#FAF6EC;
+  --chip-bg:rgba(168,185,140,.28); --chip-text:#F7F3E9;
   --hard-soft:rgba(219,167,94,.17); --easy-soft:rgba(168,185,140,.17);
 }
 [data-palette="fern"]{               /* cool near-black green, mint accent */
   --bg:#0A100C;  --card:#121A15;  --card-2:#1A241D;
-  --text:#E9F1EA; --muted:#7E8C83; --line:#22302A; --ru-text:#C3D2C7;
+  --text:#E9F1EA; --bright:#FAFDFA; --muted:#7E8C83; --line:#22302A; --ru-text:#C3D2C7;
+  --edge:rgba(200,214,202,.32);
   --accent:#6FC192; --on-accent:#08120C;
   --wrong:#D97B7B; --hard:#D3AA63; --easy:#6FC192;
-  --hl-bg:rgba(111,193,146,.20); --hl-text:#95D6B1;
+  --hl-bg:rgba(111,193,146,.30); --hl-text:#F2FBF5;
+  --chip-bg:rgba(111,193,146,.26); --chip-text:#EFF9F3;
   --hard-soft:rgba(211,170,99,.17); --easy-soft:rgba(111,193,146,.17);
 }
 :root{
@@ -110,7 +126,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   font-weight:600; letter-spacing:-.01em; margin:0;}
 #home .sub{color:var(--muted); font-size:15px; margin-bottom:26px;}
 .stats{display:flex; gap:10px; width:100%; max-width:420px; margin-bottom:26px;}
-.stat{flex:1; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 8px;}
+.stat{flex:1; background:var(--card); border:1px solid var(--edge); border-radius:16px; padding:14px 8px;}
 .stat b{display:block; font-family:var(--serif); font-variation-settings:'opsz' 60;
   font-size:26px; font-weight:600; letter-spacing:0;}
 .stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
@@ -118,6 +134,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   font-size:17px; padding:16px; border-radius:16px;}
 .btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
   font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
+#home .note{max-width:340px; margin:20px 0 0; font-size:12.5px; line-height:1.5; color:var(--muted);}
 
 /* ---------- STUDY ---------- */
 #study{padding-left:12px; padding-right:12px;}
@@ -135,7 +152,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* a new card should snap to its front, not reverse-flip and flash its answer */
 .card.noanim, .card.noanim .face{transition:none !important;}
 .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
-  background:var(--card); border:1px solid var(--line);
+  background:var(--card); border:1px solid var(--edge);
   border-radius:24px; display:flex; flex-direction:column; overflow:hidden;
   /* An identity transform gives each face its own 3D context, so the speaker
      button is flattened onto the face instead of floating on its own plane
@@ -143,35 +160,40 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   transform:rotateY(0deg);}
 .face.back{transform:rotateY(180deg);}
 
-.speaker{position:absolute; top:14px; right:14px; width:56px; height:56px; border-radius:50%;
-  background:var(--card-2); display:grid; place-items:center;
-  backface-visibility:hidden; -webkit-backface-visibility:hidden;}
+/* Bottom right of the card, above both faces and outside their 3D context. */
+.speaker{position:absolute; right:16px; bottom:16px; width:58px; height:58px; border-radius:50%;
+  background:var(--card-2); border:1px solid var(--edge); display:grid; place-items:center;
+  z-index:6; box-shadow:0 4px 14px rgba(0,0,0,.28);}
 .speaker svg{width:26px; height:26px; fill:var(--text);}
-.speaker:active{background:var(--line);}
+.speaker:active{background:var(--line); transform:scale(.94);}
+.speaker.speaking{background:var(--accent); border-color:var(--accent);}
+.speaker.speaking svg{fill:var(--on-accent);}
 
+/* Sentence first, word underneath: the point is to meet the word in context
+   and only then name it. */
 .front-body{flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;
-  padding:74px 22px 26px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch;}
-.front-word{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:46px;
-  font-weight:600; letter-spacing:-.008em; line-height:1.08; word-break:break-word;}
-.front-word.long{font-size:31px;}
-.pos{margin-top:13px; color:var(--muted); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-  font-weight:600;}
-.example{margin-top:26px; padding-top:22px; border-top:1px solid var(--line); max-width:330px;
-  font-size:16px; line-height:1.6; color:var(--text); opacity:.76;}
-.example .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:650;
-  padding:1px 5px; border-radius:6px;}
+  padding:30px 22px 84px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+.example{max-width:340px; font-size:22px; line-height:1.48; color:var(--bright); font-weight:500;
+  letter-spacing:-.004em;}
+/* The highlight is grown with a spread shadow rather than padding, so it takes
+   no extra width in the line: padding would push the following comma away from
+   the word and leave a hole in the sentence. */
+.example .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
+  border-radius:5px; box-shadow:0 0 0 4px var(--hl-bg);}
 .example:empty{display:none;}
+.front-word{margin-top:30px; padding-top:26px; border-top:1px solid var(--line);
+  align-self:stretch; font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:38px;
+  font-weight:600; letter-spacing:-.008em; line-height:1.08; word-break:break-word;}
+.front-word.long{font-size:27px;}
+.pos{margin-top:11px; color:var(--muted); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  font-weight:600;}
 
-.back-head{display:flex; align-items:center; gap:12px; padding:18px 18px 14px 22px;
+.back-head{display:flex; align-items:center; gap:12px; padding:18px 22px 14px;
   border-bottom:1px solid var(--line); flex:0 0 auto;}
 .back-word{font-family:var(--serif); font-variation-settings:'opsz' 72; font-size:26px;
   font-weight:600; letter-spacing:-.005em; flex:1; word-break:break-word;}
-.spk-sm{width:44px; height:44px; border-radius:50%; background:var(--card-2); display:grid;
-  place-items:center; flex:0 0 auto;
-  backface-visibility:hidden; -webkit-backface-visibility:hidden;}
-.spk-sm svg{width:21px; height:21px; fill:var(--text);}
-.spk-sm:active{background:var(--line);}
-.back-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+/* the last block has to clear the speaker button */
+.back-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:76px;}
 .sect{padding:16px 22px; border-bottom:1px solid var(--line);}
 .sect:last-child{border-bottom:none;}
 .sect h4{margin:0 0 7px; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
@@ -180,14 +202,14 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .sect p{margin:0; font-size:16.5px; line-height:1.45;}
 .sect.ru p{color:var(--ru-text);}
 .chips{display:flex; flex-wrap:wrap; gap:7px;}
-.chip{background:var(--hl-bg); color:var(--hl-text); font-weight:600; font-size:15px;
+.chip{background:var(--chip-bg); color:var(--chip-text); font-weight:600; font-size:15px;
   padding:5px 11px; border-radius:9px; line-height:1.3;}
 
 .hint{flex:0 0 auto; text-align:center; color:var(--muted); font-size:13px; padding:20px 0 22px;}
 .answers{flex:0 0 auto; display:none; gap:8px;}
 .answers.on{display:flex;}
 .ans{flex:1; border-radius:16px; padding:12px 4px 10px; background:var(--card);
-  border:1px solid var(--line);
+  border:1px solid var(--edge);
   display:flex; flex-direction:column; align-items:center; gap:2px;}
 .ans b{font-size:15.5px; font-weight:650;}
 .ans span{font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums;}
@@ -248,6 +270,8 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
     <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
   </div>
   <button class="btn-main" id="goStudy">Start</button>
+  <p class="note" id="voiceNote" hidden>For a natural voice, download it once:
+    Settings &rsaquo; Accessibility &rsaquo; Spoken Content &rsaquo; Voices &rsaquo; English (UK) &rsaquo; Serena.</p>
 </section>
 
 <!-- ============ STUDY ============ -->
@@ -264,21 +288,26 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   <div class="card-wrap" id="cardWrap">
     <div class="card" id="card">
       <div class="face front">
-        <button class="speaker" data-speak><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg></button>
         <div class="front-body">
+          <div class="example" id="fEx"></div>
           <div class="front-word" id="fWord"></div>
           <div class="pos" id="fPos"></div>
-          <div class="example" id="fEx"></div>
         </div>
       </div>
       <div class="face back">
         <div class="back-head">
           <div class="back-word" id="bWord"></div>
-          <button class="spk-sm" data-speak><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg></button>
         </div>
         <div class="back-body" id="bBody"></div>
       </div>
     </div>
+    <!-- The speaker lives outside the card, not on a face. Safari's hit testing
+         inside a preserve-3d subtree sent taps to the card underneath, which is
+         why it used to flip instead of speak. Out here it is a plain button,
+         and one button serves both sides. -->
+    <button class="speaker" id="spk" aria-label="Say the word">
+      <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg>
+    </button>
   </div>
 
   <div class="hint" id="hint">Tap the card to reveal</div>
@@ -317,16 +346,56 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* ============================================================
    STORAGE  —  progress lives in this browser, on this device
    ============================================================ */
+/* NEVER change this key. Progress is keyed by the word itself, not by its
+   position in the deck, so words can be added, reordered or removed and every
+   remaining card keeps its schedule. Shipping a new version of the app must
+   never cost the user their reviews: load() therefore repairs whatever it
+   finds rather than discarding it, and unknown fields are left untouched so
+   an older build cannot destroy data written by a newer one. */
 const KEY = 'vocab.main.v2';
 let S = null;
 
 function load(){
   try { S = JSON.parse(localStorage.getItem(KEY)) || null; } catch(e){ S = null; }
-  if(!S || typeof S !== 'object') S = {cards:{}, requests:[]};
-  S.cards    = S.cards    || {};
-  S.requests = S.requests || [];
+  if(!S || typeof S !== 'object') S = {};
+  if(!S.cards    || typeof S.cards !== 'object') S.cards = {};
+  if(!Array.isArray(S.requests)) S.requests = [];
+  correctForClockChange();
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* Due dates are absolute epoch milliseconds, which is the phone's own clock and
+   is unaffected by a VPN, by travelling, or by the timezone displayed. The one
+   thing that would break them is the clock itself jumping: if the device sets
+   its time backwards, every card looks as though it is due further in the
+   future than it is, and nothing comes up for review. So remember the last time
+   we ran, and if the clock has gone backwards by more than a few minutes, slide
+   every due date by the same amount. Intervals stay relative, which is all the
+   schedule ever cared about. A forward jump needs no repair: cards simply
+   become due, which is what would have happened anyway. */
+function correctForClockChange(){
+  const now = Date.now();
+  const seen = Number(S.lastSeen) || 0;
+  if(seen && now < seen - 5*60000){
+    const shift = seen - now;
+    Object.keys(S.cards).forEach(id => {
+      const c = S.cards[id];
+      if(c && typeof c.due === 'number' && c.due > 0) c.due -= shift;
+    });
+  }
+  S.lastSeen = now;
+  // Persist straight away. If the corrected dates only lived in memory, the
+  // stale marker would still be on disk and the next launch would measure the
+  // same rollback again and shift everything a second time.
+  save();
+}
+/* Keep the marker fresh so a rollback is measured from the last real use. */
+setInterval(() => { if(S){ S.lastSeen = Date.now(); save(); } }, 60000);
+
+/* Ask the browser not to evict this. Safari clears script-writable storage for
+   sites left unused, and a flashcard app is exactly the kind of thing you leave
+   alone for a fortnight. Installed to the home screen this is usually granted. */
+if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
 
 function deck(){
   return (window.WORDS||[]).map(w => ({
@@ -451,24 +520,30 @@ function nextDueText(){
    en-GB voice, which is the deep robotic one. Named voices differ per device
    and per OS version, so score candidates rather than hard-coding one. */
 const FEMALE = /serena|kate|stephanie|martha|sonia|libby|hazel|fiona|moira|tessa|samantha|karen|zira|susan|catherine|linda|amy|emma|jenny|aria|ava|clara|female/i;
-const MALE   = /daniel|arthur|oliver|george|ryan|thomas|alex|fred|gordon|rishi|aaron|david|mark|james|guy|eric|christopher|brandon|liam|nathan|william/i;
+const MALE   = /daniel|arthur|oliver|george|ryan|thomas|alex|fred|gordon|rishi|aaron|david|mark|james|guy|eric|christopher|brandon|liam|nathan|william|male/i;
 
 let voice = null;
 function pickVoice(){
   const all = speechSynthesis.getVoices()
     .filter(v => v.lang && v.lang.replace('_','-').toLowerCase().indexOf('en') === 0);
   if(!all.length) return;
-  // Voice names differ wildly per device, so score rather than hard-code.
-  // British first, then female: iOS otherwise defaults to Daniel, the deep one.
+  /* Voice names differ wildly per device, so score rather than hard-code.
+     The quality tier hides in the voiceURI, not the name: iOS ships
+     com.apple.voice.compact.en-GB.Daniel by default and only exposes
+     ...voice.enhanced.en-GB.Serena once that voice has been downloaded.
+     Both are called "Serena"/"Daniel" in .name, so the URI has to be read
+     or the robotic compact one wins on a tie. */
   const score = v => {
     const lang = v.lang.replace('_','-');
+    const uri  = (v.voiceURI || '') + ' ' + v.name;
     let s = 0;
     if(lang === 'en-GB') s += 100;
     else if(/^en-(AU|IE|NZ|ZA)$/i.test(lang)) s += 40;
-    if(FEMALE.test(v.name)) s += 50;
-    else if(MALE.test(v.name)) s -= 60;      // checked second so "female" never reads as "male"
-    if(/enhanced|premium|natural|neural/i.test(v.name)) s += 15;
-    if(/compact|eloquence/i.test(v.name)) s -= 20;
+    if(FEMALE.test(v.name)) s += 60;
+    else if(MALE.test(v.name)) s -= 80;      // checked second so "female" never reads as "male"
+    if(/premium|enhanced|natural|neural|siri/i.test(uri)) s += 45;
+    if(/compact|eloquence|novelty/i.test(uri)) s -= 30;
+    if(v.localService) s += 5;
     return s;
   };
   voice = all.slice().sort((a,b) => score(b) - score(a))[0] || null;
@@ -477,14 +552,22 @@ if('speechSynthesis' in window){
   pickVoice();
   speechSynthesis.onvoiceschanged = pickVoice;
 }
+/* True when the best voice available is one of iOS's compact ones, which is
+   what makes it sound robotic. Nothing the page can do about that except say so. */
+function voiceIsCompact(){
+  return !!voice && /compact/i.test((voice.voiceURI || '') + ' ' + voice.name);
+}
 function speak(text){
   if(!('speechSynthesis' in window) || !text) return;
   if(!voice) pickVoice();               // iOS often fills the list only after first use
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = (voice && voice.lang) || 'en-GB';
-  u.rate = .9; u.pitch = 1.05;
+  u.rate = .92; u.pitch = 1;
   if(voice) u.voice = voice;
+  const btn = $('spk');
+  u.onstart = () => btn && btn.classList.add('speaking');
+  u.onend = u.onerror = () => btn && btn.classList.remove('speaking');
   speechSynthesis.speak(u);
 }
 
@@ -503,6 +586,18 @@ function refreshHome(){
   const k = counts();
   $('sDue').textContent = k.due; $('sNew').textContent = k.neu; $('sKnown').textContent = k.known;
   $('goStudy').textContent = (k.due + k.neu) ? 'Start' : 'Review anyway';
+  $('voiceNote').hidden = !voiceIsCompact();
+}
+
+/* Written out in full: "ADJ" and "PREP" are extra decoding work for someone
+   reading in a second language. */
+const POS = {
+  adj:'adjective', adv:'adverb', v:'verb', n:'noun',
+  prep:'preposition', conj:'conjunction', phrase:'phrase', idiom:'idiom'
+};
+function posName(p){
+  const k = String(p || '').trim().toLowerCase();
+  return POS[k] || k;
 }
 
 /* Example sentences mark the target word with *asterisks* in words.csv,
@@ -560,7 +655,7 @@ function render(){
 
   $('fWord').textContent = w.word;
   $('fWord').className = 'front-word' + (w.word.length > 15 ? ' long' : '');
-  $('fPos').textContent = w.pos || '';
+  $('fPos').textContent = posName(w.pos);
   renderExample($('fEx'), w.ex);
   $('bWord').textContent = w.word;
 
@@ -597,11 +692,15 @@ function answer(r){
 }
 
 /* events */
-$('cardWrap').addEventListener('click', e => { if(!e.target.closest('[data-speak]')) flip(); });
-document.querySelectorAll('[data-speak]').forEach(b => b.addEventListener('click', e => {
-  e.stopPropagation();
+$('cardWrap').addEventListener('click', e => { if(!e.target.closest('#spk')) flip(); });
+/* pointerdown, not click: on iOS the speech engine is happiest when it is
+   started by the first event of the gesture, and this also settles the tap
+   before the card can interpret it. */
+$('spk').addEventListener('pointerdown', e => {
+  e.preventDefault(); e.stopPropagation();
   if(current) speak(current.w.word);
-}));
+});
+$('spk').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); });
 document.querySelectorAll('.ans').forEach(b => b.addEventListener('click', () => answer(b.dataset.r)));
 $('back').addEventListener('click', () => show('home'));
 $('doneHome').addEventListener('click', () => show('home'));
@@ -684,6 +783,12 @@ $('reqSend').addEventListener('click', () => {
 
 /* go */
 load(); show('home');
+
+/* Offline shell, so the home-screen app opens with no signal. Registered last
+   and failure is ignored: the app must work whether or not this succeeds. */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
 </script>
 </body>
 </html>

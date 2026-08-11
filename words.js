@@ -1,21 +1,12 @@
 window.WORDS = [
     {
-        "word":  "ostensibly",
-        "part_of_speech":  "adv",
-        "definition":  "Apparently, on the surface, though the truth may be different",
-        "russian_definition":  "судя по внешним признакам, но, возможно, не на самом деле",
-        "english_synonyms":  "supposedly, seemingly, outwardly",
-        "russian_synonyms":  "якобы, на первый взгляд, внешне",
-        "example":  "The policy was *ostensibly* about safety, though critics saw a financial motive."
-    },
-    {
         "word":  "conversely",
         "part_of_speech":  "adv",
         "definition":  "Looking at it from the opposite point of view",
         "russian_definition":  "если посмотреть с противоположной стороны; вводит обратное утверждение",
         "english_synonyms":  "on the other hand, contrarily, inversely",
         "russian_synonyms":  "наоборот, напротив, с другой стороны",
-        "example":  "Cities offer opportunity; *conversely*, they strip away the quiet of rural life."
+        "example":  "My brother loves the cold; *conversely*, I want to live somewhere hot."
     },
     {
         "word":  "arguably",
@@ -24,7 +15,7 @@ window.WORDS = [
         "russian_definition":  "можно с основанием утверждать, хотя кто-то и поспорит",
         "english_synonyms":  "possibly, conceivably, debatably",
         "russian_synonyms":  "пожалуй, можно утверждать, вероятно",
-        "example":  "Online learning is *arguably* the most significant change in education this century."
+        "example":  "He is *arguably* the best cook in the family, though my sister would disagree."
     },
     {
         "word":  "notwithstanding",
@@ -33,7 +24,7 @@ window.WORDS = [
         "russian_definition":  "несмотря на что-либо, вопреки обстоятельствам",
         "english_synonyms":  "despite, regardless of, even so",
         "russian_synonyms":  "несмотря на, вопреки",
-        "example":  "*Notwithstanding* the cost, the government pressed ahead with the rail project."
+        "example":  "*Notwithstanding* the rain, we still had a lovely walk by the river."
     },
     {
         "word":  "albeit",
@@ -42,7 +33,7 @@ window.WORDS = [
         "russian_definition":  "хотя и, пусть и; вводит уточнение или оговорку",
         "english_synonyms":  "though, even if, while",
         "russian_synonyms":  "хотя, пусть и, хоть и",
-        "example":  "The scheme reduced traffic, *albeit* at the expense of local businesses."
+        "example":  "The flat is lovely, *albeit* a little small for two people."
     },
     {
         "word":  "inherently",
@@ -51,7 +42,7 @@ window.WORDS = [
         "russian_definition":  "в силу самой природы вещи, неотделимо от нее",
         "english_synonyms":  "intrinsically, fundamentally, innately",
         "russian_synonyms":  "по своей сути, изначально, органически",
-        "example":  "Competition is not *inherently* harmful; it depends on how it is regulated."
+        "example":  "Dogs are not *inherently* dangerous; it depends on how they are raised."
     },
     {
         "word":  "predominantly",
@@ -60,7 +51,7 @@ window.WORDS = [
         "russian_definition":  "по большей части, в подавляющем большинстве случаев",
         "english_synonyms":  "mostly, largely, chiefly",
         "russian_synonyms":  "преимущественно, главным образом, в основном",
-        "example":  "The workforce is *predominantly* young, with most staff under thirty."
+        "example":  "The audience was *predominantly* young, with only a few older people."
     },
     {
         "word":  "invariably",
@@ -69,7 +60,7 @@ window.WORDS = [
         "russian_definition":  "всегда, без единого исключения",
         "english_synonyms":  "consistently, unfailingly, every time",
         "russian_synonyms":  "неизменно, всегда, постоянно",
-        "example":  "Poorly designed exams *invariably* reward memorisation over real understanding."
+        "example":  "Whenever I wash the car, it *invariably* rains the next day."
     },
     {
         "word":  "inadvertently",
@@ -78,7 +69,7 @@ window.WORDS = [
         "russian_definition":  "не желая того, по недосмотру",
         "english_synonyms":  "accidentally, unintentionally, unwittingly",
         "russian_synonyms":  "непреднамеренно, случайно, ненароком",
-        "example":  "By subsidising cars, planners *inadvertently* made the city harder to walk in."
+        "example":  "I *inadvertently* deleted the photos while clearing space on my phone."
     },
     {
         "word":  "paradoxically",
@@ -87,16 +78,7 @@ window.WORDS = [
         "russian_definition":  "как ни странно: вопреки ожиданиям, но это правда",
         "english_synonyms":  "ironically, contradictorily, oddly enough",
         "russian_synonyms":  "парадоксальным образом, как ни странно",
-        "example":  "*Paradoxically*, having more choice often leaves consumers less satisfied."
-    },
-    {
-        "word":  "hitherto",
-        "part_of_speech":  "adv",
-        "definition":  "Up until now; before this point",
-        "russian_definition":  "вплоть до настоящего момента, до сих пор",
-        "english_synonyms":  "previously, formerly, so far",
-        "russian_synonyms":  "до сих пор, доныне, прежде",
-        "example":  "The discovery challenged assumptions that had *hitherto* gone unquestioned."
+        "example":  "*Paradoxically*, the more I rush in the morning, the later I leave."
     },
     {
         "word":  "akin to",
@@ -105,7 +87,7 @@ window.WORDS = [
         "russian_definition":  "близкий по своей природе, сравнимый с чем-то",
         "english_synonyms":  "similar to, comparable to, close to",
         "russian_synonyms":  "сродни, подобно, схоже с",
-        "example":  "Learning a language without speaking it is *akin to* studying swimming from a book."
+        "example":  "Talking to him is *akin to* talking to a wall: nothing gets through."
     },
     {
         "word":  "ubiquitous",
@@ -114,7 +96,7 @@ window.WORDS = [
         "russian_definition":  "встречающийся буквально везде и одновременно",
         "english_synonyms":  "omnipresent, pervasive, widespread",
         "russian_synonyms":  "вездесущий, повсеместный",
-        "example":  "Smartphones have become so *ubiquitous* that we no longer notice them."
+        "example":  "Coffee shops are so *ubiquitous* now that there is one on every corner."
     },
     {
         "word":  "prevalent",
@@ -123,7 +105,7 @@ window.WORDS = [
         "russian_definition":  "широко распространенный в данном месте или в данное время",
         "english_synonyms":  "widespread, rife, commonplace",
         "russian_synonyms":  "распространенный, преобладающий, повсеместный",
-        "example":  "Anxiety is far more *prevalent* among students than it was a decade ago."
+        "example":  "Colds are more *prevalent* in winter, when everyone stays indoors."
     },
     {
         "word":  "detrimental",
@@ -132,7 +114,7 @@ window.WORDS = [
         "russian_definition":  "наносящий вред, ухудшающий положение",
         "english_synonyms":  "damaging, harmful, adverse",
         "russian_synonyms":  "вредный, пагубный, губительный",
-        "example":  "Long commutes have a *detrimental* effect on both health and family life."
+        "example":  "Going to bed at three in the morning is *detrimental* to your health."
     },
     {
         "word":  "negligible",
@@ -141,7 +123,7 @@ window.WORDS = [
         "russian_definition":  "настолько малый, что им можно пренебречь",
         "english_synonyms":  "insignificant, minimal, trivial",
         "russian_synonyms":  "незначительный, ничтожный, пренебрежимо малый",
-        "example":  "The tax raised real revenue at a *negligible* cost to ordinary households."
+        "example":  "The price went up by one penny, so the difference is *negligible*."
     },
     {
         "word":  "substantial",
@@ -150,7 +132,7 @@ window.WORDS = [
         "russian_definition":  "значительный по размеру, ценности или важности",
         "english_synonyms":  "considerable, significant, sizeable",
         "russian_synonyms":  "существенный, значительный, немалый",
-        "example":  "The charity received a *substantial* donation that funded three new clinics."
+        "example":  "They gave us a *substantial* discount, nearly half the normal price."
     },
     {
         "word":  "viable",
@@ -159,7 +141,7 @@ window.WORDS = [
         "russian_definition":  "способный работать на практике, реально осуществимый",
         "english_synonyms":  "feasible, workable, practicable",
         "russian_synonyms":  "жизнеспособный, осуществимый, реальный",
-        "example":  "Wind power is now a commercially *viable* alternative to coal."
+        "example":  "Cycling to work is only *viable* if there is somewhere safe to leave the bike."
     },
     {
         "word":  "sustainable",
@@ -168,7 +150,7 @@ window.WORDS = [
         "russian_definition":  "способный продолжаться долго, не истощая ресурсы",
         "english_synonyms":  "enduring, renewable, long-term",
         "russian_synonyms":  "устойчивый, экологичный, рациональный",
-        "example":  "Tourism must be *sustainable*, or the landscape visitors come for disappears."
+        "example":  "Working sixty hours a week is not *sustainable* for very long."
     },
     {
         "word":  "pragmatic",
@@ -177,7 +159,7 @@ window.WORDS = [
         "russian_definition":  "исходящий из практической пользы, а не из теории",
         "english_synonyms":  "practical, realistic, level-headed",
         "russian_synonyms":  "прагматичный, практичный, здравомыслящий",
-        "example":  "Rather than argue about ideals, the council took a *pragmatic* approach."
+        "example":  "He took a *pragmatic* approach: fix what we can afford now, the rest next year."
     },
     {
         "word":  "compelling",
@@ -186,7 +168,7 @@ window.WORDS = [
         "russian_definition":  "настолько убедительный, что трудно не согласиться или оторваться",
         "english_synonyms":  "persuasive, cogent, gripping",
         "russian_synonyms":  "убедительный, веский, захватывающий",
-        "example":  "She made a *compelling* case for a shorter working week."
+        "example":  "The film was so *compelling* that I watched the whole thing in one sitting."
     },
     {
         "word":  "plausible",
@@ -195,7 +177,7 @@ window.WORDS = [
         "russian_definition":  "выглядящий разумным и правдоподобным, но не доказанный",
         "english_synonyms":  "credible, believable, convincing",
         "russian_synonyms":  "правдоподобный, убедительный, вероятный",
-        "example":  "His explanation was *plausible*, but the evidence did not support it."
+        "example":  "His excuse sounded *plausible*, but I later found out none of it was true."
     },
     {
         "word":  "ambiguous",
@@ -204,7 +186,7 @@ window.WORDS = [
         "russian_definition":  "допускающий несколько толкований, неясный",
         "english_synonyms":  "equivocal, vague, open-ended",
         "russian_synonyms":  "двусмысленный, неоднозначный, расплывчатый",
-        "example":  "The wording of the contract was deliberately *ambiguous*."
+        "example":  "Her answer was *ambiguous*, so I still do not know if she is coming."
     },
     {
         "word":  "disproportionate",
@@ -213,7 +195,7 @@ window.WORDS = [
         "russian_definition":  "слишком большой или малый по сравнению с чем-то",
         "english_synonyms":  "excessive, unbalanced, uneven",
         "russian_synonyms":  "непропорциональный, чрезмерный, несоразмерный",
-        "example":  "Low-income families bear a *disproportionate* share of the burden."
+        "example":  "He got a *disproportionate* punishment: grounded for a month for being ten minutes late."
     },
     {
         "word":  "unprecedented",
@@ -222,7 +204,7 @@ window.WORDS = [
         "russian_definition":  "не имеющий примеров в прошлом",
         "english_synonyms":  "unparalleled, unheard-of, groundbreaking",
         "russian_synonyms":  "беспрецедентный, небывалый, невиданный",
-        "example":  "The pandemic caused an *unprecedented* shift towards remote work."
+        "example":  "The heat last summer was *unprecedented*; nobody could remember anything like it."
     },
     {
         "word":  "robust",
@@ -231,7 +213,7 @@ window.WORDS = [
         "russian_definition":  "прочный, выдерживающий нагрузку и критику",
         "english_synonyms":  "sturdy, resilient, sound",
         "russian_synonyms":  "надежный, крепкий, устойчивый",
-        "example":  "The country needs a more *robust* system for protecting personal data."
+        "example":  "These boots are *robust* enough to survive years of walking in the hills."
     },
     {
         "word":  "profound",
@@ -240,7 +222,7 @@ window.WORDS = [
         "russian_definition":  "очень глубокий, имеющий далеко идущие последствия",
         "english_synonyms":  "deep, far-reaching, weighty",
         "russian_synonyms":  "глубокий, основательный, серьезный",
-        "example":  "Automation will have a *profound* impact on unskilled employment."
+        "example":  "Losing his father had a *profound* effect on the way he lives."
     },
     {
         "word":  "inevitable",
@@ -249,7 +231,7 @@ window.WORDS = [
         "russian_definition":  "то, чего невозможно избежать",
         "english_synonyms":  "unavoidable, inescapable, bound to happen",
         "russian_synonyms":  "неизбежный, неотвратимый",
-        "example":  "Some job losses are an *inevitable* consequence of new technology."
+        "example":  "With three young children in the house, a bit of mess is *inevitable*."
     },
     {
         "word":  "intricate",
@@ -258,7 +240,7 @@ window.WORDS = [
         "russian_definition":  "состоящий из множества мелких переплетенных деталей",
         "english_synonyms":  "complex, elaborate, convoluted",
         "russian_synonyms":  "замысловатый, сложный, витиеватый",
-        "example":  "The novel weaves an *intricate* web of family relationships."
+        "example":  "The cake was covered in *intricate* patterns that must have taken hours."
     },
     {
         "word":  "rudimentary",
@@ -267,7 +249,7 @@ window.WORDS = [
         "russian_definition":  "самый начальный, неразвитый, на уровне азов",
         "english_synonyms":  "elementary, primitive, bare-bones",
         "russian_synonyms":  "элементарный, зачаточный, примитивный",
-        "example":  "My cooking skills are *rudimentary* at best."
+        "example":  "My Spanish is *rudimentary*: I can order food and not much else."
     },
     {
         "word":  "arduous",
@@ -276,7 +258,7 @@ window.WORDS = [
         "russian_definition":  "требующий больших и длительных усилий",
         "english_synonyms":  "gruelling, laborious, strenuous",
         "russian_synonyms":  "тяжелый, изнурительный, трудоемкий",
-        "example":  "Qualifying as a doctor is an *arduous* process that takes over a decade."
+        "example":  "The climb was *arduous*, and we had to stop three times on the way up."
     },
     {
         "word":  "futile",
@@ -285,7 +267,7 @@ window.WORDS = [
         "russian_definition":  "бессмысленный, заведомо обреченный на неудачу",
         "english_synonyms":  "useless, vain, fruitless",
         "russian_synonyms":  "тщетный, бесполезный, напрасный",
-        "example":  "Banning the technology outright would be *futile*, as users simply move abroad."
+        "example":  "Arguing with him is *futile*; he never changes his mind."
     },
     {
         "word":  "tangible",
@@ -294,7 +276,7 @@ window.WORDS = [
         "russian_definition":  "реальный и измеримый, ощутимый на практике",
         "english_synonyms":  "concrete, palpable, measurable",
         "russian_synonyms":  "осязаемый, ощутимый, реальный",
-        "example":  "The training produced *tangible* benefits: output rose within three months."
+        "example":  "After months of training, I finally saw *tangible* results in the mirror."
     },
     {
         "word":  "pivotal",
@@ -303,7 +285,7 @@ window.WORDS = [
         "russian_definition":  "имеющий решающее значение, вокруг чего все вращается",
         "english_synonyms":  "crucial, decisive, key",
         "russian_synonyms":  "ключевой, решающий, поворотный",
-        "example":  "Teachers play a *pivotal* role in shaping how children view learning."
+        "example":  "That teacher played a *pivotal* role in my decision to study medicine."
     },
     {
         "word":  "exacerbate",
@@ -312,7 +294,7 @@ window.WORDS = [
         "russian_definition":  "делать уже существующую проблему заметно хуже",
         "english_synonyms":  "worsen, aggravate, intensify",
         "russian_synonyms":  "усугублять, обострять, ухудшать",
-        "example":  "Building more roads tends to *exacerbate* congestion rather than relieve it."
+        "example":  "Scratching the bite will only *exacerbate* the itching."
     },
     {
         "word":  "mitigate",
@@ -321,7 +303,7 @@ window.WORDS = [
         "russian_definition":  "уменьшать тяжесть чего-то плохого",
         "english_synonyms":  "alleviate, ease, lessen",
         "russian_synonyms":  "смягчать, уменьшать, ослаблять",
-        "example":  "Planting trees can *mitigate* the worst effects of urban heat."
+        "example":  "A good coat will *mitigate* the cold, but you still need gloves."
     },
     {
         "word":  "alleviate",
@@ -330,7 +312,7 @@ window.WORDS = [
         "russian_definition":  "облегчать страдания или снижать нагрузку",
         "english_synonyms":  "ease, relieve, soothe",
         "russian_synonyms":  "облегчать, снимать, смягчать",
-        "example":  "Cash transfers do more to *alleviate* poverty than food aid."
+        "example":  "A hot bath helps *alleviate* the pain in my back."
     },
     {
         "word":  "undermine",
@@ -339,7 +321,7 @@ window.WORDS = [
         "russian_definition":  "постепенно ослаблять, подтачивать изнутри",
         "english_synonyms":  "erode, weaken, sap",
         "russian_synonyms":  "подрывать, ослаблять",
-        "example":  "Constant testing can *undermine* a child\u0027s confidence."
+        "example":  "Correcting her in front of everyone will *undermine* her confidence."
     },
     {
         "word":  "underpin",
@@ -348,7 +330,7 @@ window.WORDS = [
         "russian_definition":  "служить основой, на которой все держится",
         "english_synonyms":  "support, sustain, buttress",
         "russian_synonyms":  "лежать в основе, подкреплять, поддерживать",
-        "example":  "Trust *underpins* every successful working relationship."
+        "example":  "Trust *underpins* every good friendship."
     },
     {
         "word":  "facilitate",
@@ -357,7 +339,7 @@ window.WORDS = [
         "russian_definition":  "делать процесс проще и удобнее",
         "english_synonyms":  "enable, ease, assist",
         "russian_synonyms":  "способствовать, облегчать, содействовать",
-        "example":  "Good public transport *facilitates* access to jobs and education."
+        "example":  "The new app *facilitates* booking a doctor\u0027s appointment in seconds."
     },
     {
         "word":  "hinder",
@@ -366,7 +348,7 @@ window.WORDS = [
         "russian_definition":  "мешать движению вперед, замедлять",
         "english_synonyms":  "impede, hamper, obstruct",
         "russian_synonyms":  "препятствовать, мешать, тормозить",
-        "example":  "A lack of funding continues to *hinder* medical research."
+        "example":  "A heavy bag will *hinder* you on a long walk."
     },
     {
         "word":  "curb",
@@ -375,7 +357,7 @@ window.WORDS = [
         "russian_definition":  "ставить предел чему-то вредному, держать в узде",
         "english_synonyms":  "restrain, rein in, check",
         "russian_synonyms":  "сдерживать, ограничивать, обуздывать",
-        "example":  "Higher taxes on sugar are intended to *curb* consumption."
+        "example":  "I am trying to *curb* how much I spend on takeaways."
     },
     {
         "word":  "foster",
@@ -384,7 +366,7 @@ window.WORDS = [
         "russian_definition":  "создавать условия, в которых что-то развивается",
         "english_synonyms":  "nurture, cultivate, promote",
         "russian_synonyms":  "воспитывать, взращивать, способствовать",
-        "example":  "Small class sizes *foster* closer relationships between staff and students."
+        "example":  "Eating together every evening *fosters* a closer family."
     },
     {
         "word":  "allocate",
@@ -393,7 +375,7 @@ window.WORDS = [
         "russian_definition":  "распределять ресурсы на конкретную цель",
         "english_synonyms":  "assign, distribute, apportion",
         "russian_synonyms":  "выделять, распределять, назначать",
-        "example":  "The government should *allocate* more funding to primary care."
+        "example":  "We *allocate* an hour each evening to homework, and no phones are allowed."
     },
     {
         "word":  "implement",
@@ -402,7 +384,7 @@ window.WORDS = [
         "russian_definition":  "воплощать план или политику в жизнь",
         "english_synonyms":  "carry out, enact, execute",
         "russian_synonyms":  "внедрять, осуществлять, реализовывать",
-        "example":  "It is easy to write a policy but difficult to *implement* it."
+        "example":  "It is easy to plan a new diet; the hard part is *implementing* it."
     },
     {
         "word":  "prioritise",
@@ -411,7 +393,7 @@ window.WORDS = [
         "russian_definition":  "ставить одно выше остального по важности",
         "english_synonyms":  "rank first, emphasise, put first",
         "russian_synonyms":  "ставить во главу угла, отдавать предпочтение, расставлять приоритеты",
-        "example":  "Hospitals must *prioritise* the most urgent cases."
+        "example":  "With exams next week, I need to *prioritise* studying over going out."
     },
     {
         "word":  "advocate",
@@ -420,7 +402,7 @@ window.WORDS = [
         "russian_definition":  "публично выступать в поддержку чего-либо",
         "english_synonyms":  "champion, endorse, push for",
         "russian_synonyms":  "отстаивать, выступать за, поддерживать",
-        "example":  "Many economists *advocate* raising the retirement age."
+        "example":  "My doctor *advocates* walking for thirty minutes a day."
     },
     {
         "word":  "attribute",
@@ -429,7 +411,7 @@ window.WORDS = [
         "russian_definition":  "объяснять что-то определенной причиной",
         "english_synonyms":  "ascribe, credit, put down to",
         "russian_synonyms":  "приписывать, объяснять, относить",
-        "example":  "Researchers *attribute* the fall in crime to better street lighting."
+        "example":  "She *attributes* her good health to swimming every morning."
     },
     {
         "word":  "exemplify",
@@ -438,7 +420,7 @@ window.WORDS = [
         "russian_definition":  "служить типичным или образцовым примером",
         "english_synonyms":  "illustrate, typify, embody",
         "russian_synonyms":  "служить примером, иллюстрировать, олицетворять",
-        "example":  "Singapore *exemplifies* how careful planning can transform a small nation."
+        "example":  "My grandmother *exemplifies* kindness: she feeds anyone who visits."
     },
     {
         "word":  "perpetuate",
@@ -447,7 +429,7 @@ window.WORDS = [
         "russian_definition":  "способствовать тому, чтобы что-то плохое длилось бесконечно",
         "english_synonyms":  "sustain, prolong, entrench",
         "russian_synonyms":  "увековечивать, закреплять, поддерживать",
-        "example":  "Unpaid internships *perpetuate* inequality by excluding poorer applicants."
+        "example":  "Telling children that boys do not cry *perpetuates* a very old idea."
     },
     {
         "word":  "scrutinise",
@@ -456,7 +438,7 @@ window.WORDS = [
         "russian_definition":  "разбирать очень внимательно и критически",
         "english_synonyms":  "inspect, examine, pore over",
         "russian_synonyms":  "тщательно изучать, рассматривать, разбирать",
-        "example":  "Journalists must *scrutinise* government spending on the public\u0027s behalf."
+        "example":  "Read the contract slowly and *scrutinise* every line before you sign."
     },
     {
         "word":  "overhaul",
@@ -465,7 +447,7 @@ window.WORDS = [
         "russian_definition":  "полностью перестроить и улучшить систему",
         "english_synonyms":  "revamp, restructure, rebuild",
         "russian_synonyms":  "перестраивать, модернизировать, реформировать",
-        "example":  "Ministers plan to *overhaul* the outdated examination system."
+        "example":  "They plan to *overhaul* the whole system rather than fix small parts of it."
     },
     {
         "word":  "streamline",
@@ -474,7 +456,7 @@ window.WORDS = [
         "russian_definition":  "сделать эффективнее за счет упрощения",
         "english_synonyms":  "simplify, rationalise, optimise",
         "russian_synonyms":  "оптимизировать, упрощать, рационализировать",
-        "example":  "Digital forms have *streamlined* what was once a week-long process."
+        "example":  "Ordering online has *streamlined* the process; it now takes two minutes."
     },
     {
         "word":  "deter",
@@ -483,7 +465,7 @@ window.WORDS = [
         "russian_definition":  "отбить у кого-то желание что-то делать",
         "english_synonyms":  "discourage, dissuade, put off",
         "russian_synonyms":  "сдерживать, отпугивать, отговаривать",
-        "example":  "Harsher sentences do not necessarily *deter* offenders."
+        "example":  "A loud alarm is usually enough to *deter* thieves."
     },
     {
         "word":  "offset",
@@ -492,7 +474,7 @@ window.WORDS = [
         "russian_definition":  "уравновесить минус соответствующим плюсом",
         "english_synonyms":  "counterbalance, compensate for, cancel out",
         "russian_synonyms":  "компенсировать, уравновешивать, возмещать",
-        "example":  "Companies plant trees to *offset* their carbon emissions."
+        "example":  "I walk everywhere to *offset* how much I eat at the weekend."
     },
     {
         "word":  "galvanise",
@@ -501,7 +483,7 @@ window.WORDS = [
         "russian_definition":  "резко подтолкнуть людей к действию",
         "english_synonyms":  "spur, rouse, stir",
         "russian_synonyms":  "подстегнуть, воодушевить, всколыхнуть",
-        "example":  "The documentary *galvanised* public opinion against plastic waste."
+        "example":  "The video *galvanised* the neighbours into cleaning up the park."
     },
     {
         "word":  "permeate",
@@ -510,7 +492,7 @@ window.WORDS = [
         "russian_definition":  "распространиться по всему объему, пропитать целиком",
         "english_synonyms":  "pervade, saturate, infuse",
         "russian_synonyms":  "пронизывать, проникать, пропитывать",
-        "example":  "A sense of optimism *permeated* the entire conference."
+        "example":  "The smell of fresh bread *permeated* the whole house."
     },
     {
         "word":  "reconcile",
@@ -519,7 +501,7 @@ window.WORDS = [
         "russian_definition":  "привести противоречащие вещи в согласие",
         "english_synonyms":  "resolve, harmonise, settle",
         "russian_synonyms":  "примирять, согласовывать, увязывать",
-        "example":  "It is hard to *reconcile* economic growth with environmental protection."
+        "example":  "It is hard to *reconcile* a full-time job with looking after a baby."
     },
     {
         "word":  "incentive",
@@ -528,7 +510,7 @@ window.WORDS = [
         "russian_definition":  "то, что побуждает человека действовать",
         "english_synonyms":  "motivation, inducement, spur",
         "russian_synonyms":  "стимул, побуждение, поощрение",
-        "example":  "Tax breaks give companies a strong *incentive* to invest locally."
+        "example":  "Free coffee is a strong *incentive* to get to work early."
     },
     {
         "word":  "consensus",
@@ -537,7 +519,7 @@ window.WORDS = [
         "russian_definition":  "общее согласие, достигнутое в группе",
         "english_synonyms":  "agreement, accord, common ground",
         "russian_synonyms":  "консенсус, согласие, единое мнение",
-        "example":  "There is now broad scientific *consensus* on the causes of warming."
+        "example":  "After an hour of arguing, we finally reached a *consensus* on where to eat."
     },
     {
         "word":  "discrepancy",
@@ -546,7 +528,7 @@ window.WORDS = [
         "russian_definition":  "расхождение там, где данные должны совпадать",
         "english_synonyms":  "inconsistency, mismatch, gap",
         "russian_synonyms":  "расхождение, несоответствие, разночтение",
-        "example":  "There was a *discrepancy* between the reported figures and the audit."
+        "example":  "There was a *discrepancy* between the price on the shelf and the price at the checkout."
     },
     {
         "word":  "disparity",
@@ -555,7 +537,7 @@ window.WORDS = [
         "russian_definition":  "большая и часто несправедливая разница между группами",
         "english_synonyms":  "inequality, imbalance, gulf",
         "russian_synonyms":  "неравенство, разрыв, диспропорция",
-        "example":  "The *disparity* in pay between the two regions is striking."
+        "example":  "There is a huge *disparity* between what the two brothers earn."
     },
     {
         "word":  "implication",
@@ -564,7 +546,7 @@ window.WORDS = [
         "russian_definition":  "вероятное последствие или то, что подразумевается без слов",
         "english_synonyms":  "consequence, ramification, undertone",
         "russian_synonyms":  "последствие, подтекст, вывод",
-        "example":  "The findings have serious *implications* for how we teach reading."
+        "example":  "If we move house, think about the *implications* for the children\u0027s school."
     },
     {
         "word":  "constraint",
@@ -573,7 +555,7 @@ window.WORDS = [
         "russian_definition":  "то, что ограничивает возможности действия",
         "english_synonyms":  "limitation, restriction, curb",
         "russian_synonyms":  "ограничение, стеснение, рамки",
-        "example":  "Time was the main *constraint* on how much we could achieve."
+        "example":  "Money is the only *constraint*; otherwise we would travel every month."
     },
     {
         "word":  "drawback",
@@ -582,7 +564,7 @@ window.WORDS = [
         "russian_definition":  "недостаток в остальном хорошей вещи",
         "english_synonyms":  "downside, shortcoming, snag",
         "russian_synonyms":  "недостаток, минус, изъян",
-        "example":  "The main *drawback* of remote work is the loss of casual conversation."
+        "example":  "The one *drawback* of this flat is that there is no lift."
     },
     {
         "word":  "catalyst",
@@ -591,7 +573,7 @@ window.WORDS = [
         "russian_definition":  "то, что запускает значительные перемены",
         "english_synonyms":  "trigger, spark, impetus",
         "russian_synonyms":  "катализатор, толчок, стимул",
-        "example":  "The strike acted as a *catalyst* for wider political change."
+        "example":  "Her illness was the *catalyst* that made him finally give up smoking."
     },
     {
         "word":  "threshold",
@@ -600,7 +582,7 @@ window.WORDS = [
         "russian_definition":  "уровень, начиная с которого что-то происходит",
         "english_synonyms":  "limit, cut-off point, brink",
         "russian_synonyms":  "порог, предел, грань",
-        "example":  "Households earning below this *threshold* qualify for support."
+        "example":  "If you earn below this *threshold*, you do not pay any tax."
     },
     {
         "word":  "backlash",
@@ -609,7 +591,7 @@ window.WORDS = [
         "russian_definition":  "сильная негативная реакция общества в ответ",
         "english_synonyms":  "outcry, resistance, reaction",
         "russian_synonyms":  "негативная реакция, отпор, волна возмущения",
-        "example":  "The price rise provoked a fierce *backlash* from customers."
+        "example":  "There was a *backlash* from parents when the school changed the uniform."
     },
     {
         "word":  "trade-off",
@@ -618,7 +600,7 @@ window.WORDS = [
         "russian_definition":  "выигрыш в одном ценой уступки в другом",
         "english_synonyms":  "compromise, balance, exchange",
         "russian_synonyms":  "компромисс, размен, баланс",
-        "example":  "There is always a *trade-off* between speed and accuracy."
+        "example":  "There is a *trade-off*: the cheaper flight leaves at four in the morning."
     },
     {
         "word":  "autonomy",
@@ -627,7 +609,7 @@ window.WORDS = [
         "russian_definition":  "независимость и право самому решать за себя",
         "english_synonyms":  "independence, self-rule, self-determination",
         "russian_synonyms":  "автономия, самостоятельность, независимость",
-        "example":  "Employees given greater *autonomy* tend to report higher satisfaction."
+        "example":  "I like the *autonomy* of working from home; nobody is watching over me."
     },
     {
         "word":  "infrastructure",
@@ -636,7 +618,7 @@ window.WORDS = [
         "russian_definition":  "базовые системы, на которых держится жизнь общества",
         "english_synonyms":  "framework, foundations, facilities",
         "russian_synonyms":  "инфраструктура, основа, коммуникации",
-        "example":  "Rural areas suffer from decades of underinvestment in *infrastructure*."
+        "example":  "The village needs better *infrastructure*: roads, water and internet."
     },
     {
         "word":  "prevalence",
@@ -645,7 +627,7 @@ window.WORDS = [
         "russian_definition":  "то, насколько широко что-то распространено",
         "english_synonyms":  "frequency, extent, commonness",
         "russian_synonyms":  "распространенность, частота, повсеместность",
-        "example":  "The *prevalence* of diabetes has doubled in twenty years."
+        "example":  "Doctors are worried about the *prevalence* of back pain among office workers."
     },
     {
         "word":  "adversity",
@@ -654,7 +636,7 @@ window.WORDS = [
         "russian_definition":  "тяжелые обстоятельства, длительные испытания",
         "english_synonyms":  "hardship, misfortune, ordeal",
         "russian_synonyms":  "невзгоды, трудности, лишения",
-        "example":  "She showed remarkable determination in the face of *adversity*."
+        "example":  "She stayed cheerful through years of *adversity*."
     },
     {
         "word":  "resilience",
@@ -663,7 +645,7 @@ window.WORDS = [
         "russian_definition":  "способность быстро восстанавливаться после ударов",
         "english_synonyms":  "toughness, adaptability, hardiness",
         "russian_synonyms":  "стойкость, жизнестойкость, выносливость",
-        "example":  "Children develop *resilience* by overcoming manageable setbacks."
+        "example":  "Children build *resilience* by failing sometimes and trying again."
     },
     {
         "word":  "paradox",
@@ -672,7 +654,7 @@ window.WORDS = [
         "russian_definition":  "утверждение, которое противоречит себе, но содержит истину",
         "english_synonyms":  "contradiction, irony, absurdity",
         "russian_synonyms":  "парадокс, противоречие",
-        "example":  "It is a *paradox* that the wealthiest nations report the loneliest citizens."
+        "example":  "It is a *paradox* that the busiest people often find time to help you."
     },
     {
         "word":  "dichotomy",
@@ -681,7 +663,7 @@ window.WORDS = [
         "russian_definition":  "резкое деление на две противоположные части",
         "english_synonyms":  "split, division, polarity",
         "russian_synonyms":  "дихотомия, разделение, противопоставление",
-        "example":  "The old *dichotomy* between work and leisure is breaking down."
+        "example":  "He sees a *dichotomy* between city and country life, but you can enjoy both."
     },
     {
         "word":  "nuance",
@@ -690,16 +672,7 @@ window.WORDS = [
         "russian_definition":  "тонкое различие в значении или интонации",
         "english_synonyms":  "subtlety, shade, distinction",
         "russian_synonyms":  "нюанс, оттенок, тонкость",
-        "example":  "Translation often loses the *nuance* of the original phrasing."
-    },
-    {
-        "word":  "juxtaposition",
-        "part_of_speech":  "n",
-        "definition":  "Placing two things side by side so the contrast shows",
-        "russian_definition":  "размещение двух вещей рядом, чтобы был виден контраст",
-        "english_synonyms":  "contrast, pairing, counterpoint",
-        "russian_synonyms":  "сопоставление, противопоставление",
-        "example":  "The *juxtaposition* of glass towers and old markets defines the city."
+        "example":  "Jokes often lose their *nuance* when you translate them."
     },
     {
         "word":  "epiphany",
@@ -708,7 +681,7 @@ window.WORDS = [
         "russian_definition":  "внезапное озарение, меняющее взгляд на вещи",
         "english_synonyms":  "revelation, insight, awakening",
         "russian_synonyms":  "прозрение, озарение",
-        "example":  "Standing in that gallery, I had a sudden *epiphany* about my career."
+        "example":  "Standing on the beach, I had an *epiphany*: I did not want that job at all."
     },
     {
         "word":  "affinity",
@@ -717,7 +690,7 @@ window.WORDS = [
         "russian_definition":  "естественная тяга или внутренняя близость к чему-то",
         "english_synonyms":  "kinship, rapport, attraction",
         "russian_synonyms":  "сродство, влечение, близость",
-        "example":  "I have always felt a natural *affinity* for coastal towns."
+        "example":  "I have always had an *affinity* with cats; they seem to trust me."
     },
     {
         "word":  "vivid",
@@ -726,7 +699,7 @@ window.WORDS = [
         "russian_definition":  "создающий яркие и четкие образы в сознании",
         "english_synonyms":  "striking, graphic, intense",
         "russian_synonyms":  "яркий, живой, красочный",
-        "example":  "She gave a *vivid* description of the market at dawn."
+        "example":  "She gave such a *vivid* description that I could picture the room."
     },
     {
         "word":  "immersive",
@@ -735,7 +708,7 @@ window.WORDS = [
         "russian_definition":  "полностью окружающий, заставляющий забыть обо всем",
         "english_synonyms":  "absorbing, engrossing, enveloping",
         "russian_synonyms":  "захватывающий, погружающий, увлекающий",
-        "example":  "The museum offers an *immersive* experience rather than rows of glass cases."
+        "example":  "The game is so *immersive* that I forget to eat."
     },
     {
         "word":  "exhilarating",
@@ -744,7 +717,7 @@ window.WORDS = [
         "russian_definition":  "вызывающий сильный восторг и прилив сил",
         "english_synonyms":  "thrilling, invigorating, electrifying",
         "russian_synonyms":  "воодушевляющий, будоражащий, бодрящий",
-        "example":  "Cycling down the mountain road was absolutely *exhilarating*."
+        "example":  "Swimming in the sea in winter is freezing but *exhilarating*."
     },
     {
         "word":  "daunting",
@@ -753,7 +726,7 @@ window.WORDS = [
         "russian_definition":  "пугающий настолько, что лишает уверенности",
         "english_synonyms":  "intimidating, formidable, off-putting",
         "russian_synonyms":  "устрашающий, пугающий, обескураживающий",
-        "example":  "Speaking in a second language can be *daunting* at first."
+        "example":  "Starting a new job is *daunting*, especially in the first week."
     },
     {
         "word":  "mundane",
@@ -762,7 +735,7 @@ window.WORDS = [
         "russian_definition":  "обычный, повседневный и скучный",
         "english_synonyms":  "banal, humdrum, run-of-the-mill",
         "russian_synonyms":  "обыденный, будничный, заурядный",
-        "example":  "Automation frees people from the most *mundane* office tasks."
+        "example":  "Washing up and folding clothes are *mundane* but somebody has to do them."
     },
     {
         "word":  "tedious",
@@ -771,7 +744,7 @@ window.WORDS = [
         "russian_definition":  "долгий, однообразный и утомительный",
         "english_synonyms":  "dull, monotonous, wearisome",
         "russian_synonyms":  "утомительный, нудный, однообразный",
-        "example":  "Filling in the same form three times was *tedious*."
+        "example":  "Waiting two hours at the airport was *tedious*."
     },
     {
         "word":  "overwhelming",
@@ -780,7 +753,7 @@ window.WORDS = [
         "russian_definition":  "настолько сильный или огромный, что с ним не справиться",
         "english_synonyms":  "crushing, staggering, immense",
         "russian_synonyms":  "подавляющий, ошеломляющий, непосильный",
-        "example":  "The evidence in favour of vaccination is *overwhelming*."
+        "example":  "The support after the fire was *overwhelming*; hundreds of people helped."
     },
     {
         "word":  "nostalgic",
@@ -789,7 +762,7 @@ window.WORDS = [
         "russian_definition":  "с теплой грустью вспоминающий прошлое",
         "english_synonyms":  "wistful, sentimental, yearning",
         "russian_synonyms":  "ностальгический, тоскующий по прошлому, сентиментальный",
-        "example":  "Old photographs always make me *nostalgic* for my school years."
+        "example":  "That song makes me *nostalgic* for summers at my grandmother\u0027s house."
     },
     {
         "word":  "serene",
@@ -798,7 +771,7 @@ window.WORDS = [
         "russian_definition":  "тихий, спокойный, ничем не потревоженный",
         "english_synonyms":  "tranquil, placid, unruffled",
         "russian_synonyms":  "безмятежный, спокойный, умиротворенный",
-        "example":  "The lake at sunrise was utterly *serene*."
+        "example":  "The garden was *serene*, with only the birds breaking the silence."
     },
     {
         "word":  "chaotic",
@@ -807,7 +780,7 @@ window.WORDS = [
         "russian_definition":  "полностью беспорядочный, вышедший из-под контроля",
         "english_synonyms":  "disorderly, turbulent, frantic",
         "russian_synonyms":  "хаотичный, беспорядочный, сумбурный",
-        "example":  "Rush hour in the capital is genuinely *chaotic*."
+        "example":  "The kitchen was *chaotic*: pans everywhere and nothing put away."
     },
     {
         "word":  "desolate",
@@ -816,7 +789,7 @@ window.WORDS = [
         "russian_definition":  "пустой и мрачный; ощущающий полную заброшенность",
         "english_synonyms":  "barren, bleak, forlorn",
         "russian_synonyms":  "пустынный, заброшенный, унылый",
-        "example":  "The mining town felt *desolate* once the industry collapsed."
+        "example":  "The beach felt *desolate* in November; there was nobody there at all."
     },
     {
         "word":  "luminous",
@@ -825,7 +798,7 @@ window.WORDS = [
         "russian_definition":  "излучающий мягкий свет, светящийся изнутри",
         "english_synonyms":  "radiant, glowing, incandescent",
         "russian_synonyms":  "светящийся, сияющий, лучезарный",
-        "example":  "The city looked *luminous* through the rain-streaked window."
+        "example":  "The moon was so *luminous* that we walked home without a light."
     },
     {
         "word":  "ephemeral",
@@ -834,7 +807,7 @@ window.WORDS = [
         "russian_definition":  "существующий очень недолго и быстро исчезающий",
         "english_synonyms":  "fleeting, transient, momentary",
         "russian_synonyms":  "мимолетный, скоротечный, эфемерный",
-        "example":  "Fame online is *ephemeral*; today\u0027s star is forgotten by Friday."
+        "example":  "Snow here is *ephemeral*; it has melted by lunchtime."
     },
     {
         "word":  "relentless",
@@ -843,7 +816,7 @@ window.WORDS = [
         "russian_definition":  "не прекращающийся и не знающий пощады",
         "english_synonyms":  "persistent, unremitting, dogged",
         "russian_synonyms":  "неумолимый, неустанный, безжалостный",
-        "example":  "The *relentless* pace of city life eventually wore him down."
+        "example":  "The rain was *relentless* and did not stop for three days."
     },
     {
         "word":  "meticulous",
@@ -852,7 +825,7 @@ window.WORDS = [
         "russian_definition":  "предельно внимательный к каждой мелочи",
         "english_synonyms":  "thorough, painstaking, scrupulous",
         "russian_synonyms":  "дотошный, скрупулезный, тщательный",
-        "example":  "She keeps *meticulous* records of every transaction."
+        "example":  "He is *meticulous* about his tools: every one has its own place."
     },
     {
         "word":  "resonate",
@@ -861,7 +834,7 @@ window.WORDS = [
         "russian_definition":  "находить глубокий отклик и надолго запоминаться",
         "english_synonyms":  "strike a chord, echo, reverberate",
         "russian_synonyms":  "находить отклик, резонировать, отзываться",
-        "example":  "His argument about work-life balance really *resonated* with me."
+        "example":  "What she said about missing home really *resonated* with me."
     },
     {
         "word":  "evoke",
@@ -870,7 +843,7 @@ window.WORDS = [
         "russian_definition":  "вызывать в сознании чувство, образ или воспоминание",
         "english_synonyms":  "conjure, summon, elicit",
         "russian_synonyms":  "вызывать, пробуждать, навевать",
-        "example":  "The smell of pine *evokes* childhood holidays."
+        "example":  "The smell of the sea *evokes* childhood holidays."
     },
     {
         "word":  "yearn",
@@ -879,7 +852,7 @@ window.WORDS = [
         "russian_definition":  "глубоко и постоянно тосковать по чему-то",
         "english_synonyms":  "long for, crave, pine for",
         "russian_synonyms":  "тосковать, жаждать, томиться",
-        "example":  "After years abroad, many migrants *yearn* for familiar food and language."
+        "example":  "After a month away, I began to *yearn* for my own bed."
     },
     {
         "word":  "flourish",
@@ -888,7 +861,7 @@ window.WORDS = [
         "russian_definition":  "бурно расти и процветать в благоприятных условиях",
         "english_synonyms":  "thrive, prosper, blossom",
         "russian_synonyms":  "процветать, расцветать, преуспевать",
-        "example":  "Small businesses *flourish* when rents are kept affordable."
+        "example":  "Tomatoes *flourish* in a warm, sunny spot."
     },
     {
         "word":  "dwindle",
@@ -897,6 +870,6 @@ window.WORDS = [
         "russian_definition":  "постепенно уменьшаться, пока почти ничего не останется",
         "english_synonyms":  "diminish, wane, taper off",
         "russian_synonyms":  "убывать, сокращаться, иссякать",
-        "example":  "Attendance has *dwindled* since the club raised its fees."
+        "example":  "My savings *dwindled* while I was out of work."
     }
 ];
