@@ -243,6 +243,15 @@ window.WORDS = [
         "example":  "He got a *disproportionate* punishment: grounded for a month for being ten minutes late."
     },
     {
+        "word":  "disparate",
+        "part_of_speech":  "adj",
+        "definition":  "Very different from one another, and hard to compare",
+        "russian_definition":  "совершенно разные по своей природе, несопоставимые",
+        "english_synonyms":  "contrasting, dissimilar, unrelated",
+        "russian_synonyms":  "несопоставимые, разнородные, совсем разные",
+        "example":  "The team came from *disparate* backgrounds: a farmer, a lawyer and a DJ."
+    },
+    {
         "word":  "unprecedented",
         "part_of_speech":  "adj",
         "definition":  "Never having happened or existed before",
@@ -907,6 +916,15 @@ window.WORDS = [
         "english_synonyms":  "intimidating, formidable, off-putting",
         "russian_synonyms":  "устрашающий, пугающий, обескураживающий",
         "example":  "Starting a new job is *daunting*, especially in the first week."
+    },
+    {
+        "word":  "desperate",
+        "part_of_speech":  "adj",
+        "definition":  "So worried or hopeless that you will try anything",
+        "russian_definition":  "доведенный до отчаяния, готовый на все",
+        "english_synonyms":  "frantic, hopeless, at your wits end",
+        "russian_synonyms":  "отчаянный, в отчаянии, безвыходный",
+        "example":  "After three hours lost in the rain, we were *desperate* to find a bus stop."
     },
     {
         "word":  "mundane",
