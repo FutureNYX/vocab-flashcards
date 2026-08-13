@@ -894,30 +894,41 @@ if('serviceWorker' in navigator){
   const hadController = !!navigator.serviceWorker.controller;
   const PILL_AFTER = 4 * 60 * 1000;
   let updateReady = false, reloading = false, pillTimer = null;
+  let resumedAt = Date.now(), touchedSinceResume = false;
 
   const applyUpdate = () => {
     if(reloading) return;
     reloading = true;
     location.reload();
   };
+  /* Is a reload right now indistinguishable from the app starting?
+     Yes if the page is not on screen, and yes in the moments after it comes
+     back but before a finger has touched it: that is still "launching" as far
+     as the user is concerned. This window matters more than it looks. Coming
+     back from the background is the only time the app looks for an update, and
+     the new worker takes a second or two to arrive, by which point the app is
+     visible again. Without this the update would sit and wait for the NEXT
+     time you leave, so every change took two trips away instead of one. */
+  const safeMoment = () =>
+    document.hidden || (!touchedSinceResume && Date.now() - resumedAt < 15000);
+
   const markUpdateReady = () => {
     if(updateReady) return;
     updateReady = true;
-    // if it is already out of sight, take it now
-    if(document.hidden){ applyUpdate(); return; }
-    // otherwise wait, and offer the choice if they never look away
+    if(safeMoment()){ applyUpdate(); return; }
+    // they are using it: wait, and offer the choice if they never look away
     pillTimer = setTimeout(() => { if(updateReady) $('updatePill').hidden = false; }, PILL_AFTER);
   };
   window.markUpdateReady = markUpdateReady;      // also the hook the tests drive
 
   $('updatePill').addEventListener('click', applyUpdate);
+  document.addEventListener('pointerdown', () => { touchedSinceResume = true; }, true);
 
   document.addEventListener('visibilitychange', () => {
-    if(!updateReady) return;
+    if(!document.hidden){ resumedAt = Date.now(); touchedSinceResume = false; }
     // going away: swap versions now, while nobody is watching.
-    // coming back: the phone may have frozen us before we could, so do it at
-    // the first frame of the return instead, which reads as the app launching.
-    applyUpdate();
+    // coming back: do it before anything is touched, which reads as a launch.
+    if(updateReady) applyUpdate();
   });
   window.addEventListener('pagehide', () => { if(updateReady) applyUpdate(); });
 
