@@ -13,8 +13,12 @@
  */
 /* Bump on every deploy that changes a cached file under the same name: the
    clips were re-rendered in a different voice, and a cache-first policy would
-   otherwise keep serving the old ones forever. */
-const CACHE = 'vocab-shell-v5';
+   otherwise keep serving the old ones forever.
+   Bump it ALSO when a phone is visibly stuck on an old build. The precache
+   holds a copy of index.html taken when the worker installed, and if that
+   copy is ever served the app is frozen at that version no matter what the
+   server says. Changing the name drops the whole old cache on activate. */
+const CACHE = 'vocab-shell-v6';
 const SHELL = [
   './',
   './index.html',
