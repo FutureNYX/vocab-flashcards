@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="theme-color" content="#10130C">
+<meta name="theme-color" content="#2A3122">
 <meta name="color-scheme" content="dark">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -53,7 +53,7 @@
    near-white; --edge is the beige card outline; --chip-* keeps synonym text
    light inside its green pill rather than green-on-green. */
 :root, [data-palette="grove"]{       /* warm forest floor, oat text, leaf accent */
-  --bg:#10130C;  --card:#1D2318;  --card-2:#2A3122;
+  --bg:#2A3122;  --card:#1D2318;  --card-2:#333B29;
   --text:#EFE9D9; --bright:#FCFAF3; --muted:#A3A48D; --line:#333A2A; --ru-text:#E2DCC9;
   --edge:rgba(216,203,168,.42);
   --accent:#9DBE79; --on-accent:#12160E;
@@ -61,6 +61,9 @@
   --hl-bg:rgba(157,190,121,.30); --hl-text:#F6F3E6;
   --chip-bg:rgba(157,190,121,.26); --chip-text:#F2EFE1;
   --hard-soft:rgba(215,165,93,.16); --easy-soft:rgba(157,190,121,.16);
+  /* the ground is now lighter than the cards, so a card reads as an object
+     lying on a surface rather than a hole cut in the dark */
+  --pattern-ink:#FFFFFF; --pattern-opacity:.07;
 }
 [data-palette="linen"]{              /* the daylight version: beige paper, deep green ink */
   --bg:#EFE9DC;  --card:#F8F4EA;  --card-2:#E7E0D0;
@@ -108,6 +111,19 @@
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
+/* Deco fans on the ground behind the cards. Drawn as a mask filled with a
+   palette colour rather than a coloured image, so it follows the theme and
+   costs one 200-byte data URI instead of a bitmap. Fixed, so it does not
+   scroll or repaint as cards change, and pointer-events:none so it can never
+   swallow a tap meant for the card. */
+body::before{
+  content:''; position:fixed; inset:0; pointer-events:none;
+  background:var(--pattern-ink); opacity:var(--pattern-opacity);
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1.6'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
+  mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1.6'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
+  -webkit-mask-size:60px 30px; mask-size:60px 30px;
+  -webkit-mask-repeat:repeat; mask-repeat:repeat;
+}
 body{
   margin:0; background:var(--bg); color:var(--text);
   font-family:var(--sans);
@@ -243,7 +259,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .fab:active{transform:scale(.94);}
 .sheet-bg{position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; display:none;}
 .sheet-bg.on{display:block;}
-.sheet{position:fixed; left:0; right:0; bottom:0; z-index:51; background:var(--bg);
+.sheet{position:fixed; left:0; right:0; bottom:0; z-index:51; background:var(--card);
   border-radius:22px 22px 0 0; padding:8px 16px var(--pad-bottom); max-height:92vh;
   display:none; flex-direction:column; transform:translateY(0);}
 .sheet.on{display:flex;}
@@ -251,7 +267,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .sheet h3{margin:0 0 14px; font-family:var(--serif); font-variation-settings:'opsz' 72;
   font-size:22px; font-weight:600; letter-spacing:-.005em;}
 .req-row{display:flex; gap:9px;}
-.req-row input{flex:1; min-width:0; background:var(--card); border:1px solid var(--line);
+.req-row input{flex:1; min-width:0; background:var(--card-2); border:1px solid var(--line);
   border-radius:14px; color:var(--text); padding:13px; font-size:16px; font-family:inherit;}
 .req-row input:focus{outline:none; border-color:var(--accent);}
 .req-row button{flex:0 0 auto; padding:13px 22px; border-radius:14px; font-size:16px; font-weight:650;}
@@ -262,7 +278,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .status.added{background:var(--easy-soft); color:var(--easy);}
 .sheet .row{display:flex; gap:10px; margin-top:14px;}
 .sheet .row button{flex:1; padding:15px; border-radius:15px; font-size:16px; font-weight:600;}
-.cancel{background:var(--card);}
+.cancel{background:var(--card-2);}
 .save{background:var(--accent); color:var(--on-accent);}
 .save:disabled{opacity:.4;}
 .mine{margin-top:20px; border-top:1px solid var(--line); padding-top:14px; overflow-y:auto;}
