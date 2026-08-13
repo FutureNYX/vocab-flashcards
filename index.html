@@ -660,8 +660,6 @@ function show(name){
   ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
   $('fab').style.display = (name === 'study') ? 'none' : 'grid';
   if(name === 'home') refreshHome();
-  // an update that arrived mid-review gets applied as soon as you step away
-  if(name !== 'study' && window.applyPendingUpdate) window.applyPendingUpdate();
 }
 function refreshHome(){
   const k = counts();
@@ -864,7 +862,7 @@ $('reqSend').addEventListener('click', () => {
 
 /* Shown small on the menu. Bump it with every deploy: it is the only way to
    tell a phone serving a stale cache from a phone that is simply up to date. */
-const BUILD = '2026-08-13 · 4';
+const BUILD = '2026-08-13 · 5';
 $('build').textContent = 'BUILD ' + BUILD;
 
 /* go */
@@ -873,14 +871,23 @@ load(); show('home');
 /* ---- offline shell, and updating itself ----
    Installed to the home screen, this app can sit suspended for days: iOS keeps
    the page alive, so nothing is ever re-fetched and a new version only arrives
-   if you force-quit. That is the bug. Three things fix it:
+   if you force-quit.
 
-     1. ask the browser to re-check the worker whenever the app comes back to
-        the foreground, which is the moment an update can actually be found;
-     2. when a new worker takes over, reload silently if the user is not in the
-        middle of a card, so most updates are simply never noticed;
-     3. if they ARE mid-review, show a pill instead and wait, then apply it the
-        moment they return to the menu.
+   The first attempt at fixing that reloaded as soon as a new worker took over.
+   It worked, and it was horrible: the reload happened while the app was on
+   screen and under a thumb, so for a second every button was dead. A silent
+   reload is not silent if you are looking at it.
+
+   So the rule now is: NEVER reload a page the user can see. An update waits,
+   and is applied at a moment that already looks like the app starting.
+
+     - while the app is in the foreground: nothing happens, however long it sits
+     - the moment it goes to the background: reload, out of sight
+     - if the phone froze the page before that could happen, reload the instant
+       it comes back, before the user has touched anything, which is
+       indistinguishable from a normal launch
+     - if they never background it at all, the pill appears after a few minutes
+       so the choice is at least offered
 
    Reloading is safe at any point: every answer is written to storage as it is
    given, so a reload cannot cost a review. */
@@ -888,23 +895,38 @@ if('serviceWorker' in navigator){
   // was this page already controlled? if not, the first activation is just
   // the worker installing, not an update, and must not trigger a reload
   const hadController = !!navigator.serviceWorker.controller;
-  let updateReady = false, reloading = false;
+  const PILL_AFTER = 4 * 60 * 1000;
+  let updateReady = false, reloading = false, pillTimer = null;
 
-  const midReview = () => $('study').classList.contains('on');
   const applyUpdate = () => {
     if(reloading) return;
     reloading = true;
     location.reload();
   };
-  window.showUpdate = () => { updateReady = true; $('updatePill').hidden = false; };
-  // leaving the study screen is the natural moment to swap versions
-  window.applyPendingUpdate = () => { if(updateReady && !midReview()) applyUpdate(); };
+  const markUpdateReady = () => {
+    if(updateReady) return;
+    updateReady = true;
+    // if it is already out of sight, take it now
+    if(document.hidden){ applyUpdate(); return; }
+    // otherwise wait, and offer the choice if they never look away
+    pillTimer = setTimeout(() => { if(updateReady) $('updatePill').hidden = false; }, PILL_AFTER);
+  };
+  window.markUpdateReady = markUpdateReady;      // also the hook the tests drive
 
   $('updatePill').addEventListener('click', applyUpdate);
 
+  document.addEventListener('visibilitychange', () => {
+    if(!updateReady) return;
+    // going away: swap versions now, while nobody is watching.
+    // coming back: the phone may have frozen us before we could, so do it at
+    // the first frame of the return instead, which reads as the app launching.
+    applyUpdate();
+  });
+  window.addEventListener('pagehide', () => { if(updateReady) applyUpdate(); });
+
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     if(!hadController) return;              // first install, nothing to update to
-    if(midReview()) showUpdate(); else applyUpdate();
+    markUpdateReady();
   });
 
   window.addEventListener('load', () => {
@@ -914,7 +936,7 @@ if('serviceWorker' in navigator){
       const check = () => { try{ reg.update(); }catch(e){} };
       document.addEventListener('visibilitychange', () => { if(!document.hidden) check(); });
       window.addEventListener('focus', check);
-      setInterval(check, 30 * 60 * 1000);   // and hourly-ish if it stays open
+      setInterval(check, 30 * 60 * 1000);
     }).catch(() => {});
   });
 }
