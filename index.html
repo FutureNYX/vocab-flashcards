@@ -896,11 +896,21 @@ if('serviceWorker' in navigator){
   let updateReady = false, reloading = false, pillTimer = null;
   let resumedAt = Date.now(), touchedSinceResume = false;
 
+  /* The guard against reloading twice used to latch forever, and that is how
+     the pill became a dead button. Backgrounding the app calls this, iOS
+     freezes the page before the navigation can happen, and the flag is left
+     true: every later attempt, including a tap on the pill, returns here and
+     does nothing. So the guard now expires. If the page is really navigating
+     away this timer dies with it; if it is still here three seconds later then
+     the reload plainly did not happen and the door should be open again. */
   const applyUpdate = () => {
     if(reloading) return;
     reloading = true;
+    setTimeout(() => { reloading = false; }, 3000);
     location.reload();
   };
+  // and the pill is the user asking directly: it never waits on that guard
+  const forceUpdate = () => { reloading = false; applyUpdate(); };
   /* Is a reload right now indistinguishable from the app starting?
      Yes if the page is not on screen, and yes in the moments after it comes
      back but before a finger has touched it: that is still "launching" as far
@@ -921,8 +931,14 @@ if('serviceWorker' in navigator){
   };
   window.markUpdateReady = markUpdateReady;      // also the hook the tests drive
 
-  $('updatePill').addEventListener('click', applyUpdate);
-  document.addEventListener('pointerdown', () => { touchedSinceResume = true; }, true);
+  // pointerdown as well as click: on iOS a click can be swallowed if anything
+  // above the pill claims the gesture, and this button must never feel dead
+  $('updatePill').addEventListener('pointerdown', e => { e.preventDefault(); forceUpdate(); });
+  $('updatePill').addEventListener('click', forceUpdate);
+  document.addEventListener('pointerdown', e => {
+    if(e.target.closest && e.target.closest('#updatePill')) return;   // not a "leave it alone" tap
+    touchedSinceResume = true;
+  }, true);
 
   document.addEventListener('visibilitychange', () => {
     if(!document.hidden){ resumedAt = Date.now(); touchedSinceResume = false; }
