@@ -14,11 +14,16 @@
 /* Bump on every deploy that changes a cached file under the same name: the
    clips were re-rendered in a different voice, and a cache-first policy would
    otherwise keep serving the old ones forever.
-   Bump it ALSO when a phone is visibly stuck on an old build. The precache
+   BUMP IT ON EVERY DEPLOY, even one that only touches index.html. That is the
+   lesson from build 5 never reaching his phone: an installed app only notices a
+   new version when the WORKER changes, because that is what fires
+   controllerchange. Leave sw.js alone and an index-only change waits for a cold
+   launch that may never come.
+   Bump it also when a phone is visibly stuck on an old build. The precache
    holds a copy of index.html taken when the worker installed, and if that
    copy is ever served the app is frozen at that version no matter what the
    server says. Changing the name drops the whole old cache on activate. */
-const CACHE = 'vocab-shell-v6';
+const CACHE = 'vocab-shell-v7';
 const SHELL = [
   './',
   './index.html',

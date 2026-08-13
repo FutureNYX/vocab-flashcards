@@ -63,9 +63,11 @@
   --hard-soft:rgba(215,165,93,.16); --easy-soft:rgba(157,190,121,.16);
   /* the ground is now lighter than the cards, so a card reads as an object
      lying on a surface rather than a hole cut in the dark */
-  /* the fans are drawn in the same beige as the card outline, so the ground
-     and the card edges read as one material */
-  --pattern-ink:#D8CBA8; --pattern-opacity:.10;
+  /* The fans are the card outline, continued across the ground: same beige and
+     now the same strength, .42, so the two genuinely match. It was .10 before,
+     which was the right colour at a quarter of the weight, and read as a
+     different, dimmer thing rather than as the same line. */
+  --pattern-ink:#D8CBA8; --pattern-opacity:.42;
 }
 [data-palette="linen"]{              /* the daylight version: beige paper, deep green ink */
   --bg:#EFE9DC;  --card:#F8F4EA;  --card-2:#E7E0D0;
@@ -862,7 +864,7 @@ $('reqSend').addEventListener('click', () => {
 
 /* Shown small on the menu. Bump it with every deploy: it is the only way to
    tell a phone serving a stale cache from a phone that is simply up to date. */
-const BUILD = '2026-08-13 · 5';
+const BUILD = '2026-08-13 · 6';
 $('build').textContent = 'BUILD ' + BUILD;
 
 /* go */
