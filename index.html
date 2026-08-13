@@ -63,7 +63,9 @@
   --hard-soft:rgba(215,165,93,.16); --easy-soft:rgba(157,190,121,.16);
   /* the ground is now lighter than the cards, so a card reads as an object
      lying on a surface rather than a hole cut in the dark */
-  --pattern-ink:#FFFFFF; --pattern-opacity:.07;
+  /* the fans are drawn in the same beige as the card outline, so the ground
+     and the card edges read as one material */
+  --pattern-ink:#D8CBA8; --pattern-opacity:.10;
 }
 [data-palette="linen"]{              /* the daylight version: beige paper, deep green ink */
   --bg:#EFE9DC;  --card:#F8F4EA;  --card-2:#E7E0D0;
@@ -117,7 +119,12 @@ html,body{height:100%;}
    scroll or repaint as cards change, and pointer-events:none so it can never
    swallow a tap meant for the card. */
 body::before{
-  content:''; position:fixed; inset:0; pointer-events:none;
+  content:''; position:fixed; left:0; top:0; width:100vw; pointer-events:none;
+  /* Not inset:0. A fixed box resolves against the SMALL viewport, so in Safari
+     it stops where the collapsed toolbar would be and leaves a bare strip at
+     the bottom of the phone. lvh is the large viewport, the full screen, with
+     vh kept underneath it for anything that does not know lvh yet. */
+  height:100vh; height:100lvh;
   background:var(--pattern-ink); opacity:var(--pattern-opacity);
   -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1.6'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
   mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1.6'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
@@ -257,6 +264,17 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   font-size:31px; font-weight:300; line-height:1; display:grid; place-items:center;
   box-shadow:0 8px 24px rgba(0,0,0,.34); z-index:40;}
 .fab:active{transform:scale(.94);}
+/* Only ever seen if an update lands mid-review, when reloading underneath
+   someone would be rude. Bottom left, opposite the plus. */
+.update-pill{position:fixed; left:16px; bottom:calc(var(--pad-bottom) + 16px);
+  display:flex; align-items:center; gap:8px; z-index:60;
+  background:var(--accent); color:var(--on-accent); font-size:13px; font-weight:700;
+  padding:10px 15px; border-radius:22px; box-shadow:0 6px 18px var(--shadow-soft, rgba(0,0,0,.28));}
+.update-pill[hidden]{display:none;}
+.update-pill i{width:7px; height:7px; border-radius:50%; background:var(--on-accent);
+  animation:pulse 1.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1} 50%{opacity:.25}}
+.update-pill:active{transform:scale(.96);}
 .sheet-bg{position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; display:none;}
 .sheet-bg.on{display:block;}
 .sheet{position:fixed; left:0; right:0; bottom:0; z-index:51; background:var(--card);
@@ -357,6 +375,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 </section>
 
 <button class="fab" id="fab">+</button>
+<button class="update-pill" id="updatePill" hidden><i></i>Update ready</button>
 
 <div class="sheet-bg" id="sheetBg"></div>
 <div class="sheet" id="sheet">
@@ -638,6 +657,8 @@ function show(name){
   ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
   $('fab').style.display = (name === 'study') ? 'none' : 'grid';
   if(name === 'home') refreshHome();
+  // an update that arrived mid-review gets applied as soon as you step away
+  if(name !== 'study' && window.applyPendingUpdate) window.applyPendingUpdate();
 }
 function refreshHome(){
   const k = counts();
@@ -841,10 +862,53 @@ $('reqSend').addEventListener('click', () => {
 /* go */
 load(); show('home');
 
-/* Offline shell, so the home-screen app opens with no signal. Registered last
-   and failure is ignored: the app must work whether or not this succeeds. */
+/* ---- offline shell, and updating itself ----
+   Installed to the home screen, this app can sit suspended for days: iOS keeps
+   the page alive, so nothing is ever re-fetched and a new version only arrives
+   if you force-quit. That is the bug. Three things fix it:
+
+     1. ask the browser to re-check the worker whenever the app comes back to
+        the foreground, which is the moment an update can actually be found;
+     2. when a new worker takes over, reload silently if the user is not in the
+        middle of a card, so most updates are simply never noticed;
+     3. if they ARE mid-review, show a pill instead and wait, then apply it the
+        moment they return to the menu.
+
+   Reloading is safe at any point: every answer is written to storage as it is
+   given, so a reload cannot cost a review. */
 if('serviceWorker' in navigator){
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  // was this page already controlled? if not, the first activation is just
+  // the worker installing, not an update, and must not trigger a reload
+  const hadController = !!navigator.serviceWorker.controller;
+  let updateReady = false, reloading = false;
+
+  const midReview = () => $('study').classList.contains('on');
+  const applyUpdate = () => {
+    if(reloading) return;
+    reloading = true;
+    location.reload();
+  };
+  window.showUpdate = () => { updateReady = true; $('updatePill').hidden = false; };
+  // leaving the study screen is the natural moment to swap versions
+  window.applyPendingUpdate = () => { if(updateReady && !midReview()) applyUpdate(); };
+
+  $('updatePill').addEventListener('click', applyUpdate);
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if(!hadController) return;              // first install, nothing to update to
+    if(midReview()) showUpdate(); else applyUpdate();
+  });
+
+  window.addEventListener('load', () => {
+    // updateViaCache:'none' so the check is a real check: otherwise the browser
+    // may answer it from its own HTTP cache and find nothing new for hours
+    navigator.serviceWorker.register('sw.js', {updateViaCache: 'none'}).then(reg => {
+      const check = () => { try{ reg.update(); }catch(e){} };
+      document.addEventListener('visibilitychange', () => { if(!document.hidden) check(); });
+      window.addEventListener('focus', check);
+      setInterval(check, 30 * 60 * 1000);   // and hourly-ish if it stays open
+    }).catch(() => {});
+  });
 }
 </script>
 </body>
