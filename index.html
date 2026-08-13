@@ -121,15 +121,18 @@ html,body{height:100%;}
    scroll or repaint as cards change, and pointer-events:none so it can never
    swallow a tap meant for the card. */
 body::before{
-  content:''; position:fixed; left:0; top:0; width:100vw; pointer-events:none;
-  /* Not inset:0. A fixed box resolves against the SMALL viewport, so in Safari
-     it stops where the collapsed toolbar would be and leaves a bare strip at
-     the bottom of the phone. lvh is the large viewport, the full screen, with
-     vh kept underneath it for anything that does not know lvh yet. */
-  height:100vh; height:100lvh;
+  content:''; position:fixed; pointer-events:none;
+  /* Overscanned by 120px on every side rather than measured.
+     inset:0 left a bare strip at the bottom of the phone, because a fixed box
+     resolves against the SMALL viewport. Switching to lvh was the textbook fix
+     and it still left a strip on his phone, so the units are not worth
+     trusting: whichever viewport iOS decides to hand us, a layer that hangs
+     120px past all four edges cannot fall short. 120 is four tiles tall and
+     two wide, so the pattern still lines up. */
+  inset:-120px;
   background:var(--pattern-ink); opacity:var(--pattern-opacity);
-  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1.6'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
-  mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1.6'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
+  mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
   -webkit-mask-size:60px 30px; mask-size:60px 30px;
   -webkit-mask-repeat:repeat; mask-repeat:repeat;
 }
@@ -168,7 +171,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
   font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
 #home .note{max-width:340px; margin:20px 0 0; font-size:12.5px; line-height:1.5; color:var(--muted);}
-.build{margin-top:16px; font-size:10.5px; letter-spacing:.1em; color:var(--muted); opacity:.65;}
 
 /* ---------- STUDY ---------- */
 #study{padding-left:12px; padding-right:12px;}
@@ -323,8 +325,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
       <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
     </div>
     <button class="btn-main" id="goStudy">Start</button>
-    <!-- so a stuck phone can be diagnosed by looking at it, rather than guessed at -->
-    <div class="build" id="build"></div>
   </div>
 </section>
 
@@ -861,11 +861,6 @@ $('reqSend').addEventListener('click', () => {
   $('reqInput').value = ''; $('reqSend').disabled = true;
   renderRequests(); flushQueue();
 });
-
-/* Shown small on the menu. Bump it with every deploy: it is the only way to
-   tell a phone serving a stale cache from a phone that is simply up to date. */
-const BUILD = '2026-08-13 · 6';
-$('build').textContent = 'BUILD ' + BUILD;
 
 /* go */
 load(); show('home');
