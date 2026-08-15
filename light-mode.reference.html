@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vocab">
+<meta name="theme-color" content="#2A3122">
+<meta name="color-scheme" content="dark light">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<title>Vocab</title>
+<script>
+/* Runs before the first paint, so the page is never drawn in the wrong theme
+   and then corrected: a white flash on a dark phone at night is worse than no
+   light mode at all. Follows the system unless the user has picked a side with
+   the sun/moon button, in which case that choice wins and is remembered.
+   Deliberately its own storage key: nothing here may touch card progress. */
+(function(){
+  var chosen = null;
+  try { chosen = localStorage.getItem('vocab.theme'); } catch(e){}
+  var system = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  var t = (chosen === 'light' || chosen === 'dark' || chosen === 'paper') ? chosen : system;
+  document.documentElement.dataset.theme = t;
+  document.documentElement.style.colorScheme = (t === 'dark') ? 'dark' : 'light';
+})();
+</script>
+<style>
+/* ---------- TYPE ----------
+   Both faces are self-hosted from fonts/, so the app still works with no
+   network and makes no third-party request from the phone.
+   Fraunces is the display serif (English words only, hence the latin range);
+   Manrope carries everything else and covers Cyrillic for the Russian side. */
+@font-face{
+  font-family:'Fraunces'; src:url('fonts/fraunces-latin.woff2') format('woff2');
+  font-weight:400 700; font-style:normal; font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+    U+2000-206F,U+2122,U+2212,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Manrope'; src:url('fonts/manrope-latin.woff2') format('woff2');
+  font-weight:400 800; font-style:normal; font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+    U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Manrope'; src:url('fonts/manrope-cyrillic.woff2') format('woff2');
+  font-weight:400 800; font-style:normal; font-display:swap;
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
+@font-face{
+  font-family:'Manrope'; src:url('fonts/manrope-cyrillic-ext.woff2') format('woff2');
+  font-weight:400 800; font-style:normal; font-display:swap;
+  unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+}
+:root{
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:'Fraunces',ui-serif,Georgia,'Times New Roman',serif;
+}
+/* Display type carries an optical-size axis: each place that uses Fraunces sets
+   its own 'opsz' so the big word is drawn as display type and the small
+   headings are drawn as text, rather than one outline scaled up and down. */
+
+/* Palettes.
+   grove and linen are the app's dark and light sides, chosen by data-theme on
+   <html>, which the head script sets from the system or from a saved choice.
+   The alternates are still here and still work: they are written as
+   html[data-palette="..."] so that an explicit palette outranks the theme
+   rather than fighting it.
+   --bright is the sentence on the front, the one thing on the card that is
+   near-white; --edge is the beige card outline; --chip-* keeps synonym text
+   light inside its green pill rather than green-on-green. */
+:root, [data-theme="dark"], html[data-palette="grove"]{   /* warm forest floor, oat text, leaf accent */
+  --bg:#2A3122;  --card:#1D2318;  --card-2:#333B29;
+  --text:#EFE9D9; --bright:#FCFAF3; --muted:#A3A48D; --line:#333A2A; --ru-text:#E2DCC9;
+  --edge:rgba(216,203,168,.42);
+  --accent:#9DBE79; --on-accent:#12160E;
+  --wrong:#D57F68; --hard:#DFAF66; --easy:#9DBE79;
+  --hl-bg:rgba(157,190,121,.30); --hl-text:#F6F3E6;
+  --chip-bg:rgba(157,190,121,.26); --chip-text:#F2EFE1;
+  --hard-soft:rgba(215,165,93,.16); --easy-soft:rgba(157,190,121,.16);
+  --shadow:rgba(0,0,0,.34); --shadow-soft:rgba(0,0,0,.28);
+  /* --ground is the page behind the cards, and --on-ground the type that sits
+     directly on it: the counts, the hint, the done screen. Split out from
+     --bg/--text so a theme can light the room without touching the furniture. */
+  --ground:#2A3122; --on-ground:#EFE9D9; --on-ground-muted:#A3A48D;
+  --pattern-ink:#D8CBA8; --pattern-opacity:.10;
+}
+[data-theme="light"], html[data-palette="linen"]{   /* daylight: warm paper, deep green ink */
+  --bg:#EDE7D9;  --card:#FAF7EF;  --card-2:#EAE3D3;
+  --text:#232A1D; --bright:#161B12; --muted:#77775F; --line:#DED6C3; --ru-text:#39402F;
+  --edge:rgba(112,98,66,.34);
+  --accent:#4F6E3E; --on-accent:#FAF7EF;
+  --wrong:#A64B36; --hard:#8A6417; --easy:#4F6E3E;
+  /* on paper the highlight has to be solid ink, not a wash: a pale green tint
+     behind dark text reads as a printing error rather than a highlight */
+  --hl-bg:rgba(79,110,62,.92); --hl-text:#FBF8F0;
+  --chip-bg:rgba(79,110,62,.90); --chip-text:#FBF8F0;
+  --hard-soft:rgba(138,100,23,.15); --easy-soft:rgba(79,110,62,.14);
+  --shadow:rgba(60,52,30,.16); --shadow-soft:rgba(60,52,30,.12);
+  --ground:#EDE7D9; --on-ground:#232A1D; --on-ground-muted:#77775F;
+}
+/* Paper: the room is lit, the cards are not. Everything the app hands you
+   (cards, answer buttons, the speaker, the sheet) keeps its dark surface and
+   light type; only the ground behind them turns beige. Inherits the whole grove
+   palette from :root and overrides nothing but the ground. */
+[data-theme="paper"]{
+  --ground:#EDE7D9; --on-ground:#262C1F; --on-ground-muted:#6E6C57;
+  --shadow:rgba(60,52,30,.22); --shadow-soft:rgba(60,52,30,.16);
+}
+html[data-palette="moss"]{               /* deep green, sage accent */
+  --bg:#0E1311;  --card:#161D19;  --card-2:#1F2823;
+  --text:#ECF1ED; --bright:#FBFDFA; --muted:#8B978F; --line:#29332D; --ru-text:#C6D2C8;
+  --edge:rgba(206,214,196,.34);
+  --accent:#86B26A; --on-accent:#0E1311;
+  --wrong:#E07A5F; --hard:#E0A458; --easy:#86B26A;
+  --hl-bg:rgba(134,178,106,.32); --hl-text:#F4F8EE;
+  --chip-bg:rgba(134,178,106,.28); --chip-text:#F1F6EB;
+  --hard-soft:rgba(224,164,88,.17); --easy-soft:rgba(134,178,106,.17);
+}
+html[data-palette="clay"]{               /* warm earth, olive accent */
+  --bg:#14110E;  --card:#1E1A16;  --card-2:#282320;
+  --text:#F3EDE5; --bright:#FEFBF6; --muted:#9C9086; --line:#342D27; --ru-text:#DED6CA;
+  --edge:rgba(222,206,180,.38);
+  --accent:#A8B98C; --on-accent:#14110E;
+  --wrong:#CF7B62; --hard:#DBA75E; --easy:#A8B98C;
+  --hl-bg:rgba(168,185,140,.32); --hl-text:#FAF6EC;
+  --chip-bg:rgba(168,185,140,.28); --chip-text:#F7F3E9;
+  --hard-soft:rgba(219,167,94,.17); --easy-soft:rgba(168,185,140,.17);
+}
+html[data-palette="fern"]{               /* cool near-black green, mint accent */
+  --bg:#0A100C;  --card:#121A15;  --card-2:#1A241D;
+  --text:#E9F1EA; --bright:#FAFDFA; --muted:#7E8C83; --line:#22302A; --ru-text:#C3D2C7;
+  --edge:rgba(200,214,202,.32);
+  --accent:#6FC192; --on-accent:#08120C;
+  --wrong:#D97B7B; --hard:#D3AA63; --easy:#6FC192;
+  --hl-bg:rgba(111,193,146,.30); --hl-text:#F2FBF5;
+  --chip-bg:rgba(111,193,146,.26); --chip-text:#EFF9F3;
+  --hard-soft:rgba(211,170,99,.17); --easy-soft:rgba(111,193,146,.17);
+}
+:root{
+  --pad-bottom: max(14px, env(safe-area-inset-bottom));
+  --pad-top: max(10px, env(safe-area-inset-top));
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+/* Deco fans on the ground behind the cards. Drawn as a mask filled with a
+   palette colour rather than a coloured image, so it follows the theme and
+   costs one 200-byte data URI instead of a bitmap. Fixed, so it does not
+   scroll or repaint as cards change, and pointer-events:none so it can never
+   swallow a tap meant for the card. */
+body::before{
+  content:''; position:fixed; left:0; top:0; width:100vw; pointer-events:none;
+  /* Not inset:0. A fixed box resolves against the SMALL viewport, so in Safari
+     it stops where the collapsed toolbar would be and leaves a bare strip at
+     the bottom of the phone. lvh is the large viewport, the full screen, with
+     vh kept underneath it for anything that does not know lvh yet. */
+  height:100vh; height:100lvh;
+  background:var(--pattern-ink); opacity:var(--pattern-opacity);
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1.6'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
+  mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='30'><g fill='none' stroke='black' stroke-width='1.6'><path d='M0 30 A30 30 0 0 1 60 30'/><path d='M10 30 A20 20 0 0 1 50 30'/><path d='M20 30 A10 10 0 0 1 40 30'/></g></svg>");
+  -webkit-mask-size:60px 30px; mask-size:60px 30px;
+  -webkit-mask-repeat:repeat; mask-repeat:repeat;
+}
+body{
+  margin:0; background:var(--ground); color:var(--on-ground);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  touch-action:manipulation;
+  overscroll-behavior:none;
+}
+button{font:inherit; color:inherit; background:none; border:none; cursor:pointer;}
+.screen{position:fixed; inset:0; display:none; flex-direction:column;
+  padding:var(--pad-top) 14px var(--pad-bottom);}
+.screen.on{display:flex;}
+
+/* ---------- HOME ----------
+   Built as a card, so the app opens on the same object it teaches with:
+   the card surface, the beige edge and the radius are the ones from .face. */
+#home{justify-content:center; align-items:center; text-align:center;}
+.theme-toggle{position:absolute; top:calc(var(--pad-top) + 4px); right:14px;
+  width:44px; height:44px; border-radius:50%; background:var(--card);
+  border:1px solid var(--edge); display:grid; place-items:center;}
+.theme-toggle svg{width:21px; height:21px; fill:var(--text);}
+.theme-toggle:active{background:var(--card-2); transform:scale(.94);}
+/* moon while dark, sun while light */
+.theme-toggle .sun{display:none;}
+[data-theme="light"] .theme-toggle .sun, [data-theme="paper"] .theme-toggle .sun{display:block;}
+[data-theme="light"] .theme-toggle .moon, [data-theme="paper"] .theme-toggle .moon{display:none;}
+.home-card{width:100%; max-width:420px; min-height:56vh;
+  background:var(--card); color:var(--text); border:1px solid var(--edge); border-radius:24px;
+  padding:34px 22px 30px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:6px;}
+#home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:44px;
+  font-weight:600; letter-spacing:-.01em; margin:0;}
+#home .sub{color:var(--muted); font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:600; margin-top:12px; margin-bottom:30px;}
+.stats{display:flex; gap:10px; width:100%; margin-bottom:26px;}
+.stat{flex:1; background:var(--card-2); border:1px solid var(--line); border-radius:16px;
+  padding:14px 8px;}
+.stat b{display:block; font-family:var(--serif); font-variation-settings:'opsz' 60;
+  font-size:26px; font-weight:600; letter-spacing:0;}
+.stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
+.btn-main{width:100%; max-width:420px; background:var(--accent); color:var(--on-accent); font-weight:700;
+  font-size:17px; padding:16px; border-radius:16px;}
+.btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
+  font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
+#home .note{max-width:340px; margin:20px 0 0; font-size:12.5px; line-height:1.5; color:var(--muted);}
+.build{margin-top:16px; font-size:10.5px; letter-spacing:.1em; color:var(--muted); opacity:.65;}
+
+/* ---------- STUDY ---------- */
+#study{padding-left:12px; padding-right:12px;}
+.top{display:flex; align-items:center; justify-content:space-between; height:38px; flex:0 0 auto;}
+.top .counts{display:flex; gap:14px; font-size:12px; color:var(--on-ground-muted);
+  font-variant-numeric:tabular-nums;}
+.top .counts em{font-style:normal; color:var(--on-ground); font-weight:650;}
+.icon-btn{width:38px; height:38px; display:grid; place-items:center; color:var(--on-ground-muted); font-size:19px;}
+.icon-btn:disabled{opacity:.25;}
+
+.card-wrap{flex:1 1 auto; position:relative; perspective:1400px; margin:8px 0 12px; min-height:0;}
+.card{position:absolute; inset:0; transform-style:preserve-3d;
+  transition:transform .42s cubic-bezier(.22,.68,.28,1);}
+.card.flipped{transform:rotateY(180deg);}
+/* a new card should snap to its front, not reverse-flip and flash its answer */
+.card.noanim, .card.noanim .face{transition:none !important;}
+.face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  background:var(--card); color:var(--text); border:1px solid var(--edge);
+  border-radius:24px; display:flex; flex-direction:column; overflow:hidden;
+  /* An identity transform gives each face its own 3D context, so the speaker
+     button is flattened onto the face instead of floating on its own plane
+     mid-turn. Without this the button visibly detaches while the card flips. */
+  transform:rotateY(0deg);}
+.face.back{transform:rotateY(180deg);}
+
+/* Bottom right of the card, above both faces and outside their 3D context. */
+.speaker{position:absolute; right:16px; bottom:16px; width:58px; height:58px; border-radius:50%;
+  background:var(--card-2); border:1px solid var(--edge); display:grid; place-items:center;
+  z-index:6; box-shadow:0 4px 14px var(--shadow-soft);}
+.speaker svg{width:26px; height:26px; fill:var(--text);}
+.speaker:active{background:var(--line); transform:scale(.94);}
+.speaker.speaking{background:var(--accent); border-color:var(--accent);}
+.speaker.speaking svg{fill:var(--on-accent);}
+
+/* Sentence first, word underneath: the point is to meet the word in context
+   and only then name it. */
+.front-body{flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;
+  padding:30px 22px 84px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+.example{max-width:340px; font-size:22px; line-height:1.48; color:var(--bright); font-weight:500;
+  letter-spacing:-.004em;}
+/* The highlight is grown with a spread shadow rather than padding, so it takes
+   no extra width in the line: padding would push the following comma away from
+   the word and leave a hole in the sentence. */
+.example .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
+  border-radius:5px; box-shadow:0 0 0 3px var(--hl-bg);
+  /* idioms are several words long and wrap: clone gives each line fragment its
+     own rounded box instead of one shape stretched across the break */
+  -webkit-box-decoration-break:clone; box-decoration-break:clone;}
+.example:empty{display:none;}
+.front-word{margin-top:30px; padding-top:26px; border-top:1px solid var(--line);
+  align-self:stretch; font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:38px;
+  font-weight:600; letter-spacing:-.008em; line-height:1.08; word-break:break-word;}
+/* idioms are whole phrases, so the display size steps down by length */
+.front-word.long{font-size:28px;}
+.front-word.longer{font-size:22px; line-height:1.2;}
+.pos{margin-top:11px; color:var(--muted); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  font-weight:600;}
+
+.back-head{display:flex; align-items:center; gap:12px; padding:18px 22px 14px;
+  border-bottom:1px solid var(--line); flex:0 0 auto;}
+.back-word{font-family:var(--serif); font-variation-settings:'opsz' 72; font-size:26px;
+  font-weight:600; letter-spacing:-.005em; flex:1; word-break:break-word;}
+/* the last block has to clear the speaker button */
+.back-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:76px;}
+.sect{padding:16px 22px; border-bottom:1px solid var(--line);}
+.sect:last-child{border-bottom:none;}
+.sect h4{margin:0 0 7px; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted); font-weight:650;}
+.sect h4.sub{margin-top:17px;}
+.sect p{margin:0; font-size:16.5px; line-height:1.45;}
+.sect.ru p{color:var(--ru-text);}
+.chips{display:flex; flex-wrap:wrap; gap:7px;}
+.chip{background:var(--chip-bg); color:var(--chip-text); font-weight:600; font-size:15px;
+  padding:5px 11px; border-radius:9px; line-height:1.3;}
+
+.hint{flex:0 0 auto; text-align:center; color:var(--on-ground-muted); font-size:13px; padding:20px 0 22px;}
+.answers{flex:0 0 auto; display:none; gap:8px;}
+.answers.on{display:flex;}
+.ans{flex:1; border-radius:16px; padding:12px 4px 10px; background:var(--card);
+  color:var(--text); border:1px solid var(--edge);
+  display:flex; flex-direction:column; align-items:center; gap:2px;}
+.ans b{font-size:15.5px; font-weight:650;}
+.ans span{font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums;}
+.ans:active{filter:brightness(1.35);}
+.ans.w b{color:var(--wrong);} .ans.h b{color:var(--hard);} .ans.e b{color:var(--easy);}
+
+/* ---------- DONE ---------- */
+#done{justify-content:center; align-items:center; text-align:center; gap:8px;}
+#done .big{font-family:var(--serif); font-variation-settings:'opsz' 96; font-size:30px;
+  font-weight:600; letter-spacing:-.005em;}
+#done .big{color:var(--on-ground);}
+#done .sub{color:var(--on-ground-muted); font-size:15px; margin-bottom:24px;}
+
+/* ---------- FAB + SHEET ---------- */
+.fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px);
+  width:58px; height:58px; border-radius:50%; background:var(--accent); color:var(--on-accent);
+  font-size:31px; font-weight:300; line-height:1; display:grid; place-items:center;
+  box-shadow:0 8px 24px var(--shadow); z-index:40;}
+.fab:active{transform:scale(.94);}
+/* Only ever seen if an update lands mid-review, when reloading underneath
+   someone would be rude. Bottom left, opposite the plus. */
+.update-pill{position:fixed; left:16px; bottom:calc(var(--pad-bottom) + 16px);
+  display:flex; align-items:center; gap:8px; z-index:60;
+  background:var(--accent); color:var(--on-accent); font-size:13px; font-weight:700;
+  padding:10px 15px; border-radius:22px; box-shadow:0 6px 18px var(--shadow-soft, rgba(0,0,0,.28));}
+.update-pill[hidden]{display:none;}
+.update-pill i{width:7px; height:7px; border-radius:50%; background:var(--on-accent);
+  animation:pulse 1.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1} 50%{opacity:.25}}
+.update-pill:active{transform:scale(.96);}
+.sheet-bg{position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50; display:none;}
+.sheet-bg.on{display:block;}
+.sheet{position:fixed; left:0; right:0; bottom:0; z-index:51; background:var(--card); color:var(--text);
+  border-radius:22px 22px 0 0; padding:8px 16px var(--pad-bottom); max-height:92vh;
+  display:none; flex-direction:column; transform:translateY(0);}
+.sheet.on{display:flex;}
+.grab{width:38px; height:5px; border-radius:3px; background:var(--line); margin:6px auto 12px;}
+.sheet h3{margin:0 0 14px; font-family:var(--serif); font-variation-settings:'opsz' 72;
+  font-size:22px; font-weight:600; letter-spacing:-.005em;}
+.req-row{display:flex; gap:9px;}
+.req-row input{flex:1; min-width:0; background:var(--card-2); border:1px solid var(--line);
+  border-radius:14px; color:var(--text); padding:13px; font-size:16px; font-family:inherit;}
+.req-row input:focus{outline:none; border-color:var(--accent);}
+.req-row button{flex:0 0 auto; padding:13px 22px; border-radius:14px; font-size:16px; font-weight:650;}
+.req-note{font-size:12.5px; line-height:1.45; color:var(--muted); margin:11px 2px 0;}
+.status{font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; flex:0 0 auto;
+  letter-spacing:.02em;}
+.status.pending{background:var(--hard-soft); color:var(--hard);}
+.status.added{background:var(--easy-soft); color:var(--easy);}
+.sheet .row{display:flex; gap:10px; margin-top:14px;}
+.sheet .row button{flex:1; padding:15px; border-radius:15px; font-size:16px; font-weight:600;}
+.cancel{background:var(--card-2);}
+.save{background:var(--accent); color:var(--on-accent);}
+.save:disabled{opacity:.4;}
+.mine{margin-top:20px; border-top:1px solid var(--line); padding-top:14px; overflow-y:auto;}
+.mine .item{display:flex; align-items:center; gap:10px; padding:11px 0; border-bottom:1px solid var(--line);}
+.mine .item p{flex:1; margin:0; font-size:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.mine .item button{color:var(--wrong); font-size:14px; padding:6px 8px;}
+</style>
+</head>
+<body>
+
+<!-- ============ HOME ============ -->
+<section id="home" class="screen on">
+  <!-- Sun when the app is light, moon when it is dark: the icon shows where you
+       are, and tapping it takes you to the other side. -->
+  <button class="theme-toggle" id="themeBtn" aria-label="Switch between light and dark">
+    <svg class="sun" viewBox="0 0 24 24"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-13.2a1 1 0 0 1-1-1V1.5a1 1 0 1 1 2 0v1.3a1 1 0 0 1-1 1zm0 19.7a1 1 0 0 1-1-1v-1.3a1 1 0 1 1 2 0v1.3a1 1 0 0 1-1 1zM3.8 12a1 1 0 0 1-1 1H1.5a1 1 0 1 1 0-2h1.3a1 1 0 0 1 1 1zm19.7 0a1 1 0 0 1-1 1h-1.3a1 1 0 1 1 0-2h1.3a1 1 0 0 1 1 1zM5.6 6.6a1 1 0 0 1-.7-.3l-.9-.9a1 1 0 0 1 1.4-1.4l.9.9a1 1 0 0 1-.7 1.7zm13.7 13.7a1 1 0 0 1-.7-.3l-.9-.9a1 1 0 0 1 1.4-1.4l.9.9a1 1 0 0 1-.7 1.7zM4.7 20.3a1 1 0 0 1-.7-1.7l.9-.9a1 1 0 1 1 1.4 1.4l-.9.9a1 1 0 0 1-.7.3zM18.4 6.6a1 1 0 0 1-.7-1.7l.9-.9A1 1 0 0 1 20 5.4l-.9.9a1 1 0 0 1-.7.3z"/></svg>
+    <svg class="moon" viewBox="0 0 24 24"><path d="M20.7 14.2a1 1 0 0 0-1.1-.3 7 7 0 0 1-9.5-8.2 1 1 0 0 0-1.4-1.1A9 9 0 1 0 21 15.3a1 1 0 0 0-.3-1.1z"/></svg>
+  </button>
+  <!-- The home screen is itself a card: same surface, same beige edge, same
+       radius as the ones you study, so the app opens on its own vocabulary. -->
+  <div class="home-card">
+    <h1>Vocab</h1>
+    <div class="sub" id="homeSub">IELTS high-band words</div>
+    <div class="stats">
+      <div class="stat"><b id="sDue">0</b><span>Due</span></div>
+      <div class="stat"><b id="sNew">0</b><span>New</span></div>
+      <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
+    </div>
+    <button class="btn-main" id="goStudy">Start</button>
+    <div class="build" id="build"></div>
+  </div>
+</section>
+
+<!-- ============ STUDY ============ -->
+<section id="study" class="screen">
+  <div class="top">
+    <button class="icon-btn" id="back">&#10005;</button>
+    <div class="counts">
+      <span>Due <em id="cDue">0</em></span>
+      <span>New <em id="cNew">0</em></span>
+    </div>
+    <button class="icon-btn" id="undo" disabled>&#8634;</button>
+  </div>
+
+  <div class="card-wrap" id="cardWrap">
+    <div class="card" id="card">
+      <div class="face front">
+        <div class="front-body">
+          <div class="example" id="fEx"></div>
+          <div class="front-word" id="fWord"></div>
+          <div class="pos" id="fPos"></div>
+        </div>
+      </div>
+      <div class="face back">
+        <div class="back-head">
+          <div class="back-word" id="bWord"></div>
+        </div>
+        <div class="back-body" id="bBody"></div>
+      </div>
+    </div>
+    <!-- The speaker lives outside the card, not on a face. Safari's hit testing
+         inside a preserve-3d subtree sent taps to the card underneath, which is
+         why it used to flip instead of speak. Out here it is a plain button,
+         and one button serves both sides. -->
+    <button class="speaker" id="spk" aria-label="Say the word">
+      <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg>
+    </button>
+  </div>
+
+  <div class="hint" id="hint">Tap the card to reveal</div>
+  <div class="answers" id="answers">
+    <button class="ans w" data-r="wrong"><b>Wrong</b><span id="tW">1m</span></button>
+    <button class="ans h" data-r="hard"><b>Hard</b><span id="tH">5m</span></button>
+    <button class="ans e" data-r="easy"><b>Easy</b><span id="tE">10m</span></button>
+  </div>
+</section>
+
+<!-- ============ DONE ============ -->
+<section id="done" class="screen">
+  <div class="big">All caught up</div>
+  <div class="sub" id="doneSub"></div>
+  <button class="btn-main" id="doneHome">Back to start</button>
+</section>
+
+<button class="fab" id="fab">+</button>
+<button class="update-pill" id="updatePill" hidden><i></i>Update ready</button>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet">
+  <div class="grab"></div>
+  <h3>Request a word</h3>
+  <div class="req-row">
+    <input id="reqInput" type="text" inputmode="text" autocomplete="off" autocapitalize="none"
+           autocorrect="off" placeholder="Word or phrase">
+    <button class="save" id="reqSend" disabled>Send</button>
+  </div>
+  <p class="req-note">Sent straight to Elijah. It turns green once the word is in the deck.</p>
+  <div class="mine" id="mine"></div>
+  <div class="row"><button class="cancel" id="closeSheet">Done</button></div>
+</div>
+
+<script src="words.js"></script>
+<script>
+/* ============================================================
+   STORAGE  —  progress lives in this browser, on this device
+   ============================================================ */
+/* NEVER change this key. Progress is keyed by the word itself, not by its
+   position in the deck, so words can be added, reordered or removed and every
+   remaining card keeps its schedule. Shipping a new version of the app must
+   never cost the user their reviews: load() therefore repairs whatever it
+   finds rather than discarding it, and unknown fields are left untouched so
+   an older build cannot destroy data written by a newer one. */
+const KEY = 'vocab.main.v2';
+let S = null;
+
+function load(){
+  try { S = JSON.parse(localStorage.getItem(KEY)) || null; } catch(e){ S = null; }
+  if(!S || typeof S !== 'object') S = {};
+  if(!S.cards    || typeof S.cards !== 'object') S.cards = {};
+  if(!Array.isArray(S.requests)) S.requests = [];
+  correctForClockChange();
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* Due dates are absolute epoch milliseconds, which is the phone's own clock and
+   is unaffected by a VPN, by travelling, or by the timezone displayed. The one
+   thing that would break them is the clock itself jumping: if the device sets
+   its time backwards, every card looks as though it is due further in the
+   future than it is, and nothing comes up for review. So remember the last time
+   we ran, and if the clock has gone backwards by more than a few minutes, slide
+   every due date by the same amount. Intervals stay relative, which is all the
+   schedule ever cared about. A forward jump needs no repair: cards simply
+   become due, which is what would have happened anyway. */
+function correctForClockChange(){
+  const now = Date.now();
+  const seen = Number(S.lastSeen) || 0;
+  if(seen && now < seen - 5*60000){
+    const shift = seen - now;
+    Object.keys(S.cards).forEach(id => {
+      const c = S.cards[id];
+      if(c && typeof c.due === 'number' && c.due > 0) c.due -= shift;
+    });
+  }
+  S.lastSeen = now;
+  // Persist straight away. If the corrected dates only lived in memory, the
+  // stale marker would still be on disk and the next launch would measure the
+  // same rollback again and shift everything a second time.
+  save();
+}
+/* Keep the marker fresh so a rollback is measured from the last real use. */
+setInterval(() => { if(S){ S.lastSeen = Date.now(); save(); } }, 60000);
+
+/* Ask the browser not to evict this. Safari clears script-writable storage for
+   sites left unused, and a flashcard app is exactly the kind of thing you leave
+   alone for a fortnight. Installed to the home screen this is usually granted. */
+if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+
+function deck(){
+  return (window.WORDS||[]).map(w => ({
+    id: w.word,
+    word: w.word, pos: w.part_of_speech, ex: w.example,
+    def: w.definition, rudef: w.russian_definition,
+    en: w.english_synonyms, ru: w.russian_synonyms
+  }));
+}
+
+/* ============================================================
+   SPACED REPETITION
+   Deliberately short-term: a word you keep getting right tops
+   out at 10 days rather than vanishing for a month.
+   ============================================================ */
+const MIN = 60000, DAY = 1440;              // DAY measured in minutes
+const LEARN = [1, 10];                       // minutes
+const GRADUATE = DAY;                        // first real interval: 1 day
+const EASY_FIRST = 2 * DAY;                  // knew it cold on sight
+const MAX_IVL = 10 * DAY;                    // ceiling: 10 days
+const EASE0 = 2.2, EASE_MIN = 1.3, EASE_MAX = 2.8;
+
+function fresh(id){ return {id, stage:'new', step:0, ivl:0, ease:EASE0, due:0, reps:0, lapses:0}; }
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+
+/* Pure: returns the next state of a card for a given answer. */
+function apply(c, r, now){
+  const n = Object.assign({}, c);
+  n.reps++;
+  if(n.stage === 'new' || n.stage === 'learning'){
+    n.stage = 'learning';
+    if(r === 'wrong'){ n.step = 0; n.due = now + LEARN[0]*MIN; }
+    else if(r === 'hard'){
+      // Hard still moves you forward, just in smaller hops than Easy —
+      // otherwise a word you always find hard would loop in the learning
+      // steps forever and never earn a day-scale interval.
+      n.step++;
+      if(n.step >= LEARN.length){ n.stage='review'; n.ivl = GRADUATE; n.due = now + n.ivl*MIN; }
+      else { n.due = now + LEARN[n.step]*MIN; }
+    }
+    else { n.stage='review'; n.ivl = EASY_FIRST; n.due = now + n.ivl*MIN; }
+  }
+  else if(n.stage === 'relearn'){
+    if(r === 'wrong'){ n.due = now + 5*MIN; }
+    else if(r === 'hard'){ n.due = now + 10*MIN; }
+    else { n.stage='review'; n.due = now + n.ivl*MIN; }
+  }
+  else { /* review */
+    if(r === 'wrong'){
+      n.lapses++; n.ease = clamp(n.ease-0.2, EASE_MIN, EASE_MAX);
+      n.ivl = clamp(Math.round(n.ivl*0.4), DAY, MAX_IVL);
+      n.stage = 'relearn'; n.step = 0; n.due = now + 5*MIN;
+    } else if(r === 'hard'){
+      n.ease = clamp(n.ease-0.15, EASE_MIN, EASE_MAX);
+      // cap last, so a card sitting at the ceiling stays there
+      n.ivl = Math.min(MAX_IVL, Math.max(Math.round(n.ivl*1.3), n.ivl+720));
+      n.due = now + n.ivl*MIN;
+    } else {
+      n.ivl = Math.min(MAX_IVL, Math.max(Math.round(n.ivl*n.ease), n.ivl+DAY));
+      n.ease = clamp(n.ease+0.1, EASE_MIN, EASE_MAX);
+      n.due = now + n.ivl*MIN;
+    }
+  }
+  return n;
+}
+
+/* How long until this card comes back, in words. */
+function gap(c, r, now){
+  const n = apply(c, r, now);
+  return human(Math.round((n.due - now)/MIN));
+}
+function human(m){
+  if(m < 60) return Math.max(1,Math.round(m)) + 'm';
+  if(m < DAY) return Math.round(m/60) + 'h';
+  const d = m/DAY;
+  return (d < 10 ? +d.toFixed(d % 1 && d < 3 ? 1 : 0) : Math.round(d)) + 'd';
+}
+
+/* ============================================================
+   QUEUE
+   ============================================================ */
+function stateOf(id){ return S.cards[id] || null; }
+function counts(){
+  const now = Date.now(), all = deck();
+  let due = 0, neu = 0, known = 0;
+  all.forEach(w => {
+    const c = stateOf(w.id);
+    if(!c){ neu++; return; }
+    if(c.due <= now) due++;
+    if(c.stage === 'review') known++;
+  });
+  return {due, neu, known, total: all.length};
+}
+function pickNext(){
+  const now = Date.now(), all = deck();
+  const seen = all.filter(w => stateOf(w.id)).map(w => ({w, c: stateOf(w.id)}));
+  const ready = seen.filter(x => x.c.due <= now).sort((a,b) => a.c.due - b.c.due);
+  if(ready.length) return ready[0];
+  // A card you just answered must not come straight back, so an unseen word
+  // takes priority over one that is merely due soon.
+  const first = all.find(w => !stateOf(w.id));
+  if(first) return {w: first, c: fresh(first.id)};
+  // Only once the deck is exhausted is it worth showing a learning card early,
+  // rather than parking you on "all caught up" for the sake of a few minutes.
+  const soon = seen
+    .filter(x => (x.c.stage==='learning'||x.c.stage==='relearn') && x.c.due - now <= 20*MIN)
+    .sort((a,b) => a.c.due - b.c.due);
+  if(soon.length) return soon[0];
+  return null;
+}
+function nextDueText(){
+  const now = Date.now();
+  const times = deck().map(w => stateOf(w.id)).filter(Boolean).map(c => c.due).filter(t => t > now);
+  if(!times.length) return 'Nothing left to review.';
+  return 'Next card in ' + human(Math.round((Math.min.apply(null,times) - now)/MIN)) + '.';
+}
+
+/* ============================================================
+   SPEECH
+   Every headword ships as an MP3 in audio/, spoken by a British
+   female voice (Cori, LibriVox) rendered offline with Piper.
+   That is the whole point: iOS defaults to a compact voice that
+   sounds robotic, and the only way to improve it on the device is
+   to go and download one in Settings. Shipping the clips means the
+   app sounds the same on every phone and works with no signal.
+   The phone's own engine is kept only as a fallback for anything
+   with no clip, which today is nothing.
+   ============================================================ */
+const CLIP_DIR = 'audio/';
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+/* One element, reused: iOS only lets audio start inside a user gesture, and a
+   single element that has already played once stays unlocked. */
+const clip = new Audio();
+clip.preload = 'auto';
+
+/* Pick a British female voice. Left to itself iOS grabs Daniel, the default
+   en-GB voice, which is the deep robotic one. Named voices differ per device
+   and per OS version, so score candidates rather than hard-coding one. */
+const FEMALE = /serena|kate|stephanie|martha|sonia|libby|hazel|fiona|moira|tessa|samantha|karen|zira|susan|catherine|linda|amy|emma|jenny|aria|ava|clara|female/i;
+const MALE   = /daniel|arthur|oliver|george|ryan|thomas|alex|fred|gordon|rishi|aaron|david|mark|james|guy|eric|christopher|brandon|liam|nathan|william|male/i;
+
+let voice = null;
+function pickVoice(){
+  const all = speechSynthesis.getVoices()
+    .filter(v => v.lang && v.lang.replace('_','-').toLowerCase().indexOf('en') === 0);
+  if(!all.length) return;
+  /* Voice names differ wildly per device, so score rather than hard-code.
+     The quality tier hides in the voiceURI, not the name: iOS ships
+     com.apple.voice.compact.en-GB.Daniel by default and only exposes
+     ...voice.enhanced.en-GB.Serena once that voice has been downloaded.
+     Both are called "Serena"/"Daniel" in .name, so the URI has to be read
+     or the robotic compact one wins on a tie. */
+  const score = v => {
+    const lang = v.lang.replace('_','-');
+    const uri  = (v.voiceURI || '') + ' ' + v.name;
+    let s = 0;
+    if(lang === 'en-GB') s += 100;
+    else if(/^en-(AU|IE|NZ|ZA)$/i.test(lang)) s += 40;
+    if(FEMALE.test(v.name)) s += 60;
+    else if(MALE.test(v.name)) s -= 80;      // checked second so "female" never reads as "male"
+    if(/premium|enhanced|natural|neural|siri/i.test(uri)) s += 45;
+    if(/compact|eloquence|novelty/i.test(uri)) s -= 30;
+    if(v.localService) s += 5;
+    return s;
+  };
+  voice = all.slice().sort((a,b) => score(b) - score(a))[0] || null;
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function synthesise(text){
+  if(!('speechSynthesis' in window) || !text) return;
+  if(!voice) pickVoice();               // iOS often fills the list only after first use
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = (voice && voice.lang) || 'en-GB';
+  u.rate = .92; u.pitch = 1;
+  if(voice) u.voice = voice;
+  u.onstart = () => busy(true);
+  u.onend = u.onerror = () => busy(false);
+  speechSynthesis.speak(u);
+}
+function busy(on){ const b = $('spk'); if(b) b.classList.toggle('speaking', on); }
+
+function speak(text){
+  if(!text) return;
+  const src = CLIP_DIR + slug(text) + '.mp3';
+  try{ speechSynthesis.cancel(); }catch(e){}
+  // Re-pointing src at the same file still restarts it, so a second tap
+  // replays rather than doing nothing.
+  clip.src = src;
+  clip.currentTime = 0;
+  clip.onplaying = () => busy(true);
+  clip.onended = () => busy(false);
+  clip.onerror = () => { busy(false); synthesise(text); };   // no clip for this word
+  const p = clip.play();
+  if(p && p.catch) p.catch(() => { busy(false); synthesise(text); });
+}
+
+/* ============================================================
+   UI
+   ============================================================ */
+const $ = id => document.getElementById(id);
+let current = null, flipped = false, undoSnap = null;
+
+function show(name){
+  ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
+  $('fab').style.display = (name === 'study') ? 'none' : 'grid';
+  if(name === 'home') refreshHome();
+}
+function refreshHome(){
+  const k = counts();
+  $('sDue').textContent = k.due; $('sNew').textContent = k.neu; $('sKnown').textContent = k.known;
+  $('goStudy').textContent = (k.due + k.neu) ? 'Start' : 'Review anyway';
+}
+
+/* Written out in full: "ADJ" and "PREP" are extra decoding work for someone
+   reading in a second language. */
+const POS = {
+  adj:'adjective', adv:'adverb', v:'verb', n:'noun',
+  prep:'preposition', conj:'conjunction', phrase:'phrase', idiom:'idiom'
+};
+function posName(p){
+  const k = String(p || '').trim().toLowerCase();
+  return POS[k] || k;
+}
+
+/* Example sentences mark the target word with *asterisks* in words.csv,
+   so the highlight lands on the right span whatever form the word takes
+   (exacerbate -> *exacerbated*). Built as nodes, never innerHTML. */
+function renderExample(el, text){
+  el.textContent = '';
+  if(!text) return;
+  text.split(/(\*[^*]+\*)/).forEach(part => {
+    if(!part) return;
+    if(part[0] === '*' && part.length > 2){
+      const s = document.createElement('span');
+      s.className = 'hl';
+      s.textContent = part.slice(1, -1);
+      el.appendChild(s);
+    } else el.appendChild(document.createTextNode(part));
+  });
+}
+
+/* One language per block: its definition and its synonyms sit together under
+   a single divider, with the synonyms as chips so they read as a set rather
+   than a run-on line. */
+function meaningBlock(defLabel, defText, synLabel, synText, isRussian){
+  const sect = document.createElement('div');
+  sect.className = 'sect' + (isRussian ? ' ru' : '');
+  const h1 = document.createElement('h4'); h1.textContent = defLabel;
+  const p  = document.createElement('p');  p.textContent  = defText || '';
+  sect.appendChild(h1); sect.appendChild(p);
+
+  const words = String(synText || '').split(',').map(s => s.trim()).filter(Boolean);
+  if(words.length){
+    const h2 = document.createElement('h4'); h2.className = 'sub'; h2.textContent = synLabel;
+    const chips = document.createElement('div'); chips.className = 'chips';
+    words.forEach(t => {
+      const c = document.createElement('span'); c.className = 'chip'; c.textContent = t;
+      chips.appendChild(c);
+    });
+    sect.appendChild(h2); sect.appendChild(chips);
+  }
+  return sect;
+}
+
+function render(){
+  current = pickNext();
+  if(!current){ $('doneSub').textContent = nextDueText(); show('done'); return; }
+  const {w, c} = current;
+  flipped = false;
+  const card = $('card');
+  card.classList.add('noanim');
+  card.classList.remove('flipped');
+  void card.offsetWidth;                    // commit the snap before animation returns
+  card.classList.remove('noanim');
+  $('answers').classList.remove('on');
+  $('hint').style.display = '';
+
+  $('fWord').textContent = w.word;
+  $('fWord').className = 'front-word' +
+    (w.word.length > 24 ? ' longer' : w.word.length > 15 ? ' long' : '');
+  $('fPos').textContent = posName(w.pos);
+  renderExample($('fEx'), w.ex);
+  $('bWord').textContent = w.word;
+
+  $('bBody').textContent = '';
+  $('bBody').appendChild(meaningBlock('Definition', w.def, 'Synonyms', w.en, false));
+  $('bBody').appendChild(meaningBlock('Значение', w.rudef, 'Синонимы', w.ru, true));
+
+  const now = Date.now();
+  $('tW').textContent = '(' + gap(c,'wrong',now) + ')';
+  $('tH').textContent = '(' + gap(c,'hard', now) + ')';
+  $('tE').textContent = '(' + gap(c,'easy', now) + ')';
+
+  const k = counts();
+  $('cDue').textContent = k.due; $('cNew').textContent = k.neu;
+  $('undo').disabled = !undoSnap;
+  $('bBody').scrollTop = 0;
+}
+
+function flip(){
+  if(!current) return;
+  flipped = !flipped;
+  $('card').classList.toggle('flipped', flipped);
+  $('answers').classList.toggle('on', flipped);
+  $('hint').style.display = flipped ? 'none' : '';
+}
+
+function answer(r){
+  if(!current || !flipped) return;
+  const {w, c} = current;
+  undoSnap = {id: w.id, prev: S.cards[w.id] ? JSON.parse(JSON.stringify(S.cards[w.id])) : null};
+  S.cards[w.id] = apply(c, r, Date.now());
+  save();
+  render();
+}
+
+/* ---- theme ----
+   The head script has already set data-theme before first paint. This half only
+   handles changing it: the button writes a choice, and until a choice exists the
+   app keeps following the system, including if the phone flips at sunset. */
+const THEME_KEY = 'vocab.theme';                 // never the progress key
+function storedTheme(){ try{ return localStorage.getItem(THEME_KEY); }catch(e){ return null; } }
+function applyTheme(t){
+  document.documentElement.dataset.theme = t;
+  document.documentElement.style.colorScheme = (t === 'dark') ? 'dark' : 'light';
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute('content',
+    getComputedStyle(document.documentElement).getPropertyValue('--ground').trim());
+}
+applyTheme(document.documentElement.dataset.theme || 'dark');   // sync the status bar
+$('themeBtn').addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
+  applyTheme(next);
+});
+if(window.matchMedia){
+  const mq = matchMedia('(prefers-color-scheme: light)');
+  const follow = e => { if(!storedTheme()) applyTheme(e.matches ? 'light' : 'dark'); };
+  if(mq.addEventListener) mq.addEventListener('change', follow);
+  else if(mq.addListener) mq.addListener(follow);
+}
+
+/* events */
+$('cardWrap').addEventListener('click', e => { if(!e.target.closest('#spk')) flip(); });
+/* pointerdown, not click: on iOS the speech engine is happiest when it is
+   started by the first event of the gesture, and this also settles the tap
+   before the card can interpret it. */
+$('spk').addEventListener('pointerdown', e => {
+  e.preventDefault(); e.stopPropagation();
+  if(current) speak(current.w.word);
+});
+$('spk').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); });
+document.querySelectorAll('.ans').forEach(b => b.addEventListener('click', () => answer(b.dataset.r)));
+$('back').addEventListener('click', () => show('home'));
+$('doneHome').addEventListener('click', () => show('home'));
+$('goStudy').addEventListener('click', () => { undoSnap = null; show('study'); render(); });
+$('undo').addEventListener('click', () => {
+  if(!undoSnap) return;
+  if(undoSnap.prev) S.cards[undoSnap.id] = undoSnap.prev; else delete S.cards[undoSnap.id];
+  undoSnap = null; save(); render();
+});
+/* ============================================================
+   REQUEST A WORD
+   The request goes to Elijah's buffer worker, which pings him on
+   Telegram. A request counts as "added" the moment the word turns up in
+   the deck, so no reply channel is needed: publishing the word is the
+   answer. Anything that fails to send stays queued and retries, since
+   this gets used on a phone with patchy signal.
+   ============================================================ */
+const REQUEST_URL = 'https://claude-buffer.elijahrobineau.workers.dev/word-request';
+
+function isInDeck(text){
+  const t = text.trim().toLowerCase();
+  return (window.WORDS || []).some(w => w.word.toLowerCase() === t);
+}
+function openSheet(){
+  $('sheetBg').classList.add('on'); $('sheet').classList.add('on');
+  $('reqInput').value = ''; $('reqSend').disabled = true;
+  renderRequests(); flushQueue();
+}
+function closeSheet(){
+  $('sheetBg').classList.remove('on'); $('sheet').classList.remove('on');
+  $('reqInput').blur();
+}
+function renderRequests(){
+  const list = $('mine');
+  list.textContent = '';
+  if(!S.requests.length) return;
+  S.requests.slice().reverse().forEach(r => {
+    const added = isInDeck(r.text);
+    const row = document.createElement('div'); row.className = 'item';
+    const p = document.createElement('p'); p.textContent = r.text;
+    const tag = document.createElement('span');
+    tag.className = 'status ' + (added ? 'added' : 'pending');
+    tag.textContent = added ? '✓ added' : (r.sent ? 'pending' : 'not sent yet');
+    row.appendChild(p); row.appendChild(tag); list.appendChild(row);
+  });
+}
+const inflight = new Set();   // a send in progress is not yet "sent", but must not be repeated
+function flushQueue(){
+  S.requests.filter(r => !r.sent && !inflight.has(r.text)).forEach(r => {
+    inflight.add(r.text);
+    fetch(REQUEST_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({word: r.text, at: r.ts})
+    }).then(res => {
+      if(res.ok){ r.sent = true; save(); renderRequests(); }
+    }).catch(() => {})        // stays queued, retried next time the sheet opens
+      .then(() => inflight.delete(r.text));
+  });
+}
+$('fab').addEventListener('click', openSheet);
+$('sheetBg').addEventListener('click', closeSheet);
+$('closeSheet').addEventListener('click', closeSheet);
+$('reqInput').addEventListener('input', function(){
+  $('reqSend').disabled = !this.value.trim();
+});
+$('reqInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && this.value.trim()) $('reqSend').click();
+});
+$('reqSend').addEventListener('click', () => {
+  const text = $('reqInput').value.trim().slice(0, 60);
+  if(!text) return;
+  if(!S.requests.some(r => r.text.toLowerCase() === text.toLowerCase())){
+    S.requests.push({text, ts: new Date().toISOString(), sent: false});
+    save();
+  }
+  $('reqInput').value = ''; $('reqSend').disabled = true;
+  renderRequests(); flushQueue();
+});
+
+/* go */
+load(); show('home');
+
+/* ---- offline shell, and updating itself ----
+   Installed to the home screen, this app can sit suspended for days: iOS keeps
+   the page alive, so nothing is ever re-fetched and a new version only arrives
+   if you force-quit. That is the bug. Three things fix it:
+
+     1. ask the browser to re-check the worker whenever the app comes back to
+        the foreground, which is the moment an update can actually be found;
+     2. when a new worker takes over, reload silently if the user is not in the
+        middle of a card, so most updates are simply never noticed;
+     3. if they ARE mid-review, show a pill instead and wait, then apply it the
+        moment they return to the menu.
+
+   Reloading is safe at any point: every answer is written to storage as it is
+   given, so a reload cannot cost a review. */
+if('serviceWorker' in navigator){
+  // was this page already controlled? if not, the first activation is just
+  // the worker installing, not an update, and must not trigger a reload
+  const hadController = !!navigator.serviceWorker.controller;
+  let updateReady = false, reloading = false;
+
+  const midReview = () => $('study').classList.contains('on');
+  const applyUpdate = () => {
+    if(reloading) return;
+    reloading = true;
+    location.reload();
+  };
+  window.showUpdate = () => { updateReady = true; $('updatePill').hidden = false; };
+  // leaving the study screen is the natural moment to swap versions
+  window.applyPendingUpdate = () => { if(updateReady && !midReview()) applyUpdate(); };
+
+  $('updatePill').addEventListener('click', applyUpdate);
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if(!hadController) return;              // first install, nothing to update to
+    if(midReview()) showUpdate(); else applyUpdate();
+  });
+
+  window.addEventListener('load', () => {
+    // updateViaCache:'none' so the check is a real check: otherwise the browser
+    // may answer it from its own HTTP cache and find nothing new for hours
+    navigator.serviceWorker.register('sw.js', {updateViaCache: 'none'}).then(reg => {
+      const check = () => { try{ reg.update(); }catch(e){} };
+      document.addEventListener('visibilitychange', () => { if(!document.hidden) check(); });
+      window.addEventListener('focus', check);
+      setInterval(check, 30 * 60 * 1000);   // and hourly-ish if it stays open
+    }).catch(() => {});
+  });
+}
+</script>
+</body>
+</html>

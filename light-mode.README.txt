@@ -1,0 +1,16 @@
+Reference only. Not part of the app, not served by Pages (this branch is never
+merged to main as-is).
+
+This is the sun/moon light-mode work: a head script that sets data-theme before
+first paint, a [data-theme="light"] palette (everything turns to paper) and a
+[data-theme="paper"] one (only the ground lights, cards stay dark), the toggle
+button top right of the menu, and the ground/on-ground token split that lets a
+theme light the room without touching the furniture.
+
+It was built against the OLD lighter-green ground, so the light values want
+re-tuning against the near-black one before it ships. Elijah has not yet chosen
+between light and paper.
+
+Kept on a branch because the previous arrangement, an uncommitted copy of
+index.html parked in a temp folder, was overwritten by mistake and the work was
+only recoverable out of a headless Chrome cache.
