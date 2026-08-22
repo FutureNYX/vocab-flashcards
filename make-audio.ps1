@@ -57,6 +57,22 @@ $size = (Get-ChildItem $outDir -Filter *.mp3 | Measure-Object -Property Length -
 "rendered $made, kept $skipped, total $((Get-ChildItem $outDir -Filter *.mp3).Count) clips, $([math]::Round($size/1MB,2)) MB"
 if($failed.Count){ "FAILED: " + ($failed -join ', ') }
 
+# Piper sometimes carries on talking after a short word: it says "impact", then
+# invents four more seconds of speech. It sounds like a different word entirely
+# and the only sign in the output is the file size, so check the durations and
+# say so. A one-word clip is about a second; the longest idiom is under three.
+# Trim the offender to the first spoken segment rather than re-rendering, the
+# babble comes back on the same input.
+$long = @()
+foreach($r in $rows){
+  $f = Join-Path $outDir ((Slug $r.word) + '.mp3')
+  if(-not (Test-Path $f)){ continue }
+  $d = [double](ffprobe -v error -show_entries format=duration -of csv=p=0 $f)
+  $words = ($r.word -split '\s+').Count
+  if($d -gt (1.2 + 0.45 * $words)){ $long += ("{0} ({1:N1}s)" -f $r.word, $d) }
+}
+if($long.Count){ "SUSPICIOUSLY LONG, listen before shipping: " + ($long -join ', ') }
+
 # Anything in audio/ with no matching row is left over from a deleted word.
 $live = @{}; $rows | ForEach-Object { $live[(Slug $_.word)] = $true }
 $orphans = Get-ChildItem $outDir -Filter *.mp3 | Where-Object { -not $live[$_.BaseName] }
