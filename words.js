@@ -1,5 +1,59 @@
 window.WORDS = [
     {
+        "word":  "enhance",
+        "part_of_speech":  "v",
+        "definition":  "To improve the quality or value of something that is already good",
+        "russian_definition":  "улучшить качество или ценность того, что уже есть",
+        "english_synonyms":  "improve, boost, heighten",
+        "russian_synonyms":  "улучшать, усиливать, повышать",
+        "example":  "A little salt will *enhance* the flavour of almost any soup."
+    },
+    {
+        "word":  "compassion",
+        "part_of_speech":  "n",
+        "definition":  "A feeling of care for people who are suffering, and a wish to help them",
+        "russian_definition":  "сочувствие к тем, кто страдает, и желание им помочь",
+        "english_synonyms":  "sympathy, kindness, empathy",
+        "russian_synonyms":  "сострадание, сочувствие, милосердие",
+        "example":  "The nurse spoke to every patient with real *compassion*, even at the end of a long shift."
+    },
+    {
+        "word":  "thrive on",
+        "part_of_speech":  "phrase",
+        "definition":  "To do very well in conditions that most people would find hard",
+        "russian_definition":  "отлично себя чувствовать и добиваться успеха там, где другим тяжело",
+        "english_synonyms":  "flourish on, do well on, feed off",
+        "russian_synonyms":  "процветать благодаря, обожать, прекрасно себя чувствовать в",
+        "example":  "She *thrives on* pressure and does her best work the night before a deadline."
+    },
+    {
+        "word":  "impact",
+        "part_of_speech":  "n",
+        "definition":  "A strong effect that one thing has on another",
+        "russian_definition":  "сильное воздействие одного на другое, заметный эффект",
+        "english_synonyms":  "effect, influence, consequence",
+        "russian_synonyms":  "воздействие, влияние, эффект",
+        "example":  "The new bus route has had a real *impact* on how long my journey takes."
+    },
+    {
+        "word":  "commitment",
+        "part_of_speech":  "n",
+        "definition":  "A promise to do something, or the time and effort you give to it",
+        "russian_definition":  "обещание что-то делать, а также время и силы, которые на это отдают",
+        "english_synonyms":  "pledge, dedication, obligation",
+        "russian_synonyms":  "обязательство, приверженность, самоотдача",
+        "example":  "Getting a dog is a big *commitment*: someone has to walk it every single day."
+    },
+    {
+        "word":  "flunk out of",
+        "part_of_speech":  "phrase",
+        "definition":  "To be made to leave a school or university because of failing your exams",
+        "russian_definition":  "быть отчисленным из учебного заведения из-за проваленных экзаменов",
+        "english_synonyms":  "fail out of, be expelled from, wash out of",
+        "russian_synonyms":  "вылететь из, быть отчисленным из, завалить учебу и уйти",
+        "example":  "He spent the whole year playing games and *flunked out of* university in June."
+    },
+    {
         "word":  "conversely",
         "part_of_speech":  "adv",
         "definition":  "Looking at it from the opposite point of view",
