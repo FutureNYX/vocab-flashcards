@@ -6,8 +6,24 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="theme-color" content="#141910">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#E2D9C4">
+<meta name="color-scheme" content="light dark">
+<script>
+/* Sun and moon, resolved BEFORE first paint, or the app flashes the wrong
+   sheet on every launch. The choice lives under its own key and is never
+   written anywhere near the progress key. Follows the phone until tapped. */
+(function(){
+  try{
+    var saved = null;
+    try{ saved = localStorage.getItem('vocab.theme'); }catch(e){}
+    var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+    var pal = (saved === 'paper' || saved === 'lamplight') ? saved : (dark ? 'lamplight' : 'paper');
+    document.documentElement.setAttribute('data-palette', pal);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if(m) m.setAttribute('content', pal === 'paper' ? '#E2D9C4' : '#17140F');
+  }catch(e){}
+})();
+</script>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
@@ -109,7 +125,62 @@
   --chip-bg:rgba(111,193,146,.26); --chip-text:#EFF9F3;
   --hard-soft:rgba(211,170,99,.17); --easy-soft:rgba(111,193,146,.17);
 }
+
+/* ---------- PAPER & LAMPLIGHT ----------
+   One sheet of paper, two lights, and the pair the app now ships on. Paper is
+   the sheet by a window; lamplight is the SAME sheet under a lamp, which is
+   why the card stays parchment at night instead of turning into a grey
+   rectangle. Only the light moves.
+
+   Ink is never neutral at either end: day ink is a warm sepia-black, the
+   colour iron gall goes on rag, and night ink is a cream the lamp has already
+   warmed. Flat near-black on flat near-white is the thing that reads as a
+   screen no matter what texture sits behind it.
+
+   --sheet-light is the raking pass across the card, --grain-opacity and
+   --grain-blend put the paper tooth over the type rather than under it, and
+   the three --stock-* values are the card's own lit and shaded edges, which
+   were tuned for a dark card and have to invert for a light one. Palettes
+   that do not set them fall back to the old values, so grove, linen, moss,
+   clay and fern are untouched. */
+[data-palette="paper"]{              /* the sheet by a window */
+  --bg:#E2D9C4;  --card:#FCF9F1;  --card-2:#F2ECDD;
+  --text:#2E2418; --bright:#241B0F; --muted:#8A7F67; --line:#DCD3BE; --ru-text:#3A3021;
+  --edge:rgba(118,104,72,.30);
+  --accent:#3F5E31; --on-accent:#FCF9F1;
+  --wrong:#A24A32; --hard:#8E6518; --easy:#3F5E31;
+  --hl-bg:rgba(143,174,107,.46); --hl-text:#1D2810;
+  --chip-bg:rgba(63,94,49,.13); --chip-text:#2C4322;
+  --syn:#6E6553;
+  --hard-soft:rgba(142,101,24,.12); --easy-soft:rgba(63,94,49,.12);
+  --pattern-ink:#6B5B36; --pattern-opacity:.07;
+  --grain-opacity:.17; --grain-blend:multiply;
+  --sheet-light:linear-gradient(154deg, rgba(255,253,243,.90) 0%, rgba(255,251,235,.24) 32%,
+                rgba(255,251,235,0) 50%, rgba(74,58,26,.26) 100%);
+  --stock-lit:rgba(255,255,255,.9); --stock-shade:rgba(94,76,40,.16);
+  --stock-vignette:rgba(94,76,40,.07);
+}
+[data-palette="lamplight"]{          /* the same sheet, under a lamp */
+  --bg:#17140F;  --card:#3E362B;  --card-2:#362F26;
+  --text:#F0E4C8; --bright:#FBF2DC; --muted:#A79A80; --line:#524937; --ru-text:#DFD2B4;
+  --edge:rgba(223,205,166,.26);
+  --accent:#B3CA84; --on-accent:#1B180F;
+  --wrong:#E28D71; --hard:#DFB268; --easy:#B3CA84;
+  --hl-bg:rgba(179,202,132,.30); --hl-text:#FCF7E8;
+  --chip-bg:rgba(179,202,132,.16); --chip-text:#DCE9C4;
+  --syn:#C2B597;
+  --hard-soft:rgba(223,178,104,.15); --easy-soft:rgba(179,202,132,.16);
+  --pattern-ink:#DFCDA6; --pattern-opacity:.05;
+  --grain-opacity:.13; --grain-blend:multiply;
+  --sheet-light:linear-gradient(168deg, rgba(255,228,172,.55) 0%, rgba(255,218,158,.14) 28%,
+                rgba(255,218,158,0) 44%, rgba(0,0,0,.30) 100%);
+  --stock-lit:rgba(255,240,208,.07); --stock-shade:rgba(0,0,0,.35);
+  --stock-vignette:rgba(0,0,0,.22);
+}
 :root{
+  /* the card stock the five original palettes were drawn against */
+  --stock-lit:rgba(255,246,224,.13); --stock-shade:rgba(0,0,0,.35);
+  --stock-vignette:rgba(0,0,0,.22);
   --pad-bottom: max(14px, env(safe-area-inset-bottom));
   --pad-top: max(10px, env(safe-area-inset-top));
 }
@@ -157,6 +228,11 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    Built as a card, so the app opens on the same object it teaches with:
    the card surface, the beige edge and the radius are the ones from .face. */
 #home{justify-content:center; align-items:center; text-align:center;}
+.theme-btn{position:absolute; top:calc(var(--pad-top) + 6px); right:14px;
+  width:42px; height:42px; border-radius:50%; display:grid; place-items:center;
+  color:var(--muted); z-index:10;}
+.theme-btn svg{width:21px; height:21px; fill:currentColor;}
+.theme-btn:active{transform:scale(.92);}
 .home-card{width:100%; max-width:420px; min-height:56vh; position:relative; overflow:hidden;
   background:var(--card); border:1px solid var(--edge); border-radius:24px;
   padding:34px 22px 30px; display:flex; flex-direction:column;
@@ -199,16 +275,35 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    point. */
 .face, .home-card{
   --grain:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.55'/%3E%3C/svg%3E");
-  box-shadow:inset 0 1px 0 rgba(255,246,224,.13), inset 0 -1px 0 rgba(0,0,0,.35),
-             inset 0 0 44px rgba(0,0,0,.22);
+  box-shadow:inset 0 1px 0 var(--stock-lit), inset 0 -1px 0 var(--stock-shade),
+             inset 0 0 44px var(--stock-vignette);
+  /* Contains the blended layers below to this one surface. The last attempt at
+     a blended grain bled across the whole page precisely because it had
+     nothing to isolate it against; this is that missing line, not a retry of
+     the same mistake. Verified with the ground sampled either side of a card. */
+  isolation:isolate;
 }
 /* No mix-blend-mode. Overlay looked better in isolation and then bled the
    grain across the entire page, card and ground alike, because the blend had
    nothing to isolate it against. A plain low-opacity layer is duller in theory
    and correct in practice. */
+/* The light, then the tooth. Both sit ABOVE the type: flat text painted over a
+   texture still reads as text over a texture, and the ink only looks absorbed
+   into the sheet once the grain and the raking light fall across the letters
+   too. Neither takes a z-index — a positioned child of a .face with one gets
+   pulled out of the 3D context and visibly detaches mid-flip, which has been a
+   real bug here twice. Absolute pseudo-elements paint above the unpositioned
+   card content on their own, which is all that is needed.
+   Palettes that set no --sheet-light or --grain-blend keep the old flat
+   low-opacity layer exactly as it was. */
+.face::before, .home-card::before{
+  content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background:var(--sheet-light, none); mix-blend-mode:soft-light;
+}
 .face::after, .home-card::after{
   content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
-  background-image:var(--grain); background-size:200px 200px; opacity:.07;
+  background-image:var(--grain); background-size:200px 200px;
+  opacity:var(--grain-opacity, .07); mix-blend-mode:var(--grain-blend, normal);
 }
 .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
   background:var(--card); border:1px solid var(--edge);
@@ -265,6 +360,12 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .sect h4.sub{margin-top:17px;}
 .sect p{margin:0; font-size:16.5px; line-height:1.45;}
 .sect.ru p{color:var(--ru-text);}
+/* Synonyms carry the same cap-label as the definition above them, then step
+   back by size, weight and ink strength rather than by a fill. Filled pills
+   won the eye off the definition, which is the thing actually being learned. */
+.syn{margin:0; font-size:16px; font-weight:500; line-height:1.5; letter-spacing:-.002em;
+  color:var(--syn, var(--muted));}
+.syn .sep{opacity:.45; margin:0 7px;}
 .chips{display:flex; flex-wrap:wrap; gap:7px;}
 .chip{background:var(--chip-bg); color:var(--chip-text); font-weight:600; font-size:15px;
   padding:5px 11px; border-radius:9px; line-height:1.3;}
@@ -279,6 +380,14 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .ans span{font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums;}
 .ans:active{filter:brightness(1.35);}
 .ans.w b{color:var(--wrong);} .ans.h b{color:var(--hard);} .ans.e b{color:var(--easy);}
+/* Filled tints rather than three outlines, so the row reads as buttons and the
+   bottom of the screen finishes. Each tint is mixed from the colour that
+   button already declares, so every palette gets its own without a new
+   variable. Where color-mix is unsupported the whole declaration is dropped
+   and the outlined card above stands, which is the previous look. */
+.ans.w{background:color-mix(in srgb, var(--wrong) 12%, transparent); border-color:transparent;}
+.ans.h{background:color-mix(in srgb, var(--hard) 13%, transparent); border-color:transparent;}
+.ans.e{background:color-mix(in srgb, var(--easy) 13%, transparent); border-color:transparent;}
 
 /* ---------- DONE ---------- */
 #done{justify-content:center; align-items:center; text-align:center; gap:8px;}
@@ -337,6 +446,10 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 <!-- ============ HOME ============ -->
 <section id="home" class="screen on">
+  <!-- The light is a choice, not the phone's: it follows the system until this
+       is tapped, then remembers. Home screen only, because the study screen's
+       top right is the undo button and that has to stay where the thumb is. -->
+  <button class="theme-btn" id="themeBtn" aria-label="Switch between paper and lamplight"></button>
   <!-- The home screen is itself a card: same surface, same beige edge, same
        radius as the ones you study, so the app opens on its own vocabulary. -->
   <div class="home-card">
@@ -721,8 +834,9 @@ function renderExample(el, text){
 }
 
 /* One language per block: its definition and its synonyms sit together under
-   a single divider, with the synonyms as chips so they read as a set rather
-   than a run-on line. */
+   a single divider. The synonyms used to be filled chips and took the eye off
+   the definition, which is the thing being learned, so they are now a quiet
+   middot-separated line under a cap-label matching the one above it. */
 function meaningBlock(defLabel, defText, synLabel, synText, isRussian){
   const sect = document.createElement('div');
   sect.className = 'sect' + (isRussian ? ' ru' : '');
@@ -733,12 +847,16 @@ function meaningBlock(defLabel, defText, synLabel, synText, isRussian){
   const words = String(synText || '').split(',').map(s => s.trim()).filter(Boolean);
   if(words.length){
     const h2 = document.createElement('h4'); h2.className = 'sub'; h2.textContent = synLabel;
-    const chips = document.createElement('div'); chips.className = 'chips';
-    words.forEach(t => {
-      const c = document.createElement('span'); c.className = 'chip'; c.textContent = t;
-      chips.appendChild(c);
+    const line = document.createElement('p'); line.className = 'syn';
+    words.forEach((t, i) => {
+      if(i){
+        const sep = document.createElement('span');
+        sep.className = 'sep'; sep.textContent = '·';
+        line.appendChild(sep);
+      }
+      line.appendChild(document.createTextNode(t));
     });
-    sect.appendChild(h2); sect.appendChild(chips);
+    sect.appendChild(h2); sect.appendChild(line);
   }
   return sect;
 }
@@ -865,6 +983,39 @@ function flushQueue(){
       .then(() => inflight.delete(r.text));
   });
 }
+/* ---------- SUN AND MOON ----------
+   Paper by day, lamplight at night, switched by hand and remembered under its
+   own key. THEME_KEY is not KEY and must never become it: this writes one
+   short string and touches nothing the scheduler owns. */
+const THEME_KEY = 'vocab.theme';
+const SUN_ICON  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-14.5 1.6 2.7h-3.2zM12 21.5l-1.6-2.7h3.2zM2.5 12l2.7-1.6v3.2zM21.5 12l-2.7 1.6v-3.2zM5.2 5.2l3.1.4-1.6 1.6zM18.8 18.8l-3.1-.4 1.6-1.6zM18.8 5.2l-1.5 3.1-1.6-1.6zM5.2 18.8l1.5-3.1 1.6 1.6z"/></svg>';
+const MOON_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 14.6A8.6 8.6 0 0 1 9.4 3.3 8.7 8.7 0 1 0 20.7 14.6z"/></svg>';
+
+function currentPalette(){
+  return document.documentElement.getAttribute('data-palette');
+}
+function paintTheme(){
+  const pal = currentPalette();
+  const btn = $('themeBtn');
+  if(btn){
+    /* the button offers the other light, so it shows the other icon */
+    btn.innerHTML = (pal === 'paper') ? MOON_ICON : SUN_ICON;
+    btn.setAttribute('aria-label',
+      (pal === 'paper') ? 'Switch to lamplight' : 'Switch to paper');
+  }
+  const m = document.querySelector('meta[name="theme-color"]');
+  if(m) m.setAttribute('content', (pal === 'paper') ? '#E2D9C4' : '#17140F');
+}
+if($('themeBtn')){
+  $('themeBtn').addEventListener('click', () => {
+    const next = (currentPalette() === 'paper') ? 'lamplight' : 'paper';
+    document.documentElement.setAttribute('data-palette', next);
+    try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
+    paintTheme();
+  });
+}
+paintTheme();
+
 $('fab').addEventListener('click', openSheet);
 $('sheetBg').addEventListener('click', closeSheet);
 $('closeSheet').addEventListener('click', closeSheet);
