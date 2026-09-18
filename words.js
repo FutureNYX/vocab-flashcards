@@ -2,6 +2,7 @@ window.WORDS = [
     {
         "word":  "enhance",
         "part_of_speech":  "v",
+        "pronunciation":  "ɪnˈhɑːns",
         "definition":  "To improve the quality or value of something that is already good",
         "russian_definition":  "улучшить качество или ценность того, что уже есть",
         "english_synonyms":  "improve, boost, heighten",
@@ -11,6 +12,7 @@ window.WORDS = [
     {
         "word":  "compassion",
         "part_of_speech":  "n",
+        "pronunciation":  "kəmˈpæʃən",
         "definition":  "A feeling of care for people who are suffering, and a wish to help them",
         "russian_definition":  "сочувствие к тем, кто страдает, и желание им помочь",
         "english_synonyms":  "sympathy, kindness, empathy",
@@ -20,15 +22,17 @@ window.WORDS = [
     {
         "word":  "thrive on",
         "part_of_speech":  "phrase",
+        "pronunciation":  "ˈθraɪv ɒn",
         "definition":  "To do very well in conditions that most people would find hard",
         "russian_definition":  "отлично себя чувствовать и добиваться успеха там, где другим тяжело",
         "english_synonyms":  "flourish on, do well on, feed off",
-        "russian_synonyms":  "процветать благодаря, обожать, прекрасно себя чувствовать в",
+        "russian_synonyms":  "процветать благодаря, обожать",
         "example":  "She *thrives on* pressure and does her best work the night before a deadline."
     },
     {
         "word":  "impact",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈɪmpækt",
         "definition":  "A strong effect that one thing has on another",
         "russian_definition":  "сильное воздействие одного на другое, заметный эффект",
         "english_synonyms":  "effect, influence, consequence",
@@ -38,6 +42,7 @@ window.WORDS = [
     {
         "word":  "commitment",
         "part_of_speech":  "n",
+        "pronunciation":  "kəˈmɪtmənt",
         "definition":  "A promise to do something, or the time and effort you give to it",
         "russian_definition":  "обещание что-то делать, а также время и силы, которые на это отдают",
         "english_synonyms":  "pledge, dedication, obligation",
@@ -47,6 +52,7 @@ window.WORDS = [
     {
         "word":  "flunk out of",
         "part_of_speech":  "phrase",
+        "pronunciation":  "ˈflʌŋk aʊt əv",
         "definition":  "To be made to leave a school or university because of failing your exams",
         "russian_definition":  "быть отчисленным из учебного заведения из-за проваленных экзаменов",
         "english_synonyms":  "fail out of, be expelled from, wash out of",
@@ -56,6 +62,7 @@ window.WORDS = [
     {
         "word":  "conversely",
         "part_of_speech":  "adv",
+        "pronunciation":  "ˈkɒnvɜːsli",
         "definition":  "Looking at it from the opposite point of view",
         "russian_definition":  "если посмотреть с противоположной стороны; вводит обратное утверждение",
         "english_synonyms":  "on the other hand, contrarily, inversely",
@@ -65,6 +72,7 @@ window.WORDS = [
     {
         "word":  "arguably",
         "part_of_speech":  "adv",
+        "pronunciation":  "ˈɑːɡjuəbli",
         "definition":  "As can reasonably be claimed, though others may disagree",
         "russian_definition":  "можно с основанием утверждать, хотя кто-то и поспорит",
         "english_synonyms":  "possibly, conceivably, debatably",
@@ -74,6 +82,7 @@ window.WORDS = [
     {
         "word":  "notwithstanding",
         "part_of_speech":  "prep",
+        "pronunciation":  "ˌnɒtwɪθˈstændɪŋ",
         "definition":  "In spite of something",
         "russian_definition":  "несмотря на что-либо, вопреки обстоятельствам",
         "english_synonyms":  "despite, regardless of, even so",
@@ -83,6 +92,7 @@ window.WORDS = [
     {
         "word":  "albeit",
         "part_of_speech":  "conj",
+        "pronunciation":  "ɔːlˈbiːɪt",
         "definition":  "Although, even though (used to add a qualifying phrase)",
         "russian_definition":  "хотя и, пусть и; вводит уточнение или оговорку",
         "english_synonyms":  "though, even if, while",
@@ -92,6 +102,7 @@ window.WORDS = [
     {
         "word":  "a blessing in disguise",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "Something that seems bad at first but turns out to be good",
         "russian_definition":  "то, что сначала кажется неудачей, но оборачивается благом",
         "english_synonyms":  "a hidden benefit, a lucky setback",
@@ -101,6 +112,7 @@ window.WORDS = [
     {
         "word":  "inherently",
         "part_of_speech":  "adv",
+        "pronunciation":  "ɪnˈhɪərəntli",
         "definition":  "As a basic, permanent quality that cannot be separated out",
         "russian_definition":  "в силу самой природы вещи, неотделимо от нее",
         "english_synonyms":  "intrinsically, fundamentally, innately",
@@ -110,6 +122,7 @@ window.WORDS = [
     {
         "word":  "predominantly",
         "part_of_speech":  "adv",
+        "pronunciation":  "prɪˈdɒmɪnəntli",
         "definition":  "Mainly, for the most part",
         "russian_definition":  "по большей части, в подавляющем большинстве случаев",
         "english_synonyms":  "mostly, largely, chiefly",
@@ -119,6 +132,7 @@ window.WORDS = [
     {
         "word":  "invariably",
         "part_of_speech":  "adv",
+        "pronunciation":  "ɪnˈveəriəbli",
         "definition":  "Always, without a single exception",
         "russian_definition":  "всегда, без единого исключения",
         "english_synonyms":  "consistently, unfailingly, every time",
@@ -128,6 +142,7 @@ window.WORDS = [
     {
         "word":  "inadvertently",
         "part_of_speech":  "adv",
+        "pronunciation":  "ˌɪnədˈvɜːtəntli",
         "definition":  "Without meaning to; by accident",
         "russian_definition":  "не желая того, по недосмотру",
         "english_synonyms":  "accidentally, unintentionally, unwittingly",
@@ -137,6 +152,7 @@ window.WORDS = [
     {
         "word":  "the tip of the iceberg",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "The small visible part of a much bigger problem",
         "russian_definition":  "лишь малая видимая часть гораздо большей проблемы",
         "english_synonyms":  "just the start, the visible part",
@@ -146,6 +162,7 @@ window.WORDS = [
     {
         "word":  "paradoxically",
         "part_of_speech":  "adv",
+        "pronunciation":  "ˌpærəˈdɒksɪkli",
         "definition":  "In a way that seems contradictory but is nonetheless true",
         "russian_definition":  "как ни странно: вопреки ожиданиям, но это правда",
         "english_synonyms":  "ironically, contradictorily, oddly enough",
@@ -155,6 +172,7 @@ window.WORDS = [
     {
         "word":  "akin to",
         "part_of_speech":  "phrase",
+        "pronunciation":  "əˈkɪn tuː",
         "definition":  "Similar to; of the same nature as",
         "russian_definition":  "близкий по своей природе, сравнимый с чем-то",
         "english_synonyms":  "similar to, comparable to, close to",
@@ -164,6 +182,7 @@ window.WORDS = [
     {
         "word":  "ubiquitous",
         "part_of_speech":  "adj",
+        "pronunciation":  "juːˈbɪkwɪtəs",
         "definition":  "Found everywhere; seemingly present in all places at once",
         "russian_definition":  "встречающийся буквально везде и одновременно",
         "english_synonyms":  "omnipresent, pervasive, widespread",
@@ -173,6 +192,7 @@ window.WORDS = [
     {
         "word":  "prevalent",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈprevələnt",
         "definition":  "Common and widespread in a particular place or time",
         "russian_definition":  "широко распространенный в данном месте или в данное время",
         "english_synonyms":  "widespread, rife, commonplace",
@@ -182,6 +202,7 @@ window.WORDS = [
     {
         "word":  "a double-edged sword",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "Something with a good side and a bad side at once",
         "russian_definition":  "то, у чего есть и хорошая, и плохая сторона",
         "english_synonyms":  "a mixed blessing, it cuts both ways",
@@ -191,6 +212,7 @@ window.WORDS = [
     {
         "word":  "detrimental",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˌdetrɪˈmentəl",
         "definition":  "Causing harm or damage",
         "russian_definition":  "наносящий вред, ухудшающий положение",
         "english_synonyms":  "damaging, harmful, adverse",
@@ -200,6 +222,7 @@ window.WORDS = [
     {
         "word":  "negligible",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈneɡlɪdʒəbəl",
         "definition":  "So small or unimportant that it can be ignored",
         "russian_definition":  "настолько малый, что им можно пренебречь",
         "english_synonyms":  "insignificant, minimal, trivial",
@@ -209,6 +232,7 @@ window.WORDS = [
     {
         "word":  "substantial",
         "part_of_speech":  "adj",
+        "pronunciation":  "səbˈstænʃəl",
         "definition":  "Large in size, value, or importance",
         "russian_definition":  "значительный по размеру, ценности или важности",
         "english_synonyms":  "considerable, significant, sizeable",
@@ -218,6 +242,7 @@ window.WORDS = [
     {
         "word":  "viable",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈvaɪəbəl",
         "definition":  "Capable of working successfully in practice",
         "russian_definition":  "способный работать на практике, реально осуществимый",
         "english_synonyms":  "feasible, workable, practicable",
@@ -227,6 +252,7 @@ window.WORDS = [
     {
         "word":  "cut corners",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To do something cheaply or quickly, and badly as a result",
         "russian_definition":  "делать наспех и небрежно, экономя на качестве",
         "english_synonyms":  "skimp, do it on the cheap",
@@ -236,6 +262,7 @@ window.WORDS = [
     {
         "word":  "sustainable",
         "part_of_speech":  "adj",
+        "pronunciation":  "səˈsteɪnəbəl",
         "definition":  "Able to continue over time without exhausting resources",
         "russian_definition":  "способный продолжаться долго, не истощая ресурсы",
         "english_synonyms":  "enduring, renewable, long-term",
@@ -245,6 +272,7 @@ window.WORDS = [
     {
         "word":  "pragmatic",
         "part_of_speech":  "adj",
+        "pronunciation":  "præɡˈmætɪk",
         "definition":  "Dealing with things practically rather than theoretically",
         "russian_definition":  "исходящий из практической пользы, а не из теории",
         "english_synonyms":  "practical, realistic, level-headed",
@@ -254,6 +282,7 @@ window.WORDS = [
     {
         "word":  "compelling",
         "part_of_speech":  "adj",
+        "pronunciation":  "kəmˈpelɪŋ",
         "definition":  "So convincing or gripping that it demands attention",
         "russian_definition":  "настолько убедительный, что трудно не согласиться или оторваться",
         "english_synonyms":  "persuasive, cogent, gripping",
@@ -263,6 +292,7 @@ window.WORDS = [
     {
         "word":  "plausible",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈplɔːzəbəl",
         "definition":  "Seeming reasonable or likely to be true",
         "russian_definition":  "выглядящий разумным и правдоподобным, но не доказанный",
         "english_synonyms":  "credible, believable, convincing",
@@ -272,6 +302,7 @@ window.WORDS = [
     {
         "word":  "bite the bullet",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To make yourself do something unpleasant that you cannot avoid",
         "russian_definition":  "решиться и сделать неприятное дело",
         "english_synonyms":  "grit your teeth, get it over with",
@@ -281,6 +312,7 @@ window.WORDS = [
     {
         "word":  "ambiguous",
         "part_of_speech":  "adj",
+        "pronunciation":  "æmˈbɪɡjuəs",
         "definition":  "Open to more than one interpretation; unclear",
         "russian_definition":  "допускающий несколько толкований, неясный",
         "english_synonyms":  "equivocal, vague, open-ended",
@@ -290,6 +322,7 @@ window.WORDS = [
     {
         "word":  "disproportionate",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˌdɪsprəˈpɔːʃənət",
         "definition":  "Too large or too small in relation to something else",
         "russian_definition":  "слишком большой или малый по сравнению с чем-то",
         "english_synonyms":  "excessive, unbalanced, uneven",
@@ -299,6 +332,7 @@ window.WORDS = [
     {
         "word":  "disparate",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈdɪspərət",
         "definition":  "Very different from one another, and hard to compare",
         "russian_definition":  "совершенно разные по своей природе, несопоставимые",
         "english_synonyms":  "contrasting, dissimilar, unrelated",
@@ -308,6 +342,7 @@ window.WORDS = [
     {
         "word":  "unprecedented",
         "part_of_speech":  "adj",
+        "pronunciation":  "ʌnˈpresɪdentɪd",
         "definition":  "Never having happened or existed before",
         "russian_definition":  "не имеющий примеров в прошлом",
         "english_synonyms":  "unparalleled, unheard-of, groundbreaking",
@@ -317,6 +352,7 @@ window.WORDS = [
     {
         "word":  "robust",
         "part_of_speech":  "adj",
+        "pronunciation":  "rəʊˈbʌst",
         "definition":  "Strong and able to withstand pressure or criticism",
         "russian_definition":  "прочный, выдерживающий нагрузку и критику",
         "english_synonyms":  "sturdy, resilient, sound",
@@ -326,6 +362,7 @@ window.WORDS = [
     {
         "word":  "get the hang of",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To learn how to do something after some practice",
         "russian_definition":  "научиться чему-то с практикой, приноровиться",
         "english_synonyms":  "get used to, pick it up",
@@ -335,6 +372,7 @@ window.WORDS = [
     {
         "word":  "profound",
         "part_of_speech":  "adj",
+        "pronunciation":  "prəˈfaʊnd",
         "definition":  "Very deep, intense, or far-reaching in effect",
         "russian_definition":  "очень глубокий, имеющий далеко идущие последствия",
         "english_synonyms":  "deep, far-reaching, weighty",
@@ -344,6 +382,7 @@ window.WORDS = [
     {
         "word":  "inevitable",
         "part_of_speech":  "adj",
+        "pronunciation":  "ɪnˈevɪtəbəl",
         "definition":  "Certain to happen and impossible to avoid",
         "russian_definition":  "то, чего невозможно избежать",
         "english_synonyms":  "unavoidable, inescapable, bound to happen",
@@ -353,6 +392,7 @@ window.WORDS = [
     {
         "word":  "intricate",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈɪntrɪkət",
         "definition":  "Very detailed and made of many connected parts",
         "russian_definition":  "состоящий из множества мелких переплетенных деталей",
         "english_synonyms":  "complex, elaborate, convoluted",
@@ -362,6 +402,7 @@ window.WORDS = [
     {
         "word":  "rudimentary",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˌruːdɪˈmentəri",
         "definition":  "Basic and undeveloped; at an early stage",
         "russian_definition":  "самый начальный, неразвитый, на уровне азов",
         "english_synonyms":  "elementary, primitive, bare-bones",
@@ -371,6 +412,7 @@ window.WORDS = [
     {
         "word":  "on the same page",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "In agreement, understanding something the same way",
         "russian_definition":  "одинаково понимать ситуацию, быть заодно",
         "english_synonyms":  "in agreement, of one mind",
@@ -380,6 +422,7 @@ window.WORDS = [
     {
         "word":  "arduous",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈɑːdjuəs",
         "definition":  "Requiring great and sustained effort",
         "russian_definition":  "требующий больших и длительных усилий",
         "english_synonyms":  "gruelling, laborious, strenuous",
@@ -389,6 +432,7 @@ window.WORDS = [
     {
         "word":  "futile",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈfjuːtaɪl",
         "definition":  "Pointless because it has no chance of succeeding",
         "russian_definition":  "бессмысленный, заведомо обреченный на неудачу",
         "english_synonyms":  "useless, vain, fruitless",
@@ -398,6 +442,7 @@ window.WORDS = [
     {
         "word":  "tangible",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈtændʒəbəl",
         "definition":  "Real and definite enough to be measured or touched",
         "russian_definition":  "реальный и измеримый, ощутимый на практике",
         "english_synonyms":  "concrete, palpable, measurable",
@@ -407,6 +452,7 @@ window.WORDS = [
     {
         "word":  "pivotal",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈpɪvətəl",
         "definition":  "Of central importance; everything turns on it",
         "russian_definition":  "имеющий решающее значение, вокруг чего все вращается",
         "english_synonyms":  "crucial, decisive, key",
@@ -416,6 +462,7 @@ window.WORDS = [
     {
         "word":  "in the long run",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "Over a long period, rather than immediately",
         "russian_definition":  "в конечном счете, на длинной дистанции",
         "english_synonyms":  "eventually, over time",
@@ -425,6 +472,7 @@ window.WORDS = [
     {
         "word":  "exacerbate",
         "part_of_speech":  "v",
+        "pronunciation":  "ɪɡˈzæsəbeɪt",
         "definition":  "To make an existing problem noticeably worse",
         "russian_definition":  "делать уже существующую проблему заметно хуже",
         "english_synonyms":  "worsen, aggravate, intensify",
@@ -434,6 +482,7 @@ window.WORDS = [
     {
         "word":  "mitigate",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈmɪtɪɡeɪt",
         "definition":  "To make something bad less severe",
         "russian_definition":  "уменьшать тяжесть чего-то плохого",
         "english_synonyms":  "alleviate, ease, lessen",
@@ -443,6 +492,7 @@ window.WORDS = [
     {
         "word":  "alleviate",
         "part_of_speech":  "v",
+        "pronunciation":  "əˈliːvieɪt",
         "definition":  "To relieve suffering or reduce pressure",
         "russian_definition":  "облегчать страдания или снижать нагрузку",
         "english_synonyms":  "ease, relieve, soothe",
@@ -452,15 +502,17 @@ window.WORDS = [
     {
         "word":  "take it with a pinch of salt",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To not believe something completely",
         "russian_definition":  "не принимать за чистую монету, отнестись с сомнением",
         "english_synonyms":  "be sceptical, doubt it",
-        "russian_synonyms":  "не принимать за чистую монету, отнестись с сомнением, поставить под вопрос",
+        "russian_synonyms":  "не принимать за чистую монету, отнестись с сомнением",
         "example":  "He says he never gets nervous, but I take that *with a pinch of salt*."
     },
     {
         "word":  "undermine",
         "part_of_speech":  "v",
+        "pronunciation":  "ˌʌndəˈmaɪn",
         "definition":  "To weaken something gradually from below",
         "russian_definition":  "постепенно ослаблять, подтачивать изнутри",
         "english_synonyms":  "erode, weaken, sap",
@@ -470,6 +522,7 @@ window.WORDS = [
     {
         "word":  "underpin",
         "part_of_speech":  "v",
+        "pronunciation":  "ˌʌndəˈpɪn",
         "definition":  "To support something and form its foundation",
         "russian_definition":  "служить основой, на которой все держится",
         "english_synonyms":  "support, sustain, buttress",
@@ -479,6 +532,7 @@ window.WORDS = [
     {
         "word":  "facilitate",
         "part_of_speech":  "v",
+        "pronunciation":  "fəˈsɪlɪteɪt",
         "definition":  "To make a process easier or smoother",
         "russian_definition":  "делать процесс проще и удобнее",
         "english_synonyms":  "enable, ease, assist",
@@ -488,6 +542,7 @@ window.WORDS = [
     {
         "word":  "hinder",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈhɪndə",
         "definition":  "To slow down or get in the way of progress",
         "russian_definition":  "мешать движению вперед, замедлять",
         "english_synonyms":  "impede, hamper, obstruct",
@@ -497,6 +552,7 @@ window.WORDS = [
     {
         "word":  "go the extra mile",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To do more than you have to",
         "russian_definition":  "делать больше, чем требуется",
         "english_synonyms":  "make an extra effort, go above and beyond",
@@ -506,6 +562,7 @@ window.WORDS = [
     {
         "word":  "curb",
         "part_of_speech":  "v",
+        "pronunciation":  "kɜːb",
         "definition":  "To limit or control something harmful",
         "russian_definition":  "ставить предел чему-то вредному, держать в узде",
         "english_synonyms":  "restrain, rein in, check",
@@ -515,6 +572,7 @@ window.WORDS = [
     {
         "word":  "foster",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈfɒstə",
         "definition":  "To encourage something to develop over time",
         "russian_definition":  "создавать условия, в которых что-то развивается",
         "english_synonyms":  "nurture, cultivate, promote",
@@ -524,6 +582,7 @@ window.WORDS = [
     {
         "word":  "allocate",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈæləkeɪt",
         "definition":  "To give out resources for a particular purpose",
         "russian_definition":  "распределять ресурсы на конкретную цель",
         "english_synonyms":  "assign, distribute, apportion",
@@ -533,6 +592,7 @@ window.WORDS = [
     {
         "word":  "implement",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈɪmplɪment",
         "definition":  "To put a plan or policy into action",
         "russian_definition":  "воплощать план или политику в жизнь",
         "english_synonyms":  "carry out, enact, execute",
@@ -542,6 +602,7 @@ window.WORDS = [
     {
         "word":  "hit the nail on the head",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To say exactly the right thing about something",
         "russian_definition":  "попасть в точку, сказать точно по сути",
         "english_synonyms":  "be exactly right, put your finger on it",
@@ -551,6 +612,7 @@ window.WORDS = [
     {
         "word":  "prioritise",
         "part_of_speech":  "v",
+        "pronunciation":  "praɪˈɒrɪtaɪz",
         "definition":  "To treat something as more important than the rest",
         "russian_definition":  "ставить одно выше остального по важности",
         "english_synonyms":  "rank first, emphasise, put first",
@@ -560,6 +622,7 @@ window.WORDS = [
     {
         "word":  "advocate",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈædvəkeɪt",
         "definition":  "To publicly recommend and argue for something",
         "russian_definition":  "публично выступать в поддержку чего-либо",
         "english_synonyms":  "champion, endorse, push for",
@@ -569,6 +632,7 @@ window.WORDS = [
     {
         "word":  "attribute",
         "part_of_speech":  "v",
+        "pronunciation":  "əˈtrɪbjuːt",
         "definition":  "To say that something is caused by a particular thing",
         "russian_definition":  "объяснять что-то определенной причиной",
         "english_synonyms":  "ascribe, credit, put down to",
@@ -578,6 +642,7 @@ window.WORDS = [
     {
         "word":  "exemplify",
         "part_of_speech":  "v",
+        "pronunciation":  "ɪɡˈzemplɪfaɪ",
         "definition":  "To be a typical or perfect example of something",
         "russian_definition":  "служить типичным или образцовым примером",
         "english_synonyms":  "illustrate, typify, embody",
@@ -587,6 +652,7 @@ window.WORDS = [
     {
         "word":  "out of the blue",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "Suddenly and with no warning at all",
         "russian_definition":  "внезапно, без всякого предупреждения",
         "english_synonyms":  "suddenly, unexpectedly",
@@ -596,6 +662,7 @@ window.WORDS = [
     {
         "word":  "perpetuate",
         "part_of_speech":  "v",
+        "pronunciation":  "pəˈpetʃueɪt",
         "definition":  "To cause something to continue indefinitely, often something bad",
         "russian_definition":  "способствовать тому, чтобы что-то плохое длилось бесконечно",
         "english_synonyms":  "sustain, prolong, entrench",
@@ -605,6 +672,7 @@ window.WORDS = [
     {
         "word":  "scrutinise",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈskruːtɪnaɪz",
         "definition":  "To examine something very closely and critically",
         "russian_definition":  "разбирать очень внимательно и критически",
         "english_synonyms":  "inspect, examine, pore over",
@@ -614,6 +682,7 @@ window.WORDS = [
     {
         "word":  "overhaul",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈəʊvəhɔːl",
         "definition":  "To completely change and improve a system",
         "russian_definition":  "полностью перестроить и улучшить систему",
         "english_synonyms":  "revamp, restructure, rebuild",
@@ -623,6 +692,7 @@ window.WORDS = [
     {
         "word":  "streamline",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈstriːmlaɪn",
         "definition":  "To make something more efficient by simplifying it",
         "russian_definition":  "сделать эффективнее за счет упрощения",
         "english_synonyms":  "simplify, rationalise, optimise",
@@ -632,6 +702,7 @@ window.WORDS = [
     {
         "word":  "second nature",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "So familiar that you do it without thinking",
         "russian_definition":  "привычно до автоматизма, само собой",
         "english_synonyms":  "automatic, instinctive",
@@ -641,6 +712,7 @@ window.WORDS = [
     {
         "word":  "deter",
         "part_of_speech":  "v",
+        "pronunciation":  "dɪˈtɜː",
         "definition":  "To discourage someone from doing something",
         "russian_definition":  "отбить у кого-то желание что-то делать",
         "english_synonyms":  "discourage, dissuade, put off",
@@ -650,6 +722,7 @@ window.WORDS = [
     {
         "word":  "offset",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈɒfset",
         "definition":  "To balance out a negative effect with a positive one",
         "russian_definition":  "уравновесить минус соответствующим плюсом",
         "english_synonyms":  "counterbalance, compensate for, cancel out",
@@ -659,6 +732,7 @@ window.WORDS = [
     {
         "word":  "galvanise",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈɡælvənaɪz",
         "definition":  "To shock or excite people into taking action",
         "russian_definition":  "резко подтолкнуть людей к действию",
         "english_synonyms":  "spur, rouse, stir",
@@ -668,6 +742,7 @@ window.WORDS = [
     {
         "word":  "permeate",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈpɜːmieɪt",
         "definition":  "To spread through every part of something",
         "russian_definition":  "распространиться по всему объему, пропитать целиком",
         "english_synonyms":  "pervade, saturate, infuse",
@@ -677,6 +752,7 @@ window.WORDS = [
     {
         "word":  "a steep learning curve",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "A lot to learn in a short time",
         "russian_definition":  "надо быстро освоить очень много нового",
         "english_synonyms":  "hard at first, a lot to take in",
@@ -686,6 +762,7 @@ window.WORDS = [
     {
         "word":  "reconcile",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈrekənsaɪl",
         "definition":  "To bring conflicting things or people into agreement",
         "russian_definition":  "привести противоречащие вещи в согласие",
         "english_synonyms":  "resolve, harmonise, settle",
@@ -695,6 +772,7 @@ window.WORDS = [
     {
         "word":  "incentive",
         "part_of_speech":  "n",
+        "pronunciation":  "ɪnˈsentɪv",
         "definition":  "Something that motivates people to act",
         "russian_definition":  "то, что побуждает человека действовать",
         "english_synonyms":  "motivation, inducement, spur",
@@ -704,6 +782,7 @@ window.WORDS = [
     {
         "word":  "consensus",
         "part_of_speech":  "n",
+        "pronunciation":  "kənˈsensəs",
         "definition":  "General agreement reached across a group",
         "russian_definition":  "общее согласие, достигнутое в группе",
         "english_synonyms":  "agreement, accord, common ground",
@@ -713,6 +792,7 @@ window.WORDS = [
     {
         "word":  "discrepancy",
         "part_of_speech":  "n",
+        "pronunciation":  "dɪsˈkrepənsi",
         "definition":  "A difference between things that should match",
         "russian_definition":  "расхождение там, где данные должны совпадать",
         "english_synonyms":  "inconsistency, mismatch, gap",
@@ -722,6 +802,7 @@ window.WORDS = [
     {
         "word":  "a grey area",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "A situation where the rules are not clear",
         "russian_definition":  "ситуация, где правила неясны",
         "english_synonyms":  "an unclear case, not black and white",
@@ -731,6 +812,7 @@ window.WORDS = [
     {
         "word":  "disparity",
         "part_of_speech":  "n",
+        "pronunciation":  "dɪˈspærəti",
         "definition":  "A great and often unfair difference between groups",
         "russian_definition":  "большая и часто несправедливая разница между группами",
         "english_synonyms":  "inequality, imbalance, gulf",
@@ -740,6 +822,7 @@ window.WORDS = [
     {
         "word":  "implication",
         "part_of_speech":  "n",
+        "pronunciation":  "ˌɪmplɪˈkeɪʃən",
         "definition":  "A likely consequence, or something suggested but not said",
         "russian_definition":  "вероятное последствие или то, что подразумевается без слов",
         "english_synonyms":  "consequence, ramification, undertone",
@@ -749,6 +832,7 @@ window.WORDS = [
     {
         "word":  "constraint",
         "part_of_speech":  "n",
+        "pronunciation":  "kənˈstreɪnt",
         "definition":  "A limit on what can be done",
         "russian_definition":  "то, что ограничивает возможности действия",
         "english_synonyms":  "limitation, restriction, curb",
@@ -758,6 +842,7 @@ window.WORDS = [
     {
         "word":  "drawback",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈdrɔːbæk",
         "definition":  "A disadvantage of an otherwise good thing",
         "russian_definition":  "недостаток в остальном хорошей вещи",
         "english_synonyms":  "downside, shortcoming, snag",
@@ -767,6 +852,7 @@ window.WORDS = [
     {
         "word":  "a wake-up call",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "A shock that makes you change something",
         "russian_definition":  "тревожный сигнал, который заставляет измениться",
         "english_synonyms":  "a warning, a shock",
@@ -776,6 +862,7 @@ window.WORDS = [
     {
         "word":  "catalyst",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈkætəlɪst",
         "definition":  "Something that triggers a significant change",
         "russian_definition":  "то, что запускает значительные перемены",
         "english_synonyms":  "trigger, spark, impetus",
@@ -785,6 +872,7 @@ window.WORDS = [
     {
         "word":  "threshold",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈθreʃhəʊld",
         "definition":  "The level at which something begins to happen",
         "russian_definition":  "уровень, начиная с которого что-то происходит",
         "english_synonyms":  "limit, cut-off point, brink",
@@ -794,6 +882,7 @@ window.WORDS = [
     {
         "word":  "backlash",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈbæklæʃ",
         "definition":  "A strong public reaction against something",
         "russian_definition":  "сильная негативная реакция общества в ответ",
         "english_synonyms":  "outcry, resistance, reaction",
@@ -803,6 +892,7 @@ window.WORDS = [
     {
         "word":  "play it by ear",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To decide as you go, without a plan",
         "russian_definition":  "действовать по обстоятельствам, без плана",
         "english_synonyms":  "improvise, see how it goes",
@@ -812,6 +902,7 @@ window.WORDS = [
     {
         "word":  "trade-off",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈtreɪd ɒf",
         "definition":  "A compromise where you gain one thing by giving up another",
         "russian_definition":  "выигрыш в одном ценой уступки в другом",
         "english_synonyms":  "compromise, balance, exchange",
@@ -821,6 +912,7 @@ window.WORDS = [
     {
         "word":  "autonomy",
         "part_of_speech":  "n",
+        "pronunciation":  "ɔːˈtɒnəmi",
         "definition":  "Independence and the right to govern yourself",
         "russian_definition":  "независимость и право самому решать за себя",
         "english_synonyms":  "independence, self-rule, self-determination",
@@ -830,6 +922,7 @@ window.WORDS = [
     {
         "word":  "infrastructure",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈɪnfrəstrʌktʃə",
         "definition":  "The basic physical systems a society runs on",
         "russian_definition":  "базовые системы, на которых держится жизнь общества",
         "english_synonyms":  "framework, foundations, facilities",
@@ -839,6 +932,7 @@ window.WORDS = [
     {
         "word":  "prevalence",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈprevələns",
         "definition":  "How widespread or common something is",
         "russian_definition":  "то, насколько широко что-то распространено",
         "english_synonyms":  "frequency, extent, commonness",
@@ -848,6 +942,7 @@ window.WORDS = [
     {
         "word":  "the best of both worlds",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "Both advantages at the same time, with neither disadvantage",
         "russian_definition":  "сразу оба преимущества, без минусов каждого",
         "english_synonyms":  "two benefits at once, win-win",
@@ -857,6 +952,7 @@ window.WORDS = [
     {
         "word":  "adversity",
         "part_of_speech":  "n",
+        "pronunciation":  "ədˈvɜːsəti",
         "definition":  "Serious and continuing difficulty or hardship",
         "russian_definition":  "тяжелые обстоятельства, длительные испытания",
         "english_synonyms":  "hardship, misfortune, ordeal",
@@ -866,6 +962,7 @@ window.WORDS = [
     {
         "word":  "resilience",
         "part_of_speech":  "n",
+        "pronunciation":  "rɪˈzɪliəns",
         "definition":  "The ability to recover quickly from setbacks",
         "russian_definition":  "способность быстро восстанавливаться после ударов",
         "english_synonyms":  "toughness, adaptability, hardiness",
@@ -875,6 +972,7 @@ window.WORDS = [
     {
         "word":  "paradox",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈpærədɒks",
         "definition":  "A statement that contradicts itself yet contains truth",
         "russian_definition":  "утверждение, которое противоречит себе, но содержит истину",
         "english_synonyms":  "contradiction, irony, absurdity",
@@ -884,6 +982,7 @@ window.WORDS = [
     {
         "word":  "dichotomy",
         "part_of_speech":  "n",
+        "pronunciation":  "daɪˈkɒtəmi",
         "definition":  "A sharp division into two opposed parts",
         "russian_definition":  "резкое деление на две противоположные части",
         "english_synonyms":  "split, division, polarity",
@@ -893,6 +992,7 @@ window.WORDS = [
     {
         "word":  "see eye to eye",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To agree with someone",
         "russian_definition":  "сходиться во мнениях, соглашаться",
         "english_synonyms":  "agree, think alike",
@@ -902,6 +1002,7 @@ window.WORDS = [
     {
         "word":  "nuance",
         "part_of_speech":  "n",
+        "pronunciation":  "ˈnjuːɑːns",
         "definition":  "A subtle difference in meaning or feeling",
         "russian_definition":  "тонкое различие в значении или интонации",
         "english_synonyms":  "subtlety, shade, distinction",
@@ -911,6 +1012,7 @@ window.WORDS = [
     {
         "word":  "epiphany",
         "part_of_speech":  "n",
+        "pronunciation":  "ɪˈpɪfəni",
         "definition":  "A sudden, striking realisation that changes how you see things",
         "russian_definition":  "внезапное озарение, меняющее взгляд на вещи",
         "english_synonyms":  "revelation, insight, awakening",
@@ -920,6 +1022,7 @@ window.WORDS = [
     {
         "word":  "affinity",
         "part_of_speech":  "n",
+        "pronunciation":  "əˈfɪnəti",
         "definition":  "A natural liking for or connection with something",
         "russian_definition":  "естественная тяга или внутренняя близость к чему-то",
         "english_synonyms":  "kinship, rapport, attraction",
@@ -929,6 +1032,7 @@ window.WORDS = [
     {
         "word":  "vivid",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈvɪvɪd",
         "definition":  "Producing powerful, clear images in the mind",
         "russian_definition":  "создающий яркие и четкие образы в сознании",
         "english_synonyms":  "striking, graphic, intense",
@@ -938,6 +1042,7 @@ window.WORDS = [
     {
         "word":  "food for thought",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "Something worth thinking about carefully",
         "russian_definition":  "повод задуматься",
         "english_synonyms":  "something to consider, worth pondering",
@@ -947,6 +1052,7 @@ window.WORDS = [
     {
         "word":  "immersive",
         "part_of_speech":  "adj",
+        "pronunciation":  "ɪˈmɜːsɪv",
         "definition":  "Surrounding you so completely that you forget everything else",
         "russian_definition":  "полностью окружающий, заставляющий забыть обо всем",
         "english_synonyms":  "absorbing, engrossing, enveloping",
@@ -956,6 +1062,7 @@ window.WORDS = [
     {
         "word":  "exhilarating",
         "part_of_speech":  "adj",
+        "pronunciation":  "ɪɡˈzɪləreɪtɪŋ",
         "definition":  "Making you feel intensely excited and alive",
         "russian_definition":  "вызывающий сильный восторг и прилив сил",
         "english_synonyms":  "thrilling, invigorating, electrifying",
@@ -965,6 +1072,7 @@ window.WORDS = [
     {
         "word":  "daunting",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈdɔːntɪŋ",
         "definition":  "Intimidating enough to sap your confidence",
         "russian_definition":  "пугающий настолько, что лишает уверенности",
         "english_synonyms":  "intimidating, formidable, off-putting",
@@ -974,6 +1082,7 @@ window.WORDS = [
     {
         "word":  "desperate",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈdespərət",
         "definition":  "So worried or hopeless that you will try anything",
         "russian_definition":  "доведенный до отчаяния, готовый на все",
         "english_synonyms":  "frantic, hopeless, at your wits end",
@@ -983,6 +1092,7 @@ window.WORDS = [
     {
         "word":  "mundane",
         "part_of_speech":  "adj",
+        "pronunciation":  "mʌnˈdeɪn",
         "definition":  "Ordinary, everyday, and lacking interest",
         "russian_definition":  "обычный, повседневный и скучный",
         "english_synonyms":  "banal, humdrum, run-of-the-mill",
@@ -992,6 +1102,7 @@ window.WORDS = [
     {
         "word":  "break the ice",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To make people feel relaxed at the start of a meeting",
         "russian_definition":  "разрядить обстановку в начале общения",
         "english_synonyms":  "ease the tension, get people talking",
@@ -1001,6 +1112,7 @@ window.WORDS = [
     {
         "word":  "tedious",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈtiːdiəs",
         "definition":  "Boringly long, slow, and repetitive",
         "russian_definition":  "долгий, однообразный и утомительный",
         "english_synonyms":  "dull, monotonous, wearisome",
@@ -1010,6 +1122,7 @@ window.WORDS = [
     {
         "word":  "overwhelming",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˌəʊvəˈwelmɪŋ",
         "definition":  "So great in force or amount that you cannot cope",
         "russian_definition":  "настолько сильный или огромный, что с ним не справиться",
         "english_synonyms":  "crushing, staggering, immense",
@@ -1019,6 +1132,7 @@ window.WORDS = [
     {
         "word":  "nostalgic",
         "part_of_speech":  "adj",
+        "pronunciation":  "nɒˈstældʒɪk",
         "definition":  "Fondly and sometimes sadly remembering the past",
         "russian_definition":  "с теплой грустью вспоминающий прошлое",
         "english_synonyms":  "wistful, sentimental, yearning",
@@ -1028,6 +1142,7 @@ window.WORDS = [
     {
         "word":  "serene",
         "part_of_speech":  "adj",
+        "pronunciation":  "səˈriːn",
         "definition":  "Calm, still, and completely untroubled",
         "russian_definition":  "тихий, спокойный, ничем не потревоженный",
         "english_synonyms":  "tranquil, placid, unruffled",
@@ -1037,6 +1152,7 @@ window.WORDS = [
     {
         "word":  "burn the candle at both ends",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To exhaust yourself by doing far too much",
         "russian_definition":  "изматывать себя, работая на износ",
         "english_synonyms":  "overdo it, wear yourself out",
@@ -1046,6 +1162,7 @@ window.WORDS = [
     {
         "word":  "chaotic",
         "part_of_speech":  "adj",
+        "pronunciation":  "keɪˈɒtɪk",
         "definition":  "Completely disordered and out of control",
         "russian_definition":  "полностью беспорядочный, вышедший из-под контроля",
         "english_synonyms":  "disorderly, turbulent, frantic",
@@ -1055,6 +1172,7 @@ window.WORDS = [
     {
         "word":  "desolate",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈdesələt",
         "definition":  "Empty and bleak; or feeling utterly abandoned",
         "russian_definition":  "пустой и мрачный; ощущающий полную заброшенность",
         "english_synonyms":  "barren, bleak, forlorn",
@@ -1064,6 +1182,7 @@ window.WORDS = [
     {
         "word":  "luminous",
         "part_of_speech":  "adj",
+        "pronunciation":  "ˈluːmɪnəs",
         "definition":  "Giving off soft light; glowing from within",
         "russian_definition":  "излучающий мягкий свет, светящийся изнутри",
         "english_synonyms":  "radiant, glowing, incandescent",
@@ -1073,6 +1192,7 @@ window.WORDS = [
     {
         "word":  "ephemeral",
         "part_of_speech":  "adj",
+        "pronunciation":  "ɪˈfemərəl",
         "definition":  "Lasting for a very short time before disappearing",
         "russian_definition":  "существующий очень недолго и быстро исчезающий",
         "english_synonyms":  "fleeting, transient, momentary",
@@ -1082,6 +1202,7 @@ window.WORDS = [
     {
         "word":  "jump on the bandwagon",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "To join something only because it has become popular",
         "russian_definition":  "примкнуть к чему-то только потому, что это стало модным",
         "english_synonyms":  "follow the trend, join the crowd",
@@ -1091,6 +1212,7 @@ window.WORDS = [
     {
         "word":  "relentless",
         "part_of_speech":  "adj",
+        "pronunciation":  "rɪˈlentləs",
         "definition":  "Never stopping, easing, or showing mercy",
         "russian_definition":  "не прекращающийся и не знающий пощады",
         "english_synonyms":  "persistent, unremitting, dogged",
@@ -1100,6 +1222,7 @@ window.WORDS = [
     {
         "word":  "meticulous",
         "part_of_speech":  "adj",
+        "pronunciation":  "məˈtɪkjʊləs",
         "definition":  "Extremely careful about every small detail",
         "russian_definition":  "предельно внимательный к каждой мелочи",
         "english_synonyms":  "thorough, painstaking, scrupulous",
@@ -1109,6 +1232,7 @@ window.WORDS = [
     {
         "word":  "resonate",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈrezəneɪt",
         "definition":  "To strike a chord and stay meaningful to someone",
         "russian_definition":  "находить глубокий отклик и надолго запоминаться",
         "english_synonyms":  "strike a chord, echo, reverberate",
@@ -1118,6 +1242,7 @@ window.WORDS = [
     {
         "word":  "evoke",
         "part_of_speech":  "v",
+        "pronunciation":  "ɪˈvəʊk",
         "definition":  "To bring a feeling, image, or memory into the mind",
         "russian_definition":  "вызывать в сознании чувство, образ или воспоминание",
         "english_synonyms":  "conjure, summon, elicit",
@@ -1127,6 +1252,7 @@ window.WORDS = [
     {
         "word":  "a blessing and a curse",
         "part_of_speech":  "idiom",
+        "pronunciation":  "",
         "definition":  "Something that helps you and causes problems at the same time",
         "russian_definition":  "то, что одновременно и помогает, и создает проблемы",
         "english_synonyms":  "a mixed blessing, it cuts both ways",
@@ -1136,6 +1262,7 @@ window.WORDS = [
     {
         "word":  "yearn",
         "part_of_speech":  "v",
+        "pronunciation":  "jɜːn",
         "definition":  "To long for something deeply and persistently",
         "russian_definition":  "глубоко и постоянно тосковать по чему-то",
         "english_synonyms":  "long for, crave, pine for",
@@ -1145,6 +1272,7 @@ window.WORDS = [
     {
         "word":  "flourish",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈflʌrɪʃ",
         "definition":  "To grow strongly and thrive in good conditions",
         "russian_definition":  "бурно расти и процветать в благоприятных условиях",
         "english_synonyms":  "thrive, prosper, blossom",
@@ -1154,6 +1282,7 @@ window.WORDS = [
     {
         "word":  "dwindle",
         "part_of_speech":  "v",
+        "pronunciation":  "ˈdwɪndəl",
         "definition":  "To shrink steadily until little is left",
         "russian_definition":  "постепенно уменьшаться, пока почти ничего не останется",
         "english_synonyms":  "diminish, wane, taper off",

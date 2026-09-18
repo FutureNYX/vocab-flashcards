@@ -14,10 +14,19 @@
    written anywhere near the progress key. Follows the phone until tapped. */
 (function(){
   try{
-    var saved = null;
-    try{ saved = localStorage.getItem('vocab.theme'); }catch(e){}
     var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
-    var pal = (saved === 'paper' || saved === 'lamplight') ? saved : (dark ? 'lamplight' : 'paper');
+    var sys  = dark ? 'lamplight' : 'paper';
+    var pal  = sys;
+    /* A tap on the switch is an override for NOW, not a setting. It records the
+       light the phone itself was in when it was made, and stands only while the
+       phone is still in that light. The next time the phone flips, the override
+       is dropped and the app follows it again: choosing paper at one in the
+       morning does not leave it paper tomorrow night. */
+    try{
+      var o = JSON.parse(localStorage.getItem('vocab.theme') || 'null');
+      if(o && o.basis === sys && (o.pal === 'paper' || o.pal === 'lamplight')) pal = o.pal;
+      else if(o) localStorage.removeItem('vocab.theme');
+    }catch(e){}
     document.documentElement.setAttribute('data-palette', pal);
     var m = document.querySelector('meta[name="theme-color"]');
     if(m) m.setAttribute('content', pal === 'paper' ? '#E2D9C4' : '#17140F');
@@ -228,10 +237,10 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    Built as a card, so the app opens on the same object it teaches with:
    the card surface, the beige edge and the radius are the ones from .face. */
 #home{justify-content:center; align-items:center; text-align:center;}
-.theme-btn{position:absolute; top:calc(var(--pad-top) + 6px); right:14px;
-  width:42px; height:42px; border-radius:50%; display:grid; place-items:center;
+.theme-btn{position:absolute; top:calc(var(--pad-top) + 6px); right:10px;
+  width:60px; height:60px; border-radius:50%; display:grid; place-items:center;
   color:var(--muted); z-index:10;}
-.theme-btn svg{width:21px; height:21px; fill:currentColor;}
+.theme-btn svg{width:30px; height:30px; fill:currentColor;}
 .theme-btn:active{transform:scale(.92);}
 .home-card{width:100%; max-width:420px; min-height:56vh; position:relative; overflow:hidden;
   background:var(--card); border:1px solid var(--edge); border-radius:24px;
@@ -255,11 +264,15 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 /* ---------- STUDY ---------- */
 #study{padding-left:12px; padding-right:12px;}
-.top{display:flex; align-items:center; justify-content:space-between; height:38px; flex:0 0 auto;}
+.top{display:flex; align-items:center; justify-content:space-between; height:56px; flex:0 0 auto;}
+.top-right{display:flex; align-items:center;}
 .top .counts{display:flex; gap:14px; font-size:12px; color:var(--muted);
   font-variant-numeric:tabular-nums;}
 .top .counts em{font-style:normal; color:var(--text); font-weight:650;}
-.icon-btn{width:38px; height:38px; display:grid; place-items:center; color:var(--muted); font-size:19px;}
+/* Twice the old 38px. These were small enough to need aiming at, which is
+   the wrong thing to ask of a thumb halfway through a review. */
+.icon-btn{width:56px; height:56px; display:grid; place-items:center; color:var(--muted); font-size:30px;}
+.icon-btn svg{width:28px; height:28px; fill:currentColor;}
 .icon-btn:disabled{opacity:.25;}
 
 .card-wrap{flex:1 1 auto; position:relative; perspective:1400px; margin:8px 0 12px; min-height:0;}
@@ -332,7 +345,10 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* The highlight is grown with a spread shadow rather than padding, so it takes
    no extra width in the line: padding would push the following comma away from
    the word and leave a hole in the sentence. */
-.example .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
+/* One highlight, used in two places: the target word inside the sentence on
+   the front, and the possible translations on the back. It was scoped to
+   .example, so the translations rendered with the markup and none of the green. */
+.hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
   border-radius:5px; box-shadow:0 0 0 3px var(--hl-bg);
   /* idioms are several words long and wrap: clone gives each line fragment its
      own rounded box instead of one shape stretched across the break */
@@ -347,28 +363,41 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .pos{margin-top:11px; color:var(--muted); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
   font-weight:600;}
 
-.back-head{display:flex; align-items:center; gap:12px; padding:18px 22px 14px;
-  border-bottom:1px solid var(--line); flex:0 0 auto;}
-.back-word{font-family:var(--serif); font-variation-settings:'opsz' 72; font-size:26px;
-  font-weight:600; letter-spacing:-.005em; flex:1; word-break:break-word;}
-/* the last block has to clear the speaker button */
-.back-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:76px;}
-.sect{padding:16px 22px; border-bottom:1px solid var(--line);}
-.sect:last-child{border-bottom:none;}
-.sect h4{margin:0 0 7px; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
-  color:var(--muted); font-weight:650;}
-.sect h4.sub{margin-top:17px;}
-.sect p{margin:0; font-size:16.5px; line-height:1.45;}
-.sect.ru p{color:var(--ru-text);}
-/* Synonyms carry the same cap-label as the definition above them, then step
-   back by size, weight and ink strength rather than by a fill. Filled pills
-   won the eye off the definition, which is the thing actually being learned. */
-.syn{margin:0; font-size:16px; font-weight:500; line-height:1.5; letter-spacing:-.002em;
-  color:var(--syn, var(--muted));}
-.syn .sep{opacity:.45; margin:0 7px;}
-.chips{display:flex; flex-wrap:wrap; gap:7px;}
-.chip{background:var(--chip-bg); color:var(--chip-text); font-weight:600; font-size:15px;
-  padding:5px 11px; border-radius:9px; line-height:1.3;}
+/* The back is two equal halves. Equal because the rule between them has to sit
+   on the true middle of the card, the way the rule on the front sits under the
+   sentence: same hairline, same colour, full width. Everything that used to
+   label a block is gone - no repeated headword, no DEFINITION, no SYNONYMS, no
+   ЗНАЧЕНИЕ. What is English and what is Russian is obvious from the words. */
+.back-body{flex:1; display:flex; flex-direction:column; min-height:0;}
+/* 50% each, not flex:1 with a zero basis: box-sizing is border-box, so a zero
+   basis has the padding added back on afterwards and the half carrying the
+   speaker clearance ends up 73px taller than the other. Pinning both to half
+   the card is the only way the rule lands on the true middle. */
+.back-half{flex:0 0 50%; min-height:0; display:flex; flex-direction:column;
+  align-items:center; text-align:center; padding:0 22px; overflow-y:auto;
+  -webkit-overflow-scrolling:touch;}
+/* the same 30px above and 26px below that the front keeps around its rule */
+.back-half.top{justify-content:flex-end; padding-bottom:30px;}
+.back-half.bottom{justify-content:flex-start; padding-top:26px;
+  border-top:1px solid var(--line); padding-bottom:68px;}  /* clears the speaker */
+
+/* The definition is set exactly as the sentence on the front is set: same
+   size, same leading, same measure, same ink. It is the same kind of thing. */
+.meaning{max-width:340px; font-size:22px; line-height:1.48; color:var(--bright);
+  font-weight:500; letter-spacing:-.004em;}
+.meaning:empty{display:none;}
+
+/* British English, above the English definition only. Quiet: it is a reading
+   aid, not the meaning. */
+.phon{margin-bottom:14px; font-size:16px; color:var(--muted); letter-spacing:.01em;}
+.phon:empty{display:none;}
+
+/* The Russian is where the translations live, highlighted exactly as the
+   target word is highlighted inside the sentence on the front. The gap clears
+   the 3px spread each highlight carries, so they do not touch. */
+.ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:18px;
+  max-width:340px; font-size:22px; line-height:1.48; font-weight:500;}
+.ru-words:empty{display:none;}
 
 .hint{flex:0 0 auto; text-align:center; color:var(--muted); font-size:13px; padding:20px 0 22px;}
 .answers{flex:0 0 auto; display:none; gap:8px;}
@@ -472,7 +501,11 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
       <span>Due <em id="cDue">0</em></span>
       <span>New <em id="cNew">0</em></span>
     </div>
-    <button class="icon-btn" id="undo" disabled>&#8634;</button>
+    <div class="top-right">
+      <!-- the light switch is reachable mid-review too, not only from home -->
+      <button class="icon-btn" id="themeBtnStudy"></button>
+      <button class="icon-btn" id="undo" disabled>&#8634;</button>
+    </div>
   </div>
 
   <div class="card-wrap" id="cardWrap">
@@ -485,10 +518,20 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
         </div>
       </div>
       <div class="face back">
-        <div class="back-head">
-          <div class="back-word" id="bWord"></div>
+        <!-- Two halves of equal height, so the rule between them lands on the
+             exact middle of the card. English above it, Russian below, each
+             hugging the line by the same margin the sentence keeps from the
+             rule on the front. No headings, no repeated headword. -->
+        <div class="back-body">
+          <div class="back-half top">
+            <div class="phon" id="bPhon"></div>
+            <div class="meaning" id="bDef"></div>
+          </div>
+          <div class="back-half bottom">
+            <div class="meaning" id="bRuDef"></div>
+            <div class="ru-words" id="bRu"></div>
+          </div>
         </div>
-        <div class="back-body" id="bBody"></div>
       </div>
     </div>
     <!-- The speaker lives outside the card, not on a face. Safari's hit testing
@@ -592,6 +635,7 @@ function deck(){
   return (window.WORDS||[]).map(w => ({
     id: w.word,
     word: w.word, pos: w.part_of_speech, ex: w.example,
+    pron: w.pronunciation,
     def: w.definition, rudef: w.russian_definition,
     en: w.english_synonyms, ru: w.russian_synonyms
   }));
@@ -833,32 +877,18 @@ function renderExample(el, text){
   });
 }
 
-/* One language per block: its definition and its synonyms sit together under
-   a single divider. The synonyms used to be filled chips and took the eye off
-   the definition, which is the thing being learned, so they are now a quiet
-   middot-separated line under a cap-label matching the one above it. */
-function meaningBlock(defLabel, defText, synLabel, synText, isRussian){
-  const sect = document.createElement('div');
-  sect.className = 'sect' + (isRussian ? ' ru' : '');
-  const h1 = document.createElement('h4'); h1.textContent = defLabel;
-  const p  = document.createElement('p');  p.textContent  = defText || '';
-  sect.appendChild(h1); sect.appendChild(p);
-
-  const words = String(synText || '').split(',').map(s => s.trim()).filter(Boolean);
-  if(words.length){
-    const h2 = document.createElement('h4'); h2.className = 'sub'; h2.textContent = synLabel;
-    const line = document.createElement('p'); line.className = 'syn';
-    words.forEach((t, i) => {
-      if(i){
-        const sep = document.createElement('span');
-        sep.className = 'sep'; sep.textContent = '·';
-        line.appendChild(sep);
-      }
-      line.appendChild(document.createTextNode(t));
-    });
-    sect.appendChild(h2); sect.appendChild(line);
-  }
-  return sect;
+/* The possible Russian translations, under the Russian definition and carrying
+   the same green highlight the target word carries inside the sentence on the
+   front. No label above them: on a card with two languages and nothing else,
+   a heading saying which is which is a word you have to read past. */
+function renderRussian(el, list){
+  el.textContent = '';
+  String(list || '').split(',').map(s => s.trim()).filter(Boolean).forEach(t => {
+    const s = document.createElement('span');
+    s.className = 'hl';
+    s.textContent = t;
+    el.appendChild(s);
+  });
 }
 
 function render(){
@@ -879,11 +909,10 @@ function render(){
     (w.word.length > 24 ? ' longer' : w.word.length > 15 ? ' long' : '');
   $('fPos').textContent = posName(w.pos);
   renderExample($('fEx'), w.ex);
-  $('bWord').textContent = w.word;
-
-  $('bBody').textContent = '';
-  $('bBody').appendChild(meaningBlock('Definition', w.def, 'Synonyms', w.en, false));
-  $('bBody').appendChild(meaningBlock('Значение', w.rudef, 'Синонимы', w.ru, true));
+  $('bPhon').textContent  = w.pron ? '(' + w.pron + ')' : '';
+  $('bDef').textContent   = w.def || '';
+  $('bRuDef').textContent = w.rudef || '';
+  renderRussian($('bRu'), w.ru);
 
   const now = Date.now();
   $('tW').textContent = '(' + gap(c,'wrong',now) + ')';
@@ -893,7 +922,7 @@ function render(){
   const k = counts();
   $('cDue').textContent = k.due; $('cNew').textContent = k.neu;
   $('undo').disabled = !undoSnap;
-  $('bBody').scrollTop = 0;
+  document.querySelectorAll('.back-half').forEach(h => h.scrollTop = 0);
 }
 
 function flip(){
@@ -991,30 +1020,60 @@ const THEME_KEY = 'vocab.theme';
 const SUN_ICON  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-14.5 1.6 2.7h-3.2zM12 21.5l-1.6-2.7h3.2zM2.5 12l2.7-1.6v3.2zM21.5 12l-2.7 1.6v-3.2zM5.2 5.2l3.1.4-1.6 1.6zM18.8 18.8l-3.1-.4 1.6-1.6zM18.8 5.2l-1.5 3.1-1.6-1.6zM5.2 18.8l1.5-3.1 1.6 1.6z"/></svg>';
 const MOON_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 14.6A8.6 8.6 0 0 1 9.4 3.3 8.7 8.7 0 1 0 20.7 14.6z"/></svg>';
 
-function currentPalette(){
-  return document.documentElement.getAttribute('data-palette');
+const THEME_BTNS = ['themeBtn', 'themeBtnStudy'];
+
+/* the light the PHONE is in, which is what the app follows by default */
+function systemPalette(){
+  return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches)
+    ? 'lamplight' : 'paper';
 }
-function paintTheme(){
-  const pal = currentPalette();
-  const btn = $('themeBtn');
-  if(btn){
-    /* the button offers the other light, so it shows the other icon */
-    btn.innerHTML = (pal === 'paper') ? MOON_ICON : SUN_ICON;
-    btn.setAttribute('aria-label',
-      (pal === 'paper') ? 'Switch to lamplight' : 'Switch to paper');
-  }
+/* An override survives only while the phone is still in the light it was made
+   in. Once the phone flips, it is dropped and we are back to following it. */
+function resolvePalette(){
+  const sys = systemPalette();
+  try{
+    const o = JSON.parse(localStorage.getItem(THEME_KEY) || 'null');
+    if(o && o.basis === sys && (o.pal === 'paper' || o.pal === 'lamplight')) return o.pal;
+    if(o) localStorage.removeItem(THEME_KEY);
+  }catch(e){}
+  return sys;
+}
+function applyPalette(pal){
+  document.documentElement.setAttribute('data-palette', pal);
   const m = document.querySelector('meta[name="theme-color"]');
   if(m) m.setAttribute('content', (pal === 'paper') ? '#E2D9C4' : '#17140F');
-}
-if($('themeBtn')){
-  $('themeBtn').addEventListener('click', () => {
-    const next = (currentPalette() === 'paper') ? 'lamplight' : 'paper';
-    document.documentElement.setAttribute('data-palette', next);
-    try{ localStorage.setItem(THEME_KEY, next); }catch(e){}
-    paintTheme();
+  /* The icon shows the light you are IN: sun while the app is light, moon
+     while it is dark. Not the light you would switch to. */
+  const icon  = (pal === 'paper') ? SUN_ICON : MOON_ICON;
+  const label = (pal === 'paper') ? 'Light. Switch to dark' : 'Dark. Switch to light';
+  THEME_BTNS.forEach(id => {
+    const b = $(id);
+    if(!b) return;
+    b.innerHTML = icon;
+    b.setAttribute('aria-label', label);
   });
 }
-paintTheme();
+function toggleTheme(){
+  const next = (document.documentElement.getAttribute('data-palette') === 'paper')
+    ? 'lamplight' : 'paper';
+  try{
+    localStorage.setItem(THEME_KEY, JSON.stringify({pal: next, basis: systemPalette()}));
+  }catch(e){}
+  applyPalette(next);
+}
+THEME_BTNS.forEach(id => {
+  const b = $(id);
+  if(b) b.addEventListener('click', toggleTheme);
+});
+/* If the phone changes light while the app is open, re-resolve rather than sit
+   there: that flip is exactly the moment an override is meant to expire. */
+if(window.matchMedia){
+  const mq = matchMedia('(prefers-color-scheme: dark)');
+  const onScheme = () => applyPalette(resolvePalette());
+  if(mq.addEventListener) mq.addEventListener('change', onScheme);
+  else if(mq.addListener) mq.addListener(onScheme);
+}
+applyPalette(resolvePalette());
 
 $('fab').addEventListener('click', openSheet);
 $('sheetBg').addEventListener('click', closeSheet);
