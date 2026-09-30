@@ -68,12 +68,6 @@
 :root{
   --sans:'Manrope',-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --serif:'Fraunces',ui-serif,Georgia,'Times New Roman',serif;
-  /* Ground arts. The fern tile is seamless by construction: every frond is
-     emitted again at each neighbour offset it can reach, so anything crossing
-     an edge has its twin one tile away. The rings are one figure and are
-     never tiled, because concentric rings cannot be made to join. */
-  --fern:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='240' viewBox='0 0 200 240'><path d='M26 -26 Q77 -78 77 -134M31 -39 Q45 -49 66 -48M31 -39 Q24 -55 4 -65M37 -53 Q50 -62 69 -60M37 -53 Q31 -67 13 -76M44 -66 Q56 -74 73 -73M44 -66 Q39 -79 23 -87M52 -79 Q62 -86 77 -85M52 -79 Q47 -90 34 -97M61 -92 Q70 -98 83 -97M61 -92 Q57 -102 45 -108M71 -105 Q78 -110 89 -109M71 -105 Q67 -113 58 -118M81 -117 Q87 -121 96 -120M81 -117 Q78 -123 70 -128M26 214 Q77 161 77 105M31 200 Q45 190 66 191M31 200 Q24 184 4 174M37 186 Q50 177 69 179M37 186 Q31 172 13 163M44 173 Q56 165 73 166M44 173 Q39 160 23 152M52 160 Q62 153 77 154M52 160 Q47 149 34 142M61 147 Q70 141 83 142M61 147 Q57 137 45 131M71 134 Q78 129 89 130M71 134 Q67 126 58 121M81 122 Q87 118 96 119M81 122 Q78 116 70 111M226 -26 Q277 -78 277 -134M231 -39 Q245 -49 266 -48M231 -39 Q224 -55 204 -65M237 -53 Q250 -62 269 -60M237 -53 Q231 -67 213 -76M244 -66 Q256 -74 273 -73M244 -66 Q239 -79 223 -87M252 -79 Q262 -86 277 -85M252 -79 Q247 -90 234 -97M261 -92 Q270 -98 283 -97M261 -92 Q257 -102 245 -108M271 -105 Q278 -110 289 -109M271 -105 Q267 -113 258 -118M281 -117 Q287 -121 296 -120M281 -117 Q278 -123 270 -128M226 214 Q277 161 277 105M231 200 Q245 190 266 191M231 200 Q224 184 204 174M237 186 Q250 177 269 179M237 186 Q231 172 213 163M244 173 Q256 165 273 166M244 173 Q239 160 223 152M252 160 Q262 153 277 154M252 160 Q247 149 234 142M261 147 Q270 141 283 142M261 147 Q257 137 245 131M271 134 Q278 129 289 130M271 134 Q267 126 258 121M281 122 Q287 118 296 119M281 122 Q278 116 270 111M-104 -4 Q-86 -61 -108 -101M-105 -17 Q-99 -30 -83 -36M-105 -17 Q-116 -26 -134 -26M-106 -31 Q-100 -42 -86 -48M-106 -31 Q-115 -39 -131 -39M-105 -45 Q-100 -55 -88 -60M-105 -45 Q-114 -52 -127 -52M-104 -59 Q-100 -68 -89 -72M-104 -59 Q-111 -65 -123 -65M-102 -74 Q-98 -81 -90 -84M-102 -74 Q-108 -79 -117 -79M-99 -89 Q-96 -94 -89 -97M-99 -89 Q-104 -92 -111 -92M-104 236 Q-86 178 -108 138M-105 222 Q-99 209 -83 203M-105 222 Q-116 213 -134 213M-106 208 Q-100 197 -86 191M-106 208 Q-115 200 -131 200M-105 194 Q-100 184 -88 179M-105 194 Q-114 187 -127 187M-104 180 Q-100 171 -89 167M-104 180 Q-111 174 -123 174M-102 165 Q-98 158 -90 155M-102 165 Q-108 160 -117 160M-99 150 Q-96 145 -89 142M-99 150 Q-104 147 -111 147M96 -4 Q113 -61 91 -101M94 -17 Q100 -30 116 -36M94 -17 Q83 -26 65 -26M93 -31 Q99 -42 113 -48M93 -31 Q84 -39 68 -39M94 -45 Q99 -55 111 -60M94 -45 Q85 -52 72 -52M95 -59 Q99 -68 110 -72M95 -59 Q88 -65 76 -65M97 -74 Q101 -81 109 -84M97 -74 Q91 -79 82 -79M100 -89 Q103 -94 110 -97M100 -89 Q95 -92 88 -92M96 236 Q113 178 91 138M94 222 Q100 209 116 203M94 222 Q83 213 65 213M93 208 Q99 197 113 191M93 208 Q84 200 68 200M94 194 Q99 184 111 179M94 194 Q85 187 72 187M95 180 Q99 171 110 167M95 180 Q88 174 76 174M97 165 Q101 158 109 155M97 165 Q91 160 82 160M100 150 Q103 145 110 142M100 150 Q95 147 88 147M296 -4 Q313 -61 291 -101M294 -17 Q300 -30 316 -36M294 -17 Q283 -26 265 -26M293 -31 Q299 -42 313 -48M293 -31 Q284 -39 268 -39M294 -45 Q299 -55 311 -60M294 -45 Q285 -52 272 -52M295 -59 Q299 -68 310 -72M295 -59 Q288 -65 276 -65M297 -74 Q301 -81 309 -84M297 -74 Q291 -79 282 -79M300 -89 Q303 -94 310 -97M300 -89 Q295 -92 288 -92M296 236 Q313 178 291 138M294 222 Q300 209 316 203M294 222 Q283 213 265 213M293 208 Q299 197 313 191M293 208 Q284 200 268 200M294 194 Q299 184 311 179M294 194 Q285 187 272 187M295 180 Q299 171 310 167M295 180 Q288 174 276 174M297 165 Q301 158 309 155M297 165 Q291 160 282 160M300 150 Q303 145 310 142M300 150 Q295 147 288 147M-32 -34 Q24 -65 37 -113M-23 -45 Q-8 -50 8 -44M-23 -45 Q-24 -61 -38 -73M-13 -57 Q0 -61 15 -55M-13 -57 Q-14 -70 -26 -81M-2 -67 Q8 -71 22 -66M-2 -67 Q-3 -79 -14 -89M9 -78 Q19 -81 30 -76M9 -78 Q8 -87 0 -96M22 -87 Q30 -90 39 -86M22 -87 Q21 -95 13 -102M35 -96 Q41 -98 49 -96M35 -96 Q34 -103 28 -108M-32 206 Q24 174 37 126M-23 194 Q-8 189 8 195M-23 194 Q-24 178 -38 166M-13 182 Q0 178 15 184M-13 182 Q-14 169 -26 158M-2 172 Q8 168 22 173M-2 172 Q-3 160 -14 150M9 161 Q19 158 30 163M9 161 Q8 152 0 143M22 152 Q30 149 39 153M22 152 Q21 144 13 137M35 143 Q41 141 49 143M35 143 Q34 136 28 131M168 -34 Q224 -65 237 -113M176 -45 Q191 -50 208 -44M176 -45 Q175 -61 161 -73M186 -57 Q199 -61 215 -55M186 -57 Q185 -70 173 -81M197 -67 Q208 -71 222 -66M197 -67 Q196 -79 185 -89M209 -78 Q219 -81 230 -76M209 -78 Q208 -87 199 -96M222 -87 Q230 -90 239 -86M222 -87 Q221 -95 213 -102M235 -96 Q241 -98 249 -96M235 -96 Q234 -103 228 -108M168 206 Q224 174 237 126M176 194 Q191 189 208 195M176 194 Q175 178 161 166M186 182 Q199 178 215 184M186 182 Q185 169 173 158M197 172 Q208 168 222 173M197 172 Q196 160 185 150M209 161 Q219 158 230 163M209 161 Q208 152 199 143M222 152 Q230 149 239 153M222 152 Q221 144 213 137M235 143 Q241 141 249 143M235 143 Q234 136 228 131M58 118 Q76 72 62 39M57 108 Q63 98 77 94M57 108 Q49 100 35 98M58 98 Q63 89 76 85M58 98 Q50 91 37 89M59 88 Q64 80 75 77M59 88 Q52 81 41 80M61 78 Q65 71 75 68M61 78 Q55 72 45 71M63 68 Q67 62 75 60M63 68 Q58 63 49 62M66 58 Q69 53 76 51M66 58 Q62 54 54 53M69 48 Q71 44 77 42M69 48 Q66 44 60 44M258 118 Q276 72 262 39M257 108 Q263 98 277 94M257 108 Q249 100 235 98M258 98 Q263 89 276 85M258 98 Q250 91 237 89M259 88 Q264 80 275 77M259 88 Q252 81 241 80M261 78 Q265 71 275 68M261 78 Q255 72 245 71M263 68 Q267 62 275 60M263 68 Q258 63 249 62M266 58 Q269 53 276 51M266 58 Q262 54 254 53M269 48 Q271 44 277 42M269 48 Q266 44 260 44M-50 96 Q-9 62 -5 23M-45 86 Q-34 80 -19 83M-45 86 Q-49 74 -61 66M-39 77 Q-30 72 -16 74M-39 77 Q-43 66 -54 59M-33 68 Q-25 63 -12 66M-33 68 Q-36 59 -47 52M-27 59 Q-19 55 -8 57M-27 59 Q-29 51 -38 45M-19 51 Q-13 47 -4 49M-19 51 Q-22 44 -29 39M-12 43 Q-6 40 1 41M-12 43 Q-13 37 -20 33M-3 35 Q0 32 6 34M-3 35 Q-5 30 -10 27M-50 336 Q-9 302 -5 263M-45 326 Q-34 320 -19 323M-45 326 Q-49 314 -61 306M-39 317 Q-30 312 -16 314M-39 317 Q-43 306 -54 299M-33 308 Q-25 303 -12 306M-33 308 Q-36 299 -47 292M-27 299 Q-19 295 -8 297M-27 299 Q-29 291 -38 285M-19 291 Q-13 287 -4 289M-19 291 Q-22 284 -29 279M-12 283 Q-6 280 1 281M-12 283 Q-13 277 -20 273M-3 275 Q0 272 6 274M-3 275 Q-5 270 -10 267M150 96 Q190 62 194 23M154 86 Q165 80 180 83M154 86 Q150 74 138 66M160 77 Q169 72 183 74M160 77 Q156 66 145 59M166 68 Q174 63 187 66M166 68 Q163 59 152 52M172 59 Q180 55 191 57M172 59 Q170 51 161 45M180 51 Q186 47 195 49M180 51 Q177 44 170 39M187 43 Q193 40 201 41M187 43 Q186 37 179 33M196 35 Q200 32 206 34M196 35 Q194 30 189 27M150 336 Q190 302 194 263M154 326 Q165 320 180 323M154 326 Q150 314 138 306M160 317 Q169 312 183 314M160 317 Q156 306 145 299M166 308 Q174 303 187 306M166 308 Q163 299 152 292M172 299 Q180 295 191 297M172 299 Q170 291 161 285M180 291 Q186 287 195 289M180 291 Q177 284 170 279M187 283 Q193 280 201 281M187 283 Q186 277 179 273M196 275 Q200 272 206 274M196 275 Q194 270 189 267M8 74 Q13 30 -7 4M4 64 Q7 54 18 47M4 64 Q-3 59 -16 61M2 54 Q5 45 14 39M2 54 Q-5 50 -16 52M1 44 Q3 36 11 31M1 44 Q-5 40 -15 42M0 33 Q2 27 9 22M0 33 Q-5 30 -13 32M0 23 Q1 17 7 14M0 23 Q-4 20 -11 21M0 12 Q1 8 6 5M0 12 Q-3 10 -8 11M8 314 Q13 270 -7 244M4 304 Q7 294 18 287M4 304 Q-3 299 -16 301M2 294 Q5 285 14 279M2 294 Q-5 290 -16 292M1 284 Q3 276 11 271M1 284 Q-5 280 -15 282M0 273 Q2 267 9 262M0 273 Q-5 270 -13 272M0 263 Q1 257 7 254M0 263 Q-4 260 -11 261M0 252 Q1 248 6 245M0 252 Q-3 250 -8 251M208 74 Q213 30 192 4M204 64 Q207 54 218 47M204 64 Q196 59 183 61M202 54 Q205 45 214 39M202 54 Q194 50 183 52M201 44 Q203 36 211 31M201 44 Q194 40 184 42M200 33 Q202 27 209 22M200 33 Q194 30 186 32M200 23 Q201 17 207 14M200 23 Q195 20 188 21M200 12 Q201 8 206 5M200 12 Q196 10 191 11M208 314 Q213 270 192 244M204 304 Q207 294 218 287M204 304 Q196 299 183 301M202 294 Q205 285 214 279M202 294 Q194 290 183 292M201 284 Q203 276 211 271M201 284 Q194 280 184 282M200 273 Q202 267 209 262M200 273 Q194 270 186 272M200 263 Q201 257 207 254M200 263 Q195 260 188 261M200 252 Q201 248 206 245M200 252 Q196 250 191 251M-10 140 Q12 101 4 68M-8 129 Q-1 121 10 119M-8 129 Q-15 121 -27 118M-6 119 Q0 112 10 110M-6 119 Q-12 112 -23 109M-3 109 Q1 103 11 101M-3 109 Q-8 102 -18 100M0 99 Q4 93 12 92M0 99 Q-4 93 -12 91M3 89 Q7 84 14 83M3 89 Q0 84 -6 82M8 78 Q11 75 17 74M8 78 Q6 75 0 74M190 140 Q212 101 204 68M191 129 Q198 121 210 119M191 129 Q184 121 172 118M193 119 Q199 112 210 110M193 119 Q187 112 176 109M196 109 Q201 103 211 101M196 109 Q191 102 181 100M199 99 Q204 93 212 92M199 99 Q195 93 187 91M203 89 Q207 84 214 83M203 89 Q200 84 193 82M208 78 Q211 75 217 74M208 78 Q206 75 200 74' fill='none' stroke='black' stroke-width='1' stroke-linecap='round'/></svg>");
-  --rings:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='760' height='1180' viewBox='0 0 760 1180'><g fill='none' stroke='black' stroke-width='2'><ellipse cx='319' cy='401' rx='16' ry='20'/><ellipse cx='319' cy='401' rx='20' ry='26'/><ellipse cx='319' cy='401' rx='26' ry='33'/><ellipse cx='319' cy='401' rx='33' ry='42'/><ellipse cx='319' cy='401' rx='42' ry='53'/><ellipse cx='319' cy='401' rx='53' ry='68'/><ellipse cx='319' cy='401' rx='67' ry='86'/><ellipse cx='319' cy='401' rx='85' ry='109'/><ellipse cx='319' cy='401' rx='108' ry='139'/><ellipse cx='319' cy='401' rx='138' ry='176'/><ellipse cx='319' cy='401' rx='175' ry='224'/><ellipse cx='319' cy='401' rx='222' ry='284'/><ellipse cx='319' cy='401' rx='282' ry='361'/><ellipse cx='319' cy='401' rx='358' ry='458'/><ellipse cx='319' cy='401' rx='454' ry='582'/><ellipse cx='319' cy='401' rx='577' ry='739'/><ellipse cx='593' cy='873' rx='9' ry='7'/><ellipse cx='593' cy='873' rx='13' ry='10'/><ellipse cx='593' cy='873' rx='18' ry='14'/><ellipse cx='593' cy='873' rx='26' ry='20'/><ellipse cx='593' cy='873' rx='37' ry='28'/><ellipse cx='593' cy='873' rx='52' ry='39'/><ellipse cx='122' cy='1015' rx='9' ry='7'/><ellipse cx='122' cy='1015' rx='13' ry='10'/><ellipse cx='122' cy='1015' rx='18' ry='14'/><ellipse cx='122' cy='1015' rx='26' ry='20'/><ellipse cx='122' cy='1015' rx='37' ry='28'/></g></svg>");
 }
 /* Display type carries an optical-size axis: each place that uses Fraunces sets
    its own 'opsz' so the big word is drawn as display type and the small
@@ -98,8 +92,6 @@
      now the same strength, .42, so the two genuinely match. It was .10 before,
      which was the right colour at a quarter of the weight, and read as a
      different, dimmer thing rather than as the same line. */
-  --pattern-ink:#D8CBA8; --pattern-opacity:.13;
-
   /* Card stock for the five original palettes, and the ink split every palette
      inherits unless it says otherwise. A card surface can carry different ink
      from the ground it lies on - Understorey is a pale leaf on a dark floor -
@@ -172,15 +164,8 @@
   --hl-bg:rgba(134,170,92,.46); --hl-text:#1B2610;
   --chip-bg:rgba(91,122,60,.14); --chip-text:#2C4322;
   --hard-soft:rgba(138,97,18,.12); --easy-soft:rgba(91,122,60,.12);
-  --pattern-ink:#8A6A3A; --pattern-opacity:.13;
   /* one slice, never tiled: rings cannot be made to join, so they are not asked to */
-  --pattern-art:var(--rings); --pattern-size:cover;
-  --pattern-repeat:no-repeat; --pattern-pos:center;
   /* and the same figure across the card, over the paper tooth */
-  --card-art:var(--rings), var(--grain);
-  --card-art-size:cover, 200px 200px;
-  --card-art-repeat:no-repeat, repeat;
-  --grain-opacity:.15; --grain-blend:multiply;
   --sheet-light:linear-gradient(152deg, rgba(255,251,238,.88) 0%, rgba(255,247,226,.22) 32%,
                 rgba(255,247,226,0) 50%, rgba(92,66,24,.26) 100%);
   --stock-lit:rgba(255,255,255,.85); --stock-shade:rgba(92,66,24,.16);
@@ -197,10 +182,6 @@
   --hard-soft:rgba(221,174,99,.15); --easy-soft:rgba(127,164,99,.16);
   /* the card is the pale thing here, so it keeps its own darker ink */
   --card-ink:#22291C; --card-muted:#58614F; --card-line:#CFCBB6; --card-wrong:#A34E36;
-  --pattern-ink:#A8BE92; --pattern-opacity:.10;
-  --pattern-art:var(--fern); --pattern-size:200px 240px;
-  --pattern-repeat:repeat; --pattern-pos:0 0;
-  --grain-opacity:.15; --grain-blend:multiply;
   --sheet-light:linear-gradient(150deg, rgba(255,255,242,.85) 0%, rgba(255,255,240,.20) 34%,
                 rgba(255,255,240,0) 52%, rgba(40,54,26,.30) 100%);
   --stock-lit:rgba(255,255,255,.85); --stock-shade:rgba(40,54,26,.18);
@@ -212,33 +193,7 @@
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
-/* Deco fans on the ground behind the cards. Drawn as a mask filled with a
-   palette colour rather than a coloured image, so it follows the theme and
-   costs one 200-byte data URI instead of a bitmap. Fixed, so it does not
-   scroll or repaint as cards change, and pointer-events:none so it can never
-   swallow a tap meant for the card. */
-body::before{
-  content:''; position:fixed; pointer-events:none;
-  /* Overscanned by 120px on every side rather than measured.
-     inset:0 left a bare strip at the bottom of the phone, because a fixed box
-     resolves against the SMALL viewport. Switching to lvh was the textbook fix
-     and it still left a strip on his phone, so the units are not worth
-     trusting: whichever viewport iOS decides to hand us, a layer that hangs
-     120px past all four edges cannot fall short. 120 is four tiles tall and
-     two wide, so the pattern still lines up. */
-  inset:-120px;
-  background:var(--pattern-ink); opacity:var(--pattern-opacity);
-  /* The fan is declared once and used twice: the data URI is 9 KB, and there
-     is no sense shipping it a second time just to satisfy the -webkit- prefix.
-     The tile is one column wide and two rows tall because the rows alternate
-     offset, and every fan crossing an edge has a twin one tile away, or the
-     joins would show as seams down the screen. */
-  --fan:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88.4' height='83.2'%3E%3Cpath d='M-96.2 -41.6A52 52 0 0 1 7.8 -41.6M-44.2 -41.6C-67.5 -36.1 -92 -38.9 -96.1 -45.2C-91.1 -50.9 -66.5 -50.3 -44.2 -41.6M-44.2 -41.6C-67.9 -45.1 -89.6 -56.6 -91.1 -64C-84.4 -67.5 -61.8 -57.8 -44.2 -41.6M-44.2 -41.6C-65 -53.5 -81 -72.2 -79.7 -79.6C-72.2 -80.4 -54.6 -63.1 -44.2 -41.6M-44.2 -41.6C-59.2 -60.3 -67.2 -83.6 -63.3 -90C-56 -88 -46 -65.5 -44.2 -41.6M-44.2 -41.6C-51.3 -64.5 -50.2 -89.1 -44.2 -93.6C-38.2 -89.1 -37.1 -64.5 -44.2 -41.6M-44.2 -41.6C-42.4 -65.5 -32.4 -88 -25.1 -90C-21.2 -83.6 -29.2 -60.3 -44.2 -41.6M-44.2 -41.6C-33.8 -63.1 -16.2 -80.4 -8.7 -79.6C-7.4 -72.2 -23.4 -53.5 -44.2 -41.6M-44.2 -41.6C-26.6 -57.8 -4 -67.5 2.7 -64C1.2 -56.6 -20.5 -45.1 -44.2 -41.6M-44.2 -41.6C-21.9 -50.3 2.7 -50.9 7.7 -45.2C3.6 -38.9 -20.9 -36.1 -44.2 -41.6M-53 -41.6A8.8 8.8 0 0 1 -35.4 -41.6M-7.8 -41.6A52 52 0 0 1 96.2 -41.6M44.2 -41.6C20.9 -36.1 -3.6 -38.9 -7.7 -45.2C-2.7 -50.9 21.9 -50.3 44.2 -41.6M44.2 -41.6C20.5 -45.1 -1.2 -56.6 -2.7 -64C4 -67.5 26.6 -57.8 44.2 -41.6M44.2 -41.6C23.4 -53.5 7.4 -72.2 8.7 -79.6C16.2 -80.4 33.8 -63.1 44.2 -41.6M44.2 -41.6C29.2 -60.3 21.2 -83.6 25.1 -90C32.4 -88 42.4 -65.5 44.2 -41.6M44.2 -41.6C37.1 -64.5 38.2 -89.1 44.2 -93.6C50.2 -89.1 51.3 -64.5 44.2 -41.6M44.2 -41.6C46 -65.5 56 -88 63.3 -90C67.2 -83.6 59.2 -60.3 44.2 -41.6M44.2 -41.6C54.6 -63.1 72.2 -80.4 79.7 -79.6C81 -72.2 65 -53.5 44.2 -41.6M44.2 -41.6C61.8 -57.8 84.4 -67.5 91.1 -64C89.6 -56.6 67.9 -45.1 44.2 -41.6M44.2 -41.6C66.5 -50.3 91.1 -50.9 96.1 -45.2C92 -38.9 67.5 -36.1 44.2 -41.6M35.4 -41.6A8.8 8.8 0 0 1 53 -41.6M80.6 -41.6A52 52 0 0 1 184.6 -41.6M132.6 -41.6C109.3 -36.1 84.8 -38.9 80.7 -45.2C85.7 -50.9 110.3 -50.3 132.6 -41.6M132.6 -41.6C108.9 -45.1 87.2 -56.6 85.7 -64C92.4 -67.5 115 -57.8 132.6 -41.6M132.6 -41.6C111.8 -53.5 95.8 -72.2 97.1 -79.6C104.6 -80.4 122.2 -63.1 132.6 -41.6M132.6 -41.6C117.6 -60.3 109.6 -83.6 113.5 -90C120.8 -88 130.8 -65.5 132.6 -41.6M132.6 -41.6C125.5 -64.5 126.6 -89.1 132.6 -93.6C138.6 -89.1 139.7 -64.5 132.6 -41.6M132.6 -41.6C134.4 -65.5 144.4 -88 151.7 -90C155.6 -83.6 147.6 -60.3 132.6 -41.6M132.6 -41.6C143 -63.1 160.6 -80.4 168.1 -79.6C169.4 -72.2 153.4 -53.5 132.6 -41.6M132.6 -41.6C150.2 -57.8 172.8 -67.5 179.5 -64C178 -56.6 156.3 -45.1 132.6 -41.6M132.6 -41.6C154.9 -50.3 179.5 -50.9 184.5 -45.2C180.4 -38.9 155.9 -36.1 132.6 -41.6M123.8 -41.6A8.8 8.8 0 0 1 141.4 -41.6M-52 0A52 52 0 0 1 52 0M0 0C-23.3 5.5 -47.8 2.7 -51.9 -3.6C-46.9 -9.3 -22.3 -8.7 0 0M0 0C-23.7 -3.5 -45.4 -15 -46.9 -22.4C-40.2 -25.9 -17.6 -16.2 0 0M0 0C-20.8 -11.9 -36.8 -30.6 -35.5 -38C-28 -38.8 -10.4 -21.5 0 0M0 0C-15 -18.7 -23 -42 -19.1 -48.4C-11.8 -46.4 -1.8 -23.9 0 0M0 0C-7.1 -22.9 -6 -47.5 0 -52C6 -47.5 7.1 -22.9 0 0M0 0C1.8 -23.9 11.8 -46.4 19.1 -48.4C23 -42 15 -18.7 0 0M0 0C10.4 -21.5 28 -38.8 35.5 -38C36.8 -30.6 20.8 -11.9 0 0M0 0C17.6 -16.2 40.2 -25.9 46.9 -22.4C45.4 -15 23.7 -3.5 0 0M0 0C22.3 -8.7 46.9 -9.3 51.9 -3.6C47.8 2.7 23.3 5.5 0 0M-8.8 0A8.8 8.8 0 0 1 8.8 0M36.4 0A52 52 0 0 1 140.4 0M88.4 0C65.1 5.5 40.6 2.7 36.5 -3.6C41.5 -9.3 66.1 -8.7 88.4 0M88.4 0C64.7 -3.5 43 -15 41.5 -22.4C48.2 -25.9 70.8 -16.2 88.4 0M88.4 0C67.6 -11.9 51.6 -30.6 52.9 -38C60.4 -38.8 78 -21.5 88.4 0M88.4 0C73.4 -18.7 65.4 -42 69.3 -48.4C76.6 -46.4 86.6 -23.9 88.4 0M88.4 0C81.3 -22.9 82.4 -47.5 88.4 -52C94.4 -47.5 95.5 -22.9 88.4 0M88.4 0C90.2 -23.9 100.2 -46.4 107.5 -48.4C111.4 -42 103.4 -18.7 88.4 0M88.4 0C98.8 -21.5 116.4 -38.8 123.9 -38C125.2 -30.6 109.2 -11.9 88.4 0M88.4 0C106 -16.2 128.6 -25.9 135.3 -22.4C133.8 -15 112.1 -3.5 88.4 0M88.4 0C110.7 -8.7 135.3 -9.3 140.3 -3.6C136.2 2.7 111.7 5.5 88.4 0M79.6 0A8.8 8.8 0 0 1 97.2 0M-96.2 41.6A52 52 0 0 1 7.8 41.6M-44.2 41.6C-67.5 47.1 -92 44.3 -96.1 38C-91.1 32.3 -66.5 32.9 -44.2 41.6M-44.2 41.6C-67.9 38.1 -89.6 26.6 -91.1 19.2C-84.4 15.7 -61.8 25.4 -44.2 41.6M-44.2 41.6C-65 29.7 -81 11 -79.7 3.6C-72.2 2.8 -54.6 20.1 -44.2 41.6M-44.2 41.6C-59.2 22.9 -67.2 -0.4 -63.3 -6.8C-56 -4.8 -46 17.7 -44.2 41.6M-44.2 41.6C-51.3 18.7 -50.2 -5.9 -44.2 -10.4C-38.2 -5.9 -37.1 18.7 -44.2 41.6M-44.2 41.6C-42.4 17.7 -32.4 -4.8 -25.1 -6.8C-21.2 -0.4 -29.2 22.9 -44.2 41.6M-44.2 41.6C-33.8 20.1 -16.2 2.8 -8.7 3.6C-7.4 11 -23.4 29.7 -44.2 41.6M-44.2 41.6C-26.6 25.4 -4 15.7 2.7 19.2C1.2 26.6 -20.5 38.1 -44.2 41.6M-44.2 41.6C-21.9 32.9 2.7 32.3 7.7 38C3.6 44.3 -20.9 47.1 -44.2 41.6M-53 41.6A8.8 8.8 0 0 1 -35.4 41.6M-7.8 41.6A52 52 0 0 1 96.2 41.6M44.2 41.6C20.9 47.1 -3.6 44.3 -7.7 38C-2.7 32.3 21.9 32.9 44.2 41.6M44.2 41.6C20.5 38.1 -1.2 26.6 -2.7 19.2C4 15.7 26.6 25.4 44.2 41.6M44.2 41.6C23.4 29.7 7.4 11 8.7 3.6C16.2 2.8 33.8 20.1 44.2 41.6M44.2 41.6C29.2 22.9 21.2 -0.4 25.1 -6.8C32.4 -4.8 42.4 17.7 44.2 41.6M44.2 41.6C37.1 18.7 38.2 -5.9 44.2 -10.4C50.2 -5.9 51.3 18.7 44.2 41.6M44.2 41.6C46 17.7 56 -4.8 63.3 -6.8C67.2 -0.4 59.2 22.9 44.2 41.6M44.2 41.6C54.6 20.1 72.2 2.8 79.7 3.6C81 11 65 29.7 44.2 41.6M44.2 41.6C61.8 25.4 84.4 15.7 91.1 19.2C89.6 26.6 67.9 38.1 44.2 41.6M44.2 41.6C66.5 32.9 91.1 32.3 96.1 38C92 44.3 67.5 47.1 44.2 41.6M35.4 41.6A8.8 8.8 0 0 1 53 41.6M80.6 41.6A52 52 0 0 1 184.6 41.6M132.6 41.6C109.3 47.1 84.8 44.3 80.7 38C85.7 32.3 110.3 32.9 132.6 41.6M132.6 41.6C108.9 38.1 87.2 26.6 85.7 19.2C92.4 15.7 115 25.4 132.6 41.6M132.6 41.6C111.8 29.7 95.8 11 97.1 3.6C104.6 2.8 122.2 20.1 132.6 41.6M132.6 41.6C117.6 22.9 109.6 -0.4 113.5 -6.8C120.8 -4.8 130.8 17.7 132.6 41.6M132.6 41.6C125.5 18.7 126.6 -5.9 132.6 -10.4C138.6 -5.9 139.7 18.7 132.6 41.6M132.6 41.6C134.4 17.7 144.4 -4.8 151.7 -6.8C155.6 -0.4 147.6 22.9 132.6 41.6M132.6 41.6C143 20.1 160.6 2.8 168.1 3.6C169.4 11 153.4 29.7 132.6 41.6M132.6 41.6C150.2 25.4 172.8 15.7 179.5 19.2C178 26.6 156.3 38.1 132.6 41.6M132.6 41.6C154.9 32.9 179.5 32.3 184.5 38C180.4 44.3 155.9 47.1 132.6 41.6M123.8 41.6A8.8 8.8 0 0 1 141.4 41.6M-52 83.2A52 52 0 0 1 52 83.2M0 83.2C-23.3 88.7 -47.8 85.9 -51.9 79.6C-46.9 73.9 -22.3 74.5 0 83.2M0 83.2C-23.7 79.7 -45.4 68.2 -46.9 60.8C-40.2 57.3 -17.6 67 0 83.2M0 83.2C-20.8 71.3 -36.8 52.6 -35.5 45.2C-28 44.4 -10.4 61.7 0 83.2M0 83.2C-15 64.5 -23 41.2 -19.1 34.8C-11.8 36.8 -1.8 59.3 0 83.2M0 83.2C-7.1 60.3 -6 35.7 0 31.2C6 35.7 7.1 60.3 0 83.2M0 83.2C1.8 59.3 11.8 36.8 19.1 34.8C23 41.2 15 64.5 0 83.2M0 83.2C10.4 61.7 28 44.4 35.5 45.2C36.8 52.6 20.8 71.3 0 83.2M0 83.2C17.6 67 40.2 57.3 46.9 60.8C45.4 68.2 23.7 79.7 0 83.2M0 83.2C22.3 74.5 46.9 73.9 51.9 79.6C47.8 85.9 23.3 88.7 0 83.2M-8.8 83.2A8.8 8.8 0 0 1 8.8 83.2M36.4 83.2A52 52 0 0 1 140.4 83.2M88.4 83.2C65.1 88.7 40.6 85.9 36.5 79.6C41.5 73.9 66.1 74.5 88.4 83.2M88.4 83.2C64.7 79.7 43 68.2 41.5 60.8C48.2 57.3 70.8 67 88.4 83.2M88.4 83.2C67.6 71.3 51.6 52.6 52.9 45.2C60.4 44.4 78 61.7 88.4 83.2M88.4 83.2C73.4 64.5 65.4 41.2 69.3 34.8C76.6 36.8 86.6 59.3 88.4 83.2M88.4 83.2C81.3 60.3 82.4 35.7 88.4 31.2C94.4 35.7 95.5 60.3 88.4 83.2M88.4 83.2C90.2 59.3 100.2 36.8 107.5 34.8C111.4 41.2 103.4 64.5 88.4 83.2M88.4 83.2C98.8 61.7 116.4 44.4 123.9 45.2C125.2 52.6 109.2 71.3 88.4 83.2M88.4 83.2C106 67 128.6 57.3 135.3 60.8C133.8 68.2 112.1 79.7 88.4 83.2M88.4 83.2C110.7 74.5 135.3 73.9 140.3 79.6C136.2 85.9 111.7 88.7 88.4 83.2M79.6 83.2A8.8 8.8 0 0 1 97.2 83.2M-96.2 124.8A52 52 0 0 1 7.8 124.8M-44.2 124.8C-67.5 130.3 -92 127.5 -96.1 121.2C-91.1 115.5 -66.5 116.1 -44.2 124.8M-44.2 124.8C-67.9 121.3 -89.6 109.8 -91.1 102.4C-84.4 98.9 -61.8 108.6 -44.2 124.8M-44.2 124.8C-65 112.9 -81 94.2 -79.7 86.8C-72.2 86 -54.6 103.3 -44.2 124.8M-44.2 124.8C-59.2 106.1 -67.2 82.8 -63.3 76.4C-56 78.4 -46 100.9 -44.2 124.8M-44.2 124.8C-51.3 101.9 -50.2 77.3 -44.2 72.8C-38.2 77.3 -37.1 101.9 -44.2 124.8M-44.2 124.8C-42.4 100.9 -32.4 78.4 -25.1 76.4C-21.2 82.8 -29.2 106.1 -44.2 124.8M-44.2 124.8C-33.8 103.3 -16.2 86 -8.7 86.8C-7.4 94.2 -23.4 112.9 -44.2 124.8M-44.2 124.8C-26.6 108.6 -4 98.9 2.7 102.4C1.2 109.8 -20.5 121.3 -44.2 124.8M-44.2 124.8C-21.9 116.1 2.7 115.5 7.7 121.2C3.6 127.5 -20.9 130.3 -44.2 124.8M-53 124.8A8.8 8.8 0 0 1 -35.4 124.8M-7.8 124.8A52 52 0 0 1 96.2 124.8M44.2 124.8C20.9 130.3 -3.6 127.5 -7.7 121.2C-2.7 115.5 21.9 116.1 44.2 124.8M44.2 124.8C20.5 121.3 -1.2 109.8 -2.7 102.4C4 98.9 26.6 108.6 44.2 124.8M44.2 124.8C23.4 112.9 7.4 94.2 8.7 86.8C16.2 86 33.8 103.3 44.2 124.8M44.2 124.8C29.2 106.1 21.2 82.8 25.1 76.4C32.4 78.4 42.4 100.9 44.2 124.8M44.2 124.8C37.1 101.9 38.2 77.3 44.2 72.8C50.2 77.3 51.3 101.9 44.2 124.8M44.2 124.8C46 100.9 56 78.4 63.3 76.4C67.2 82.8 59.2 106.1 44.2 124.8M44.2 124.8C54.6 103.3 72.2 86 79.7 86.8C81 94.2 65 112.9 44.2 124.8M44.2 124.8C61.8 108.6 84.4 98.9 91.1 102.4C89.6 109.8 67.9 121.3 44.2 124.8M44.2 124.8C66.5 116.1 91.1 115.5 96.1 121.2C92 127.5 67.5 130.3 44.2 124.8M35.4 124.8A8.8 8.8 0 0 1 53 124.8M80.6 124.8A52 52 0 0 1 184.6 124.8M132.6 124.8C109.3 130.3 84.8 127.5 80.7 121.2C85.7 115.5 110.3 116.1 132.6 124.8M132.6 124.8C108.9 121.3 87.2 109.8 85.7 102.4C92.4 98.9 115 108.6 132.6 124.8M132.6 124.8C111.8 112.9 95.8 94.2 97.1 86.8C104.6 86 122.2 103.3 132.6 124.8M132.6 124.8C117.6 106.1 109.6 82.8 113.5 76.4C120.8 78.4 130.8 100.9 132.6 124.8M132.6 124.8C125.5 101.9 126.6 77.3 132.6 72.8C138.6 77.3 139.7 101.9 132.6 124.8M132.6 124.8C134.4 100.9 144.4 78.4 151.7 76.4C155.6 82.8 147.6 106.1 132.6 124.8M132.6 124.8C143 103.3 160.6 86 168.1 86.8C169.4 94.2 153.4 112.9 132.6 124.8M132.6 124.8C150.2 108.6 172.8 98.9 179.5 102.4C178 109.8 156.3 121.3 132.6 124.8M132.6 124.8C154.9 116.1 179.5 115.5 184.5 121.2C180.4 127.5 155.9 130.3 132.6 124.8M123.8 124.8A8.8 8.8 0 0 1 141.4 124.8' fill='none' stroke='black' stroke-width='1'/%3E%3C/svg%3E");
-  -webkit-mask-image:var(--pattern-art, var(--fan)); mask-image:var(--pattern-art, var(--fan));
-  -webkit-mask-size:var(--pattern-size, 88.4px 83.2px); mask-size:var(--pattern-size, 88.4px 83.2px);
-  -webkit-mask-repeat:var(--pattern-repeat, repeat); mask-repeat:var(--pattern-repeat, repeat);
-  -webkit-mask-position:var(--pattern-pos, 0 0); mask-position:var(--pattern-pos, 0 0);
-}
+
 body{
   margin:0; background:var(--bg); color:var(--text);
   font-family:var(--sans);
@@ -299,19 +254,11 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .card.flipped{transform:rotateY(180deg);}
 /* a new card should snap to its front, not reverse-flip and flash its answer */
 .card.noanim, .card.noanim .face{transition:none !important;}
-/* Card stock: a fine grain, a lit top edge and a shaded bottom one, and a soft
-   inner vignette. Nothing here is an image; the grain is a turbulence filter
-   rendered by the browser, so it costs a few hundred bytes and stays sharp at
-   any density. Only visible at arm's length as "this is a card", which is the
-   point. */
 .face, .home-card{
-  --grain:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.55'/%3E%3C/svg%3E");
   box-shadow:inset 0 1px 0 var(--stock-lit), inset 0 -1px 0 var(--stock-shade),
              inset 0 0 44px var(--stock-vignette);
   /* Contains the blended layers below to this one surface. The last attempt at
-     a blended grain bled across the whole page precisely because it had
-     nothing to isolate it against; this is that missing line, not a retry of
-     the same mistake. Verified with the ground sampled either side of a card. */
+     the blended layers on this surface to it. */
   isolation:isolate;
 }
 /* Every card surface states its own ink, and restates the three shared inks for
@@ -328,30 +275,14 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   --line:var(--card-line);
   --wrong:var(--card-wrong);
 }
-/* No mix-blend-mode. Overlay looked better in isolation and then bled the
-   grain across the entire page, card and ground alike, because the blend had
-   nothing to isolate it against. A plain low-opacity layer is duller in theory
-   and correct in practice. */
-/* The light, then the tooth. Both sit ABOVE the type: flat text painted over a
-   texture still reads as text over a texture, and the ink only looks absorbed
-   into the sheet once the grain and the raking light fall across the letters
-   too. Neither takes a z-index — a positioned child of a .face with one gets
-   pulled out of the 3D context and visibly detaches mid-flip, which has been a
-   real bug here twice. Absolute pseudo-elements paint above the unpositioned
-   card content on their own, which is all that is needed.
-   Palettes that set no --sheet-light or --grain-blend keep the old flat
-   low-opacity layer exactly as it was. */
+/* One raking pass of light across the sheet, above the type so it falls on the
+   ink as well as the paper. It takes no z-index: a positioned child of a .face
+   with one is pulled out of the 3D context and detaches mid-flip. */
 .face::before, .home-card::before{
   content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
   background:var(--sheet-light, none); mix-blend-mode:soft-light;
 }
-.face::after, .home-card::after{
-  content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
-  background-image:var(--card-art, var(--grain));
-  background-size:var(--card-art-size, 200px 200px);
-  background-repeat:var(--card-art-repeat, repeat);
-  opacity:var(--grain-opacity, .07); mix-blend-mode:var(--grain-blend, normal);
-}
+
 .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
   background:var(--card); border:1px solid var(--edge);
   border-radius:24px; display:flex; flex-direction:column; overflow:hidden;
