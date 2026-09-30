@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="theme-color" content="#D9C7A4">
+<meta name="theme-color" content="#E0CFAE">
 <meta name="color-scheme" content="light dark">
 <script>
 /* Sun and moon, resolved BEFORE first paint, or the app flashes the wrong
@@ -15,7 +15,7 @@
 (function(){
   try{
     var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
-    var sys  = dark ? 'understorey' : 'heartwood';
+    var sys  = dark ? 'ink' : 'heartwood';
     var pal  = sys;
     /* A tap on the switch is an override for NOW, not a setting. It records the
        light the phone itself was in when it was made, and stands only while the
@@ -24,12 +24,12 @@
        morning does not leave it light tomorrow night. */
     try{
       var o = JSON.parse(localStorage.getItem('vocab.theme') || 'null');
-      if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'understorey')) pal = o.pal;
+      if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'ink')) pal = o.pal;
       else if(o) localStorage.removeItem('vocab.theme');
     }catch(e){}
     document.documentElement.setAttribute('data-palette', pal);
     var m = document.querySelector('meta[name="theme-color"]');
-    if(m) m.setAttribute('content', pal === 'heartwood' ? '#D9C7A4' : '#141B14');
+    if(m) m.setAttribute('content', pal === 'heartwood' ? '#E0CFAE' : '#0C0D0C');
   }catch(e){}
 })();
 </script>
@@ -154,39 +154,41 @@
    Understorey is why the ink is split in two. Its card is light and its ground
    is dark, so --text and --card-ink genuinely differ; every other palette
    leaves the card values alone and they resolve to the ground ones. */
-[data-palette="heartwood"]{          /* a slice of the tree, in daylight */
-  --bg:#D9C7A4;  --card:#F7EEDC;  --card-2:#EDE1CA;
-  --text:#3A2B17; --bright:#2A1D0B; --muted:#625238; --line:#DFCFB2; --ru-text:#41301A;
-  --card-muted:#756243;
-  --edge:rgba(122,92,50,.32);
-  --accent:#5B7A3C; --on-accent:#F7EEDC;
-  --wrong:#773821; --hard:#61440D; --easy:#3B4F27;
+[data-palette="heartwood"]{          /* a slice of timber, in daylight */
+  --bg:#E0CFAE;  --card:#FAF4E8;  --card-2:#F1E8D6;
+  --text:#3A2B17; --bright:#2A1D0B; --muted:#6A5836; --line:#E0D2B8; --ru-text:#41301A;
+  --edge:rgba(122,92,50,.30);
+  --accent:#4E6B33; --on-accent:#FAF4E8;
+  --wrong:#8B4024; --hard:#6F4E0F; --easy:#42582A;
   --hl-bg:rgba(134,170,92,.46); --hl-text:#1B2610;
-  --chip-bg:rgba(91,122,60,.14); --chip-text:#2C4322;
-  --hard-soft:rgba(138,97,18,.12); --easy-soft:rgba(91,122,60,.12);
-  /* one slice, never tiled: rings cannot be made to join, so they are not asked to */
-  /* and the same figure across the card, over the paper tooth */
-  --sheet-light:linear-gradient(152deg, rgba(255,251,238,.88) 0%, rgba(255,247,226,.22) 32%,
-                rgba(255,247,226,0) 50%, rgba(92,66,24,.26) 100%);
-  --stock-lit:rgba(255,255,255,.85); --stock-shade:rgba(92,66,24,.16);
-  --stock-vignette:rgba(92,66,24,.07);
+  --chip-bg:rgba(78,107,51,.14); --chip-text:#2C4322;
+  --hard-soft:rgba(111,78,15,.12); --easy-soft:rgba(66,88,42,.12);
+  --card-ink:#32240F; --card-muted:#7A6642; --card-line:#E0D2B8; --card-wrong:#8B4024;
+  --sheet-light:linear-gradient(152deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,.20) 32%,
+                rgba(255,255,255,0) 50%, rgba(80,64,34,.20) 100%);
+  --stock-lit:rgba(255,255,255,.85); --stock-shade:rgba(80,64,34,.14);
+  --stock-vignette:rgba(80,64,34,.06);
 }
-[data-palette="understorey"]{        /* ground level, after rain */
-  --bg:#141B14;  --card:#E9E6D6;  --card-2:#DCD8C6;
-  --text:#D8DCCB; --bright:#1B2216; --muted:#8B9683; --line:#3A4433; --ru-text:#2A3222;
-  --edge:rgba(64,74,52,.34);
-  --accent:#7FA463; --on-accent:#131A12;
-  --wrong:#E08A6E; --hard:#DDAE63; --easy:#7FA463;
-  --hl-bg:rgba(129,163,94,.44); --hl-text:#18220F;
-  --chip-bg:rgba(94,127,74,.16); --chip-text:#22291C;
-  --hard-soft:rgba(221,174,99,.15); --easy-soft:rgba(127,164,99,.16);
-  /* the card is the pale thing here, so it keeps its own darker ink */
-  --card-ink:#22291C; --card-muted:#58614F; --card-line:#CFCBB6; --card-wrong:#A34E36;
-  --sheet-light:linear-gradient(150deg, rgba(255,255,242,.85) 0%, rgba(255,255,240,.20) 34%,
-                rgba(255,255,240,0) 52%, rgba(40,54,26,.30) 100%);
-  --stock-lit:rgba(255,255,255,.85); --stock-shade:rgba(40,54,26,.18);
-  --stock-vignette:rgba(40,54,26,.08);
+
+[data-palette="ink"]{                /* true dark: grey, never black */
+  --bg:#0C0D0C;  --card:#161816;  --card-2:#1D201D;
+  --text:#D9DDD6; --bright:#F0F3EE; --muted:#828A80; --line:#262A25; --ru-text:#D9DDD6;
+  --edge:rgba(180,190,178,.15);
+  --accent:#8FB077; --on-accent:#0C0D0C;
+  --wrong:#D08A72; --hard:#CDA765; --easy:#8FB077;
+  --hl-bg:rgba(143,176,119,.26); --hl-text:#EDF4E7;
+  --chip-bg:rgba(143,176,119,.16); --chip-text:#DCEBD1;
+  --hard-soft:rgba(205,167,101,.15); --easy-soft:rgba(143,176,119,.16);
+  --card-ink:#D9DDD6; --card-muted:#8A9187; --card-line:#262A25; --card-wrong:#D08A72;
+  /* No black, and no 21:1. Pure white on pure black blooms at the letter edges
+     and the pupil never settles; this sits near 13:1 on a ground that is dark
+     grey rather than absent, which is the range that reads as restful. */
+  --sheet-light:linear-gradient(162deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.015) 34%,
+                rgba(0,0,0,0) 52%, rgba(0,0,0,.28) 100%);
+  --stock-lit:rgba(255,255,255,.05); --stock-shade:rgba(0,0,0,.45);
+  --stock-vignette:rgba(0,0,0,.25);
 }
+
 :root{
   --pad-bottom: max(14px, env(safe-area-inset-bottom));
   --pad-top: max(10px, env(safe-area-inset-top));
@@ -313,6 +315,10 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* One highlight, used in two places: the target word inside the sentence on
    the front, and the possible translations on the back. It was scoped to
    .example, so the translations rendered with the markup and none of the green. */
+/* In the context the target word is bold and nothing else: a green block on
+   the sentence AND on the translations meant two highlights competing, and the
+   sentence is the one you are meant to read through rather than at. */
+.context .hl{background:none; box-shadow:none; color:inherit; font-weight:700;}
 .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
   border-radius:5px; box-shadow:0 0 0 3px var(--hl-bg);
   /* idioms are several words long and wrap: clone gives each line fragment its
@@ -324,8 +330,11 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* idioms are whole phrases, so the display size steps down by length */
 .front-word.long{font-size:28px;}
 .front-word.longer{font-size:22px; line-height:1.2;}
-.pos{margin-top:11px; color:var(--muted); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-  font-weight:600;}
+/* Lowercase serif, the way a dictionary sets it - not small uppercase on wide
+   tracking, which is the house style of every app built in the last two years
+   and reads as exactly that. */
+.pos{margin-top:14px; color:var(--card-muted); font-family:var(--serif);
+  font-variation-settings:'opsz' 24; font-size:17px; font-weight:400; letter-spacing:0;}
 
 /* The back is two equal halves. Equal because the rule between them has to sit
    on the true middle of the card, the way the rule on the front sits under the
@@ -362,7 +371,9 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 /* More. Everything that is reference rather than recall lives behind it, so the
    card itself stays two lines and a translation. */
-.more-btn{position:absolute; left:50%; transform:translateX(-50%); bottom:22px;
+/* Two thirds of the way down the lower half rather than on the floor of the
+   card: at 22px it read as a footer, not as part of the block it belongs to. */
+.more-btn{position:absolute; left:50%; transform:translateX(-50%); bottom:16%;
   background:none; border:0; padding:10px 18px; cursor:pointer;
   font:600 15px/1 var(--sans); color:var(--card-muted);
   text-decoration:underline; text-underline-offset:4px;}
@@ -1126,7 +1137,7 @@ const THEME_BTNS = ['themeBtn', 'themeBtnStudy'];
 /* the light the PHONE is in, which is what the app follows by default */
 function systemPalette(){
   return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches)
-    ? 'understorey' : 'heartwood';
+    ? 'ink' : 'heartwood';
 }
 /* An override survives only while the phone is still in the light it was made
    in. Once the phone flips, it is dropped and we are back to following it. */
@@ -1134,7 +1145,7 @@ function resolvePalette(){
   const sys = systemPalette();
   try{
     const o = JSON.parse(localStorage.getItem(THEME_KEY) || 'null');
-    if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'understorey')) return o.pal;
+    if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'ink')) return o.pal;
     if(o) localStorage.removeItem(THEME_KEY);
   }catch(e){}
   return sys;
@@ -1142,7 +1153,7 @@ function resolvePalette(){
 function applyPalette(pal){
   document.documentElement.setAttribute('data-palette', pal);
   const m = document.querySelector('meta[name="theme-color"]');
-  if(m) m.setAttribute('content', (pal === 'heartwood') ? '#D9C7A4' : '#141B14');
+  if(m) m.setAttribute('content', (pal === 'heartwood') ? '#E0CFAE' : '#0C0D0C');
   /* The icon shows the light you are IN: sun while the app is light, moon
      while it is dark. Not the light you would switch to. */
   const icon  = (pal === 'heartwood') ? SUN_ICON : MOON_ICON;
@@ -1156,7 +1167,7 @@ function applyPalette(pal){
 }
 function toggleTheme(){
   const next = (document.documentElement.getAttribute('data-palette') === 'heartwood')
-    ? 'understorey' : 'heartwood';
+    ? 'ink' : 'heartwood';
   try{
     localStorage.setItem(THEME_KEY, JSON.stringify({pal: next, basis: systemPalette()}));
   }catch(e){}
