@@ -23,11 +23,13 @@
    holds a copy of index.html taken when the worker installed, and if that
    copy is ever served the app is frozen at that version no matter what the
    server says. Changing the name drops the whole old cache on activate. */
-const CACHE = 'vocab-shell-v16';
+const CACHE = 'vocab-shell-v17';
 const SHELL = [
   './',
   './index.html',
   './words.js',
+  './contexts.js',
+  './gifs.json',
   './manifest.json',
   './audio-manifest.json',
   './fonts/fraunces-latin.woff2',

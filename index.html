@@ -388,8 +388,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
      own rounded box instead of one shape stretched across the break */
   -webkit-box-decoration-break:clone; box-decoration-break:clone;}
 .example:empty{display:none;}
-.front-word{margin-top:30px; padding-top:26px; border-top:1px solid var(--line);
-  align-self:stretch; font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:38px;
+.front-word{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:38px;
   font-weight:600; letter-spacing:-.008em; line-height:1.08; word-break:break-word;}
 /* idioms are whole phrases, so the display size steps down by length */
 .front-word.long{font-size:28px;}
@@ -417,21 +416,38 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 /* The definition is set exactly as the sentence on the front is set: same
    size, same leading, same measure, same ink. It is the same kind of thing. */
-.meaning{max-width:340px; font-size:22px; line-height:1.48; color:var(--bright);
+/* The context reads exactly as the sentence used to on the front: same size,
+   leading, measure and ink. It is the same thing, moved. */
+.context{max-width:340px; font-size:22px; line-height:1.48; color:var(--bright);
   font-weight:500; letter-spacing:-.004em;}
-.meaning:empty{display:none;}
-
-/* British English, above the English definition only. Quiet: it is a reading
-   aid, not the meaning. */
-.phon{margin-bottom:14px; font-size:16px; color:var(--muted); letter-spacing:.01em;}
-.phon:empty{display:none;}
+.context:empty{display:none;}
 
 /* The Russian is where the translations live, highlighted exactly as the
    target word is highlighted inside the sentence on the front. The gap clears
    the 3px spread each highlight carries, so they do not touch. */
-.ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:18px;
+.ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
   max-width:340px; font-size:22px; line-height:1.48; font-weight:500;}
 .ru-words:empty{display:none;}
+
+/* More. Everything that is reference rather than recall lives behind it, so the
+   card itself stays two lines and a translation. */
+.more-btn{position:absolute; left:50%; transform:translateX(-50%); bottom:22px;
+  background:none; border:0; padding:10px 18px; cursor:pointer;
+  font:600 15px/1 var(--sans); color:var(--card-muted);
+  text-decoration:underline; text-underline-offset:4px;}
+.more-btn.open{text-decoration:none; font-size:26px; line-height:1; padding:8px 16px;}
+.more-btn:focus-visible{outline:2px solid currentColor; outline-offset:2px; border-radius:8px;}
+.more-panel{position:absolute; inset:0; background:var(--card); border-radius:inherit;
+  display:flex; flex-direction:column;}
+.more-panel[hidden]{display:none;}
+.more-scroll{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  padding:34px 26px 78px; text-align:center;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;}
+.more-def{max-width:330px; font-size:19px; line-height:1.45; font-weight:500; color:var(--bright);}
+.more-syn{max-width:330px; font-size:16.5px; line-height:1.5; color:var(--card-muted);}
+.more-gif{width:100%; max-width:300px;}
+.more-gif img{width:100%; border-radius:10px; display:block;}
+.more-gif .none{font-size:13px; color:var(--card-muted); opacity:.75; padding:14px 0;}
 
 .hint{flex:0 0 auto; text-align:center; color:var(--muted); font-size:13px; padding:20px 0 22px;}
 .answers{flex:0 0 auto; display:none; gap:8px;}
@@ -545,27 +561,39 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   <div class="card-wrap" id="cardWrap">
     <div class="card" id="card">
       <div class="face front">
+        <!-- The word, and what kind of word it is. Nothing else, dead centre.
+             The sentence moved to the back: meeting the word cold and having to
+             reach for it is the whole exercise, and a sentence on the front
+             hands you the answer before you have tried. -->
         <div class="front-body">
-          <div class="example" id="fEx"></div>
           <div class="front-word" id="fWord"></div>
           <div class="pos" id="fPos"></div>
         </div>
       </div>
       <div class="face back">
         <!-- Two halves of equal height, so the rule between them lands on the
-             exact middle of the card. English above it, Russian below, each
-             hugging the line by the same margin the sentence keeps from the
-             rule on the front. No headings, no repeated headword. -->
+             exact middle of the card. The context sits just above it, the
+             Russian just below, and everything else is behind More. -->
         <div class="back-body">
           <div class="back-half top">
-            <div class="phon" id="bPhon"></div>
-            <div class="meaning" id="bDef"></div>
+            <div class="context" id="bCtx"></div>
           </div>
           <div class="back-half bottom">
-            <div class="meaning" id="bRuDef"></div>
             <div class="ru-words" id="bRu"></div>
           </div>
         </div>
+        <!-- No z-index anywhere in here. A positioned child of a .face that has
+             one is pulled out of the 3D context and visibly detaches mid-flip.
+             DOM order alone puts the panel above the card body and the button
+             above the panel, which is all this needs. -->
+        <div class="more-panel" id="morePanel" hidden>
+          <div class="more-scroll">
+            <div class="more-def" id="mDef"></div>
+            <div class="more-syn" id="mSyn"></div>
+            <div class="more-gif" id="mGif"></div>
+          </div>
+        </div>
+        <button class="more-btn" id="moreBtn" aria-expanded="false">more</button>
       </div>
     </div>
     <!-- The speaker lives outside the card, not on a face. Safari's hit testing
@@ -610,6 +638,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 </div>
 
 <script src="words.js"></script>
+<script src="contexts.js"></script>
 <script>
 /* ============================================================
    STORAGE  —  progress lives in this browser, on this device
@@ -623,11 +652,39 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 const KEY = 'vocab.main.v2';
 let S = null;
 
+/* A one-time reset, asked for when the cards were rebuilt. It runs once per
+   device: the stamp is written into the same record, so a second launch sees it
+   and leaves the schedule alone.
+
+   It ARCHIVES before it clears. The cards go to their own dated key in the same
+   browser, untouched, so this is reversible for as long as that key survives -
+   which matters, because every other rule in this app exists to stop progress
+   being lost by accident and this is the one time it goes deliberately. The
+   archive is written first and the clear only happens if that write succeeded;
+   a full quota therefore skips the reset rather than wiping with no copy. */
+const RESET_STAMP = '2026-09-30-cards-rebuilt';
+function applyOneTimeReset(){
+  if(S.resetStamp === RESET_STAMP) return;
+  const had = Object.keys(S.cards || {}).length;
+  if(had){
+    try{
+      localStorage.setItem(KEY + '.archive-' + RESET_STAMP,
+        JSON.stringify({at: Date.now(), cards: S.cards}));
+    }catch(e){
+      return;                      // no room for a copy, so nothing is destroyed
+    }
+  }
+  S.cards = {};
+  S.resetStamp = RESET_STAMP;
+  save();
+}
+
 function load(){
   try { S = JSON.parse(localStorage.getItem(KEY)) || null; } catch(e){ S = null; }
   if(!S || typeof S !== 'object') S = {};
   if(!S.cards    || typeof S.cards !== 'object') S.cards = {};
   if(!Array.isArray(S.requests)) S.requests = [];
+  applyOneTimeReset();
   correctForClockChange();
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
@@ -669,8 +726,7 @@ function deck(){
   return (window.WORDS||[]).map(w => ({
     id: w.word,
     word: w.word, pos: w.part_of_speech, ex: w.example,
-    pron: w.pronunciation,
-    def: w.definition, rudef: w.russian_definition,
+    def: w.definition,
     en: w.english_synonyms, ru: w.russian_synonyms
   }));
 }
@@ -911,6 +967,84 @@ function renderExample(el, text){
   });
 }
 
+/* ============================================================
+   CONTEXT ROTATION
+   ============================================================ */
+/* Every card carries up to ten sentences. Each time a card comes up it shows
+   the next one, wrapping at the end, so a word is met in a different setting
+   every time rather than welded to one sentence. The cursor is per word and
+   lives under its OWN key: it is a display detail, and the progress key is not
+   somewhere to put display details. Losing this file costs a user nothing but
+   starting the rotation over. */
+const CTX_KEY = 'vocab.ctx';
+let CTX = {};
+try{ CTX = JSON.parse(localStorage.getItem(CTX_KEY) || '{}') || {}; }catch(e){ CTX = {}; }
+function saveCtx(){ try{ localStorage.setItem(CTX_KEY, JSON.stringify(CTX)); }catch(e){} }
+
+function contextsFor(word){
+  const list = (window.CONTEXTS && window.CONTEXTS[word]) || null;
+  if(list && list.length) return list;
+  return null;
+}
+/* Returns the next sentence for this word and advances the cursor. Falls back
+   to the word's own example when it has no context list yet, so a half-filled
+   contexts file still shows a sentence on every card. */
+function nextContext(w){
+  const list = contextsFor(w.word);
+  if(!list) return w.ex || '';
+  const i = ((Number(CTX[w.word]) || 0) % list.length + list.length) % list.length;
+  CTX[w.word] = (i + 1) % list.length;
+  saveCtx();
+  return list[i];
+}
+
+/* ============================================================
+   MORE
+   ============================================================ */
+function closeMore(){
+  const p = $('morePanel'), b = $('moreBtn');
+  if(!p || !b) return;
+  p.hidden = true;
+  b.textContent = 'more';
+  b.classList.remove('open');
+  b.setAttribute('aria-expanded', 'false');
+  b.setAttribute('aria-label', 'Show the definition');
+}
+function toggleMore(e){
+  /* the card flips on a tap anywhere, so this must not reach it */
+  if(e){ e.stopPropagation(); e.preventDefault(); }
+  const p = $('morePanel'), b = $('moreBtn');
+  if(!p || !b) return;
+  const open = p.hidden;
+  p.hidden = !open;
+  b.textContent = open ? '\u2715' : 'more';
+  b.classList.toggle('open', open);
+  b.setAttribute('aria-expanded', String(open));
+  b.setAttribute('aria-label', open ? 'Hide the definition' : 'Show the definition');
+  if(open) p.querySelector('.more-scroll').scrollTop = 0;
+}
+
+/* A clip for the word, if one has been added to gifs.json. Nothing is fetched
+   from a third party: the app is offline-first and a public page should not be
+   pulling film clips it has no licence to. An empty slot simply says so. */
+let GIFS = null;
+function renderGif(el, word){
+  el.textContent = '';
+  const src = GIFS && GIFS[word];
+  if(!src){
+    const p = document.createElement('div');
+    p.className = 'none';
+    p.textContent = 'No clip for this one yet';
+    el.appendChild(p);
+    return;
+  }
+  const img = document.createElement('img');
+  img.loading = 'lazy'; img.alt = ''; img.src = src;
+  el.appendChild(img);
+}
+fetch('gifs.json').then(r => r.ok ? r.json() : null)
+  .then(j => { GIFS = j || {}; }).catch(() => { GIFS = {}; });
+
 /* The possible Russian translations, under the Russian definition and carrying
    the same green highlight the target word carries inside the sentence on the
    front. No label above them: on a card with two languages and nothing else,
@@ -942,11 +1076,13 @@ function render(){
   $('fWord').className = 'front-word' +
     (w.word.length > 24 ? ' longer' : w.word.length > 15 ? ' long' : '');
   $('fPos').textContent = posName(w.pos);
-  renderExample($('fEx'), w.ex);
-  $('bPhon').textContent  = w.pron ? '(' + w.pron + ')' : '';
-  $('bDef').textContent   = w.def || '';
-  $('bRuDef').textContent = w.rudef || '';
+
+  closeMore();
+  renderExample($('bCtx'), nextContext(w));
   renderRussian($('bRu'), w.ru);
+  $('mDef').textContent = w.def || '';
+  $('mSyn').textContent = w.en || '';
+  renderGif($('mGif'), w.word);
 
   const now = Date.now();
   $('tW').textContent = '(' + gap(c,'wrong',now) + ')';
@@ -1108,6 +1244,8 @@ if(window.matchMedia){
   else if(mq.addListener) mq.addListener(onScheme);
 }
 applyPalette(resolvePalette());
+
+$('moreBtn').addEventListener('click', toggleMore);
 
 $('fab').addEventListener('click', openSheet);
 $('sheetBg').addEventListener('click', closeSheet);
