@@ -220,9 +220,6 @@
      and a lamp has no outline. */
   --mark-pool:radial-gradient(closest-side, rgba(235,203,130,.240), rgba(235,203,130,.140));
   --mark-halo:0 0 22px 8px rgba(235,203,130,.110), 0 0 64px 26px rgba(235,203,130,.070);
-  /* the translations share one light under the whole row, not a blob each */
-  --row-pool:radial-gradient(closest-side, rgba(235,203,130,.150), rgba(235,203,130,.092));
-  --row-halo:0 0 22px 8px rgba(235,203,130,.072), 0 0 64px 26px rgba(235,203,130,.047);
 }
 
 
@@ -449,18 +446,19 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* Marked exactly as the target word is marked in the sentence above: the accent
    colour and nothing else. Same weight as the text around it, no fill, no rule,
    no extra boldness - one treatment used in both halves of the card. */
-/* 18px against the sentence's 22, and that is what makes them LOOK the same
+/* 19px against the sentence's 20, and that is what makes them LOOK the same
    size. The letters are identical in height at equal sizes - measured - but
    Cyrillic lowercase has almost no narrow letters and nearly every one fills
    the full x-height, so a Russian word reads as a wider, denser block than an
-   English one. Matching the number made it look a size too big. */
+   English one. Matching the number made it look a size too big.
+   The translations carry no light of their own: the lamp belongs to the word
+   in the sentence. At night they are plain white, by day the accent colour. */
 .ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:10px 16px;
-  max-width:340px; font-size:18px; line-height:1.48; font-weight:500;
-  border-radius:999px; background:var(--row-pool, none); box-shadow:var(--row-halo, none);}
+  max-width:340px; font-size:19px; line-height:1.48; font-weight:500;}
 .ru-words:empty{display:none;}
-.ru-words .hl{background:none; box-shadow:none; text-decoration:none;
+.ru-words .hl{background:none; box-shadow:none; text-shadow:none; text-decoration:none;
   border-radius:0; padding:0; font-weight:inherit;
-  color:var(--mark-ink, var(--accent)); text-shadow:var(--mark-glow, none);}
+  color:var(--mark-ink, var(--accent));}
 
 /* More. Everything that is reference rather than recall lives behind it, so the
    card itself stays two lines and a translation. */
