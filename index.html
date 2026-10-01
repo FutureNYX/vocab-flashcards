@@ -404,12 +404,14 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    simply the brightest thing in the lower half, which on a card holding two
    lines of text is all the emphasis anything needs. The green block was the
    second green on the screen and it was winning against the first. */
+/* Marked exactly as the target word is marked in the sentence above: the accent
+   colour and nothing else. Same weight as the text around it, no fill, no rule,
+   no extra boldness - one treatment used in both halves of the card. */
 .ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:16px;
-  max-width:340px; font-size:24px; line-height:1.45; font-weight:600;
-  color:var(--bright);}
+  max-width:340px; font-size:24px; line-height:1.45; font-weight:500;}
 .ru-words:empty{display:none;}
-.ru-words .hl{background:none; box-shadow:none; color:inherit; font-weight:inherit;
-  text-decoration:none; border-radius:0; padding:0;}
+.ru-words .hl{background:none; box-shadow:none; text-decoration:none;
+  border-radius:0; padding:0; font-weight:inherit; color:var(--accent);}
 
 /* More. Everything that is reference rather than recall lives behind it, so the
    card itself stays two lines and a translation. */
@@ -421,24 +423,27 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   text-decoration:underline; text-underline-offset:4px;}
 /* Closing it is a target, not a glyph: 54px across with a ring around it, so
    there is something obvious to aim at rather than a small mark on a card. */
-.more-btn.open{text-decoration:none; font-size:24px; line-height:1; padding:0;
-  width:54px; height:54px; border-radius:50%; display:grid; place-items:center;
+.more-btn.open{display:none;}        /* the panel carries its own, in the flow */
+/* A fixed 34px below whatever the panel last showed, every time, instead of
+   floating at a percentage and landing on the clip or the credit. */
+.more-close{margin-top:34px; width:54px; height:54px; border-radius:50%;
+  display:grid; place-items:center; cursor:pointer; font-size:24px; line-height:1;
   border:1px solid var(--card-line); background:var(--card-2); color:var(--card-ink);}
+.more-close:focus-visible{outline:2px solid currentColor; outline-offset:2px;}
 .more-btn:focus-visible{outline:2px solid currentColor; outline-offset:2px; border-radius:8px;}
 .more-panel{position:absolute; inset:0; background:var(--card); border-radius:inherit;
   display:flex; flex-direction:column;}
 .more-panel[hidden]{display:none;}
 .more-scroll{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;
-  padding:34px 26px 78px; text-align:center;
+  padding:34px 26px 34px; text-align:center;
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;}
 /* Set as a dictionary sets an entry: the headword, then what kind of word it
-   is in italic, then the sense running straight on from it. No colon - a
-   dictionary does not use one, the change of face is the punctuation. */
+   headword, a colon, then the sense. The part of speech is already on the front
+   of the card and did not need saying twice. */
 .more-def{max-width:330px; font-size:19px; line-height:1.5; font-weight:500; color:var(--bright);}
 .more-def .hw{font-family:var(--serif); font-variation-settings:'opsz' 72; font-weight:600;
-  font-size:1.2em; letter-spacing:-.012em; margin-right:.3em;}
-.more-def .hwpos{font-family:var(--serif); font-style:italic; font-weight:400;
-  color:var(--card-muted); margin-right:.42em;}
+  font-size:1.2em; letter-spacing:-.012em;}
+
 .more-syn{max-width:330px; font-size:16.5px; line-height:1.5; color:var(--card-muted);}
 .more-gif{width:100%; max-width:300px;}
 .more-gif img{width:100%; border-radius:10px; display:block;}
@@ -606,6 +611,9 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
             <div class="more-syn" id="mSyn"></div>
             <div class="more-gif" id="mGif"></div>
             <div class="gif-credit" id="mGifCredit" hidden>Powered By GIPHY</div>
+            <!-- in the flow, not floating: as an absolute element it landed on
+                 top of whatever the panel happened to be showing -->
+            <button class="more-close" id="moreClose" aria-label="Hide the definition">&#10005;</button>
           </div>
         </div>
         <button class="more-btn" id="moreBtn" aria-expanded="false">more</button>
@@ -1107,12 +1115,9 @@ fetch('gifs.json').then(r => r.ok ? r.json() : null)
 function renderEntry(el, w){
   el.textContent = '';
   const hw = document.createElement('span');
-  hw.className = 'hw'; hw.textContent = w.word;
-  const pos = document.createElement('span');
-  pos.className = 'hwpos'; pos.textContent = posName(w.pos);
+  hw.className = 'hw'; hw.textContent = w.word + ':';
   el.appendChild(hw);
-  el.appendChild(pos);
-  el.appendChild(document.createTextNode(w.def || ''));
+  el.appendChild(document.createTextNode(' ' + (w.def || '')));
 }
 
 /* The possible Russian translations, under the Russian definition and carrying
@@ -1316,6 +1321,7 @@ if(window.matchMedia){
 applyPalette(resolvePalette());
 
 $('moreBtn').addEventListener('click', toggleMore);
+$('moreClose').addEventListener('click', toggleMore);
 
 $('fab').addEventListener('click', openSheet);
 $('sheetBg').addEventListener('click', closeSheet);
