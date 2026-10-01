@@ -152,12 +152,13 @@
      a light added. Each pool peaks behind the text and fades out past it; a
      flat fill with a blur round it looks like a smudged highlight, not a lamp. */
   --mark-ink:var(--bright);
-  --mark-glow:0 0 16px rgba(235,203,130,.45);
-  /* the fill meets its halo at the same strength at the edge of the box (the
-     two halos sum to about .14 there). Any step between them shows as a rim,
-     and a lamp has no outline. */
-  --mark-pool:radial-gradient(closest-side, rgba(235,203,130,.240), rgba(235,203,130,.140));
-  --mark-halo:0 0 22px 8px rgba(235,203,130,.110), 0 0 64px 26px rgba(235,203,130,.070);
+  --mark-glow:0 0 14px rgba(235,203,130,.30);
+  /* ONE gradient, and it runs all the way out to nothing. It used to be a fill
+     with two blurred shadows round it, reaching nearly 60px past the word - far
+     enough that the half of the card it sits in cut it off, and a word on the
+     last line of its sentence got a hard line under its glow. This one is
+     about as strong as the lamp on the front and ends 14px from the word. */
+  --mark-pool:radial-gradient(closest-side, rgba(235,203,130,.16), rgba(235,203,130,.075) 50%, rgba(235,203,130,0));
   /* the back of the card, and the More panel over it: a trace of warmth in the
      middle and the corners shaded off */
   --back-shade:radial-gradient(95% 72% at 50% 44%, rgba(235,203,130,.045) 0%, rgba(235,203,130,.02) 45%, rgba(0,0,0,.42) 100%);
@@ -332,9 +333,16 @@ button.hint{display:block; width:100%;}
 /* The target word is lit, not coloured: see --mark-* in the pine palette.
    Nothing about the SHAPE of the line changes: no rule, no block, no extra
    weight. (A palette with no --mark-* values falls back to the accent colour.) */
-.context .hl{text-decoration:none; font-weight:inherit; border-radius:999px;
+/* The pool has to be bigger than the word, and an inline box can only paint
+   inside itself - so the box is padded out and the sideways padding is taken
+   back with a negative margin, which leaves every letter exactly where it was.
+   (Padding above and below an inline box never moves a line.) A marked phrase
+   is one such box PER WORD: a single box that wrapped would be sliced at the
+   line end and the light would stop dead there. */
+.context .hl{text-decoration:none; font-weight:inherit; border-radius:0; box-shadow:none;
   color:var(--mark-ink, var(--accent));
-  background:var(--mark-pool, none); box-shadow:var(--mark-halo, none);
+  padding:14px 22px; margin:0 -22px;
+  background:var(--mark-pool, none);
   text-shadow:var(--mark-glow, none);}
 .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
   border-radius:5px; box-shadow:0 0 0 3px var(--hl-bg);
@@ -1101,10 +1109,15 @@ function renderExample(el, text){
   text.split(/(\*[^*]+\*)/).forEach(part => {
     if(!part) return;
     if(part[0] === '*' && part.length > 2){
-      const s = document.createElement('span');
-      s.className = 'hl';
-      s.textContent = part.slice(1, -1);
-      el.appendChild(s);
+      /* one span per word, so each carries its own light: see .context .hl */
+      part.slice(1, -1).split(/(\s+)/).forEach(bit => {
+        if(!bit) return;
+        if(/^\s+$/.test(bit)){ el.appendChild(document.createTextNode(bit)); return; }
+        const s = document.createElement('span');
+        s.className = 'hl';
+        s.textContent = bit;
+        el.appendChild(s);
+      });
     } else el.appendChild(document.createTextNode(part));
   });
 }
