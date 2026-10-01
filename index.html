@@ -246,16 +246,12 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   align-items:center; justify-content:center; gap:6px;}
 #home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:44px;
   font-weight:600; letter-spacing:-.01em; margin:0;}
-/* A library date stamp: boxed, in the accent, knocked back, and set three
-   degrees off true. The rotation and the box do the work - the small tracked
-   caps that used to sit here naked are the single most recognisable piece of
-   default interface styling there is, and a box around them stops being that
-   and starts being an object. Manrope rather than a condensed grotesque,
-   because a new face would be another font file for eleven pixels of text. */
-#home .sub{color:var(--accent); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
-  font-weight:700; margin-top:20px; margin-bottom:30px;
-  border:2px solid var(--accent); border-radius:3px; padding:5px 10px;
-  transform:rotate(-3deg); opacity:.8;}
+/* Set the way the part of speech is set on the card: the display serif, small,
+   lowercase, no tracking. The stamp that was here read as crooked rather than
+   as stamped, and the tracked caps before it were the most recognisable piece
+   of default interface styling there is. */
+#home .sub{color:var(--muted); font-family:var(--serif); font-variation-settings:'opsz' 24;
+  font-size:17px; font-weight:400; letter-spacing:0; margin-top:10px; margin-bottom:30px;}
 .stats{display:flex; gap:10px; width:100%; margin-bottom:26px;}
 .stat{flex:1; background:var(--card-2); border:1px solid var(--line); border-radius:16px;
   padding:14px 8px;}
@@ -408,7 +404,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    colour and nothing else. Same weight as the text around it, no fill, no rule,
    no extra boldness - one treatment used in both halves of the card. */
 .ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:16px;
-  max-width:340px; font-size:24px; line-height:1.45; font-weight:500;}
+  max-width:340px; font-size:21px; line-height:1.48; font-weight:500;}
 .ru-words:empty{display:none;}
 .ru-words .hl{background:none; box-shadow:none; text-decoration:none;
   border-radius:0; padding:0; font-weight:inherit; color:var(--accent);}
@@ -421,39 +417,64 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   background:none; border:0; padding:10px 18px; cursor:pointer;
   font:600 15px/1 var(--sans); color:var(--card-muted);
   text-decoration:underline; text-underline-offset:4px;}
-/* Closing it is a target, not a glyph: 54px across with a ring around it, so
-   there is something obvious to aim at rather than a small mark on a card. */
-.more-btn.open{display:none;}        /* the panel carries its own, in the flow */
-/* A fixed 34px below whatever the panel last showed, every time, instead of
-   floating at a percentage and landing on the clip or the credit. */
-.more-close{margin-top:34px; width:54px; height:54px; border-radius:50%;
-  display:grid; place-items:center; cursor:pointer; font-size:24px; line-height:1;
-  border:1px solid var(--card-line); background:var(--card-2); color:var(--card-ink);}
-.more-close:focus-visible{outline:2px solid currentColor; outline-offset:2px;}
+/* THE MORE PANEL
+   Two rows. The body takes whatever is left and centres its contents; the foot
+   holds the X and nothing else. So the X is in the same place on every card,
+   whatever the panel is showing, and there is never anything for it to land on.
+
+   The clip gets a box of fixed height. That is the whole fix for the spacing:
+   clips come in every proportion, and one that was square took its full width
+   as its height and crushed everything else against the edges. Inside the box
+   the image is scaled down to fit, never cropped - a lot of these have a
+   caption along the bottom - so a square clip sits centred and a wide one
+   fills the width, and the panel is the same height either way.
+
+   Nothing scrolls. Every card was measured against this; the longest entry in
+   the deck fits with room to spare. */
+.more-btn.open{display:none;}        /* the panel carries its own way out */
 .more-btn:focus-visible{outline:2px solid currentColor; outline-offset:2px; border-radius:8px;}
 .more-panel{position:absolute; inset:0; background:var(--card); border-radius:inherit;
   display:flex; flex-direction:column;}
 .more-panel[hidden]{display:none;}
-.more-scroll{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;
-  padding:34px 26px 34px; text-align:center;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;}
-/* Set as a dictionary sets an entry: the headword, then what kind of word it
-   headword, a colon, then the sense. The part of speech is already on the front
-   of the card and did not need saying twice. */
-.more-def{max-width:330px; font-size:19px; line-height:1.5; font-weight:500; color:var(--bright);}
-.more-def .hw{font-family:var(--serif); font-variation-settings:'opsz' 72; font-weight:600;
-  font-size:1.2em; letter-spacing:-.012em;}
-
-.more-syn{max-width:330px; font-size:16.5px; line-height:1.5; color:var(--card-muted);}
-.more-gif{width:100%; max-width:300px;}
-.more-gif img{width:100%; border-radius:10px; display:block;}
-.more-gif .none{font-size:13px; color:var(--card-muted); opacity:.75; padding:14px 0;}
+.more-body{flex:1 1 auto; min-height:0; overflow:hidden; text-align:center;
+  padding:26px 26px 0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;}
+/* The headword stands over its definition as a title, in the same face it has
+   on the front of the card. Run into the sentence with a colon it was one more
+   thing to read past; above it, it is simply what the panel is about. */
+.more-word{font-family:var(--serif); font-variation-settings:'opsz' 96; font-weight:600;
+  font-size:31px; line-height:1.1; letter-spacing:-.016em; color:var(--card-ink);
+  max-width:330px; word-break:break-word;}
+.more-word.long{font-size:25px;}
+.more-word.longer{font-size:21px; line-height:1.18;}
+.more-def{max-width:330px; font-size:19px; line-height:1.45; font-weight:500; color:var(--bright);}
+.more-syn{max-width:330px; font-size:16.5px; line-height:1.45; color:var(--card-muted);}
+.more-clip{display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:6px;}
+/* --clip-h is the height of the box AND the ceiling on the image inside it,
+   stated in pixels both times. A percentage max-height on the image did not
+   resolve against the box, so a square clip ran 32px out of it and over the
+   credit underneath. */
+.more-gif{--clip-h:188px; width:292px; max-width:100%; height:var(--clip-h);
+  display:flex; align-items:center; justify-content:center;}
+.more-gif:empty{display:none;}
+.more-gif img{max-width:100%; max-height:var(--clip-h); width:auto; height:auto;
+  border-radius:10px; display:block;}
+/* a short phone gives the panel 180px less to work with, and the clip is the
+   only thing in it that can give any back */
+@media (max-height:720px){ .more-gif{--clip-h:128px;} .more-body{gap:11px; padding-top:18px;} }
 /* The attribution is the licence. GIPHY's API is free, commercial use included,
    on the condition that this is shown wherever their clips are. It appears only
    when a clip actually did. */
-.gif-credit{margin-top:9px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
-  font-weight:700; color:var(--card-muted); opacity:.8;}
+.gif-credit{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  font-weight:700; color:var(--card-muted); opacity:.75;}
 .gif-credit[hidden]{display:none;}
+/* The X sits level with the speaker button beside it: same 54px, same distance
+   off the floor of the card, so the bottom edge reads as one row. */
+.more-foot{flex:0 0 auto; display:grid; place-items:center; padding:12px 0 20px;}
+.more-close{width:54px; height:54px; border-radius:50%;
+  display:grid; place-items:center; cursor:pointer; font-size:24px; line-height:1;
+  border:1px solid var(--card-line); background:var(--card-2); color:var(--card-ink);}
+.more-close:focus-visible{outline:2px solid currentColor; outline-offset:2px;}
 
 .hint{flex:0 0 auto; text-align:center; color:var(--muted); font-size:13px; padding:20px 0 22px;}
 .answers{flex:0 0 auto; display:none; gap:8px;}
@@ -606,13 +627,16 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
              DOM order alone puts the panel above the card body and the button
              above the panel, which is all this needs. -->
         <div class="more-panel" id="morePanel" hidden>
-          <div class="more-scroll">
+          <div class="more-body">
+            <div class="more-word" id="mWord"></div>
             <div class="more-def" id="mDef"></div>
             <div class="more-syn" id="mSyn"></div>
-            <div class="more-gif" id="mGif"></div>
-            <div class="gif-credit" id="mGifCredit" hidden>Powered By GIPHY</div>
-            <!-- in the flow, not floating: as an absolute element it landed on
-                 top of whatever the panel happened to be showing -->
+            <div class="more-clip">
+              <div class="more-gif" id="mGif"></div>
+              <div class="gif-credit" id="mGifCredit" hidden>Powered By GIPHY</div>
+            </div>
+          </div>
+          <div class="more-foot">
             <button class="more-close" id="moreClose" aria-label="Hide the definition">&#10005;</button>
           </div>
         </div>
@@ -1081,7 +1105,6 @@ function toggleMore(e){
   b.classList.toggle('open', open);
   b.setAttribute('aria-expanded', String(open));
   b.setAttribute('aria-label', open ? 'Hide the definition' : 'Show the definition');
-  if(open) p.querySelector('.more-scroll').scrollTop = 0;
 }
 
 /* A clip for the word, if one has been added to gifs.json. Nothing is fetched
@@ -1093,13 +1116,7 @@ function renderGif(el, word){
   const credit = $('mGifCredit');
   if(credit) credit.hidden = true;
   const src = GIFS && GIFS[word];
-  if(!src){
-    const p = document.createElement('div');
-    p.className = 'none';
-    p.textContent = 'No clip for this one yet';
-    el.appendChild(p);
-    return;
-  }
+  if(!src) return;                 // no clip: the box collapses, nothing is said
   const img = document.createElement('img');
   img.loading = 'lazy'; img.alt = ''; img.src = src;
   el.appendChild(img);
@@ -1109,15 +1126,18 @@ function renderGif(el, word){
 fetch('gifs.json').then(r => r.ok ? r.json() : null)
   .then(j => { GIFS = j || {}; }).catch(() => { GIFS = {}; });
 
-/* The entry on the More panel, built the way a dictionary builds one: headword,
-   part of speech in italic, then the sense running on from it in the same line.
-   Nodes rather than innerHTML, like everything else that touches word data. */
+/* The entry on the More panel: the headword as a title, its sense beneath.
+   textContent rather than innerHTML, like everything else that touches word data. */
 function renderEntry(el, w){
-  el.textContent = '';
-  const hw = document.createElement('span');
-  hw.className = 'hw'; hw.textContent = w.word + ':';
-  el.appendChild(hw);
-  el.appendChild(document.createTextNode(' ' + (w.def || '')));
+  const t = $('mWord');
+  if(t){
+    t.textContent = w.word;
+    // idioms are whole phrases, so the title steps down by length as the
+    // headword on the front does
+    t.className = 'more-word' +
+      (w.word.length > 24 ? ' longer' : w.word.length > 15 ? ' long' : '');
+  }
+  el.textContent = w.def || '';
 }
 
 /* The possible Russian translations, under the Russian definition and carrying
