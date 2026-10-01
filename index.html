@@ -158,6 +158,9 @@
      and a lamp has no outline. */
   --mark-pool:radial-gradient(closest-side, rgba(235,203,130,.240), rgba(235,203,130,.140));
   --mark-halo:0 0 22px 8px rgba(235,203,130,.110), 0 0 64px 26px rgba(235,203,130,.070);
+  /* the back of the card, and the More panel over it: a trace of warmth in the
+     middle and the corners shaded off */
+  --back-shade:radial-gradient(95% 72% at 50% 44%, rgba(235,203,130,.045) 0%, rgba(235,203,130,.02) 45%, rgba(0,0,0,.42) 100%);
 }
 
 
@@ -294,7 +297,11 @@ button.hint{display:block; width:100%;}
      button is flattened onto the face instead of floating on its own plane
      mid-turn. Without this the button visibly detaches while the card flips. */
   transform:rotateY(0deg);}
-.face.back{transform:rotateY(180deg);}
+.face.back{transform:rotateY(180deg);
+  /* The back has no pool of light in the middle - the marked word is the light
+     there. Instead the corners fall away into shade, so the sheet has depth
+     without a second lamp competing with the word. */
+  background-image:var(--back-shade, none);}
 /* The front of the card is one word on an empty sheet, so it is lit like one:
    a pool of warm light behind the middle and a trace of it on the word. The
    word stays its own colour - it is the card that is lit, not the type. */
@@ -424,23 +431,20 @@ button.hint{display:block; width:100%;}
 .more-btn.open{display:none;}        /* the panel carries its own way out */
 .more-btn:focus-visible{outline:2px solid currentColor; outline-offset:2px; border-radius:8px;}
 .more-panel{position:absolute; inset:0; background:var(--card); border-radius:inherit;
+  background-image:var(--back-shade, none);       /* the same sheet as the back it covers */
   display:flex; flex-direction:column;}
 .more-panel[hidden]{display:none;}
+/* One group, centred in the panel, with air between its parts: 18px between
+   blocks, and the title set a further 12px clear of the definition it heads. */
 .more-body{flex:1 1 auto; min-height:0; overflow:hidden; text-align:center;
-  padding:30px 26px 0;
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:14px;}
+  padding:26px 26px 0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;}
 /* The headword stands over its definition as a title, in the same face it has
    on the front of the card. Run into the sentence with a colon it was one more
-   thing to read past; above it, it is simply what the panel is about.
-   It heads the panel, but it is not pinned to the top edge: three auto margins
-   - over the word, under the word, under the clip - share out whatever room is
-   left equally, so the title sits midway between the top of the card and the
-   text it introduces. With nothing to spare they all come to zero. */
+   thing to read past; above it, it is simply what the panel is about. */
 .more-word{font-family:var(--serif); font-variation-settings:'opsz' 96; font-weight:600;
   font-size:31px; line-height:1.1; letter-spacing:-.016em; color:var(--card-ink);
-  max-width:330px; word-break:break-word; margin-top:auto; margin-bottom:auto;
-  padding-bottom:16px;}   /* 30 over the word, 16 + the 14 gap under it: level */
-.more-clip{margin-bottom:auto;}
+  max-width:330px; word-break:break-word; padding-bottom:12px;}
 .more-word.long{font-size:25px;}
 .more-word.longer{font-size:21px; line-height:1.18;}
 .more-def{max-width:330px; font-size:19px; line-height:1.45; font-weight:500; color:var(--bright);}
@@ -457,7 +461,7 @@ button.hint{display:block; width:100%;}
   border-radius:10px; display:block;}
 /* a short phone gives the panel 180px less to work with, and the clip is the
    only thing in it that can give any back */
-@media (max-height:720px){ .more-gif{--clip-h:128px;} .more-body{gap:11px; padding-top:18px;} .more-word{padding-bottom:7px;} }
+@media (max-height:720px){ .more-gif{--clip-h:128px;} .more-body{gap:12px; padding-top:18px;} .more-word{padding-bottom:6px;} }
 /* The attribution is the licence. GIPHY's API is free, commercial use included,
    on the condition that this is shown wherever their clips are. It appears only
    when a clip actually did. */
