@@ -315,10 +315,13 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* One highlight, used in two places: the target word inside the sentence on
    the front, and the possible translations on the back. It was scoped to
    .example, so the translations rendered with the markup and none of the green. */
-/* In the context the target word is bold and nothing else: a green block on
-   the sentence AND on the translations meant two highlights competing, and the
-   sentence is the one you are meant to read through rather than at. */
-.context .hl{background:none; box-shadow:none; color:inherit; font-weight:700;}
+/* In the context the target word is underlined and nothing else. A green block
+   on the sentence AND on the translations meant two highlights competing, and
+   the sentence is the one you read through rather than at. The weight is
+   inherited rather than set, so the word sits in the line instead of standing
+   proud of it - the rule under it is the whole signal. */
+.context .hl{background:none; box-shadow:none; color:inherit; font-weight:inherit;
+  text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:4px;}
 .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
   border-radius:5px; box-shadow:0 0 0 3px var(--hl-bg);
   /* idioms are several words long and wrap: clone gives each line fragment its
