@@ -204,15 +204,14 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 /* ---------- HOME ----------
    The home screen IS a card, set as the front of a study card is set: one word
-   in the lamp, a small serif line under it, and then the three counts. It is a
-   smaller card than the ones you study - a little over half the screen, in the
-   middle of it - with the line that starts things directly underneath.
+   in the lamp, a small serif line under it, the three counts, and the line that
+   starts things - all of it on the card. It is a smaller card than the ones
+   you study: a little over half the screen, in the middle of it.
    Starting turns it over like a page. The whole screen is the tap target. */
 #home{padding-left:12px; padding-right:12px; cursor:pointer;}
-/* the card and its line are centred on the screen as one group */
 .home-mid{flex:1 1 auto; min-height:0; display:flex; flex-direction:column; justify-content:center;}
 #home .card-wrap{flex:0 0 auto; height:56vh; width:100%; max-width:420px; margin:0 auto;}
-#home .hint{padding-top:18px;}
+#home .hint{padding:0; margin-top:26px;}
 .stats{display:flex; gap:10px; width:100%; margin-top:28px;}
 .stat{flex:1; background:var(--card-2); border:1px solid var(--line); border-radius:16px;
   padding:14px 8px;}
@@ -224,8 +223,8 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    by the same distance rather than at a fixed fraction of the height. */
 .home-card{position:absolute; inset:0; overflow:hidden;
   background:var(--card); border:1px solid var(--edge); border-radius:24px;
-  background-image:radial-gradient(80% 130px at 50% calc(50% - 73px), var(--lamp, transparent), transparent 72%);
-  padding:30px 22px 84px; display:flex; flex-direction:column;
+  background-image:radial-gradient(80% 130px at 50% calc(50% - 68px), var(--lamp, transparent), transparent 72%);
+  padding:30px 22px; display:flex; flex-direction:column;
   align-items:center; justify-content:center; text-align:center;
   transform-origin:0 50%; backface-visibility:hidden; -webkit-backface-visibility:hidden;}
 .home-card h1{margin:0; text-shadow:var(--lamp-glow, none);}
@@ -433,13 +432,14 @@ button.hint{display:block; width:100%;}
 /* The headword stands over its definition as a title, in the same face it has
    on the front of the card. Run into the sentence with a colon it was one more
    thing to read past; above it, it is simply what the panel is about.
-   It is ALWAYS at the top of the card, in the same place on every word, however
-   much or little is under it. The two auto margins - under the word and under
-   the clip - share out whatever room is left, so the rest sits in the middle
-   of the space below the title instead of dragging the title down with it. */
+   It heads the panel, but it is not pinned to the top edge: three auto margins
+   - over the word, under the word, under the clip - share out whatever room is
+   left equally, so the title sits midway between the top of the card and the
+   text it introduces. With nothing to spare they all come to zero. */
 .more-word{font-family:var(--serif); font-variation-settings:'opsz' 96; font-weight:600;
   font-size:31px; line-height:1.1; letter-spacing:-.016em; color:var(--card-ink);
-  max-width:330px; word-break:break-word; margin-bottom:auto;}
+  max-width:330px; word-break:break-word; margin-top:auto; margin-bottom:auto;
+  padding-bottom:16px;}   /* 30 over the word, 16 + the 14 gap under it: level */
 .more-clip{margin-bottom:auto;}
 .more-word.long{font-size:25px;}
 .more-word.longer{font-size:21px; line-height:1.18;}
@@ -457,7 +457,7 @@ button.hint{display:block; width:100%;}
   border-radius:10px; display:block;}
 /* a short phone gives the panel 180px less to work with, and the clip is the
    only thing in it that can give any back */
-@media (max-height:720px){ .more-gif{--clip-h:128px;} .more-body{gap:11px; padding-top:18px;} }
+@media (max-height:720px){ .more-gif{--clip-h:128px;} .more-body{gap:11px; padding-top:18px;} .more-word{padding-bottom:7px;} }
 /* The attribution is the licence. GIPHY's API is free, commercial use included,
    on the condition that this is shown wherever their clips are. It appears only
    when a clip actually did. */
@@ -527,6 +527,7 @@ button.hint{display:block; width:100%;}
   #home.on .home-card > *:nth-child(1){animation-delay:.08s;}
   #home.on .home-card > *:nth-child(2){animation-delay:.14s;}
   #home.on .home-card > *:nth-child(3){animation-delay:.20s;}
+  #home.on .home-card > *:nth-child(4){animation-delay:.27s;}
 
   /* Starting turns the home card like a page: hinged on its left edge, it
      swings up towards you and over, darkening as it leaves the lamp, while the
@@ -540,7 +541,6 @@ button.hint{display:block; width:100%;}
   #home.turning{z-index:2; overflow:hidden; pointer-events:none;}
   #home.turning .home-card{animation:pageTurn .72s cubic-bezier(.5,0,.75,.4) forwards;}
   #home.turning .home-card > *{animation:none;}
-  #home.turning .hint, #home.turning .fab{opacity:0; transition:opacity .18s ease;}
   #study.arriving .top, #study.arriving .hint{animation:fadeIn .4s ease-out .25s backwards;}
   #study.arriving .card-wrap{animation:dealIn .5s cubic-bezier(.2,.8,.3,1) .16s backwards;}
 
@@ -573,12 +573,11 @@ button.hint{display:block; width:100%;}
 }
 
 /* ---------- FAB + SHEET ---------- */
-/* The plus is the speaker's twin: same disc, same edge, same shadow (it carries
-   the .speaker class), and on the home card it sits on the very spot the
-   speaker takes on a study card. On the done screen, which has no card, it
-   goes back to the corner of the screen. */
-.fab{font-size:31px; font-weight:300; line-height:1; color:var(--card-ink);}
-body > .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px); z-index:40;}
+/* The plus is the speaker's twin - same disc, same edge, same shadow (it carries
+   the .speaker class) - but it is not on a card: it sits in the bottom right
+   corner of the screen, where it has always been. */
+.speaker.fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px); z-index:40;
+  font-size:31px; font-weight:300; line-height:1; color:var(--card-ink);}
 /* Only ever seen if an update lands mid-review, when reloading underneath
    someone would be rude. Bottom left, opposite the plus. */
 .update-pill{position:fixed; left:16px; bottom:calc(var(--pad-bottom) + 16px);
@@ -637,8 +636,7 @@ body > .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px); z
 
 <!-- ============ HOME ============ -->
 <section id="home" class="screen on">
-  <!-- One smaller card in the middle of the screen, with its line directly
-       beneath. -->
+  <!-- One smaller card in the middle of the screen. -->
   <div class="home-mid">
     <div class="card-wrap" id="homeWrap">
       <div class="home-card" id="homeCard">
@@ -649,10 +647,9 @@ body > .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px); z
           <div class="stat"><b id="sNew">0</b><span>New</span></div>
           <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
         </div>
+        <button class="hint" id="goStudy">Tap to start</button>
       </div>
-      <button class="speaker fab" id="fab" aria-label="Request a word">+</button>
     </div>
-    <button class="hint" id="goStudy">Tap to start</button>
   </div>
 </section>
 
@@ -740,6 +737,7 @@ body > .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px); z
 
 <div class="sky" id="sky" aria-hidden="true"></div>
 
+<button class="speaker fab" id="fab" aria-label="Request a word">+</button>
 <button class="update-pill" id="updatePill" hidden><i></i>Update ready</button>
 
 <!-- Shown for the second or two an update takes. Without it that pause looks
@@ -1057,11 +1055,7 @@ let current = null, flipped = false, undoSnap = null;
 
 function show(name){
   ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
-  /* the plus lies on the home card; with no card to lie on, it takes the corner */
-  const fab = $('fab');
-  if(name === 'home') $('homeWrap').appendChild(fab);
-  else if(fab.parentNode !== document.body) document.body.appendChild(fab);
-  fab.style.display = (name === 'study') ? 'none' : 'grid';
+  $('fab').style.display = (name === 'study') ? 'none' : 'grid';
   if(name === 'home') refreshHome();
 }
 /* The three figures count up to their values as the screen assembles. Cosmetic:
@@ -1371,6 +1365,7 @@ function startStudy(){
   if(!current) return;
   const home = $('home'), study = $('study');
   turning = true;
+  $('fab').style.display = 'none';            // it is not part of the page that turns
   study.classList.add('on', 'arriving');
   home.classList.add('turning');
   let landed = false;
