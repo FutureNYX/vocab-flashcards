@@ -15,7 +15,7 @@
 (function(){
   try{
     var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
-    var sys  = dark ? 'ink' : 'heartwood';
+    var sys  = dark ? 'pine' : 'heartwood';
     var pal  = sys;
     /* A tap on the switch is an override for NOW, not a setting. It records the
        light the phone itself was in when it was made, and stands only while the
@@ -24,12 +24,12 @@
        morning does not leave it light tomorrow night. */
     try{
       var o = JSON.parse(localStorage.getItem('vocab.theme') || 'null');
-      if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'ink')) pal = o.pal;
+      if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'pine')) pal = o.pal;
       else if(o) localStorage.removeItem('vocab.theme');
     }catch(e){}
     document.documentElement.setAttribute('data-palette', pal);
     var m = document.querySelector('meta[name="theme-color"]');
-    if(m) m.setAttribute('content', pal === 'heartwood' ? '#E0CFAE' : '#0C0D0C');
+    if(m) m.setAttribute('content', pal === 'heartwood' ? '#E0CFAE' : '#0A120D');
   }catch(e){}
 })();
 </script>
@@ -170,24 +170,31 @@
   --stock-vignette:rgba(80,64,34,.06);
 }
 
-[data-palette="ink"]{                /* true dark: grey, never black */
-  --bg:#0C0D0C;  --card:#161816;  --card-2:#1D201D;
-  --text:#D9DDD6; --bright:#F0F3EE; --muted:#828A80; --line:#262A25; --ru-text:#D9DDD6;
-  --edge:rgba(180,190,178,.15);
-  --accent:#8FB077; --on-accent:#0C0D0C;
-  --wrong:#D08A72; --hard:#CDA765; --easy:#8FB077;
-  --hl-bg:rgba(143,176,119,.26); --hl-text:#EDF4E7;
-  --chip-bg:rgba(143,176,119,.16); --chip-text:#DCEBD1;
-  --hard-soft:rgba(205,167,101,.15); --easy-soft:rgba(143,176,119,.16);
-  --card-ink:#D9DDD6; --card-muted:#8A9187; --card-line:#262A25; --card-wrong:#D08A72;
-  /* No black, and no 21:1. Pure white on pure black blooms at the letter edges
-     and the pupil never settles; this sits near 13:1 on a ground that is dark
-     grey rather than absent, which is the range that reads as restful. */
+[data-palette="pine"]{               /* a pine-green room, one cream accent */
+  /* Heartwood is a cream card with a green accent. This is its mirror: green is
+     the room and cream is the accent, so the two themes swap roles when the
+     phone switches rather than becoming a different design.
+     The card sits two clear steps above the ground. The theme before this had
+     them 4% apart, which is too little to read as an object and too much to
+     read as one surface. */
+  --bg:#0A120D;  --card:#14231A;  --card-2:#1B2D22;
+  --text:#C4D3C8; --bright:#E3EBE5; --muted:#71857A; --line:#223528; --ru-text:#DCE8DF;
+  --edge:rgba(220,232,223,.14);
+  /* The accent is a WARM cream on purpose. A paler one sat 17 dE from the
+     sentence around it and the marked word vanished; this is 40 away, so the
+     word is found by its warmth against a cool white, not by weight or a box. */
+  --accent:#EBCB82; --on-accent:#0E1710;
+  --wrong:#B79E68; --hard:#D2B676; --easy:#EBCB82;
+  --hl-bg:rgba(235,203,130,.24); --hl-text:#F0F6F1;
+  --chip-bg:rgba(235,203,130,.16); --chip-text:#F0E6C8;
+  --hard-soft:rgba(235,203,130,.14); --easy-soft:rgba(235,203,130,.16);
+  --card-ink:#DCE8DF; --card-muted:#7F9486; --card-line:#223528; --card-wrong:#C9A56A;
   --sheet-light:linear-gradient(162deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.015) 34%,
                 rgba(0,0,0,0) 52%, rgba(0,0,0,.28) 100%);
   --stock-lit:rgba(255,255,255,.05); --stock-shade:rgba(0,0,0,.45);
   --stock-vignette:rgba(0,0,0,.25);
 }
+
 
 :root{
   --pad-bottom: max(14px, env(safe-area-inset-bottom));
@@ -203,7 +210,7 @@
    A star has to stay exactly where it is and only breathe. */
 .sky{display:none; position:fixed; inset:0; pointer-events:none; z-index:0;
   overflow:hidden; contain:strict;}
-[data-palette="ink"] .sky{display:block;}
+[data-palette="pine"] .sky{display:block;}
 .sky i{position:absolute; border-radius:50%; background:#E4EFE6;
   opacity:var(--o);
   animation:star var(--t) ease-in-out var(--d) infinite;
@@ -388,7 +395,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    size, same leading, same measure, same ink. It is the same kind of thing. */
 /* The context reads exactly as the sentence used to on the front: same size,
    leading, measure and ink. It is the same thing, moved. */
-.context{max-width:340px; font-size:22px; line-height:1.48; color:var(--bright);
+.context{max-width:340px; font-size:20px; line-height:1.5; color:var(--bright);
   font-weight:500; letter-spacing:-.004em;}
 .context:empty{display:none;}
 
@@ -489,22 +496,82 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   display:flex; flex-direction:column; align-items:center; gap:2px;}
 .ans b{font-size:15.5px; font-weight:650;}
 .ans span{font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums;}
-.ans:active{filter:brightness(1.35);}
+.ans{transition:transform .12s ease, filter .12s ease;}
+.ans:active{transform:scale(.955); filter:brightness(1.12);}
 .ans.w b{color:var(--wrong);} .ans.h b{color:var(--hard);} .ans.e b{color:var(--easy);}
-/* Filled tints rather than three outlines, so the row reads as buttons and the
-   bottom of the screen finishes. Each tint is mixed from the colour that
-   button already declares, so every palette gets its own without a new
-   variable. Where color-mix is unsupported the whole declaration is dropped
-   and the outlined card above stands, which is the previous look. */
-.ans.w{background:color-mix(in srgb, var(--wrong) 12%, transparent); border-color:transparent;}
-.ans.h{background:color-mix(in srgb, var(--hard) 13%, transparent); border-color:transparent;}
-.ans.e{background:color-mix(in srgb, var(--easy) 13%, transparent); border-color:transparent;}
+/* Empty, half, full. The three answers are one colour at three fills, so the
+   row reads left to right as a scale: an outline for Wrong, a tint for Hard,
+   the solid accent for Easy. Brightness alone was too quiet a difference to
+   read at a glance; the fill is not. Where color-mix is unsupported the plain
+   outlined card above stands. */
+.ans.w{background:transparent; border-color:color-mix(in srgb, var(--easy) 34%, transparent);}
+.ans.w b{color:color-mix(in srgb, var(--easy) 74%, var(--bg));}
+.ans.h{background:color-mix(in srgb, var(--easy) 17%, transparent); border-color:transparent;}
+.ans.h b{color:color-mix(in srgb, var(--easy) 90%, var(--bg));}
+.ans.e{background:var(--easy); border-color:transparent;}
+.ans.e b{color:var(--on-accent);}
+.ans.e span{color:color-mix(in srgb, var(--on-accent) 72%, transparent);}
 
 /* ---------- DONE ---------- */
 #done{justify-content:center; align-items:center; text-align:center; gap:8px;}
 #done .big{font-family:var(--serif); font-variation-settings:'opsz' 96; font-size:30px;
   font-weight:600; letter-spacing:-.005em;}
 #done .sub{color:var(--muted); font-size:15px; margin-bottom:24px;}
+
+
+/* ---------- MOTION ----------
+   Everything here is the card behaving like a card: it is dealt, it is turned,
+   it is put aside. Nothing moves for its own sake and nothing loops except the
+   sky. All of it is inside no-preference, so a phone set to reduce motion gets
+   the app exactly as it was. */
+@media (prefers-reduced-motion:no-preference){
+  /* answered: the card leaves the way you judged it */
+  @keyframes leaveWrong{to{transform:translateX(-44%) rotate(-6deg); opacity:0;}}
+  @keyframes leaveHard {to{transform:translateY(16%) scale(.95);     opacity:0;}}
+  @keyframes leaveEasy {to{transform:translateX(44%) rotate(6deg);   opacity:0;}}
+  .card-wrap.leave-wrong{animation:leaveWrong .2s cubic-bezier(.4,0,1,1) forwards;}
+  .card-wrap.leave-hard {animation:leaveHard  .2s cubic-bezier(.4,0,1,1) forwards;}
+  .card-wrap.leave-easy {animation:leaveEasy  .2s cubic-bezier(.4,0,1,1) forwards;}
+  /* and the next one is dealt up from the pile */
+  @keyframes dealIn{from{transform:translateY(18px) scale(.965); opacity:0;} to{transform:none; opacity:1;}}
+  .card-wrap.enter{animation:dealIn .3s cubic-bezier(.2,.8,.3,1);}
+
+  /* the opening screen assembles itself, top to bottom */
+  @keyframes rise{from{transform:translateY(12px); opacity:0;} to{transform:none; opacity:1;}}
+  #home.on .home-card{animation:dealIn .42s cubic-bezier(.2,.8,.3,1);}
+  #home.on .home-card > *{animation:rise .5s cubic-bezier(.2,.8,.3,1) backwards;}
+  #home.on .home-card > *:nth-child(1){animation-delay:.08s;}
+  #home.on .home-card > *:nth-child(2){animation-delay:.14s;}
+  #home.on .home-card > *:nth-child(3){animation-delay:.20s;}
+  #home.on .home-card > *:nth-child(4){animation-delay:.27s;}
+
+  /* the answers arrive with the turn of the card rather than popping in */
+  .answers.on .ans{animation:rise .32s cubic-bezier(.2,.8,.3,1) backwards;}
+  .answers.on .ans:nth-child(2){animation-delay:.045s;}
+  .answers.on .ans:nth-child(3){animation-delay:.09s;}
+
+  /* More opens like a page laid over the card */
+  @keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
+  .more-panel:not([hidden]){animation:fadeIn .2s ease-out;}
+  .more-panel:not([hidden]) .more-body > *{animation:rise .34s cubic-bezier(.2,.8,.3,1) backwards;}
+  .more-panel:not([hidden]) .more-body > *:nth-child(2){animation-delay:.04s;}
+  .more-panel:not([hidden]) .more-body > *:nth-child(3){animation-delay:.08s;}
+  .more-panel:not([hidden]) .more-body > *:nth-child(4){animation-delay:.12s;}
+
+  #done.on > *{animation:rise .5s cubic-bezier(.2,.8,.3,1) backwards;}
+  #done.on > *:nth-child(2){animation-delay:.08s;}
+  #done.on > *:nth-child(3){animation-delay:.16s;}
+
+  .btn-main, .fab, .speaker, .more-close, .icon-btn, .theme-btn{transition:transform .12s ease;}
+  .btn-main:active{transform:scale(.975);}
+
+  /* once in a while, a shooting star. Night only; gone in under a second. */
+  @keyframes shoot{0%{transform:translate3d(0,0,0) rotate(24deg); opacity:0;}
+    12%{opacity:.9;} 100%{transform:translate3d(190px,84px,0) rotate(24deg); opacity:0;}}
+  .sky .shoot{position:absolute; width:70px; height:1.2px; border-radius:2px;
+    background:linear-gradient(90deg, rgba(228,239,230,0), rgba(228,239,230,.9));
+    animation:shoot .95s ease-out forwards;}
+}
 
 /* ---------- FAB + SHEET ---------- */
 .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px);
@@ -995,9 +1062,22 @@ function show(name){
   $('fab').style.display = (name === 'study') ? 'none' : 'grid';
   if(name === 'home') refreshHome();
 }
+/* The three figures count up to their values as the screen assembles. Cosmetic:
+   the real number is written at the end whatever happens in between. */
+function countUp(el, to){
+  const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(calm || !to){ el.textContent = to; return; }
+  const t0 = performance.now(), dur = 520;
+  const step = now => {
+    const p = Math.min(1, (now - t0) / dur);
+    el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+    if(p < 1) requestAnimationFrame(step); else el.textContent = to;
+  };
+  requestAnimationFrame(step);
+}
 function refreshHome(){
   const k = counts();
-  $('sDue').textContent = k.due; $('sNew').textContent = k.neu; $('sKnown').textContent = k.known;
+  countUp($('sDue'), k.due); countUp($('sNew'), k.neu); countUp($('sKnown'), k.known);
   $('goStudy').textContent = (k.due + k.neu) ? 'Start' : 'Review anyway';
 }
 
@@ -1054,6 +1134,24 @@ function renderExample(el, text){
     frag.appendChild(i);
   }
   sky.appendChild(frag);
+
+  /* Every so often one crosses. Only at night, only while the app is on screen,
+     never with reduced motion, and the element removes itself when it is done. */
+  const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(calm) return;
+  const shoot = () => {
+    const night = document.documentElement.getAttribute('data-palette') === 'pine';
+    if(night && !document.hidden){
+      const s = document.createElement('i');
+      s.className = 'shoot';
+      s.style.left = (8 + Math.random() * 44) + '%';
+      s.style.top  = (4 + Math.random() * 30) + '%';
+      sky.appendChild(s);
+      setTimeout(() => s.remove(), 1100);
+    }
+    setTimeout(shoot, 16000 + Math.random() * 26000);
+  };
+  setTimeout(shoot, 7000 + Math.random() * 9000);
 })();
 
 /* ============================================================
@@ -1203,13 +1301,47 @@ function flip(){
   $('hint').style.display = flipped ? 'none' : '';
 }
 
+/* The answer is written to storage BEFORE anything moves. The animation is
+   decoration on top of a finished save, so closing the app mid-deal costs
+   nothing. `dealing` only stops a second tap landing while the card is in the
+   air, and it is released on a timer as well as on the animation's own end:
+   an event that never fires must not be able to leave the app stuck. */
+const CALM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+let dealing = false;
+
+function dealIn(){
+  if(CALM) return;
+  const wrap = $('cardWrap');
+  wrap.classList.remove('enter');
+  void wrap.offsetWidth;
+  wrap.classList.add('enter');
+  setTimeout(() => wrap.classList.remove('enter'), 340);
+}
+function dealNext(r){
+  const wrap = $('cardWrap');
+  if(CALM){ render(); return; }
+  dealing = true;
+  let moved = false;
+  const next = () => {
+    if(moved) return;
+    moved = true;
+    wrap.classList.remove('leave-wrong', 'leave-hard', 'leave-easy');
+    render();
+    dealIn();
+    setTimeout(() => { dealing = false; }, 120);
+  };
+  wrap.addEventListener('animationend', next, {once: true});
+  setTimeout(next, 280);                       // the event is a hint, the timer is the guarantee
+  wrap.classList.add('leave-' + r);
+}
+
 function answer(r){
-  if(!current || !flipped) return;
+  if(!current || !flipped || dealing) return;
   const {w, c} = current;
   undoSnap = {id: w.id, prev: S.cards[w.id] ? JSON.parse(JSON.stringify(S.cards[w.id])) : null};
   S.cards[w.id] = apply(c, r, Date.now());
   save();
-  render();
+  dealNext(r);
 }
 
 /* events */
@@ -1225,7 +1357,7 @@ $('spk').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(
 document.querySelectorAll('.ans').forEach(b => b.addEventListener('click', () => answer(b.dataset.r)));
 $('back').addEventListener('click', () => show('home'));
 $('doneHome').addEventListener('click', () => show('home'));
-$('goStudy').addEventListener('click', () => { undoSnap = null; show('study'); render(); });
+$('goStudy').addEventListener('click', () => { undoSnap = null; show('study'); render(); dealIn(); });
 $('undo').addEventListener('click', () => {
   if(!undoSnap) return;
   if(undoSnap.prev) S.cards[undoSnap.id] = undoSnap.prev; else delete S.cards[undoSnap.id];
@@ -1295,7 +1427,7 @@ const THEME_BTNS = ['themeBtn', 'themeBtnStudy'];
 /* the light the PHONE is in, which is what the app follows by default */
 function systemPalette(){
   return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches)
-    ? 'ink' : 'heartwood';
+    ? 'pine' : 'heartwood';
 }
 /* An override survives only while the phone is still in the light it was made
    in. Once the phone flips, it is dropped and we are back to following it. */
@@ -1303,7 +1435,7 @@ function resolvePalette(){
   const sys = systemPalette();
   try{
     const o = JSON.parse(localStorage.getItem(THEME_KEY) || 'null');
-    if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'ink')) return o.pal;
+    if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'pine')) return o.pal;
     if(o) localStorage.removeItem(THEME_KEY);
   }catch(e){}
   return sys;
@@ -1311,7 +1443,7 @@ function resolvePalette(){
 function applyPalette(pal){
   document.documentElement.setAttribute('data-palette', pal);
   const m = document.querySelector('meta[name="theme-color"]');
-  if(m) m.setAttribute('content', (pal === 'heartwood') ? '#E0CFAE' : '#0C0D0C');
+  if(m) m.setAttribute('content', (pal === 'heartwood') ? '#E0CFAE' : '#0A120D');
   /* The icon shows the light you are IN: sun while the app is light, moon
      while it is dark. Not the light you would switch to. */
   const icon  = (pal === 'heartwood') ? SUN_ICON : MOON_ICON;
@@ -1325,7 +1457,7 @@ function applyPalette(pal){
 }
 function toggleTheme(){
   const next = (document.documentElement.getAttribute('data-palette') === 'heartwood')
-    ? 'ink' : 'heartwood';
+    ? 'pine' : 'heartwood';
   try{
     localStorage.setItem(THEME_KEY, JSON.stringify({pal: next, basis: systemPalette()}));
   }catch(e){}
