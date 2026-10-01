@@ -208,6 +208,21 @@
   --ans-dim:.55; --ans-mid:.86; --ans-top:#FFF0C9;
   --ans-glow-mid:0 0 12px rgba(235,203,130,.40);
   --ans-glow-top:0 0 6px rgba(235,203,130,.90), 0 0 20px rgba(235,203,130,.65), 0 0 40px rgba(235,203,130,.40);
+  /* The marked word is not dyed. It stays the white of the sentence around it
+     and sits in a pool of light, as the headword does on the front - so the
+     word reads as the SOURCE of the light rather than as a coloured word with
+     a light added. Each pool peaks behind the text and fades out past it; a
+     flat fill with a blur round it looks like a smudged highlight, not a lamp. */
+  --mark-ink:var(--bright);
+  --mark-glow:0 0 16px rgba(235,203,130,.45);
+  /* the fill meets its halo at the same strength at the edge of the box (the
+     two halos sum to about .14 there). Any step between them shows as a rim,
+     and a lamp has no outline. */
+  --mark-pool:radial-gradient(closest-side, rgba(235,203,130,.240), rgba(235,203,130,.140));
+  --mark-halo:0 0 22px 8px rgba(235,203,130,.110), 0 0 64px 26px rgba(235,203,130,.070);
+  /* the translations share one light under the whole row, not a blob each */
+  --row-pool:radial-gradient(closest-side, rgba(235,203,130,.150), rgba(235,203,130,.092));
+  --row-halo:0 0 22px 8px rgba(235,203,130,.072), 0 0 64px 26px rgba(235,203,130,.047);
 }
 
 
@@ -369,13 +384,17 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* One highlight, used in two places: the target word inside the sentence on
    the front, and the possible translations on the back. It was scoped to
    .example, so the translations rendered with the markup and none of the green. */
-/* The target word takes the accent colour and nothing else: no rule, no block,
-   no extra weight. Nothing about the SHAPE of the line changes, so the eye
-   finds the word the way it finds a name in a page of text rather than having
-   to read past a mark. Underline and highlight both interrupted the line;
-   bold was invisible, because Manrope 500 and 700 sit close at this size. */
-.context .hl{background:none; box-shadow:none; text-decoration:none;
-  font-weight:inherit; color:var(--accent);}
+/* How the target word is marked depends on the light.
+   At night it is lit, not coloured: see --mark-* in the pine palette.
+   By day there is no lamp - light does not show on a pale card - so the word
+   takes the accent colour instead and nothing else, which is what every
+   palette without --mark-* values falls back to.
+   Either way nothing about the SHAPE of the line changes: no rule, no block,
+   no extra weight. */
+.context .hl{text-decoration:none; font-weight:inherit; border-radius:999px;
+  color:var(--mark-ink, var(--accent));
+  background:var(--mark-pool, none); box-shadow:var(--mark-halo, none);
+  text-shadow:var(--mark-glow, none);}
 .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
   border-radius:5px; box-shadow:0 0 0 3px var(--hl-bg);
   /* idioms are several words long and wrap: clone gives each line fragment its
@@ -436,10 +455,12 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    the full x-height, so a Russian word reads as a wider, denser block than an
    English one. Matching the number made it look a size too big. */
 .ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:10px 16px;
-  max-width:340px; font-size:18px; line-height:1.48; font-weight:500;}
+  max-width:340px; font-size:18px; line-height:1.48; font-weight:500;
+  border-radius:999px; background:var(--row-pool, none); box-shadow:var(--row-halo, none);}
 .ru-words:empty{display:none;}
 .ru-words .hl{background:none; box-shadow:none; text-decoration:none;
-  border-radius:0; padding:0; font-weight:inherit; color:var(--accent);}
+  border-radius:0; padding:0; font-weight:inherit;
+  color:var(--mark-ink, var(--accent)); text-shadow:var(--mark-glow, none);}
 
 /* More. Everything that is reference rather than recall lives behind it, so the
    card itself stays two lines and a translation. */
