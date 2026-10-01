@@ -193,6 +193,76 @@
   --pad-bottom: max(14px, env(safe-area-inset-bottom));
   --pad-top: max(10px, env(safe-area-inset-top));
 }
+/* ---------- NIGHT SKY ----------
+   Ink only. Three layers of pinpricks, each breathing on its own slow cycle and
+   at its own offset, so they do not pulse in unison - that is what separates a
+   sky from a blinking light. Drawn as radial-gradients rather than an image or
+   forty elements: no file to fetch, no DOM to lay out, and the whole thing
+   costs one fixed layer that never repaints as cards change.
+   Fixed and overscanned by 120px rather than measured, for the same reason the
+   old pattern layer was: a fixed box resolves against the SMALL viewport and
+   left a bare strip at the bottom of the phone. */
+[data-palette="ink"] body::before,
+[data-palette="ink"] body::after{
+  content:''; position:fixed; inset:-120px; pointer-events:none; z-index:0;
+  background-repeat:no-repeat;
+}
+[data-palette="ink"] body::before{
+  background-image:
+    radial-gradient(circle 1.6px at 45.3% 55.9%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 91.6% 46.6%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 50.8% 58.6%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 19.1% 51.2%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 62.7% 78.7%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 10.2% 30.7%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 9.9% 80.3%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 69.0% 5.1%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 97.3% 95.5%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 65.1% 61.3%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 16.4% 2.5%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 52.8% 6.8%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 19.6% 24.7%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 3.9% 46.5%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 44.2% 83.6%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.6px at 51.9% 63.7%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%);
+  animation:twinkle-a 7.5s ease-in-out infinite;
+}
+[data-palette="ink"] body::after{
+  background-image:
+    radial-gradient(circle 1.2px at 50.0% 65.9%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 45.8% 28.3%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 98.8% 98.6%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 83.3% 70.4%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 31.9% 23.5%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 29.3% 7.9%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 76.1% 40.2%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 84.0% 38.9%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 94.9% 84.0%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 1.1% 21.6%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 90.2% 47.1%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 97.1% 39.9%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 1.2px at 8.2% 62.7%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 77.3% 27.4%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 9.5% 33.6%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 95.5% 75.3%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 12.6% 25.1%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 10.9% 6.9%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 79.1% 18.4%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 55.8% 44.8%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 19.7% 72.7%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 13.8% 64.1%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 12.4% 42.2%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
+    radial-gradient(circle 2.1px at 21.9% 27.4%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%);
+  animation:twinkle-b 11s ease-in-out infinite 2.5s;
+}
+@keyframes twinkle-a{0%,100%{opacity:.75} 50%{opacity:.32}}
+@keyframes twinkle-b{0%,100%{opacity:.38} 45%{opacity:.8}}
+/* a still sky is still a sky */
+@media (prefers-reduced-motion:reduce){
+  [data-palette="ink"] body::before,
+  [data-palette="ink"] body::after{animation:none; opacity:.55;}
+}
+
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
 
@@ -204,7 +274,7 @@ body{
   overscroll-behavior:none;
 }
 button{font:inherit; color:inherit; background:none; border:none; cursor:pointer;}
-.screen{position:fixed; inset:0; display:none; flex-direction:column;
+.screen{position:fixed; inset:0; display:none; flex-direction:column; z-index:1;
   padding:var(--pad-top) 14px var(--pad-bottom);}
 .screen.on{display:flex;}
 
@@ -315,13 +385,13 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* One highlight, used in two places: the target word inside the sentence on
    the front, and the possible translations on the back. It was scoped to
    .example, so the translations rendered with the markup and none of the green. */
-/* In the context the target word is underlined and nothing else. A green block
-   on the sentence AND on the translations meant two highlights competing, and
-   the sentence is the one you read through rather than at. The weight is
-   inherited rather than set, so the word sits in the line instead of standing
-   proud of it - the rule under it is the whole signal. */
-.context .hl{background:none; box-shadow:none; color:inherit; font-weight:inherit;
-  text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:4px;}
+/* The target word takes the accent colour and nothing else: no rule, no block,
+   no extra weight. Nothing about the SHAPE of the line changes, so the eye
+   finds the word the way it finds a name in a page of text rather than having
+   to read past a mark. Underline and highlight both interrupted the line;
+   bold was invisible, because Manrope 500 and 700 sit close at this size. */
+.context .hl{background:none; box-shadow:none; text-decoration:none;
+  font-weight:inherit; color:var(--accent);}
 .hl{background:var(--hl-bg); color:var(--hl-text); font-weight:600;
   border-radius:5px; box-shadow:0 0 0 3px var(--hl-bg);
   /* idioms are several words long and wrap: clone gives each line fragment its
@@ -393,6 +463,12 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .more-gif{width:100%; max-width:300px;}
 .more-gif img{width:100%; border-radius:10px; display:block;}
 .more-gif .none{font-size:13px; color:var(--card-muted); opacity:.75; padding:14px 0;}
+/* The attribution is the licence. GIPHY's API is free, commercial use included,
+   on the condition that this is shown wherever their clips are. It appears only
+   when a clip actually did. */
+.gif-credit{margin-top:9px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  font-weight:700; color:var(--card-muted); opacity:.8;}
+.gif-credit[hidden]{display:none;}
 
 .hint{flex:0 0 auto; text-align:center; color:var(--muted); font-size:13px; padding:20px 0 22px;}
 .answers{flex:0 0 auto; display:none; gap:8px;}
@@ -536,6 +612,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
             <div class="more-def" id="mDef"></div>
             <div class="more-syn" id="mSyn"></div>
             <div class="more-gif" id="mGif"></div>
+            <div class="gif-credit" id="mGifCredit" hidden>Powered By GIPHY</div>
           </div>
         </div>
         <button class="more-btn" id="moreBtn" aria-expanded="false">more</button>
@@ -975,6 +1052,8 @@ function toggleMore(e){
 let GIFS = null;
 function renderGif(el, word){
   el.textContent = '';
+  const credit = $('mGifCredit');
+  if(credit) credit.hidden = true;
   const src = GIFS && GIFS[word];
   if(!src){
     const p = document.createElement('div');
@@ -986,6 +1065,8 @@ function renderGif(el, word){
   const img = document.createElement('img');
   img.loading = 'lazy'; img.alt = ''; img.src = src;
   el.appendChild(img);
+  const c = $('mGifCredit');
+  if(c) c.hidden = false;
 }
 fetch('gifs.json').then(r => r.ok ? r.json() : null)
   .then(j => { GIFS = j || {}; }).catch(() => { GIFS = {}; });
