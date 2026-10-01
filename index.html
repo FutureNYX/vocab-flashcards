@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-palette="ink">
+<html lang="en" data-palette="pine">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="theme-color" content="#0C0D0C">
+<meta name="theme-color" content="#0A120D">
 <meta name="color-scheme" content="dark">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -118,30 +118,9 @@
   --hard-soft:rgba(211,170,99,.17); --easy-soft:rgba(111,193,146,.17);
 }
 
-/* ---------- ONE LIGHT, TWO ROOMS ----------
-   The app is dark only. There is no daylight theme and no switch.
-   It has two palettes all the same, one per place: INK is the home screen
-   (and the done screen and the request sheet), PINE is the card you study.
-   show() sets data-palette on <html> as the screen changes. */
-[data-palette="ink"]{                /* home. True dark: grey, never black */
-  --bg:#0C0D0C;  --card:#161816;  --card-2:#1D201D;
-  --text:#D9DDD6; --bright:#F0F3EE; --muted:#828A80; --line:#262A25; --ru-text:#D9DDD6;
-  --edge:rgba(180,190,178,.15);
-  --accent:#8FB077; --on-accent:#0C0D0C;
-  --wrong:#D08A72; --hard:#CDA765; --easy:#8FB077;
-  --hl-bg:rgba(143,176,119,.26); --hl-text:#EDF4E7;
-  --chip-bg:rgba(143,176,119,.16); --chip-text:#DCEBD1;
-  --hard-soft:rgba(205,167,101,.15); --easy-soft:rgba(143,176,119,.16);
-  --card-ink:#D9DDD6; --card-muted:#8A9187; --card-line:#262A25; --card-wrong:#D08A72;
-  /* No black, and no 21:1. Pure white on pure black blooms at the letter edges
-     and the pupil never settles; this sits near 13:1 on a ground that is dark
-     grey rather than absent, which is the range that reads as restful. */
-  --sheet-light:linear-gradient(162deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.015) 34%,
-                rgba(0,0,0,0) 52%, rgba(0,0,0,.28) 100%);
-  --stock-lit:rgba(255,255,255,.05); --stock-shade:rgba(0,0,0,.45);
-  --stock-vignette:rgba(0,0,0,.25);
-}
-
+/* ---------- ONE LIGHT ----------
+   The app is dark only, and every screen is the same room as the card: pine
+   green, one cream light. There is no daylight theme and no switch. */
 [data-palette="pine"]{               /* the card. A pine-green room, one cream accent */
   /* The card sits two clear steps above the ground. The theme before this had
      them 4% apart, which is too little to read as an object and too much to
@@ -213,7 +192,6 @@ html,body{height:100%;}
 
 body{
   margin:0; background:var(--bg); color:var(--text);
-  transition:background-color .45s ease;   /* home and card are different rooms */
   font-family:var(--sans);
   -webkit-font-smoothing:antialiased;
   touch-action:manipulation;
@@ -225,29 +203,26 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .screen.on{display:flex;}
 
 /* ---------- HOME ----------
-   Built as a card, so the app opens on the same object it teaches with:
-   the card surface, the beige edge and the radius are the ones from .face. */
-#home{justify-content:center; align-items:center; text-align:center;}
-.home-card{width:100%; max-width:420px; min-height:56vh; position:relative; overflow:hidden;
+   The home screen IS a card, laid out by the same boxes as the study screen:
+   a top bar, the card, a line under it. So the home card sits exactly where
+   the first card will, and starting is turning it over like a page.
+   It is set as the front of a card is set: one word in the lamp, a small serif
+   line under it. The counts live in the top bar, where they stay once you are
+   studying. The whole screen is the tap target. */
+#home{padding-left:12px; padding-right:12px; cursor:pointer;}
+#home .top{justify-content:center;}
+.home-card{position:absolute; inset:0; overflow:hidden;
   background:var(--card); border:1px solid var(--edge); border-radius:24px;
-  padding:34px 22px 30px; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:6px;}
-#home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:44px;
-  font-weight:600; letter-spacing:-.01em; margin:0;}
-/* A hairline capsule in the accent, sitting dead straight: the stamp without the
-   tilt. A border gives the line something to be, which is what the bare tracked
-   caps that started here never had. */
-#home .sub{color:var(--accent); font-size:12.5px; font-weight:600; letter-spacing:.01em;
-  border:1px solid var(--accent); border-radius:999px; padding:5px 13px;
-  margin-top:14px; margin-bottom:28px;}
-.stats{display:flex; gap:10px; width:100%; margin-bottom:26px;}
-.stat{flex:1; background:var(--card-2); border:1px solid var(--line); border-radius:16px;
-  padding:14px 8px;}
-.stat b{display:block; font-family:var(--serif); font-variation-settings:'opsz' 60;
-  font-size:26px; font-weight:600; letter-spacing:0;}
-.stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
-.btn-main{width:100%; max-width:420px; background:var(--accent); color:var(--on-accent); font-weight:700;
-  font-size:17px; padding:16px; border-radius:16px;}
+  background-image:radial-gradient(80% 40% at 50% 48%, var(--lamp, transparent), transparent 72%);
+  padding:30px 22px 84px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  transform-origin:0 50%; backface-visibility:hidden; -webkit-backface-visibility:hidden;}
+.home-card h1{margin:0; text-shadow:var(--lamp-glow, none);}
+button.hint{display:block; width:100%;}
+/* Buttons are drawn the way the speaker on the card is: the card's own darker
+   green with a hairline edge. Cream is light, not paint - it is never a fill. */
+.btn-main{width:100%; max-width:420px; background:var(--card-2); color:var(--card-ink);
+  border:1px solid var(--edge); font-weight:650; font-size:17px; padding:16px; border-radius:16px;}
 .btn-ghost{width:100%; max-width:420px; background:var(--card); color:var(--text);
   font-size:15px; padding:14px; border-radius:16px; margin-top:10px;}
 #home .note{max-width:340px; margin:20px 0 0; font-size:12.5px; line-height:1.5; color:var(--muted);}
@@ -374,8 +349,10 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   -webkit-overflow-scrolling:touch;}
 /* the same 30px above and 26px below that the front keeps around its rule */
 .back-half.top{justify-content:flex-end; padding-bottom:30px;}
+/* No rule between the halves any more: the sentence and its translations are
+   close enough to read as a pair, and the split still falls on the middle. */
 .back-half.bottom{justify-content:flex-start; padding-top:26px;
-  border-top:1px solid var(--line); padding-bottom:68px;}  /* clears the speaker */
+  padding-bottom:68px;}  /* clears the speaker */
 
 /* The definition is set exactly as the sentence on the front is set: same
    size, same leading, same measure, same ink. It is the same kind of thing. */
@@ -529,8 +506,21 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   #home.on .home-card > *{animation:rise .5s cubic-bezier(.2,.8,.3,1) backwards;}
   #home.on .home-card > *:nth-child(1){animation-delay:.08s;}
   #home.on .home-card > *:nth-child(2){animation-delay:.14s;}
-  #home.on .home-card > *:nth-child(3){animation-delay:.20s;}
-  #home.on .home-card > *:nth-child(4){animation-delay:.27s;}
+
+  /* Starting turns the home card like a page: hinged on its left edge, it
+     swings up towards you and over, darkening as it leaves the lamp, and the
+     first card is lying underneath where it was. While it turns the home
+     screen is stacked above the study screen, which is already laid out. */
+  @keyframes pageTurn{
+    0%  {transform:rotateY(0deg);    filter:brightness(1);}
+    70% {transform:rotateY(-88deg);  filter:brightness(.45);}
+    100%{transform:rotateY(-120deg); filter:brightness(.3);}
+  }
+  #home.turning{z-index:2; overflow:hidden; pointer-events:none;}
+  #home.turning .home-card{animation:pageTurn .72s cubic-bezier(.5,0,.75,.4) forwards;}
+  #home.turning .home-card > *{animation:none;}
+  #home.turning .top, #home.turning .hint, #home.turning .fab{opacity:0; transition:opacity .18s ease;}
+  #study.arriving .top, #study.arriving .hint, #study.arriving .speaker{animation:fadeIn .4s ease-out .25s backwards;}
 
   /* the answers arrive with the turn of the card rather than popping in */
   .answers.on .ans{animation:rise .32s cubic-bezier(.2,.8,.3,1) backwards;}
@@ -561,11 +551,12 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 }
 
 /* ---------- FAB + SHEET ---------- */
-.fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px);
-  width:58px; height:58px; border-radius:50%; background:var(--accent); color:var(--on-accent);
-  font-size:31px; font-weight:300; line-height:1; display:grid; place-items:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.34); z-index:40;}
-.fab:active{transform:scale(.94);}
+/* The plus is the speaker's twin: same disc, same edge, same shadow (it carries
+   the .speaker class), and on the home card it sits on the very spot the
+   speaker takes on a study card. On the done screen, which has no card, it
+   goes back to the corner of the screen. */
+.fab{font-size:31px; font-weight:300; line-height:1; color:var(--card-ink);}
+body > .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px); z-index:40;}
 /* Only ever seen if an update lands mid-review, when reloading underneath
    someone would be rude. Bottom left, opposite the plus. */
 .update-pill{position:fixed; left:16px; bottom:calc(var(--pad-bottom) + 16px);
@@ -612,7 +603,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .sheet .row{display:flex; gap:10px; margin-top:14px;}
 .sheet .row button{flex:1; padding:15px; border-radius:15px; font-size:16px; font-weight:600;}
 .cancel{background:var(--card-2);}
-.save{background:var(--accent); color:var(--on-accent);}
+.save{background:var(--card-2); color:var(--card-ink); border:1px solid var(--edge);}
 .save:disabled{opacity:.4;}
 .mine{margin-top:20px; border-top:1px solid var(--line); padding-top:14px; overflow-y:auto;}
 .mine .item{display:flex; align-items:center; gap:10px; padding:11px 0; border-bottom:1px solid var(--line);}
@@ -624,18 +615,23 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 <!-- ============ HOME ============ -->
 <section id="home" class="screen on">
-  <!-- The home screen is itself a card: same surface, same beige edge, same
-       radius as the ones you study, so the app opens on its own vocabulary. -->
-  <div class="home-card">
-    <h1>Vocab</h1>
-    <div class="sub" id="homeSub">IELTS high-band words</div>
-    <div class="stats">
-      <div class="stat"><b id="sDue">0</b><span>Due</span></div>
-      <div class="stat"><b id="sNew">0</b><span>New</span></div>
-      <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
+  <!-- Same three boxes as the study screen - top bar, card, line - so this card
+       lies exactly where the first study card will. -->
+  <div class="top">
+    <div class="counts">
+      <span>Due <em id="sDue">0</em></span>
+      <span>New <em id="sNew">0</em></span>
+      <span>Learned <em id="sKnown">0</em></span>
     </div>
-    <button class="btn-main" id="goStudy">Start</button>
   </div>
+  <div class="card-wrap" id="homeWrap">
+    <div class="home-card" id="homeCard">
+      <h1 class="front-word">Vocab</h1>
+      <div class="pos" id="homeSub">IELTS high-band words</div>
+    </div>
+    <button class="speaker fab" id="fab" aria-label="Request a word">+</button>
+  </div>
+  <button class="hint" id="goStudy">Tap to start</button>
 </section>
 
 <!-- ============ STUDY ============ -->
@@ -722,7 +718,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 <div class="sky" id="sky" aria-hidden="true"></div>
 
-<button class="fab" id="fab">+</button>
 <button class="update-pill" id="updatePill" hidden><i></i>Update ready</button>
 
 <!-- Shown for the second or two an update takes. Without it that pause looks
@@ -1038,18 +1033,13 @@ function speak(text){
 const $ = id => document.getElementById(id);
 let current = null, flipped = false, undoSnap = null;
 
-/* Each screen has its room: the card is pine, everything else is ink. */
-const ROOM   = {home:'ink', study:'pine', done:'ink'};
-const GROUND = {ink:'#0C0D0C', pine:'#0A120D'};
-function applyPalette(pal){
-  document.documentElement.setAttribute('data-palette', pal);
-  const m = document.querySelector('meta[name="theme-color"]');
-  if(m) m.setAttribute('content', GROUND[pal]);
-}
 function show(name){
-  applyPalette(ROOM[name]);
   ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
-  $('fab').style.display = (name === 'study') ? 'none' : 'grid';
+  /* the plus lies on the home card; with no card to lie on, it takes the corner */
+  const fab = $('fab');
+  if(name === 'home') $('homeWrap').appendChild(fab);
+  else if(fab.parentNode !== document.body) document.body.appendChild(fab);
+  fab.style.display = (name === 'study') ? 'none' : 'grid';
   if(name === 'home') refreshHome();
 }
 /* The three figures count up to their values as the screen assembles. Cosmetic:
@@ -1068,7 +1058,7 @@ function countUp(el, to){
 function refreshHome(){
   const k = counts();
   countUp($('sDue'), k.due); countUp($('sNew'), k.neu); countUp($('sKnown'), k.known);
-  $('goStudy').textContent = (k.due + k.neu) ? 'Start' : 'Review anyway';
+  $('goStudy').textContent = (k.due + k.neu) ? 'Tap to start' : 'Tap to review anyway';
 }
 
 /* Written out in full: "ADJ" and "PREP" are extra decoding work for someone
@@ -1346,7 +1336,35 @@ $('spk').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(
 document.querySelectorAll('.ans').forEach(b => b.addEventListener('click', () => answer(b.dataset.r)));
 $('back').addEventListener('click', () => show('home'));
 $('doneHome').addEventListener('click', () => show('home'));
-$('goStudy').addEventListener('click', () => { undoSnap = null; show('study'); render(); dealIn(); });
+/* Tap anywhere on the home screen. The first card is laid out underneath
+   BEFORE anything moves, so the page turns to reveal a real card rather than a
+   gap; and the turn is ended by a timer as well as by its own event, because
+   an animation event that never fires must not be able to leave the app stuck. */
+let turning = false;
+function startStudy(){
+  if(turning) return;
+  undoSnap = null;
+  if(CALM){ show('study'); render(); return; }
+  render();                                   // shows Done instead if nothing is left
+  if(!current) return;
+  const home = $('home'), study = $('study');
+  turning = true;
+  study.classList.add('on', 'arriving');
+  home.classList.add('turning');
+  let landed = false;
+  const onEnd = e => { if(e.animationName === 'pageTurn') land(); };
+  const land = () => {
+    if(landed) return;
+    landed = true;
+    $('homeCard').removeEventListener('animationend', onEnd);
+    show('study');
+    home.classList.remove('turning');
+    setTimeout(() => { study.classList.remove('arriving'); turning = false; }, 420);
+  };
+  $('homeCard').addEventListener('animationend', onEnd);
+  setTimeout(land, 800);
+}
+$('home').addEventListener('click', e => { if(!e.target.closest('#fab')) startStudy(); });
 $('undo').addEventListener('click', () => {
   if(!undoSnap) return;
   if(undoSnap.prev) S.cards[undoSnap.id] = undoSnap.prev; else delete S.cards[undoSnap.id];
