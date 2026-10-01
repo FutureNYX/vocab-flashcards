@@ -193,75 +193,28 @@
   --pad-bottom: max(14px, env(safe-area-inset-bottom));
   --pad-top: max(10px, env(safe-area-inset-top));
 }
+
 /* ---------- NIGHT SKY ----------
-   Ink only. Three layers of pinpricks, each breathing on its own slow cycle and
-   at its own offset, so they do not pulse in unison - that is what separates a
-   sky from a blinking light. Drawn as radial-gradients rather than an image or
-   forty elements: no file to fetch, no DOM to lay out, and the whole thing
-   costs one fixed layer that never repaints as cards change.
-   Fixed and overscanned by 120px rather than measured, for the same reason the
-   old pattern layer was: a fixed box resolves against the SMALL viewport and
-   left a bare strip at the bottom of the phone. */
-[data-palette="ink"] body::before,
-[data-palette="ink"] body::after{
-  content:''; position:fixed; inset:-120px; pointer-events:none; z-index:0;
-  background-repeat:no-repeat;
+   Ink only. One element per star, each sitting at a fixed point and changing
+   nothing but its own opacity, on its own duration and its own delay.
+   The first attempt faded two whole layers of gradients in and out instead.
+   Nothing actually moved, but a hundred points brightening and dimming in
+   unison reads as drift across the screen, which is the opposite of a sky.
+   A star has to stay exactly where it is and only breathe. */
+.sky{display:none; position:fixed; inset:0; pointer-events:none; z-index:0;
+  overflow:hidden; contain:strict;}
+[data-palette="ink"] .sky{display:block;}
+.sky i{position:absolute; border-radius:50%; background:#E4EFE6;
+  opacity:var(--o);
+  animation:star var(--t) ease-in-out var(--d) infinite;
+  will-change:opacity;}
+/* only opacity is animated: no transform, no position, nothing that could
+   shift a star off its point */
+@keyframes star{
+  0%,100%{opacity:calc(var(--o) * .18)}
+  50%    {opacity:var(--o)}
 }
-[data-palette="ink"] body::before{
-  background-image:
-    radial-gradient(circle 1.6px at 45.3% 55.9%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 91.6% 46.6%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 50.8% 58.6%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 19.1% 51.2%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 62.7% 78.7%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 10.2% 30.7%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 9.9% 80.3%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 69.0% 5.1%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 97.3% 95.5%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 65.1% 61.3%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 16.4% 2.5%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 52.8% 6.8%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 19.6% 24.7%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 3.9% 46.5%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 44.2% 83.6%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.6px at 51.9% 63.7%, rgba(226,238,228,0.55) 0, rgba(226,238,228,0) 100%);
-  animation:twinkle-a 7.5s ease-in-out infinite;
-}
-[data-palette="ink"] body::after{
-  background-image:
-    radial-gradient(circle 1.2px at 50.0% 65.9%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 45.8% 28.3%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 98.8% 98.6%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 83.3% 70.4%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 31.9% 23.5%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 29.3% 7.9%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 76.1% 40.2%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 84.0% 38.9%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 94.9% 84.0%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 1.1% 21.6%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 90.2% 47.1%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 97.1% 39.9%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 1.2px at 8.2% 62.7%, rgba(226,238,228,0.42) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 77.3% 27.4%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 9.5% 33.6%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 95.5% 75.3%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 12.6% 25.1%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 10.9% 6.9%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 79.1% 18.4%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 55.8% 44.8%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 19.7% 72.7%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 13.8% 64.1%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 12.4% 42.2%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%),
-    radial-gradient(circle 2.1px at 21.9% 27.4%, rgba(226,238,228,0.30) 0, rgba(226,238,228,0) 100%);
-  animation:twinkle-b 11s ease-in-out infinite 2.5s;
-}
-@keyframes twinkle-a{0%,100%{opacity:.75} 50%{opacity:.32}}
-@keyframes twinkle-b{0%,100%{opacity:.38} 45%{opacity:.8}}
-/* a still sky is still a sky */
-@media (prefers-reduced-motion:reduce){
-  [data-palette="ink"] body::before,
-  [data-palette="ink"] body::after{animation:none; opacity:.55;}
-}
+@media (prefers-reduced-motion:reduce){ .sky i{animation:none; opacity:calc(var(--o) * .7);} }
 
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
@@ -293,8 +246,16 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   align-items:center; justify-content:center; gap:6px;}
 #home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:44px;
   font-weight:600; letter-spacing:-.01em; margin:0;}
-#home .sub{color:var(--muted); font-size:13px; letter-spacing:.14em; text-transform:uppercase;
-  font-weight:600; margin-top:12px; margin-bottom:30px;}
+/* A library date stamp: boxed, in the accent, knocked back, and set three
+   degrees off true. The rotation and the box do the work - the small tracked
+   caps that used to sit here naked are the single most recognisable piece of
+   default interface styling there is, and a box around them stops being that
+   and starts being an object. Manrope rather than a condensed grotesque,
+   because a new face would be another font file for eleven pixels of text. */
+#home .sub{color:var(--accent); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  font-weight:700; margin-top:20px; margin-bottom:30px;
+  border:2px solid var(--accent); border-radius:3px; padding:5px 10px;
+  transform:rotate(-3deg); opacity:.8;}
 .stats{display:flex; gap:10px; width:100%; margin-bottom:26px;}
 .stat{flex:1; background:var(--card-2); border:1px solid var(--line); border-radius:16px;
   padding:14px 8px;}
@@ -508,6 +469,19 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   background:var(--accent); color:var(--on-accent); font-size:13px; font-weight:700;
   padding:10px 15px; border-radius:22px; box-shadow:0 6px 18px var(--shadow-soft, rgba(0,0,0,.28));}
 .update-pill[hidden]{display:none;}
+.updating{position:fixed; inset:0; z-index:80; background:var(--bg); color:var(--text);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;}
+.updating[hidden]{display:none;}
+.updating p{margin:14px 0 0; font-family:var(--serif); font-variation-settings:'opsz' 72;
+  font-size:26px; font-weight:600; letter-spacing:-.01em;}
+.updating span{font-size:14px; color:var(--muted);}
+.updating .dots{display:flex; gap:7px;}
+.updating .dots i{width:7px; height:7px; border-radius:50%; background:var(--accent);
+  animation:updot 1.1s ease-in-out infinite;}
+.updating .dots i:nth-child(2){animation-delay:.15s;}
+.updating .dots i:nth-child(3){animation-delay:.3s;}
+@keyframes updot{0%,100%{opacity:.25; transform:translateY(0)} 40%{opacity:1; transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){ .updating .dots i{animation:none; opacity:.7;} }
 .update-pill i{width:7px; height:7px; border-radius:50%; background:var(--on-accent);
   animation:pulse 1.6s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1} 50%{opacity:.25}}
@@ -642,8 +616,18 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   <button class="btn-main" id="doneHome">Back to start</button>
 </section>
 
+<div class="sky" id="sky" aria-hidden="true"></div>
+
 <button class="fab" id="fab">+</button>
 <button class="update-pill" id="updatePill" hidden><i></i>Update ready</button>
+
+<!-- Shown for the second or two an update takes. Without it that pause looks
+     exactly like the app having died, which is what sent people to force-quit. -->
+<div class="updating" id="updating" hidden>
+  <div class="dots"><i></i><i></i><i></i></div>
+  <p>Updating</p>
+  <span>This only takes a moment</span>
+</div>
 
 <div class="sheet-bg" id="sheetBg"></div>
 <div class="sheet" id="sheet">
@@ -989,6 +973,33 @@ function renderExample(el, text){
   });
 }
 
+/* ---------- THE SKY ----------
+   Built once, from a fixed seed, so the same stars sit in the same places on
+   every launch - a sky you half-recognise rather than a new one each time.
+   Positions are percentages, so a rotation or a keyboard does not move them.
+   48 is enough to read as a sky at arm's length and few enough that 48 opacity
+   animations cost nothing measurable. */
+(function buildSky(){
+  const sky = document.getElementById('sky');
+  if(!sky) return;
+  let seed = 20260930;
+  const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  const frag = document.createDocumentFragment();
+  for(let n = 0; n < 48; n++){
+    const i = document.createElement('i');
+    const size = (rnd() * 1.3 + 1).toFixed(2);
+    i.style.left   = (rnd() * 100).toFixed(2) + '%';
+    i.style.top    = (rnd() * 100).toFixed(2) + '%';
+    i.style.width  = size + 'px';
+    i.style.height = size + 'px';
+    i.style.setProperty('--o', (rnd() * 0.38 + 0.22).toFixed(2));
+    i.style.setProperty('--t', (rnd() * 4.2 + 2.8).toFixed(2) + 's');
+    i.style.setProperty('--d', (rnd() * -7).toFixed(2) + 's');   // negative: already mid-cycle
+    frag.appendChild(i);
+  }
+  sky.appendChild(frag);
+})();
+
 /* ============================================================
    CONTEXT ROTATION
    ============================================================ */
@@ -1320,74 +1331,100 @@ load(); show('home');
    Reloading is safe at any point: every answer is written to storage as it is
    given, so a reload cannot cost a review. */
 if('serviceWorker' in navigator){
-  // was this page already controlled? if not, the first activation is just
-  // the worker installing, not an update, and must not trigger a reload
-  const hadController = !!navigator.serviceWorker.controller;
   const PILL_AFTER = 4 * 60 * 1000;
-  let updateReady = false, reloading = false, pillTimer = null;
+  let waiting = null, updateReady = false, applying = false, pillTimer = null, navigated = false;
   let resumedAt = Date.now(), touchedSinceResume = false;
 
-  /* The guard against reloading twice used to latch forever, and that is how
-     the pill became a dead button. Backgrounding the app calls this, iOS
-     freezes the page before the navigation can happen, and the flag is left
-     true: every later attempt, including a tap on the pill, returns here and
-     does nothing. So the guard now expires. If the page is really navigating
-     away this timer dies with it; if it is still here three seconds later then
-     the reload plainly did not happen and the door should be open again. */
-  const applyUpdate = () => {
-    if(reloading) return;
-    reloading = true;
-    setTimeout(() => { reloading = false; }, 3000);
-    location.reload();
-  };
-  // and the pill is the user asking directly: it never waits on that guard
-  const forceUpdate = () => { reloading = false; applyUpdate(); };
-  /* Is a reload right now indistinguishable from the app starting?
-     Yes if the page is not on screen, and yes in the moments after it comes
-     back but before a finger has touched it: that is still "launching" as far
-     as the user is concerned. This window matters more than it looks. Coming
-     back from the background is the only time the app looks for an update, and
-     the new worker takes a second or two to arrive, by which point the app is
-     visible again. Without this the update would sit and wait for the NEXT
-     time you leave, so every change took two trips away instead of one. */
+  /* THE RULE THIS IS BUILT AROUND: never reload a page that is hidden, and
+     never reload from pagehide.
+     That is what the old version did, on the theory that swapping versions
+     while nobody is looking is invisible. On iOS it is not invisible, it is
+     fatal: the browser freezes the page part-way through the navigation and
+     what you come back to is a half-torn-down document that paints but does
+     not respond. That is the freeze, and the only way out of it was to force
+     quit. So the reload now happens only when the app is on screen, and the
+     user is told it is happening. */
   const safeMoment = () =>
-    document.hidden || (!touchedSinceResume && Date.now() - resumedAt < 15000);
+    !document.hidden && !touchedSinceResume && (Date.now() - resumedAt) < 15000;
 
-  const markUpdateReady = () => {
+  function applyUpdate(){
+    if(applying || document.hidden) return;
+    applying = true;
+    clearTimeout(pillTimer);
+    $('updatePill').hidden = true;
+    $('updating').hidden = false;          // say what is happening, always
+
+    const go = () => {
+      if(navigated) return;
+      navigated = true;
+      location.reload();
+    };
+    /* Ask the waiting worker to take over, and reload once it has. If no worker
+       is waiting, or it never answers, reload anyway: a stale page that
+       refreshes is a far smaller problem than a page that sits there. */
+    navigator.serviceWorker.addEventListener('controllerchange', go, {once: true});
+    if(waiting){ try{ waiting.postMessage({type: 'SKIP_WAITING'}); }catch(e){} }
+    setTimeout(go, 2000);
+
+    /* And if even the reload did not take - which is what a frozen navigation
+       looks like from in here - stop pretending. Put the app back, put the
+       pill back, and let the user tap it. Nothing latches. */
+    setTimeout(() => {
+      if(navigated && document.visibilityState !== 'visible') return;
+      applying = false;
+      $('updating').hidden = true;
+      if(updateReady) $('updatePill').hidden = false;
+    }, 7000);
+  }
+
+  function markUpdateReady(worker){
+    if(worker) waiting = worker;
     if(updateReady) return;
     updateReady = true;
     if(safeMoment()){ applyUpdate(); return; }
-    // they are using it: wait, and offer the choice if they never look away
-    pillTimer = setTimeout(() => { if(updateReady) $('updatePill').hidden = false; }, PILL_AFTER);
-  };
-  window.markUpdateReady = markUpdateReady;      // also the hook the tests drive
+    // they are mid-review: leave them alone, and offer the choice if they
+    // never look away for long enough to take it quietly
+    pillTimer = setTimeout(() => {
+      if(updateReady && !applying) $('updatePill').hidden = false;
+    }, PILL_AFTER);
+  }
+  window.markUpdateReady = markUpdateReady;      // the hook the tests drive
 
   // pointerdown as well as click: on iOS a click can be swallowed if anything
   // above the pill claims the gesture, and this button must never feel dead
-  $('updatePill').addEventListener('pointerdown', e => { e.preventDefault(); forceUpdate(); });
-  $('updatePill').addEventListener('click', forceUpdate);
+  const tapPill = e => { if(e) e.preventDefault(); applying = false; applyUpdate(); };
+  $('updatePill').addEventListener('pointerdown', tapPill);
+  $('updatePill').addEventListener('click', tapPill);
   document.addEventListener('pointerdown', e => {
-    if(e.target.closest && e.target.closest('#updatePill')) return;   // not a "leave it alone" tap
+    if(e.target.closest && e.target.closest('#updatePill')) return;
     touchedSinceResume = true;
   }, true);
 
+  /* Coming back is the moment to do it: the app is on screen, nothing has been
+     touched, and a reload there is indistinguishable from a launch. Going away
+     is NOT the moment, which is the whole point of the rule above. */
   document.addEventListener('visibilitychange', () => {
-    if(!document.hidden){ resumedAt = Date.now(); touchedSinceResume = false; }
-    // going away: swap versions now, while nobody is watching.
-    // coming back: do it before anything is touched, which reads as a launch.
+    if(document.hidden) return;
+    resumedAt = Date.now();
+    touchedSinceResume = false;
     if(updateReady) applyUpdate();
-  });
-  window.addEventListener('pagehide', () => { if(updateReady) applyUpdate(); });
-
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if(!hadController) return;              // first install, nothing to update to
-    markUpdateReady();
   });
 
   window.addEventListener('load', () => {
     // updateViaCache:'none' so the check is a real check: otherwise the browser
     // may answer it from its own HTTP cache and find nothing new for hours
     navigator.serviceWorker.register('sw.js', {updateViaCache: 'none'}).then(reg => {
+      // a worker already sitting waiting from a previous visit
+      if(reg.waiting && navigator.serviceWorker.controller) markUpdateReady(reg.waiting);
+      reg.addEventListener('updatefound', () => {
+        const nw = reg.installing;
+        if(!nw) return;
+        nw.addEventListener('statechange', () => {
+          // installed AND something was already in charge: that is an update,
+          // not a first install
+          if(nw.state === 'installed' && navigator.serviceWorker.controller) markUpdateReady(nw);
+        });
+      });
       const check = () => { try{ reg.update(); }catch(e){} };
       document.addEventListener('visibilitychange', () => { if(!document.hidden) check(); });
       window.addEventListener('focus', check);

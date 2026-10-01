@@ -23,7 +23,7 @@
    holds a copy of index.html taken when the worker installed, and if that
    copy is ever served the app is frozen at that version no matter what the
    server says. Changing the name drops the whole old cache on activate. */
-const CACHE = 'vocab-shell-v21';
+const CACHE = 'vocab-shell-v22';
 const SHELL = [
   './',
   './index.html',
@@ -46,8 +46,21 @@ self.addEventListener('install', e => {
     caches.open(CACHE)
       // one bad URL must not fail the whole install
       .then(c => Promise.all(SHELL.map(u => c.add(u).catch(() => {}))))
-      .then(() => self.skipWaiting())
   );
+});
+
+/* The new worker does NOT take over on its own any more.
+ *
+ * It used to call skipWaiting() the moment it finished installing, which meant
+ * it activated underneath a session already in progress and, on activate,
+ * deleted the cache that session was still reading from. The page carried on
+ * with a controller whose cache no longer held its fonts or its clips.
+ *
+ * Now it waits until the page says it is ready to be replaced - which the page
+ * only says at a moment when it is about to reload anyway. Nothing is swapped
+ * under anyone's feet. */
+self.addEventListener('message', e => {
+  if(e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('activate', e => {
