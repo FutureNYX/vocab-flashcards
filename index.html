@@ -203,17 +203,28 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .screen.on{display:flex;}
 
 /* ---------- HOME ----------
-   The home screen IS a card, laid out by the same boxes as the study screen:
-   a top bar, the card, a line under it. So the home card sits exactly where
-   the first card will, and starting is turning it over like a page.
-   It is set as the front of a card is set: one word in the lamp, a small serif
-   line under it. The counts live in the top bar, where they stay once you are
-   studying. The whole screen is the tap target. */
+   The home screen IS a card, set as the front of a study card is set: one word
+   in the lamp, a small serif line under it, and then the three counts. It is a
+   smaller card than the ones you study - a little over half the screen, in the
+   middle of it - with the line that starts things directly underneath.
+   Starting turns it over like a page. The whole screen is the tap target. */
 #home{padding-left:12px; padding-right:12px; cursor:pointer;}
-#home .top{justify-content:center;}
+/* the card and its line are centred on the screen as one group */
+.home-mid{flex:1 1 auto; min-height:0; display:flex; flex-direction:column; justify-content:center;}
+#home .card-wrap{flex:0 0 auto; height:56vh; width:100%; max-width:420px; margin:0 auto;}
+#home .hint{padding-top:18px;}
+.stats{display:flex; gap:10px; width:100%; margin-top:28px;}
+.stat{flex:1; background:var(--card-2); border:1px solid var(--line); border-radius:16px;
+  padding:14px 8px;}
+.stat b{display:block; font-family:var(--serif); font-variation-settings:'opsz' 60;
+  font-size:26px; font-weight:600; letter-spacing:0;}
+.stat span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.09em;}
+/* The lamp is behind the word, as on a study card. The counts under the word
+   push it above the middle of this card, so the pool is placed from the middle
+   by the same distance rather than at a fixed fraction of the height. */
 .home-card{position:absolute; inset:0; overflow:hidden;
   background:var(--card); border:1px solid var(--edge); border-radius:24px;
-  background-image:radial-gradient(80% 40% at 50% 48%, var(--lamp, transparent), transparent 72%);
+  background-image:radial-gradient(80% 130px at 50% calc(50% - 73px), var(--lamp, transparent), transparent 72%);
   padding:30px 22px 84px; display:flex; flex-direction:column;
   align-items:center; justify-content:center; text-align:center;
   transform-origin:0 50%; backface-visibility:hidden; -webkit-backface-visibility:hidden;}
@@ -243,7 +254,9 @@ button.hint{display:block; width:100%;}
 .card-wrap{flex:1 1 auto; position:relative; perspective:1400px; margin:8px 0 12px; min-height:0;}
 .card{position:absolute; inset:0; transform-style:preserve-3d;
   transition:transform .42s cubic-bezier(.22,.68,.28,1);}
-.card.flipped{transform:rotateY(180deg);}
+/* minus: the right-hand edge comes towards you and goes over to the left, the
+   way the home card turns. It used to go the other way round. */
+.card.flipped{transform:rotateY(-180deg);}
 /* a new card should snap to its front, not reverse-flip and flash its answer */
 .card.noanim, .card.noanim .face{transition:none !important;}
 .face, .home-card{
@@ -415,14 +428,19 @@ button.hint{display:block; width:100%;}
   display:flex; flex-direction:column;}
 .more-panel[hidden]{display:none;}
 .more-body{flex:1 1 auto; min-height:0; overflow:hidden; text-align:center;
-  padding:26px 26px 0;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;}
+  padding:30px 26px 0;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:14px;}
 /* The headword stands over its definition as a title, in the same face it has
    on the front of the card. Run into the sentence with a colon it was one more
-   thing to read past; above it, it is simply what the panel is about. */
+   thing to read past; above it, it is simply what the panel is about.
+   It is ALWAYS at the top of the card, in the same place on every word, however
+   much or little is under it. The two auto margins - under the word and under
+   the clip - share out whatever room is left, so the rest sits in the middle
+   of the space below the title instead of dragging the title down with it. */
 .more-word{font-family:var(--serif); font-variation-settings:'opsz' 96; font-weight:600;
   font-size:31px; line-height:1.1; letter-spacing:-.016em; color:var(--card-ink);
-  max-width:330px; word-break:break-word;}
+  max-width:330px; word-break:break-word; margin-bottom:auto;}
+.more-clip{margin-bottom:auto;}
 .more-word.long{font-size:25px;}
 .more-word.longer{font-size:21px; line-height:1.18;}
 .more-def{max-width:330px; font-size:19px; line-height:1.45; font-weight:500; color:var(--bright);}
@@ -443,8 +461,10 @@ button.hint{display:block; width:100%;}
 /* The attribution is the licence. GIPHY's API is free, commercial use included,
    on the condition that this is shown wherever their clips are. It appears only
    when a clip actually did. */
-.gif-credit{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
-  font-weight:700; color:var(--card-muted); opacity:.75;}
+/* Plain Manrope, as written: not small capitals on wide tracking, which read as
+   a different typeface from everything else on the card. */
+.gif-credit{font-family:var(--sans); font-size:12px; letter-spacing:0; text-transform:none;
+  font-weight:500; color:var(--card-muted);}
 .gif-credit[hidden]{display:none;}
 /* The X sits level with the speaker button beside it: same 54px, same distance
    off the floor of the card, so the bottom edge reads as one row. */
@@ -506,11 +526,12 @@ button.hint{display:block; width:100%;}
   #home.on .home-card > *{animation:rise .5s cubic-bezier(.2,.8,.3,1) backwards;}
   #home.on .home-card > *:nth-child(1){animation-delay:.08s;}
   #home.on .home-card > *:nth-child(2){animation-delay:.14s;}
+  #home.on .home-card > *:nth-child(3){animation-delay:.20s;}
 
   /* Starting turns the home card like a page: hinged on its left edge, it
-     swings up towards you and over, darkening as it leaves the lamp, and the
-     first card is lying underneath where it was. While it turns the home
-     screen is stacked above the study screen, which is already laid out. */
+     swings up towards you and over, darkening as it leaves the lamp, while the
+     first card - a bigger one - is dealt up underneath it. While it turns the
+     home screen is stacked above the study screen, which is already laid out. */
   @keyframes pageTurn{
     0%  {transform:rotateY(0deg);    filter:brightness(1);}
     70% {transform:rotateY(-88deg);  filter:brightness(.45);}
@@ -519,8 +540,9 @@ button.hint{display:block; width:100%;}
   #home.turning{z-index:2; overflow:hidden; pointer-events:none;}
   #home.turning .home-card{animation:pageTurn .72s cubic-bezier(.5,0,.75,.4) forwards;}
   #home.turning .home-card > *{animation:none;}
-  #home.turning .top, #home.turning .hint, #home.turning .fab{opacity:0; transition:opacity .18s ease;}
-  #study.arriving .top, #study.arriving .hint, #study.arriving .speaker{animation:fadeIn .4s ease-out .25s backwards;}
+  #home.turning .hint, #home.turning .fab{opacity:0; transition:opacity .18s ease;}
+  #study.arriving .top, #study.arriving .hint{animation:fadeIn .4s ease-out .25s backwards;}
+  #study.arriving .card-wrap{animation:dealIn .5s cubic-bezier(.2,.8,.3,1) .16s backwards;}
 
   /* the answers arrive with the turn of the card rather than popping in */
   .answers.on .ans{animation:rise .32s cubic-bezier(.2,.8,.3,1) backwards;}
@@ -615,23 +637,23 @@ body > .fab{position:fixed; right:18px; bottom:calc(var(--pad-bottom) + 14px); z
 
 <!-- ============ HOME ============ -->
 <section id="home" class="screen on">
-  <!-- Same three boxes as the study screen - top bar, card, line - so this card
-       lies exactly where the first study card will. -->
-  <div class="top">
-    <div class="counts">
-      <span>Due <em id="sDue">0</em></span>
-      <span>New <em id="sNew">0</em></span>
-      <span>Learned <em id="sKnown">0</em></span>
+  <!-- One smaller card in the middle of the screen, with its line directly
+       beneath. -->
+  <div class="home-mid">
+    <div class="card-wrap" id="homeWrap">
+      <div class="home-card" id="homeCard">
+        <h1 class="front-word">Vocab</h1>
+        <div class="pos" id="homeSub">IELTS high-band words</div>
+        <div class="stats">
+          <div class="stat"><b id="sDue">0</b><span>Due</span></div>
+          <div class="stat"><b id="sNew">0</b><span>New</span></div>
+          <div class="stat"><b id="sKnown">0</b><span>Learned</span></div>
+        </div>
+      </div>
+      <button class="speaker fab" id="fab" aria-label="Request a word">+</button>
     </div>
+    <button class="hint" id="goStudy">Tap to start</button>
   </div>
-  <div class="card-wrap" id="homeWrap">
-    <div class="home-card" id="homeCard">
-      <h1 class="front-word">Vocab</h1>
-      <div class="pos" id="homeSub">IELTS high-band words</div>
-    </div>
-    <button class="speaker fab" id="fab" aria-label="Request a word">+</button>
-  </div>
-  <button class="hint" id="goStudy">Tap to start</button>
 </section>
 
 <!-- ============ STUDY ============ -->
