@@ -315,8 +315,18 @@ button.hint{display:block; width:100%;}
   z-index:6; box-shadow:0 4px 14px rgba(0,0,0,.28);}
 .speaker svg{width:26px; height:26px; fill:var(--text);}
 .speaker:active{background:var(--line); transform:scale(.94);}
-.speaker.speaking{background:var(--accent); border-color:var(--accent);}
-.speaker.speaking svg{fill:var(--on-accent);}
+/* While the word is being said the button does not change colour. Two fine
+   rings leave it and fade, one after the other, the way sound leaves a
+   speaker. With reduced motion there is a single still ring instead. */
+.speaker.speaking::before, .speaker.speaking::after{
+  content:''; position:absolute; inset:-1px; border-radius:50%; pointer-events:none;
+  border:1px solid var(--accent); opacity:0;}
+.speaker.speaking::before{opacity:.45; transform:scale(1.16);}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes soundRing{0%{transform:scale(1); opacity:.7;} 100%{transform:scale(1.75); opacity:0;}}
+  .speaker.speaking::before{opacity:0; transform:none; animation:soundRing 1.2s ease-out infinite;}
+  .speaker.speaking::after{animation:soundRing 1.2s ease-out .6s infinite;}
+}
 
 /* Sentence first, word underneath: the point is to meet the word in context
    and only then name it. */
