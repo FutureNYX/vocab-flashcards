@@ -246,12 +246,12 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   align-items:center; justify-content:center; gap:6px;}
 #home h1{font-family:var(--serif); font-variation-settings:'opsz' 144; font-size:44px;
   font-weight:600; letter-spacing:-.01em; margin:0;}
-/* Set the way the part of speech is set on the card: the display serif, small,
-   lowercase, no tracking. The stamp that was here read as crooked rather than
-   as stamped, and the tracked caps before it were the most recognisable piece
-   of default interface styling there is. */
-#home .sub{color:var(--muted); font-family:var(--serif); font-variation-settings:'opsz' 24;
-  font-size:17px; font-weight:400; letter-spacing:0; margin-top:10px; margin-bottom:30px;}
+/* A hairline capsule in the accent, sitting dead straight: the stamp without the
+   tilt. A border gives the line something to be, which is what the bare tracked
+   caps that started here never had. */
+#home .sub{color:var(--accent); font-size:12.5px; font-weight:600; letter-spacing:.01em;
+  border:1px solid var(--accent); border-radius:999px; padding:5px 13px;
+  margin-top:14px; margin-bottom:28px;}
 .stats{display:flex; gap:10px; width:100%; margin-bottom:26px;}
 .stat{flex:1; background:var(--card-2); border:1px solid var(--line); border-radius:16px;
   padding:14px 8px;}
@@ -403,8 +403,13 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* Marked exactly as the target word is marked in the sentence above: the accent
    colour and nothing else. Same weight as the text around it, no fill, no rule,
    no extra boldness - one treatment used in both halves of the card. */
-.ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:16px;
-  max-width:340px; font-size:21px; line-height:1.48; font-weight:500;}
+/* 18px against the sentence's 22, and that is what makes them LOOK the same
+   size. The letters are identical in height at equal sizes - measured - but
+   Cyrillic lowercase has almost no narrow letters and nearly every one fills
+   the full x-height, so a Russian word reads as a wider, denser block than an
+   English one. Matching the number made it look a size too big. */
+.ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:10px 16px;
+  max-width:340px; font-size:18px; line-height:1.48; font-weight:500;}
 .ru-words:empty{display:none;}
 .ru-words .hl{background:none; box-shadow:none; text-decoration:none;
   border-radius:0; padding:0; font-weight:inherit; color:var(--accent);}
