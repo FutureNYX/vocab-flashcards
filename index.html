@@ -168,7 +168,17 @@
                 rgba(255,255,255,0) 50%, rgba(80,64,34,.20) 100%);
   --stock-lit:rgba(255,255,255,.85); --stock-shade:rgba(80,64,34,.14);
   --stock-vignette:rgba(80,64,34,.06);
+  /* Daylight has no lamp to glow, so the same idea is carried by brightness on
+     the card and by ink strength on the answers: nothing glows on a pale ground. */
+  --lamp:rgba(255,255,255,.80); --lamp-glow:none;
+  --ans-dim:.74; --ans-mid:.88; --ans-top:var(--easy);
+  --ans-glow-mid:none; --ans-glow-top:none;
 }
+/* On a pale ground the fade cannot go as far as it does at night - at half
+   strength Wrong fell to 2:1 - so daylight carries the rest of the scale in
+   the weight of the word. */
+[data-palette="heartwood"] .ans.w b{font-weight:500;}
+[data-palette="heartwood"] .ans.e b{font-weight:800;}
 
 [data-palette="pine"]{               /* a pine-green room, one cream accent */
   /* Heartwood is a cream card with a green accent. This is its mirror: green is
@@ -193,6 +203,11 @@
                 rgba(0,0,0,0) 52%, rgba(0,0,0,.28) 100%);
   --stock-lit:rgba(255,255,255,.05); --stock-shade:rgba(0,0,0,.45);
   --stock-vignette:rgba(0,0,0,.25);
+  /* the lamp on the front of the card, and the light the answers give off */
+  --lamp:rgba(235,203,130,.13); --lamp-glow:0 0 26px rgba(235,203,130,.35);
+  --ans-dim:.55; --ans-mid:.86; --ans-top:#FFF0C9;
+  --ans-glow-mid:0 0 12px rgba(235,203,130,.40);
+  --ans-glow-top:0 0 6px rgba(235,203,130,.90), 0 0 20px rgba(235,203,130,.65), 0 0 40px rgba(235,203,130,.40);
 }
 
 
@@ -327,6 +342,11 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
      mid-turn. Without this the button visibly detaches while the card flips. */
   transform:rotateY(0deg);}
 .face.back{transform:rotateY(180deg);}
+/* The front of the card is one word on an empty sheet, so it is lit like one:
+   a pool of warm light behind the middle and a trace of it on the word. The
+   word stays its own colour - it is the card that is lit, not the type. */
+.face.front{background-image:radial-gradient(80% 40% at 50% 48%, var(--lamp, transparent), transparent 72%);}
+.face.front .front-word{text-shadow:var(--lamp-glow, none);}
 
 /* Bottom right of the card, above both faces and outside their 3D context. */
 .speaker{position:absolute; right:16px; bottom:16px; width:58px; height:58px; border-radius:50%;
@@ -499,18 +519,16 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .ans{transition:transform .12s ease, filter .12s ease;}
 .ans:active{transform:scale(.955); filter:brightness(1.12);}
 .ans.w b{color:var(--wrong);} .ans.h b{color:var(--hard);} .ans.e b{color:var(--easy);}
-/* Empty, half, full. The three answers are one colour at three fills, so the
-   row reads left to right as a scale: an outline for Wrong, a tint for Hard,
-   the solid accent for Easy. Brightness alone was too quiet a difference to
-   read at a glance; the fill is not. Where color-mix is unsupported the plain
-   outlined card above stands. */
-.ans.w{background:transparent; border-color:color-mix(in srgb, var(--easy) 34%, transparent);}
-.ans.w b{color:color-mix(in srgb, var(--easy) 74%, var(--bg));}
-.ans.h{background:color-mix(in srgb, var(--easy) 17%, transparent); border-color:transparent;}
-.ans.h b{color:color-mix(in srgb, var(--easy) 90%, var(--bg));}
-.ans.e{background:var(--easy); border-color:transparent;}
-.ans.e b{color:var(--on-accent);}
-.ans.e span{color:color-mix(in srgb, var(--on-accent) 72%, transparent);}
+/* Words only. No buttons are drawn: three words, dim to lit, so the card is the
+   only object on the screen and the answers read as a scale by light alone.
+   The tap targets are exactly as large as before - the whole third of the row
+   under each word still takes the tap, it just is not outlined. */
+.ans.w, .ans.h, .ans.e{background:transparent; border-color:transparent;}
+.ans b{font-size:18px;}
+.ans.w b{color:var(--easy); opacity:var(--ans-dim, .55);}
+.ans.h b{color:var(--easy); opacity:var(--ans-mid, .86); text-shadow:var(--ans-glow-mid, none);}
+.ans.e b{color:var(--ans-top, var(--easy)); text-shadow:var(--ans-glow-top, none);}
+.ans.e span{color:var(--muted);}
 
 /* ---------- DONE ---------- */
 #done{justify-content:center; align-items:center; text-align:center; gap:8px;}
