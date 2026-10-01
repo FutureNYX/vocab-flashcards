@@ -399,9 +399,17 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* The Russian is where the translations live, highlighted exactly as the
    target word is highlighted inside the sentence on the front. The gap clears
    the 3px spread each highlight carries, so they do not touch. */
-.ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
-  max-width:340px; font-size:22px; line-height:1.48; font-weight:500;}
+/* The translations are marked the same way the target word is marked in the
+   sentence above: by not being marked. No block, no fill, no border - they are
+   simply the brightest thing in the lower half, which on a card holding two
+   lines of text is all the emphasis anything needs. The green block was the
+   second green on the screen and it was winning against the first. */
+.ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:16px;
+  max-width:340px; font-size:24px; line-height:1.45; font-weight:600;
+  color:var(--bright);}
 .ru-words:empty{display:none;}
+.ru-words .hl{background:none; box-shadow:none; color:inherit; font-weight:inherit;
+  text-decoration:none; border-radius:0; padding:0;}
 
 /* More. Everything that is reference rather than recall lives behind it, so the
    card itself stays two lines and a translation. */
@@ -411,7 +419,11 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   background:none; border:0; padding:10px 18px; cursor:pointer;
   font:600 15px/1 var(--sans); color:var(--card-muted);
   text-decoration:underline; text-underline-offset:4px;}
-.more-btn.open{text-decoration:none; font-size:26px; line-height:1; padding:8px 16px;}
+/* Closing it is a target, not a glyph: 54px across with a ring around it, so
+   there is something obvious to aim at rather than a small mark on a card. */
+.more-btn.open{text-decoration:none; font-size:24px; line-height:1; padding:0;
+  width:54px; height:54px; border-radius:50%; display:grid; place-items:center;
+  border:1px solid var(--card-line); background:var(--card-2); color:var(--card-ink);}
 .more-btn:focus-visible{outline:2px solid currentColor; outline-offset:2px; border-radius:8px;}
 .more-panel{position:absolute; inset:0; background:var(--card); border-radius:inherit;
   display:flex; flex-direction:column;}
@@ -419,7 +431,14 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 .more-scroll{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;
   padding:34px 26px 78px; text-align:center;
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;}
-.more-def{max-width:330px; font-size:19px; line-height:1.45; font-weight:500; color:var(--bright);}
+/* Set as a dictionary sets an entry: the headword, then what kind of word it
+   is in italic, then the sense running straight on from it. No colon - a
+   dictionary does not use one, the change of face is the punctuation. */
+.more-def{max-width:330px; font-size:19px; line-height:1.5; font-weight:500; color:var(--bright);}
+.more-def .hw{font-family:var(--serif); font-variation-settings:'opsz' 72; font-weight:600;
+  font-size:1.2em; letter-spacing:-.012em; margin-right:.3em;}
+.more-def .hwpos{font-family:var(--serif); font-style:italic; font-weight:400;
+  color:var(--card-muted); margin-right:.42em;}
 .more-syn{max-width:330px; font-size:16.5px; line-height:1.5; color:var(--card-muted);}
 .more-gif{width:100%; max-width:300px;}
 .more-gif img{width:100%; border-radius:10px; display:block;}
@@ -1082,6 +1101,20 @@ function renderGif(el, word){
 fetch('gifs.json').then(r => r.ok ? r.json() : null)
   .then(j => { GIFS = j || {}; }).catch(() => { GIFS = {}; });
 
+/* The entry on the More panel, built the way a dictionary builds one: headword,
+   part of speech in italic, then the sense running on from it in the same line.
+   Nodes rather than innerHTML, like everything else that touches word data. */
+function renderEntry(el, w){
+  el.textContent = '';
+  const hw = document.createElement('span');
+  hw.className = 'hw'; hw.textContent = w.word;
+  const pos = document.createElement('span');
+  pos.className = 'hwpos'; pos.textContent = posName(w.pos);
+  el.appendChild(hw);
+  el.appendChild(pos);
+  el.appendChild(document.createTextNode(w.def || ''));
+}
+
 /* The possible Russian translations, under the Russian definition and carrying
    the same green highlight the target word carries inside the sentence on the
    front. No label above them: on a card with two languages and nothing else,
@@ -1117,7 +1150,7 @@ function render(){
   closeMore();
   renderExample($('bCtx'), nextContext(w));
   renderRussian($('bRu'), w.ru);
-  $('mDef').textContent = w.def || '';
+  renderEntry($('mDef'), w);
   $('mSyn').textContent = w.en || '';
   renderGif($('mGif'), w.word);
 
