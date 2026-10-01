@@ -1,38 +1,13 @@
 <!doctype html>
-<html lang="en" data-palette="grove">
+<html lang="en" data-palette="ink">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="theme-color" content="#E0CFAE">
-<meta name="color-scheme" content="light dark">
-<script>
-/* Sun and moon, resolved BEFORE first paint, or the app flashes the wrong
-   sheet on every launch. The choice lives under its own key and is never
-   written anywhere near the progress key. Follows the phone until tapped. */
-(function(){
-  try{
-    var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
-    var sys  = dark ? 'pine' : 'heartwood';
-    var pal  = sys;
-    /* A tap on the switch is an override for NOW, not a setting. It records the
-       light the phone itself was in when it was made, and stands only while the
-       phone is still in that light. The next time the phone flips, the override
-       is dropped and the app follows it again: choosing daylight at one in the
-       morning does not leave it light tomorrow night. */
-    try{
-      var o = JSON.parse(localStorage.getItem('vocab.theme') || 'null');
-      if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'pine')) pal = o.pal;
-      else if(o) localStorage.removeItem('vocab.theme');
-    }catch(e){}
-    document.documentElement.setAttribute('data-palette', pal);
-    var m = document.querySelector('meta[name="theme-color"]');
-    if(m) m.setAttribute('content', pal === 'heartwood' ? '#E0CFAE' : '#0A120D');
-  }catch(e){}
-})();
-</script>
+<meta name="theme-color" content="#0C0D0C">
+<meta name="color-scheme" content="dark">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
@@ -143,48 +118,32 @@
   --hard-soft:rgba(211,170,99,.17); --easy-soft:rgba(111,193,146,.17);
 }
 
-/* ---------- HEARTWOOD & UNDERSTOREY ----------
-   Two places rather than two brightnesses. Heartwood is a slice of timber seen
-   in daylight: honey everywhere, growth rings running across the sheet as well
-   as behind it, and green surviving only in the highlight, which is the one
-   thing on the card that should read as a leaf. Understorey is the forest
-   floor after rain - a dark moss ground carrying ferns, with the card a pale
-   birch leaf lying on it.
-
-   Understorey is why the ink is split in two. Its card is light and its ground
-   is dark, so --text and --card-ink genuinely differ; every other palette
-   leaves the card values alone and they resolve to the ground ones. */
-[data-palette="heartwood"]{          /* a slice of timber, in daylight */
-  --bg:#E0CFAE;  --card:#FAF4E8;  --card-2:#F1E8D6;
-  --text:#3A2B17; --bright:#2A1D0B; --muted:#6A5836; --line:#E0D2B8; --ru-text:#41301A;
-  --edge:rgba(122,92,50,.30);
-  --accent:#4E6B33; --on-accent:#FAF4E8;
-  --wrong:#8B4024; --hard:#6F4E0F; --easy:#42582A;
-  --hl-bg:rgba(134,170,92,.46); --hl-text:#1B2610;
-  --chip-bg:rgba(78,107,51,.14); --chip-text:#2C4322;
-  --hard-soft:rgba(111,78,15,.12); --easy-soft:rgba(66,88,42,.12);
-  --card-ink:#32240F; --card-muted:#7A6642; --card-line:#E0D2B8; --card-wrong:#8B4024;
-  --sheet-light:linear-gradient(152deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,.20) 32%,
-                rgba(255,255,255,0) 50%, rgba(80,64,34,.20) 100%);
-  --stock-lit:rgba(255,255,255,.85); --stock-shade:rgba(80,64,34,.14);
-  --stock-vignette:rgba(80,64,34,.06);
-  /* Daylight has no lamp to glow, so the same idea is carried by brightness on
-     the card and by ink strength on the answers: nothing glows on a pale ground. */
-  --lamp:rgba(255,255,255,.80); --lamp-glow:none;
-  --ans-dim:.74; --ans-mid:.88; --ans-top:var(--easy);
-  --ans-glow-mid:none; --ans-glow-top:none;
+/* ---------- ONE LIGHT, TWO ROOMS ----------
+   The app is dark only. There is no daylight theme and no switch.
+   It has two palettes all the same, one per place: INK is the home screen
+   (and the done screen and the request sheet), PINE is the card you study.
+   show() sets data-palette on <html> as the screen changes. */
+[data-palette="ink"]{                /* home. True dark: grey, never black */
+  --bg:#0C0D0C;  --card:#161816;  --card-2:#1D201D;
+  --text:#D9DDD6; --bright:#F0F3EE; --muted:#828A80; --line:#262A25; --ru-text:#D9DDD6;
+  --edge:rgba(180,190,178,.15);
+  --accent:#8FB077; --on-accent:#0C0D0C;
+  --wrong:#D08A72; --hard:#CDA765; --easy:#8FB077;
+  --hl-bg:rgba(143,176,119,.26); --hl-text:#EDF4E7;
+  --chip-bg:rgba(143,176,119,.16); --chip-text:#DCEBD1;
+  --hard-soft:rgba(205,167,101,.15); --easy-soft:rgba(143,176,119,.16);
+  --card-ink:#D9DDD6; --card-muted:#8A9187; --card-line:#262A25; --card-wrong:#D08A72;
+  /* No black, and no 21:1. Pure white on pure black blooms at the letter edges
+     and the pupil never settles; this sits near 13:1 on a ground that is dark
+     grey rather than absent, which is the range that reads as restful. */
+  --sheet-light:linear-gradient(162deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.015) 34%,
+                rgba(0,0,0,0) 52%, rgba(0,0,0,.28) 100%);
+  --stock-lit:rgba(255,255,255,.05); --stock-shade:rgba(0,0,0,.45);
+  --stock-vignette:rgba(0,0,0,.25);
 }
-/* On a pale ground the fade cannot go as far as it does at night - at half
-   strength Wrong fell to 2:1 - so daylight carries the rest of the scale in
-   the weight of the word. */
-[data-palette="heartwood"] .ans.w b{font-weight:500;}
-[data-palette="heartwood"] .ans.e b{font-weight:800;}
 
-[data-palette="pine"]{               /* a pine-green room, one cream accent */
-  /* Heartwood is a cream card with a green accent. This is its mirror: green is
-     the room and cream is the accent, so the two themes swap roles when the
-     phone switches rather than becoming a different design.
-     The card sits two clear steps above the ground. The theme before this had
+[data-palette="pine"]{               /* the card. A pine-green room, one cream accent */
+  /* The card sits two clear steps above the ground. The theme before this had
      them 4% apart, which is too little to read as an object and too much to
      read as one surface. */
   --bg:#0A120D;  --card:#14231A;  --card-2:#1B2D22;
@@ -229,15 +188,14 @@
 }
 
 /* ---------- NIGHT SKY ----------
-   Ink only. One element per star, each sitting at a fixed point and changing
+   One element per star, each sitting at a fixed point and changing
    nothing but its own opacity, on its own duration and its own delay.
    The first attempt faded two whole layers of gradients in and out instead.
    Nothing actually moved, but a hundred points brightening and dimming in
    unison reads as drift across the screen, which is the opposite of a sky.
    A star has to stay exactly where it is and only breathe. */
-.sky{display:none; position:fixed; inset:0; pointer-events:none; z-index:0;
+.sky{position:fixed; inset:0; pointer-events:none; z-index:0;
   overflow:hidden; contain:strict;}
-[data-palette="pine"] .sky{display:block;}
 .sky i{position:absolute; border-radius:50%; background:#E4EFE6;
   opacity:var(--o);
   animation:star var(--t) ease-in-out var(--d) infinite;
@@ -255,6 +213,7 @@ html,body{height:100%;}
 
 body{
   margin:0; background:var(--bg); color:var(--text);
+  transition:background-color .45s ease;   /* home and card are different rooms */
   font-family:var(--sans);
   -webkit-font-smoothing:antialiased;
   touch-action:manipulation;
@@ -269,11 +228,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    Built as a card, so the app opens on the same object it teaches with:
    the card surface, the beige edge and the radius are the ones from .face. */
 #home{justify-content:center; align-items:center; text-align:center;}
-.theme-btn{position:absolute; top:calc(var(--pad-top) + 6px); right:10px;
-  width:60px; height:60px; border-radius:50%; display:grid; place-items:center;
-  color:var(--muted); z-index:10;}
-.theme-btn svg{width:30px; height:30px; fill:currentColor;}
-.theme-btn:active{transform:scale(.92);}
 .home-card{width:100%; max-width:420px; min-height:56vh; position:relative; overflow:hidden;
   background:var(--card); border:1px solid var(--edge); border-radius:24px;
   padding:34px 22px 30px; display:flex; flex-direction:column;
@@ -381,13 +335,9 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 /* One highlight, used in two places: the target word inside the sentence on
    the front, and the possible translations on the back. It was scoped to
    .example, so the translations rendered with the markup and none of the green. */
-/* How the target word is marked depends on the light.
-   At night it is lit, not coloured: see --mark-* in the pine palette.
-   By day there is no lamp - light does not show on a pale card - so the word
-   takes the accent colour instead and nothing else, which is what every
-   palette without --mark-* values falls back to.
-   Either way nothing about the SHAPE of the line changes: no rule, no block,
-   no extra weight. */
+/* The target word is lit, not coloured: see --mark-* in the pine palette.
+   Nothing about the SHAPE of the line changes: no rule, no block, no extra
+   weight. (A palette with no --mark-* values falls back to the accent colour.) */
 .context .hl{text-decoration:none; font-weight:inherit; border-radius:999px;
   color:var(--mark-ink, var(--accent));
   background:var(--mark-pool, none); box-shadow:var(--mark-halo, none);
@@ -452,7 +402,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
    the full x-height, so a Russian word reads as a wider, denser block than an
    English one. Matching the number made it look a size too big.
    The translations carry no light of their own: the lamp belongs to the word
-   in the sentence. At night they are plain white, by day the accent colour. */
+   in the sentence. They are plain white. */
 .ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:10px 16px;
   max-width:340px; font-size:19px; line-height:1.48; font-weight:500;}
 .ru-words:empty{display:none;}
@@ -599,7 +549,7 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   #done.on > *:nth-child(2){animation-delay:.08s;}
   #done.on > *:nth-child(3){animation-delay:.16s;}
 
-  .btn-main, .fab, .speaker, .more-close, .icon-btn, .theme-btn{transition:transform .12s ease;}
+  .btn-main, .fab, .speaker, .more-close, .icon-btn{transition:transform .12s ease;}
   .btn-main:active{transform:scale(.975);}
 
   /* once in a while, a shooting star. Night only; gone in under a second. */
@@ -674,10 +624,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
 
 <!-- ============ HOME ============ -->
 <section id="home" class="screen on">
-  <!-- The light is a choice, not the phone's: it follows the system until this
-       is tapped, then remembers. Home screen only, because the study screen's
-       top right is the undo button and that has to stay where the thumb is. -->
-  <button class="theme-btn" id="themeBtn" aria-label="Switch between light and dark"></button>
   <!-- The home screen is itself a card: same surface, same beige edge, same
        radius as the ones you study, so the app opens on its own vocabulary. -->
   <div class="home-card">
@@ -701,8 +647,6 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
       <span>New <em id="cNew">0</em></span>
     </div>
     <div class="top-right">
-      <!-- the light switch is reachable mid-review too, not only from home -->
-      <button class="icon-btn" id="themeBtnStudy"></button>
       <button class="icon-btn" id="undo" disabled>&#8634;</button>
     </div>
   </div>
@@ -1094,7 +1038,16 @@ function speak(text){
 const $ = id => document.getElementById(id);
 let current = null, flipped = false, undoSnap = null;
 
+/* Each screen has its room: the card is pine, everything else is ink. */
+const ROOM   = {home:'ink', study:'pine', done:'ink'};
+const GROUND = {ink:'#0C0D0C', pine:'#0A120D'};
+function applyPalette(pal){
+  document.documentElement.setAttribute('data-palette', pal);
+  const m = document.querySelector('meta[name="theme-color"]');
+  if(m) m.setAttribute('content', GROUND[pal]);
+}
 function show(name){
+  applyPalette(ROOM[name]);
   ['home','study','done'].forEach(s => $(s).classList.toggle('on', s === name));
   $('fab').style.display = (name === 'study') ? 'none' : 'grid';
   if(name === 'home') refreshHome();
@@ -1172,13 +1125,12 @@ function renderExample(el, text){
   }
   sky.appendChild(frag);
 
-  /* Every so often one crosses. Only at night, only while the app is on screen,
+  /* Every so often one crosses. Only while the app is on screen,
      never with reduced motion, and the element removes itself when it is done. */
   const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(calm) return;
   const shoot = () => {
-    const night = document.documentElement.getAttribute('data-palette') === 'pine';
-    if(night && !document.hidden){
+    if(!document.hidden){
       const s = document.createElement('i');
       s.className = 'shoot';
       s.style.left = (8 + Math.random() * 44) + '%';
@@ -1451,68 +1403,9 @@ function flushQueue(){
       .then(() => inflight.delete(r.text));
   });
 }
-/* ---------- SUN AND MOON ----------
-   Heartwood by day, understorey at night, switched by hand and remembered under its
-   own key. THEME_KEY is not KEY and must never become it: this writes one
-   short string and touches nothing the scheduler owns. */
-const THEME_KEY = 'vocab.theme';
-const SUN_ICON  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-14.5 1.6 2.7h-3.2zM12 21.5l-1.6-2.7h3.2zM2.5 12l2.7-1.6v3.2zM21.5 12l-2.7 1.6v-3.2zM5.2 5.2l3.1.4-1.6 1.6zM18.8 18.8l-3.1-.4 1.6-1.6zM18.8 5.2l-1.5 3.1-1.6-1.6zM5.2 18.8l1.5-3.1 1.6 1.6z"/></svg>';
-const MOON_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 14.6A8.6 8.6 0 0 1 9.4 3.3 8.7 8.7 0 1 0 20.7 14.6z"/></svg>';
-
-const THEME_BTNS = ['themeBtn', 'themeBtnStudy'];
-
-/* the light the PHONE is in, which is what the app follows by default */
-function systemPalette(){
-  return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches)
-    ? 'pine' : 'heartwood';
-}
-/* An override survives only while the phone is still in the light it was made
-   in. Once the phone flips, it is dropped and we are back to following it. */
-function resolvePalette(){
-  const sys = systemPalette();
-  try{
-    const o = JSON.parse(localStorage.getItem(THEME_KEY) || 'null');
-    if(o && o.basis === sys && (o.pal === 'heartwood' || o.pal === 'pine')) return o.pal;
-    if(o) localStorage.removeItem(THEME_KEY);
-  }catch(e){}
-  return sys;
-}
-function applyPalette(pal){
-  document.documentElement.setAttribute('data-palette', pal);
-  const m = document.querySelector('meta[name="theme-color"]');
-  if(m) m.setAttribute('content', (pal === 'heartwood') ? '#E0CFAE' : '#0A120D');
-  /* The icon shows the light you are IN: sun while the app is light, moon
-     while it is dark. Not the light you would switch to. */
-  const icon  = (pal === 'heartwood') ? SUN_ICON : MOON_ICON;
-  const label = (pal === 'heartwood') ? 'Light. Switch to dark' : 'Dark. Switch to light';
-  THEME_BTNS.forEach(id => {
-    const b = $(id);
-    if(!b) return;
-    b.innerHTML = icon;
-    b.setAttribute('aria-label', label);
-  });
-}
-function toggleTheme(){
-  const next = (document.documentElement.getAttribute('data-palette') === 'heartwood')
-    ? 'pine' : 'heartwood';
-  try{
-    localStorage.setItem(THEME_KEY, JSON.stringify({pal: next, basis: systemPalette()}));
-  }catch(e){}
-  applyPalette(next);
-}
-THEME_BTNS.forEach(id => {
-  const b = $(id);
-  if(b) b.addEventListener('click', toggleTheme);
-});
-/* If the phone changes light while the app is open, re-resolve rather than sit
-   there: that flip is exactly the moment an override is meant to expire. */
-if(window.matchMedia){
-  const mq = matchMedia('(prefers-color-scheme: dark)');
-  const onScheme = () => applyPalette(resolvePalette());
-  if(mq.addEventListener) mq.addEventListener('change', onScheme);
-  else if(mq.addListener) mq.addListener(onScheme);
-}
-applyPalette(resolvePalette());
+/* There was a light theme and a switch for it. Both are gone; this only clears
+   the switch's old setting. It is its own key and has nothing to do with KEY. */
+try{ localStorage.removeItem('vocab.theme'); }catch(e){}
 
 $('moreBtn').addEventListener('click', toggleMore);
 $('moreClose').addEventListener('click', toggleMore);
