@@ -421,13 +421,28 @@ button.hint{display:block; width:100%;}
    the full x-height, so a Russian word reads as a wider, denser block than an
    English one. Matching the number made it look a size too big.
    The translations carry no light of their own: the lamp belongs to the word
-   in the sentence. They are plain white. */
-.ru-words{display:flex; flex-wrap:wrap; justify-content:center; gap:10px 16px;
-  max-width:340px; font-size:19px; line-height:1.48; font-weight:500;}
+   in the sentence. They are plain white.
+   STEPPING STONES: one translation under another, each on its own stone, the
+   stones set left, right, middle so they read as a path leading down the card.
+   No two stones are cut quite alike. */
+.ru-words{display:grid; gap:7px; width:min(300px, 100%);
+  font-size:19px; line-height:1.3; font-weight:500;}
 .ru-words:empty{display:none;}
-.ru-words .hl{background:none; box-shadow:none; text-shadow:none; text-decoration:none;
-  border-radius:0; padding:0; font-weight:inherit;
-  color:var(--mark-ink, var(--accent));}
+.ru-words .hl{text-shadow:none; text-decoration:none; font-weight:inherit;
+  color:var(--mark-ink, var(--accent)); max-width:100%; text-wrap:balance;
+  background:var(--card-2); border:1px solid var(--edge);
+  border-radius:18px 14px 17px 13px; padding:4px 14px;
+  box-shadow:0 2px 7px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);}
+.ru-words .hl:nth-child(3n+1){justify-self:start;}
+.ru-words .hl:nth-child(3n+2){justify-self:end; border-radius:14px 18px 13px 17px;}
+.ru-words .hl:nth-child(3n){justify-self:center; border-radius:16px 13px 18px 15px;}
+.ru-words .hl:only-child{justify-self:center;}
+/* a short phone has a third less card: the path tightens so it never reaches "more" */
+@media (max-height:720px){
+  .back-half.bottom{padding-top:14px;}
+  .ru-words{gap:5px; font-size:16px;}
+  .ru-words .hl{padding:3px 12px;}
+}
 
 /* More. Everything that is reference rather than recall lives behind it, so the
    card itself stays two lines and a translation. */
