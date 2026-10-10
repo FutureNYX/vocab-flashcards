@@ -434,8 +434,8 @@ Session.prototype.makeCard = function(item){
     if(item.kind === 'reintro') anchor = (e.contexts || []).find(s => s !== e.ex) || e.ex;
     return {kind:'intro', word: e.word, entry: e, cue, anchor, reintro: item.kind === 'reintro',
       instruction: item.kind === 'reintro'
-        ? 'This word keeps slipping, so we start again. What would you say? Say your guess out loud.'
-        : 'New word. What would you say? Say your guess out loud, even if you are not sure.'};
+        ? 'Fresh start. Guess out loud.'
+        : 'New word. Guess out loud.'};
   }
   if(item.kind === 'meet'){
     return {kind:'intro', word: e.word, entry: e, cue: null, anchor: e.ex, meetOnly: true,
@@ -448,14 +448,14 @@ Session.prototype.makeCard = function(item){
   }
   if(w.lapses >= T.HOOK_LAPSES && !w.hookShown && e.hook && item.kind === 'review'){
     return {kind:'hook', word: e.word, entry: e, hook: e.hook,
-      instruction: 'This one keeps slipping. Read the memory hook and picture it, then tap Next.'};
+      instruction: 'Picture this.'};
   }
   if(item.kind === 'review' && w.stage >= STAGE.RECALL && !w.personal && (e.personal || []).length
      && (this.asked || 0) < T.ASKS_PER_SESSION){
     this.asked = (this.asked || 0) + 1;
     const qs = e.personal;
     return {kind:'personal-ask', word: e.word, entry: e, question: qs[qs.length > 1 ? 1 : 0],
-      instruction: 'Make it yours. Answer in a few words about your own life.'};
+      instruction: 'Make it yours.'};
   }
 
   // a retrieval card
@@ -477,15 +477,15 @@ Session.prototype.makeCard = function(item){
     card.hints = [];
   }
   card.instruction = {
-    intent: 'You want to say this. Say the word out loud.',
-    probe: 'You want to say this. Say the word out loud.',
-    ru: 'Say the English word out loud.',
-    cloze: 'Fill the gap out loud.',
-    upgrade: 'Say it with one stronger word in place of the crossed-out words.',
-    colloc: 'Complete the phrase out loud.',
-    contrast: 'Careful, these are easy to mix up. Say the one that fits.',
-    personal: 'Your own words, with the word hidden. Say it out loud.'
-  }[cue.type] || 'Say the word out loud.';
+    intent: 'Say the word.',
+    probe: 'Say the word.',
+    ru: 'Say it in English.',
+    cloze: 'Fill the gap.',
+    upgrade: 'One stronger word.',
+    colloc: 'Fill the gap.',
+    contrast: 'Which one?',
+    personal: 'Your words. Say it.'
+  }[cue.type] || 'Say the word.';
 
   // typed, and marked automatically: every few retrievals, always for probes
   // from stage 4, and until a word has one typed success at stage 2
@@ -497,11 +497,10 @@ Session.prototype.makeCard = function(item){
        || w.reps % every === every - 1
        || (w.ivl >= T.MAX_IVL_DAYS && this.rnd() < 0.35)){
       card.typed = true;
-      card.instruction = cue.type === 'upgrade' ? 'Type the one stronger word for the crossed-out words.'
-        : cue.type === 'cloze' || cue.type === 'colloc' ? 'Type the missing word.' : 'Type the word.';
+      card.instruction = 'Type it.';
     }
   }
-  if(item.kind === 'probe'){ card.typed = false; card.instruction = 'Do you still know this one? Say the word out loud.'; card.placement = true; }
+  if(item.kind === 'probe'){ card.typed = false; card.instruction = 'Still know it? Say it.'; card.placement = true; }
   return card;
 };
 
@@ -521,7 +520,7 @@ Session.prototype.makeSpeak = function(){
   const rest = ready.filter(e => !inTheme.includes(e)).sort(weak);
   const words = inTheme.concat(rest).slice(0, 3).map(e => e.word);
   return {kind:'speak', prompt: prompt.prompt, promptId: prompt.id, words, seconds: 45,
-    instruction: 'Speak out loud for 45 seconds and work in all three words. Then tick the ones you used.'};
+    instruction: 'Talk for 45 seconds. Use all three.'};
 };
 
 Session.prototype.makeCarry = function(){
@@ -540,7 +539,7 @@ Session.prototype.makeCarry = function(){
     this.deck.forEach(d => (d.plain || []).forEach(p => { const k = p.toLowerCase(); this.plainCount[k] = (this.plainCount[k] || 0) + 1; }));
   }
   const plain = e.plain.find(p => this.plainCount[p.toLowerCase()] === 1) || e.plain[0];
-  return {kind:'carry', word: e.word, entry: e, instruction: 'Take this word with you today.',
+  return {kind:'carry', word: e.word, entry: e, instruction: 'Use this today.',
     plan: `When you're about to say “${plain}”, say “${e.word}” instead.`};
 };
 

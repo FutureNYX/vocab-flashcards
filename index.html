@@ -112,7 +112,7 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
 .card.lit .card-body{ padding-bottom:76px; }   /* lets the last line scroll clear of the speaker */
 .instr{ font-family:var(--serif); font-variation-settings:'opsz' 18; font-style:italic; font-size:16px;
   line-height:1.4; color:#C9B783; }
-.stage{ flex:1 0 auto; display:flex; flex-direction:column; gap:14px; padding:18px 0; }
+.stage{ flex:1 0 auto; min-height:calc(100% - 44px); display:flex; flex-direction:column; gap:14px; padding:18px 0; }
 /* centred when it fits, top-aligned when it doesn't: auto margins give way to overflow, justify-content:center would push content up under the instruction */
 .stage > :first-child{ margin-top:auto; } .stage > :last-child{ margin-bottom:auto; }
 .cue{ font-family:var(--serif); font-variation-settings:'opsz' 30; font-size:25px; line-height:1.4;
@@ -146,6 +146,7 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
 .ru-line{ font-size:16px; color:var(--ink-muted); }
 .note{ font-size:14px; line-height:1.5; color:var(--ink-muted); }
 .trap{ font-size:14px; line-height:1.5; color:#D9B779; }
+.trap b, .note b{ font-weight:600; color:var(--ink); }
 .verdict{ font-size:15px; font-weight:700; letter-spacing:.01em; }
 .verdict.ok{ color:var(--light); } .verdict.no{ color:var(--miss); }
 .clip{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; }
@@ -153,6 +154,11 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
 .credit{ font-size:11px; color:var(--ink-muted); }
 .chunks{ display:flex; flex-direction:column; gap:4px; font-size:16px; color:var(--ink); }
 .chunks .lbl{ font-family:var(--serif); font-style:italic; font-size:14px; color:var(--ink-muted); }
+/* Below the fold: everything that is not the word itself. Memory takes in
+   little at once, so the screen shows the cue and the word; the rest is there
+   for anyone who scrolls. */
+.more{ display:flex; flex-direction:column; gap:16px; border-top:1px solid var(--line); padding:22px 0 8px; }
+.more-cue{ text-align:center; color:var(--ink-muted); opacity:.55; font-size:20px; line-height:1; }
 .rule{ font-size:12.5px; line-height:1.45; color:var(--ink-muted); text-align:center; padding:6px 58px 0; }
 .speak-btn{ position:absolute; right:14px; bottom:14px; width:50px; height:50px; border-radius:50%;
   background:var(--card-2); border:1px solid var(--edge); display:grid; place-items:center; }
@@ -575,20 +581,24 @@ function addWordFlies(){
   const w = $('lit'); if(!w || CALM) return;
   [[-6, 10], [104, 22], [96, 96], [-4, 88]].forEach(([x, y]) => w.parentNode.appendChild(firefly(x, y, .55)));
 }
-function answerReveal(){
+function answerParts(){
   const e = card.entry;
   let sent = '';
   if(card.answerSentence){
     sent = card.answerSentence.includes('*') ? marked(card.answerSentence)
       : esc(card.answerSentence).replace(new RegExp(esc(e.word), 'i'), m => `<b>${m}</b>`);
   }
-  return `<div class="reveal" style="display:flex;flex-direction:column;gap:14px">
-    ${wordHTML(e.word)}
-    ${sent ? `<div class="sent">${sent}</div>` : ''}
-    ${card.stage <= 1 && e.ru ? `<div class="ru-line">${esc(e.ru)}</div>` : ''}
-    ${card.type === 'contrast' && e.nuance ? `<div class="note">${esc(e.nuance)}</div>` : ''}
-    ${clip(e.word)}
-  </div>`;
+  const top = `<div class="reveal" style="display:flex;flex-direction:column;gap:12px">${wordHTML(e.word)}` +
+    (card.stage <= 1 && e.ru ? `<div class="ru-line">${esc(e.ru)}</div>` : '') + `</div>`;
+  const more = (sent ? `<div class="sent">${sent}</div>` : '') +
+    (card.stage > 1 && e.ru ? `<div class="ru-line">${esc(e.ru)}</div>` : '') +
+    (e.nuance ? `<div class="note">${marked(e.nuance)}</div>` : '') + clip(e.word);
+  return {top, more};
+}
+/* The rule under Got it is shown until it has been read a few times. */
+function ruleHTML(){
+  S.ruleShown = (S.ruleShown || 0) + 1;
+  return S.ruleShown <= 12 ? '<div class="rule">Got it = you said it before tapping Show.</div>' : '';
 }
 
 /* Hints are never asked for: they light up on their own when you are slow,
@@ -608,9 +618,11 @@ function retrievalCard(extra){
   setCard(`<div class="instr">${esc(card.instruction)}</div>
     <div class="stage">${cueHTML()}<div class="pos">${esc(card.pos || '')}</div>${extra || ''}<div class="hint" id="hint"></div></div>`);
 }
-function revealCard(top){
-  setCard(`<div class="stage">${cueHTML()}${top || ''}${answerReveal()}</div>
-    <div class="rule">Got it means you said this word, in any form, before you tapped Show.</div>
+function revealCard(extraTop, withRule){
+  const {top, more} = answerParts();
+  setCard(`<div class="stage">${cueHTML()}${extraTop || ''}${top}${more ? '<div class="more-cue">&#8964;</div>' : ''}</div>
+    ${withRule ? ruleHTML() : ''}
+    ${more ? `<div class="more">${more}</div>` : ''}
     <button class="speak-btn" id="hear" aria-label="Hear it">${speakerIcon}</button>`, true);
   body().classList.add('answered');
   $('hear').onclick = ev => { ev.stopPropagation(); say(card.entry.word); };
@@ -626,7 +638,7 @@ function renderSay(){
     stopHints();
     const latency = performance.now() - shownAt, noSpeed = resumed;
     say(card.entry.word);
-    revealCard();
+    revealCard('', true);
     setActions(`<button class="ans miss" id="no">Missed</button><button class="ans got" id="yes">Got it</button>`);
     $('no').onclick = () => answer({ok:false, latency, noSpeed, hints: hintsUsed}, 'miss');
     $('yes').onclick = () => answer({ok:true, latency, noSpeed, hints: hintsUsed}, 'got');
@@ -648,7 +660,6 @@ function renderTyped(){
     say(card.entry.word);
     const verdict = r === 'right' ? 'Right' : r === 'close' ? `Nearly. You typed “${esc(typedText)}”` : typedText ? `You typed “${esc(typedText)}”` : 'The word was';
     revealCard(`<div class="verdict ${r === 'right' ? 'ok' : 'no'}">${verdict}</div>`);
-    body().querySelector('.rule').remove();
     setActions(`<button class="btn-main" id="nx">Next</button>`);
     $('nx').onclick = () => answer({ok: r !== 'wrong', close: r === 'close', latency, noSpeed, hints: hintsUsed, typed: true}, r === 'wrong' ? 'miss' : 'got');
   };
@@ -661,20 +672,21 @@ function renderIntro(){
   const reveal = () => {
     say(e.word);
     const chunks = (e.collocations || []).map(c => `<div>${esc(c.chunk)}</div>`).join('');
-    setCard(`<div class="instr">Say it out loud three times${e.gesture ? ', doing the movement' : ''}.</div>
+    const more = (chunks ? `<div class="chunks"><span class="lbl">goes with</span>${chunks}</div>` : '') +
+      (e.ru_trap ? `<div class="trap">${marked(e.ru_trap)}</div>` : '') +
+      (e.nuance ? `<div class="note">${marked(e.nuance)}</div>` : '') + clip(e.word);
+    setCard(`<div class="instr">${e.gesture ? 'Say it three times, with the movement.' : 'Say it three times.'}</div>
       <div class="stage">
         ${card.cue ? `<div class="cue">${esc(card.cue)}</div>` : ''}
-        <div class="reveal" style="display:flex;flex-direction:column;gap:14px">
+        <div class="reveal" style="display:flex;flex-direction:column;gap:12px">
           ${wordHTML(e.word)}
           <div class="ru-line">${esc(e.ru || '')}</div>
           <div class="sent">${marked(card.anchor || e.ex || '')}</div>
-          ${e.gesture ? `<div class="note">Movement: ${esc(e.gesture)}</div>` : ''}
-          ${chunks ? `<div class="chunks"><span class="lbl">goes with</span>${chunks}</div>` : ''}
-          ${e.ru_trap ? `<div class="trap">${esc(e.ru_trap)}</div>` : ''}
-          ${e.nuance ? `<div class="note">${esc(e.nuance)}</div>` : ''}
-          ${clip(e.word)}
+          ${e.gesture ? `<div class="note">${esc(e.gesture)}</div>` : ''}
         </div>
+        ${more ? '<div class="more-cue">&#8964;</div>' : ''}
       </div>
+      ${more ? `<div class="more">${more}</div>` : ''}
       <button class="speak-btn" id="hear" aria-label="Hear it">${speakerIcon}</button>`, true);
     body().classList.add('answered');
     $('hear').onclick = ev => { ev.stopPropagation(); say(e.word); };
@@ -704,14 +716,14 @@ function renderPersonalAsk(){
   setCard(`<div class="instr">${esc(card.instruction)}</div>
     <div class="stage">${wordHTML(e.word)}<div class="cue">${esc(card.question)}</div>
       <textarea id="txt" placeholder="A name, a moment, a line"></textarea>
-      <div class="note">Stays on this phone. It comes back later as a clue.</div></div>`, true);
+      <div class="note">Stays on this phone.</div></div>`, true);
   setActions(`<button class="btn-main" id="nx">Save</button>`);
   $('nx').onclick = () => answer({text: $('txt').value}, 'on');
 }
 
 function renderCheckin(){
   setCard(`<div class="instr">${esc(card.instruction)}</div>
-    <div class="stage">${wordHTML(card.word)}<div class="cue">Did it come out anywhere yesterday, said or written?</div></div>`, true);
+    <div class="stage">${wordHTML(card.word)}<div class="cue">Did you use it yesterday?</div></div>`, true);
   addWordFlies();
   setActions(`<button class="ans miss" id="no">Not yet</button><button class="ans got" id="yes">Yes</button>`);
   $('no').onclick = () => answer({yes:false}, 'miss');
@@ -720,8 +732,7 @@ function renderCheckin(){
 
 function renderCarry(){
   setCard(`<div class="instr">${esc(card.instruction)}</div>
-    <div class="stage">${wordHTML(card.word)}<div class="cue">${esc(card.plan)}</div>
-      <div class="note">Tomorrow the app will ask whether it came out.</div></div>`, true);
+    <div class="stage">${wordHTML(card.word)}<div class="cue">${esc(card.plan)}</div></div>`, true);
   addWordFlies();
   setActions(`<button class="btn-main" id="nx">OK</button>`);
   $('nx').onclick = () => answer({}, 'on');
@@ -740,7 +751,7 @@ function renderSpeak(){
   let iv = null;
   const done = () => {
     clearInterval(iv);
-    setCard(`<div class="instr">Tick the words you managed to use.</div>
+    setCard(`<div class="instr">Which did you use?</div>
       <div class="stage">${card.words.map((w, i) => `<label class="chk"><input type="checkbox" id="w${i}">${esc(w)}</label>`).join('')}</div>`, true);
     setActions(`<button class="btn-main" id="nx">Done</button>`);
     $('nx').onclick = () => answer({used: card.words.filter((w, i) => $('w' + i).checked)}, 'on');
