@@ -1,0 +1,708 @@
+[
+  {
+    "word": "perpetuate",
+    "intents": [
+      "keep a bad idea or habit going by passing it on to the next people",
+      "when parents repeat the same old stereotype and the kids grow up believing it too",
+      "make sure an unfair situation never ends, often without meaning to",
+      "keep a myth alive just by repeating it"
+    ],
+    "ru_cue": "не дать чему-то плохому закончиться, передавая его дальше",
+    "plain": ["keep going", "keep alive"],
+    "upgrades": [
+      {"plain": "Laughing at those jokes only [keeps the stereotype alive].",
+       "better": "Laughing at those jokes only *perpetuates* the stereotype."},
+      {"plain": "If nobody speaks up at the meeting, we'll just [keep the problem going].",
+       "better": "If nobody speaks up at the meeting, we'll just *perpetuate* the problem."},
+      {"plain": "Every Christmas my uncle repeats the family myth that I failed my driving test five times, and Grandma [keeps it alive] by nodding along.",
+       "better": "Every Christmas my uncle repeats the family myth that I failed my driving test five times, and Grandma *perpetuates* it by nodding along."}
+    ],
+    "collocations": [
+      {"chunk": "perpetuate a stereotype", "frame": "___ a stereotype"},
+      {"chunk": "perpetuate the myth", "frame": "___ the myth"},
+      {"chunk": "only serves to perpetuate the cycle", "frame": "only serves to ___ the cycle"}
+    ],
+    "ru_trap": "Russian 'увековечить' sounds noble (a hero, a memory); *perpetuate* usually keeps something bad going, so to honour someone say 'keep their memory alive'.",
+    "nuance": "Unlike *foster*, which helps something good grow, *perpetuate* keeps something (usually bad) going: myths, stereotypes, inequality.",
+    "personal": [
+      "Which family myth do you think you still perpetuate without meaning to?",
+      "Which friend of yours perpetuates an old rumour every time your group meets?"
+    ],
+    "gesture": "",
+    "hook": "'Пер-ПЕТЬ-ю-ate': a parrot that keeps singing (петь) the same old myth to every new generation.",
+    "forms": ["perpetuate", "perpetuates", "perpetuated", "perpetuating"]
+  },
+  {
+    "word": "scrutinise",
+    "intents": [
+      "look at something very closely, hunting for any mistake or problem",
+      "when you go through a contract line by line before you sign, looking for a trap",
+      "examine every detail with a suspicious, critical eye"
+    ],
+    "ru_cue": "придирчиво изучать каждую деталь, выискивая ошибки",
+    "plain": ["look closely at", "check carefully", "examine"],
+    "upgrades": [
+      {"plain": "Before you sign, [look very carefully at] every page.",
+       "better": "Before you sign, *scrutinise* every page."},
+      {"plain": "My mother-in-law [looked closely at] my cooking, just waiting for something to go wrong.",
+       "better": "My mother-in-law *scrutinised* my cooking, just waiting for something to go wrong."},
+      {"plain": "The examiners will [check every figure in your report very carefully].",
+       "better": "The examiners will *scrutinise* every figure in your report."}
+    ],
+    "collocations": [
+      {"chunk": "closely scrutinise", "frame": "closely ___"},
+      {"chunk": "scrutinise every detail", "frame": "___ every detail"},
+      {"chunk": "scrutinise the figures", "frame": "___ the figures"}
+    ],
+    "ru_trap": "",
+    "nuance": "Stronger and more critical than *examine*: you scrutinise something because you expect to find a fault.",
+    "personal": [
+      "What is the last document you really had to scrutinise before signing?",
+      "Who in your family scrutinises your choices most closely?"
+    ],
+    "gesture": "Hold an imaginary magnifying glass up to your eye and lean in, frowning.",
+    "hook": "'Screw-tin-eyes': you screw up your eyes and stare at a tin until you find the tiny dent.",
+    "forms": ["scrutinise", "scrutinises", "scrutinised", "scrutinising", "scrutinize", "scrutinizes", "scrutinized", "scrutinizing"]
+  },
+  {
+    "word": "overhaul",
+    "intents": [
+      "completely rework a whole system instead of patching small bits of it",
+      "when the old booking system is so broken that fixing it piece by piece won't do",
+      "take something apart and rebuild it properly from top to bottom"
+    ],
+    "ru_cue": "полностью переделать систему сверху донизу",
+    "plain": ["completely change", "redo", "fix"],
+    "upgrades": [
+      {"plain": "The school needs to [completely change] how it handles complaints.",
+       "better": "The school needs to *overhaul* how it handles complaints."},
+      {"plain": "We spent the whole winter [taking apart and fixing] Dad's old car.",
+       "better": "We spent the whole winter *overhauling* Dad's old car."},
+      {"plain": "After the third customer walked out in tears, the manager finally agreed to [totally rethink] the refund policy.",
+       "better": "After the third customer walked out in tears, the manager finally agreed to *overhaul* the refund policy."}
+    ],
+    "collocations": [
+      {"chunk": "completely overhaul", "frame": "completely ___"},
+      {"chunk": "overhaul the system", "frame": "___ the system"},
+      {"chunk": "a major overhaul", "frame": "a major ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Bigger than *streamline*: you overhaul when the whole thing needs rebuilding, not just simplifying.",
+    "personal": [
+      "What part of your daily routine would you most like to overhaul?",
+      "Who do you know who completely overhauled their life after a big change?"
+    ],
+    "gesture": "",
+    "hook": "'Over-HAUL': you haul the whole engine out over the side and rebuild every single part.",
+    "forms": ["overhaul", "overhauls", "overhauled", "overhauling"]
+  },
+  {
+    "word": "streamline",
+    "intents": [
+      "make a process quicker and smoother by cutting out unnecessary steps",
+      "when signing up takes six forms and you squeeze it down to one",
+      "simplify the way something is done so it wastes less time"
+    ],
+    "ru_cue": "убрать лишние шаги, чтобы все шло быстрее",
+    "plain": ["simplify", "make faster", "make simpler"],
+    "upgrades": [
+      {"plain": "If we [cut some of the steps out of] the checkout, more people will buy.",
+       "better": "If we *streamline* the checkout, more people will buy."},
+      {"plain": "She [simplified] her morning routine so she can sleep twenty minutes longer.",
+       "better": "She *streamlined* her morning routine so she can sleep twenty minutes longer."},
+      {"plain": "I missed my flight because of the queue; they really need to [make the security checks quicker and simpler].",
+       "better": "I missed my flight because of the queue; they really need to *streamline* the security checks."}
+    ],
+    "collocations": [
+      {"chunk": "streamline the process", "frame": "___ the process"},
+      {"chunk": "streamline paperwork", "frame": "___ paperwork"},
+      {"chunk": "a more streamlined service", "frame": "a more ___ service"}
+    ],
+    "ru_trap": "",
+    "nuance": "Unlike *overhaul*, *streamline* doesn't rebuild everything: it trims steps so the same thing runs faster.",
+    "personal": [
+      "Which daily chore have you managed to streamline the most?",
+      "Who at your work or school could streamline how they do things?"
+    ],
+    "gesture": "",
+    "hook": "Picture water in a stream running in one straight line: no bends, no stops, just faster.",
+    "forms": ["streamline", "streamlines", "streamlined", "streamlining"]
+  },
+  {
+    "word": "second nature",
+    "intents": [
+      "something you've done so often that you no longer have to think about it",
+      "when you used to panic about changing gear and now your hands just do it",
+      "a skill so deep in your habits that it feels automatic"
+    ],
+    "ru_cue": "делать что-то так привычно, что даже не задумываешься",
+    "plain": ["automatic", "a habit", "easy"],
+    "upgrades": [
+      {"plain": "After a few months, typing without looking became [automatic] for me.",
+       "better": "After a few months, typing without looking became *second nature* to me."},
+      {"plain": "For a nurse, washing your hands [is something you do without thinking].",
+       "better": "For a nurse, washing your hands is *second nature*."},
+      {"plain": "I was so nervous at my first driving lesson, but now checking the mirrors [happens automatically].",
+       "better": "I was so nervous at my first driving lesson, but now checking the mirrors is *second nature*."}
+    ],
+    "collocations": [
+      {"chunk": "it soon became second nature", "frame": "it soon became ___"},
+      {"chunk": "second nature to him", "frame": "it's ___ to him now"},
+      {"chunk": "almost second nature", "frame": "almost ___"}
+    ],
+    "ru_trap": "Russian 'вторая натура' carries over well; just say it's *second nature to me* (not 'for me'), with no article.",
+    "nuance": "*Get the hang of* is the moment you start managing; *second nature* is much later, when you don't even notice you're doing it.",
+    "personal": [
+      "What skill has become second nature to you that once felt impossible?",
+      "What is second nature to one of your parents that you still find hard?"
+    ],
+    "gesture": "",
+    "hook": "Picture a second you, born with the habit already built in, quietly doing the job while the first you daydreams.",
+    "forms": ["second nature"]
+  },
+  {
+    "word": "deter",
+    "intents": [
+      "make someone decide not to do something because it looks risky, costly or unpleasant",
+      "when a barking dog in the garden makes burglars choose another house",
+      "put people off before they even try"
+    ],
+    "ru_cue": "сделать так, чтобы человеку расхотелось что-то делать",
+    "plain": ["put off", "discourage", "stop"],
+    "upgrades": [
+      {"plain": "Cameras at the entrance [put off] most shoplifters.",
+       "better": "Cameras at the entrance *deter* most shoplifters."},
+      {"plain": "The rain didn't [discourage] us from having the picnic.",
+       "better": "The rain didn't *deter* us from having the picnic."},
+      {"plain": "Two rejections didn't [put her off]; she applied a third time and got the job.",
+       "better": "Two rejections didn't *deter* her; she applied a third time and got the job."}
+    ],
+    "collocations": [
+      {"chunk": "deter crime", "frame": "___ crime"},
+      {"chunk": "deter people from applying", "frame": "___ people from applying"},
+      {"chunk": "deter burglars", "frame": "___ burglars"}
+    ],
+    "ru_trap": "*Deter* takes 'from' + -ing (deter people from smoking), not 'to' or a plain infinitive as Russian 'отговорить делать' might suggest.",
+    "nuance": "*Deter* works on a person's decision beforehand; *hinder* gets in the way once they've started.",
+    "personal": [
+      "What once deterred you from trying something you later loved?",
+      "What would deter your best friend from moving abroad?"
+    ],
+    "gesture": "Hold your palm out flat towards someone, as if saying 'don't even think about it'.",
+    "hook": "'Deter' sounds like 'the terror': the terror of getting caught deters the thief.",
+    "forms": ["deter", "deters", "deterred", "deterring"]
+  },
+  {
+    "word": "offset",
+    "intents": [
+      "balance out a cost or loss with a gain of about the same size",
+      "when the train ticket costs more but you save all of it on parking, so it evens out",
+      "cancel out the bad side of something with a good side"
+    ],
+    "ru_cue": "уравновесить минус таким же плюсом",
+    "plain": ["balance out", "make up for", "cancel out"],
+    "upgrades": [
+      {"plain": "The higher rent is [balanced out] by not having to pay for travel.",
+       "better": "The higher rent is *offset* by not having to pay for travel."},
+      {"plain": "I go running every morning to [make up for] all the cake I eat at work.",
+       "better": "I go running every morning to *offset* all the cake I eat at work."},
+      {"plain": "Losing my bonus hurt, but it was more than [made up for] by the extra week of holiday.",
+       "better": "Losing my bonus hurt, but it was more than *offset* by the extra week of holiday."}
+    ],
+    "collocations": [
+      {"chunk": "partly offset by", "frame": "partly ___ by"},
+      {"chunk": "more than offset by", "frame": "more than ___ by"},
+      {"chunk": "help offset the cost", "frame": "help ___ the cost"}
+    ],
+    "ru_trap": "Russian 'компенсировать' tempts 'compensate the cost'; English says *offset the cost* or 'compensate for the cost'.",
+    "nuance": "*Mitigate* makes the harm smaller; *offset* leaves the harm but adds an equal gain on the other side of the scales.",
+    "personal": [
+      "What do you do to offset a long week of sitting at a desk?",
+      "How does someone in your family offset a habit they feel guilty about?"
+    ],
+    "gesture": "Hold both hands out like scales; push one down, then the other, until they level.",
+    "hook": "'Off-set': one weight goes on, an equal weight is set on the other side, and the scales level off.",
+    "forms": ["offset", "offsets", "offsetting"]
+  },
+  {
+    "word": "galvanise",
+    "intents": [
+      "jolt a group of people out of doing nothing and get them to act",
+      "when one shocking photo shakes the whole street out of doing nothing and sends everyone to clean the park",
+      "fire people up so strongly that they finally take action together"
+    ],
+    "ru_cue": "встряхнуть людей так, что они сразу берутся за дело",
+    "plain": ["push into action", "fire up", "stir up"],
+    "upgrades": [
+      {"plain": "The news that the library might close [pushed] the whole town into action.",
+       "better": "The news that the library might close *galvanised* the whole town into action."},
+      {"plain": "Losing 5-0 at home was what finally [got the team fired up].",
+       "better": "Losing 5-0 at home was what finally *galvanised* the team."},
+      {"plain": "Her speech [stirred up] the volunteers, and fifty more signed up that night.",
+       "better": "Her speech *galvanised* the volunteers, and fifty more signed up that night."}
+    ],
+    "collocations": [
+      {"chunk": "galvanise someone into action", "frame": "___ them into action"},
+      {"chunk": "galvanise support", "frame": "___ support"},
+      {"chunk": "galvanise public opinion", "frame": "___ public opinion"}
+    ],
+    "ru_trap": "Russian 'гальванизировать' is mostly technical or about reviving something dead; in everyday English you *galvanise people into action*.",
+    "nuance": "A *catalyst* is the thing that starts a change; *galvanise* is the verb for shocking people into action, with a sense of sudden energy.",
+    "personal": [
+      "What news has ever galvanised you into changing something straight away?",
+      "Who do you know who can galvanise a group just by speaking?"
+    ],
+    "gesture": "",
+    "hook": "'Гальваника': a jolt of electric current runs through a sleepy crowd and everyone jumps up and gets moving.",
+    "forms": ["galvanise", "galvanises", "galvanised", "galvanising", "galvanize", "galvanizes", "galvanized", "galvanizing"]
+  },
+  {
+    "word": "permeate",
+    "intents": [
+      "spread through every part of something, like a smell through a house",
+      "when damp soaks into the walls until the whole room smells of it",
+      "fill the whole of something so completely that it's in every corner"
+    ],
+    "ru_cue": "проникнуть во все уголки и пропитать целиком",
+    "plain": ["spread through", "fill", "soak into"],
+    "upgrades": [
+      {"plain": "The smell of burnt toast [spread through] the whole flat.",
+       "better": "The smell of burnt toast *permeated* the whole flat."},
+      {"plain": "After the job cuts were announced, fear [filled every corner of] the office.",
+       "better": "After the job cuts were announced, fear *permeated* the office."},
+      {"plain": "Water had [soaked right into] the old wooden floor.",
+       "better": "Water had *permeated* the old wooden floor."}
+    ],
+    "collocations": [
+      {"chunk": "permeate every aspect of", "frame": "___ every aspect of"},
+      {"chunk": "permeate the air", "frame": "___ the air"},
+      {"chunk": "permeate the whole house", "frame": "___ the whole house"}
+    ],
+    "ru_trap": "Russian 'проникнуть в' tempts 'permeate into'; English usually takes a direct object: the smell permeated the house.",
+    "nuance": "*Ubiquitous* says something is found everywhere; *permeate* is the spreading itself, seeping into every part of one thing.",
+    "personal": [
+      "What smell permeated your childhood home?",
+      "Whose sense of humour permeates every family gathering you go to?"
+    ],
+    "gesture": "Start with your fingers bunched together, then slowly spread them outwards in every direction.",
+    "hook": "'Perm-eat': after one perm at the hairdresser's, the chemical smell permeates the whole salon for days.",
+    "forms": ["permeate", "permeates", "permeated", "permeating"]
+  },
+  {
+    "word": "a steep learning curve",
+    "intents": [
+      "a lot of new things to pick up very quickly at the start",
+      "when you begin a new job and every single day there's a pile of new skills to master",
+      "that hard first stretch when you have to get up to speed fast"
+    ],
+    "ru_cue": "когда нужно очень быстро освоить много нового",
+    "plain": ["a lot to learn", "hard at first"],
+    "upgrades": [
+      {"plain": "My first month as a manager [meant picking up a huge amount very fast].",
+       "better": "My first month as a manager was *a steep learning curve*."},
+      {"plain": "I nearly quit after my first week in the kitchen; [there was so much to pick up so quickly].",
+       "better": "I nearly quit after my first week in the kitchen; it was *a steep learning curve*."},
+      {"plain": "This software [is hard to get used to at first], but it's worth it.",
+       "better": "This software has *a steep learning curve*, but it's worth it."}
+    ],
+    "collocations": [
+      {"chunk": "still on a steep learning curve", "frame": "I'm still on ___ with the new software"},
+      {"chunk": "it was a steep learning curve", "frame": "it was ___, but I managed"},
+      {"chunk": "quite a steep learning curve", "frame": "quite ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "*Get the hang of* is reaching the point where you can do it; *a steep learning curve* is the hard, crowded stretch before that.",
+    "personal": [
+      "When did you last face a steep learning curve?",
+      "Who do you know who handled a steep learning curve really well?"
+    ],
+    "gesture": "",
+    "hook": "Picture a ski slope so steep that you have to master turning before you reach the bottom.",
+    "forms": ["a steep learning curve", "steep learning curve"]
+  },
+  {
+    "word": "reconcile",
+    "intents": [
+      "make two things that seem to clash fit together somehow",
+      "when your job and your family seem to pull against each other and you look for a way to make them fit together",
+      "make peace with someone after a long falling-out",
+      "make two sets of figures or two stories agree with each other"
+    ],
+    "ru_cue": "совместить то, что противоречит друг другу, или помириться",
+    "plain": ["make fit together", "make up", "balance"],
+    "upgrades": [
+      {"plain": "I can't [make his words fit with] his actions.",
+       "better": "I can't *reconcile* his words with his actions."},
+      {"plain": "My dad and his brother finally [made up] after fifteen years of not speaking.",
+       "better": "My dad and his brother finally *reconciled* after fifteen years of not speaking."},
+      {"plain": "How do you [balance] a full-time job with a newborn baby?",
+       "better": "How do you *reconcile* a full-time job with a newborn baby?"}
+    ],
+    "collocations": [
+      {"chunk": "reconcile work with family life", "frame": "___ work with family life"},
+      {"chunk": "reconcile yourself to", "frame": "___ yourself to the loss"},
+      {"chunk": "reconcile their differences", "frame": "___ their differences"}
+    ],
+    "ru_trap": "Russian 'примириться с' tempts 'reconcile with the loss'; English says *reconcile yourself to* it (or 'be reconciled to').",
+    "nuance": "Unlike *see eye to eye* (simply agreeing), *reconcile* means bringing back together things or people that were in conflict.",
+    "personal": [
+      "Which two goals of yours are hardest to reconcile?",
+      "Have two people you know ever reconciled after a long falling-out?"
+    ],
+    "gesture": "Bring two fists together and slowly lace your fingers.",
+    "hook": "'Reckon sail': 'I reckon we sail together,' says one old rival to the other, and they share one boat.",
+    "forms": ["reconcile", "reconciles", "reconciled", "reconciling"]
+  },
+  {
+    "word": "incentive",
+    "intents": [
+      "a reward or benefit that makes people want to do something",
+      "when the company offers a bonus for finishing early, so suddenly everyone hurries",
+      "the carrot that gets people to act"
+    ],
+    "ru_cue": "выгода, ради которой человеку хочется что-то сделать",
+    "plain": ["reason", "motivation", "reward"],
+    "upgrades": [
+      {"plain": "Free parking is a good [reason] to shop at the big supermarket.",
+       "better": "Free parking is a good *incentive* to shop at the big supermarket."},
+      {"plain": "If nobody notices, I have no [motivation] to work harder.",
+       "better": "If nobody notices, I have no *incentive* to work harder."},
+      {"plain": "My parents promised me a trip to Italy if I passed, which was a huge [push] to revise.",
+       "better": "My parents promised me a trip to Italy if I passed, which was a huge *incentive* to revise."}
+    ],
+    "collocations": [
+      {"chunk": "a strong incentive to", "frame": "a strong ___ to"},
+      {"chunk": "a financial incentive", "frame": "a financial ___"},
+      {"chunk": "have no incentive to", "frame": "have no ___ to"}
+    ],
+    "ru_trap": "Russian 'стимул' tempts 'stimulus', but for a reason to act English says *incentive*: a tax incentive, not a 'tax stimulus'.",
+    "nuance": "An *incentive* is offered on purpose to make people act; a *catalyst* is whatever happens to set a change off.",
+    "personal": [
+      "What incentive would get you to wake up an hour earlier?",
+      "What incentive works best on a child you know?"
+    ],
+    "gesture": "",
+    "hook": "'In-SENT-ive': the boss sent a bonus in the envelope, and suddenly everyone works faster.",
+    "forms": ["incentive", "incentives"]
+  },
+  {
+    "word": "consensus",
+    "intents": [
+      "what everyone in a group finally agrees on",
+      "when ten friends argue for an hour about where to eat and at last all settle on one place",
+      "broad agreement across a whole group of people or experts"
+    ],
+    "ru_cue": "общее мнение, на котором сошлась вся группа",
+    "plain": ["agreement", "what everyone agrees"],
+    "upgrades": [
+      {"plain": "After a long debate, [the view everyone shared] was to cancel the trip.",
+       "better": "After a long debate, the *consensus* was to cancel the trip."},
+      {"plain": "[Most doctors now agree] that sitting all day is bad for you.",
+       "better": "The *consensus* among doctors is that sitting all day is bad for you."},
+      {"plain": "My family argued all through dinner, and the six of us never reached [an agreement we could all accept] on where Grandma should live.",
+       "better": "My family argued all through dinner, and the six of us never reached a *consensus* on where Grandma should live."}
+    ],
+    "collocations": [
+      {"chunk": "reach a consensus", "frame": "reach a ___"},
+      {"chunk": "a broad consensus", "frame": "a broad ___"},
+      {"chunk": "a growing consensus that", "frame": "a growing ___ that"}
+    ],
+    "ru_trap": "Russian 'достичь консенсуса' has no article; English needs one: *reach a consensus*.",
+    "nuance": "A *consensus* is a whole group's agreement; *see eye to eye* is usually just two people agreeing.",
+    "personal": [
+      "When did your family last fail to reach a consensus about something?",
+      "Who among your friends is best at building consensus in a group?"
+    ],
+    "gesture": "",
+    "hook": "Think 'common sense-us': it makes sense to all of us. Spell it con-SENS-us, not 'concensus'.",
+    "forms": ["consensus", "consensuses"]
+  },
+  {
+    "word": "discrepancy",
+    "intents": [
+      "a mismatch between two things that should be exactly the same, like two sets of figures",
+      "when the price on the shelf says one thing and the receipt says another",
+      "two stories of the same night that don't add up"
+    ],
+    "ru_cue": "несовпадение там, где цифры или факты должны сходиться",
+    "plain": ["difference", "mismatch"],
+    "upgrades": [
+      {"plain": "There's a [difference] between the price on the menu and the price on the bill.",
+       "better": "There's a *discrepancy* between the price on the menu and the price on the bill."},
+      {"plain": "The police noticed a [mismatch] between his story and his sister's, and he went bright red.",
+       "better": "The police noticed a *discrepancy* between his story and his sister's, and he went bright red."},
+      {"plain": "Could you explain [the gap in the figures] between the two reports? They're supposed to match.",
+       "better": "Could you explain the *discrepancy* between the two reports? They're supposed to match."}
+    ],
+    "collocations": [
+      {"chunk": "a discrepancy between the figures", "frame": "a ___ between the figures"},
+      {"chunk": "notice a discrepancy", "frame": "notice a ___"},
+      {"chunk": "explain the discrepancy", "frame": "explain the ___"}
+    ],
+    "ru_trap": "Russian 'расхождение в' and 'разница' push towards 'discrepancy of'; English says a discrepancy *between* two things or *in* the figures.",
+    "nuance": "A *discrepancy* is a mismatch where things should agree (figures, accounts); a *disparity* is a big, often unfair gap between groups.",
+    "personal": [
+      "Have you ever spotted a discrepancy on a bill or receipt?",
+      "Who do you know who would immediately notice a discrepancy in someone's story?"
+    ],
+    "gesture": "",
+    "hook": "'Dis-crepe-ancy': two pancakes (crepes) on the plate should be identical, but one is twice the size, and you spot the mismatch.",
+    "forms": ["discrepancy", "discrepancies"]
+  },
+  {
+    "word": "a grey area",
+    "intents": [
+      "a situation where it's not clear whether something is allowed or not",
+      "when nobody can tell you if claiming your taxi home on expenses is OK or against the rules",
+      "something the rules don't clearly cover either way"
+    ],
+    "ru_cue": "ситуация, где непонятно, можно так или нельзя",
+    "plain": ["unclear", "not clear-cut"],
+    "upgrades": [
+      {"plain": "Whether you can work from abroad on this contract is [somewhere between allowed and not allowed].",
+       "better": "Whether you can work from abroad on this contract is *a grey area*."},
+      {"plain": "I wasn't sure if using my friend's discount code was cheating; it's [not exactly right, not exactly wrong], isn't it?",
+       "better": "I wasn't sure if using my friend's discount code was cheating; it's a bit of *a grey area*, isn't it?"},
+      {"plain": "Subletting your room for a few weeks [isn't clearly allowed or banned].",
+       "better": "Subletting your room for a few weeks is *a grey area*."}
+    ],
+    "collocations": [
+      {"chunk": "a bit of a grey area", "frame": "a bit of ___"},
+      {"chunk": "fall into a grey area", "frame": "fall into ___"},
+      {"chunk": "it's still a grey area", "frame": "it's still ___"}
+    ],
+    "ru_trap": "Russian 'серая зона' tempts 'grey zone'; the usual English phrase is *a grey area*.",
+    "nuance": "*Ambiguous* is about words or meaning; *a grey area* is about rules, or right and wrong, being unclear.",
+    "personal": [
+      "What's a grey area at your work or school that people argue about?",
+      "Which friend of yours loves living in a grey area when it comes to rules?"
+    ],
+    "gesture": "",
+    "hook": "Picture a page half black, half white, and you're standing in the blurry grey strip in the middle where nobody can tell which side you're on.",
+    "forms": ["a grey area", "grey area", "grey areas", "a gray area", "gray area"]
+  },
+  {
+    "word": "disparity",
+    "intents": [
+      "a big, unfair gap between two groups, like the rich and the poor",
+      "when men and women do the same job but one group gets paid far more",
+      "an unfair gap between groups of people, for example in pay, health or schooling"
+    ],
+    "ru_cue": "большой и несправедливый разрыв между группами",
+    "plain": ["gap", "difference", "inequality"],
+    "upgrades": [
+      {"plain": "There's a huge [gap] in pay between the city and the countryside.",
+       "better": "There's a huge *disparity* in pay between the city and the countryside."},
+      {"plain": "The [unfair gap] in exam results between rich and poor schools made the parents furious.",
+       "better": "The *disparity* in exam results between rich and poor schools made the parents furious."},
+      {"plain": "It hurt to see the [gap] between how my parents treated my brother and how they treated me.",
+       "better": "It hurt to see the *disparity* between how my parents treated my brother and how they treated me."}
+    ],
+    "collocations": [
+      {"chunk": "a wide disparity", "frame": "a wide ___"},
+      {"chunk": "a disparity in pay", "frame": "a ___ in pay"},
+      {"chunk": "a growing disparity between rich and poor", "frame": "a growing ___ between rich and poor"}
+    ],
+    "ru_trap": "",
+    "nuance": "A *disparity* is an unfair gap between groups; a *discrepancy* is two things that should match but don't.",
+    "personal": [
+      "What disparity between your town and the capital do you notice most?",
+      "Have you noticed any disparity in how your parents treated you and your siblings or cousins?"
+    ],
+    "gesture": "",
+    "hook": "'Dis-PARITY': 'parity' means equal shares, like a fair 'пари' (bet), and 'dis-' breaks it: one side ends up far richer.",
+    "forms": ["disparity", "disparities"]
+  },
+  {
+    "word": "implication",
+    "intents": [
+      "what is likely to follow later as a result of a decision",
+      "when you hear 'we need to talk about your hours' and realise it really means you might lose your job",
+      "the meaning hidden behind words, suggested but not said out loud"
+    ],
+    "ru_cue": "то, к чему это приведет, или то, что подразумевается без слов",
+    "plain": ["result", "what it means", "hint"],
+    "upgrades": [
+      {"plain": "Have you thought about [what this will mean] for your pension?",
+       "better": "Have you thought about the *implications* for your pension?"},
+      {"plain": "I was hurt by the [hint] that I hadn't done my share of the cooking.",
+       "better": "I was hurt by the *implication* that I hadn't done my share of the cooking."},
+      {"plain": "Nobody considered [what would happen] if the bridge closed.",
+       "better": "Nobody considered the *implications* of closing the bridge."}
+    ],
+    "collocations": [
+      {"chunk": "serious implications for", "frame": "serious ___ for"},
+      {"chunk": "think through the implications", "frame": "think through the ___"},
+      {"chunk": "by implication", "frame": "by ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "*Impact* is the effect itself; *implications* are what a decision may lead to, which you have to think through, or a meaning hinted but not said.",
+    "personal": [
+      "What decision have you made without thinking through the implications?",
+      "Has someone you know ever said something with an implication that upset you?"
+    ],
+    "gesture": "",
+    "hook": "'Im-PLY-cation': like layers of plywood, a second meaning is folded inside the words, waiting to be opened.",
+    "forms": ["implication", "implications"]
+  },
+  {
+    "word": "constraint",
+    "intents": [
+      "a limit that stops you doing everything you'd like, such as time, money or space",
+      "a limit you have to work within, like a room only two metres wide when you wanted a big kitchen island",
+      "something that ties your hands and keeps your choices narrow"
+    ],
+    "ru_cue": "рамки, за которые нельзя выйти: время, деньги, место",
+    "plain": ["limit", "restriction"],
+    "upgrades": [
+      {"plain": "Money is the main [limit] on where we can go on holiday.",
+       "better": "Money is the main *constraint* on where we can go on holiday."},
+      {"plain": "We had to shoot the whole film in two days, so time was a real [issue].",
+       "better": "We had to shoot the whole film in two days, so time was a real *constraint*."},
+      {"plain": "I'd love to help with the wedding, but with the new baby there are real [limits] on my time.",
+       "better": "I'd love to help with the wedding, but with the new baby there are real *constraints* on my time."}
+    ],
+    "collocations": [
+      {"chunk": "time constraints", "frame": "due to time ___"},
+      {"chunk": "budget constraints", "frame": "tight budget ___"},
+      {"chunk": "within the constraints of", "frame": "within the ___ of"}
+    ],
+    "ru_trap": "",
+    "nuance": "A *constraint* limits what you can do; a *drawback* is a disadvantage of something you already have.",
+    "personal": [
+      "What's the biggest constraint on how you spend your free time?",
+      "What constraint does someone in your family work around every day?"
+    ],
+    "gesture": "",
+    "hook": "'Con-STRAIN-t': in a straitjacket you strain and strain, but the straps won't let you move.",
+    "forms": ["constraint", "constraints"]
+  },
+  {
+    "word": "drawback",
+    "intents": [
+      "the one downside of something that is otherwise good",
+      "when you love the new flat but there's no lift and you live on the fifth floor",
+      "the catch that spoils a great option a little"
+    ],
+    "ru_cue": "минус у вещи, которая в остальном хороша",
+    "plain": ["downside", "problem", "disadvantage"],
+    "upgrades": [
+      {"plain": "The main [downside] of living in the centre is the noise.",
+       "better": "The main *drawback* of living in the centre is the noise."},
+      {"plain": "I loved the dress, but the [catch] was that it cost half my rent.",
+       "better": "I loved the dress, but the *drawback* was that it cost half my rent."},
+      {"plain": "Working from home is great; the one [disadvantage] is that I talk to nobody all day.",
+       "better": "Working from home is great; the one *drawback* is that I talk to nobody all day."}
+    ],
+    "collocations": [
+      {"chunk": "the main drawback", "frame": "the main ___ of"},
+      {"chunk": "the only drawback is", "frame": "the only ___ is that"},
+      {"chunk": "a major drawback", "frame": "a major ___"}
+    ],
+    "ru_trap": "Russian 'минус' tempts 'the minus of it'; English says *the drawback* (or 'downside') of it.",
+    "nuance": "A *drawback* is one weak point of something good; *a double-edged sword* has a good and a bad side so tangled you can't separate them.",
+    "personal": [
+      "What's the biggest drawback of where you live now?",
+      "What drawback does a friend of yours always mention about their job?"
+    ],
+    "gesture": "",
+    "hook": "'Draw back': the one thing that makes you draw your hand back at the last second before buying.",
+    "forms": ["drawback", "drawbacks"]
+  },
+  {
+    "word": "a wake-up call",
+    "intents": [
+      "a shock that makes you realise you must change something",
+      "when your doctor says your blood pressure is far too high and you finally start exercising",
+      "a nasty surprise that warns you things can't go on like this"
+    ],
+    "ru_cue": "тревожный сигнал, после которого понимаешь: пора меняться",
+    "plain": ["a warning", "a shock"],
+    "upgrades": [
+      {"plain": "Failing my mock exam was [a real shock]; I started revising every night.",
+       "better": "Failing my mock exam was *a wake-up call*; I started revising every night."},
+      {"plain": "That huge phone bill was [a warning sign] about our spending.",
+       "better": "That huge phone bill was *a wake-up call* about our spending."},
+      {"plain": "The flood should be [a warning] for the whole town.",
+       "better": "The flood should be *a wake-up call* for the whole town."}
+    ],
+    "collocations": [
+      {"chunk": "it was a wake-up call for", "frame": "it was ___ for all of us"},
+      {"chunk": "a real wake-up call", "frame": "a real ___"},
+      {"chunk": "serve as a wake-up call", "frame": "serve as ___"}
+    ],
+    "ru_trap": "Russian 'тревожный звонок' tempts 'an alarming call'; English says *a wake-up call* (or 'it set alarm bells ringing').",
+    "nuance": "An *epiphany* is a sudden insight; *a wake-up call* is an unpleasant shock or warning that pushes you to change.",
+    "personal": [
+      "What was a wake-up call that changed one of your habits?",
+      "Who do you know who needs a wake-up call about their health?"
+    ],
+    "gesture": "",
+    "hook": "Picture a hotel phone ringing at six in the morning: 'This is your wake-up call', and you leap out of bed to change your life.",
+    "forms": ["a wake-up call", "wake-up call", "wake-up calls", "a wakeup call"]
+  },
+  {
+    "word": "catalyst",
+    "intents": [
+      "the event that sets off a big change",
+      "the single thing that triggers a much bigger change, like one online video that leads to new rules",
+      "the spark that finally gets a long-overdue change moving"
+    ],
+    "ru_cue": "то, с чего начинаются большие перемены",
+    "plain": ["trigger", "spark", "cause"],
+    "upgrades": [
+      {"plain": "Losing her job was the [trigger] for starting her own business.",
+       "better": "Losing her job was the *catalyst* for starting her own business."},
+      {"plain": "The fire was the [spark] for new safety rules across the city.",
+       "better": "The fire was the *catalyst* for new safety rules across the city."},
+      {"plain": "My grandad's heart attack was [what started] a huge change in how our whole family eats.",
+       "better": "My grandad's heart attack was the *catalyst* for a huge change in how our whole family eats."}
+    ],
+    "collocations": [
+      {"chunk": "a catalyst for change", "frame": "a ___ for change"},
+      {"chunk": "act as a catalyst", "frame": "act as a ___"},
+      {"chunk": "the catalyst for the protest", "frame": "the ___ for the protest"}
+    ],
+    "ru_trap": "Russian 'катализатор чего-то' tempts 'catalyst of'; English usually says *a catalyst for* something.",
+    "nuance": "A *catalyst* is whatever sets a change off; *galvanise* is the verb for jolting people into action; an *incentive* is a reward offered on purpose.",
+    "personal": [
+      "What was the catalyst for the biggest change in your life so far?",
+      "What was the catalyst for a friend of yours changing career or city?"
+    ],
+    "gesture": "",
+    "hook": "'Cat-a-list': the cat knocks your to-do list off the table, and that's what finally gets everything moving.",
+    "forms": ["catalyst", "catalysts"]
+  },
+  {
+    "word": "threshold",
+    "intents": [
+      "the level you have to reach before something starts to happen",
+      "when you need to spend thirty pounds before delivery becomes free",
+      "the point beyond which a tax, a rule or pain begins to kick in"
+    ],
+    "ru_cue": "уровень, начиная с которого что-то начинает действовать",
+    "plain": ["limit", "cut-off point", "minimum"],
+    "upgrades": [
+      {"plain": "You only pay tax once you earn over a certain [amount].",
+       "better": "You only pay tax once you earn over a certain *threshold*."},
+      {"plain": "My [ability to put up with] pain is embarrassingly low; I cry at injections.",
+       "better": "My pain *threshold* is embarrassingly low; I cry at injections."},
+      {"plain": "Orders above the [minimum] of fifty pounds get free delivery.",
+       "better": "Orders above the *threshold* of fifty pounds get free delivery."}
+    ],
+    "collocations": [
+      {"chunk": "pain threshold", "frame": "a high pain ___"},
+      {"chunk": "the threshold for free delivery", "frame": "the ___ for free delivery"},
+      {"chunk": "cross the threshold", "frame": "cross the ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "A *constraint* limits what you can do; a *threshold* is the point at which something starts: tax, pain, free delivery.",
+    "personal": [
+      "What is your threshold for noise before you complain to a neighbour?",
+      "Who do you know with an amazingly high pain threshold?"
+    ],
+    "gesture": "Lift your foot and step deliberately over an imaginary line on the floor.",
+    "hook": "Picture an old man threshing wheat on your doorstep: you have to step right over him before anything can begin.",
+    "forms": ["threshold", "thresholds"]
+  }
+]

@@ -1,0 +1,638 @@
+[
+  {
+    "word": "mundane",
+    "intents": [
+      "ordinary everyday stuff with nothing special or exciting about it",
+      "when someone asks about your weekend and it was just shopping, laundry and paying bills",
+      "the reason turned out to be disappointingly ordinary, not dramatic at all",
+      "so routine and unremarkable that nobody would bother telling a story about it"
+    ],
+    "ru_cue": "привычные повседневные дела, в которых нет ничего интересного",
+    "plain": ["ordinary", "everyday", "boring"],
+    "upgrades": [
+      {"plain": "Most of my job is pretty [ordinary and everyday], to be honest: emails, forms and meetings.",
+       "better": "Most of my job is pretty *mundane*, to be honest: emails, forms and meetings."},
+      {"plain": "I told my little brother the noise was a ghost, but the real reason was [really ordinary]: a loose pipe.",
+       "better": "I told my little brother the noise was a ghost, but the real reason was disappointingly *mundane*: a loose pipe."},
+      {"plain": "On our first date I panicked and talked about [boring everyday things] like bin collection days.",
+       "better": "On our first date I panicked and talked about *mundane* things like bin collection days."}
+    ],
+    "collocations": [
+      {"chunk": "mundane everyday tasks", "frame": "___ everyday tasks"},
+      {"chunk": "escape the mundane", "frame": "escape the ___"},
+      {"chunk": "disappointingly mundane", "frame": "disappointingly ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Mundane means ordinary and unremarkable, not necessarily long; a task that drags on and on is tedious.",
+    "personal": [
+      "What mundane job at home do you secretly enjoy?",
+      "Who do you know who can make even a mundane story sound exciting?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'Monday': the most ordinary, nothing-happens day of the week.",
+    "forms": ["mundane"]
+  },
+  {
+    "word": "break the ice",
+    "intents": [
+      "get a group of strangers talking and relaxed at the very start",
+      "at a meeting where nobody knows each other and the silence is awkward, someone tells a small joke",
+      "end that first awkward silence so people feel at ease with each other"
+    ],
+    "ru_cue": "снять первую неловкость и разговорить незнакомых людей",
+    "plain": ["get people talking", "ease the tension", "start the conversation"],
+    "upgrades": [
+      {"plain": "Our teacher played a silly game on the first day to [help us relax and start talking].",
+       "better": "Our teacher played a silly game on the first day to *break the ice*."},
+      {"plain": "Nobody said a word at dinner until my dad [got everyone relaxed and talking] by spilling his soup on purpose.",
+       "better": "Nobody said a word at dinner until my dad *broke the ice* by spilling his soup on purpose."},
+      {"plain": "I was so nervous meeting her parents, but asking about their dog [got rid of the awkwardness].",
+       "better": "I was so nervous meeting her parents, but asking about their dog *broke the ice*."}
+    ],
+    "collocations": [
+      {"chunk": "a game to break the ice", "frame": "a game to ___"},
+      {"chunk": "break the ice with the new team", "frame": "___ with the new team"},
+      {"chunk": "tell a joke to break the ice", "frame": "tell a joke to ___"}
+    ],
+    "ru_trap": "Russian 'растопить лед' tempts 'melt the ice'; English says *break* the ice.",
+    "nuance": "Only for the awkward start between people who don't know each other well, not for calming an argument.",
+    "personal": [
+      "How do you usually break the ice when you meet someone new?",
+      "Who in your family is best at breaking the ice at parties?"
+    ],
+    "gesture": "Pretend to crack something flat with both hands, then open your arms wide in welcome.",
+    "hook": "Picture the silence at the table as a sheet of ice; one joke and it cracks.",
+    "forms": ["break the ice", "breaks the ice", "broke the ice", "broken the ice", "breaking the ice"]
+  },
+  {
+    "word": "tedious",
+    "intents": [
+      "boring because it goes on and on and is the same thing over and over",
+      "when you spend three hours filling in a long form, ticking boxes one by one",
+      "the kind of slow, repetitive task that makes the clock seem to stop"
+    ],
+    "ru_cue": "долгое однообразное занятие, от которого тянет зевать",
+    "plain": ["boring", "dull", "long and boring"],
+    "upgrades": [
+      {"plain": "Copying all the old numbers into the new spreadsheet was [so slow and boring].",
+       "better": "Copying all the old numbers into the new spreadsheet was so *tedious*."},
+      {"plain": "The lecture was interesting at first but [dragged on and got really boring] after twenty minutes.",
+       "better": "The lecture was interesting at first but grew *tedious* after twenty minutes."},
+      {"plain": "I had to redo every reference in my essay by hand the night before the deadline, and it was [endless and boring].",
+       "better": "I had to redo every reference in my essay by hand the night before the deadline, and it was utterly *tedious*."}
+    ],
+    "collocations": [
+      {"chunk": "long and tedious", "frame": "long and ___"},
+      {"chunk": "tedious and time-consuming", "frame": "___ and time-consuming"},
+      {"chunk": "a slow, tedious process", "frame": "a slow, ___ process"}
+    ],
+    "ru_trap": "",
+    "nuance": "Tedious is boring because of length and repetition; hard, exhausting work is arduous, and something merely ordinary is mundane.",
+    "personal": [
+      "What is the most tedious task you have to do every week?",
+      "Who do you know who can turn a tedious job into a game?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'tea-dious': standing by a kettle that never boils, again and again, for hours.",
+    "forms": ["tedious"]
+  },
+  {
+    "word": "overwhelming",
+    "intents": [
+      "so much of something at once that you simply can't cope with it all",
+      "when fifty emails, three deadlines and a crying baby all hit you at the same moment",
+      "so strong that it floods you completely, like a giant wave",
+      "support so huge that it sweeps everything before it, like 95 out of 100 people voting yes"
+    ],
+    "ru_cue": "настолько много или сильно, что накрывает с головой",
+    "plain": ["too much", "huge", "very strong"],
+    "upgrades": [
+      {"plain": "After the operation, the amount of paperwork was [too much to cope with].",
+       "better": "After the operation, the amount of paperwork was *overwhelming*."},
+      {"plain": "When I saw my exam results, I felt a [huge, unstoppable] sense of relief.",
+       "better": "When I saw my exam results, I felt an *overwhelming* sense of relief."},
+      {"plain": "Starting a new job and moving house in the same week was [just too much].",
+       "better": "Starting a new job and moving house in the same week was *overwhelming*."}
+    ],
+    "collocations": [
+      {"chunk": "an overwhelming majority", "frame": "an ___ majority"},
+      {"chunk": "overwhelming evidence", "frame": "___ evidence"},
+      {"chunk": "an overwhelming sense of relief", "frame": "an ___ sense of relief"}
+    ],
+    "ru_trap": "",
+    "nuance": "Overwhelming is being flooded right now by too much; daunting is the fear before you even start.",
+    "personal": [
+      "When did you last find your workload overwhelming?",
+      "Who do you know whose kindness was overwhelming at a hard time?"
+    ],
+    "gesture": "Hold your hands high above your head, then let them crash down over you like a wave.",
+    "hook": "'Over-WHELM' sounds like 'over-WHALE': a whale lands on top of you, far too much to lift.",
+    "forms": ["overwhelming"]
+  },
+  {
+    "word": "nostalgic",
+    "intents": [
+      "warm and a little sad when you remember the good old days",
+      "when an old song comes on and suddenly you miss your school summers",
+      "fondly missing a time in your own past that is gone for good"
+    ],
+    "ru_cue": "с теплой грустью скучающий по тем временам, которые уже не вернуть",
+    "plain": ["miss the old days", "sentimental about the past"],
+    "upgrades": [
+      {"plain": "Looking at my old school photos always makes me [miss those days].",
+       "better": "Looking at my old school photos always makes me *nostalgic*."},
+      {"plain": "My grandad gets [all sentimental about the old days] whenever he hears that song.",
+       "better": "My grandad gets *nostalgic* whenever he hears that song."},
+      {"plain": "Walking past our old flat after the divorce, I felt [sad and fond about the past] in a way I didn't expect.",
+       "better": "Walking past our old flat after the divorce, I felt *nostalgic* in a way I didn't expect."}
+    ],
+    "collocations": [
+      {"chunk": "nostalgic for the old days", "frame": "___ for the old days"},
+      {"chunk": "get nostalgic about your childhood", "frame": "get ___ about your childhood"},
+      {"chunk": "feel nostalgic", "frame": "makes me feel ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Nostalgic always looks back at your own past; to ache for something you have never had, you yearn for it.",
+    "personal": [
+      "What smell or song makes you most nostalgic?",
+      "Which relative gets nostalgic about the old days at every family dinner?"
+    ],
+    "gesture": "",
+    "hook": "'Nos-TALgic': your 'нос' (nose) catches the smell of grandma's pies and the past floods back.",
+    "forms": ["nostalgic"]
+  },
+  {
+    "word": "serene",
+    "intents": [
+      "deeply calm and peaceful, with nothing at all disturbing it",
+      "a lake at dawn with no wind and no people, perfectly still",
+      "someone who stays perfectly calm and untroubled while everyone around them panics"
+    ],
+    "ru_cue": "полный тихого покоя, когда ничто не тревожит",
+    "plain": ["calm", "peaceful"],
+    "upgrades": [
+      {"plain": "The beach was so [calm and peaceful] at six in the morning.",
+       "better": "The beach was so *serene* at six in the morning."},
+      {"plain": "Even when the wedding cake fell over, the bride stayed completely [calm].",
+       "better": "Even when the wedding cake fell over, the bride stayed completely *serene*."},
+      {"plain": "After the noisy city, the little village felt [wonderfully peaceful].",
+       "better": "After the noisy city, the little village felt wonderfully *serene*."}
+    ],
+    "collocations": [
+      {"chunk": "a serene smile", "frame": "a ___ smile"},
+      {"chunk": "calm and serene", "frame": "calm and ___"},
+      {"chunk": "a serene expression", "frame": "a ___ expression on her face"}
+    ],
+    "ru_trap": "",
+    "nuance": "Serene is a happy, peaceful stillness; an empty place that feels gloomy and lonely is desolate.",
+    "personal": [
+      "Where do you feel most serene?",
+      "Who do you know who stays serene even in a crisis?"
+    ],
+    "gesture": "Close your eyes, breathe out slowly and smooth your palm flat across the air like still water.",
+    "hook": "Sounds like 'сирень' (lilac): sitting under a lilac bush on a still spring evening, perfectly calm.",
+    "forms": ["serene"]
+  },
+  {
+    "word": "burn the candle at both ends",
+    "intents": [
+      "wear yourself out by working late and getting up early, day after day",
+      "when you work all day, study all night and sleep four hours, and it starts to show on your face",
+      "push yourself so hard, morning and night, that you're heading for a crash"
+    ],
+    "ru_cue": "изнурять себя, работая и рано утром, и до поздней ночи",
+    "plain": ["overdo it", "wear yourself out", "work too hard"],
+    "upgrades": [
+      {"plain": "You've been [working day and night] for weeks; no wonder you're ill.",
+       "better": "You've been *burning the candle at both ends* for weeks; no wonder you're ill."},
+      {"plain": "During exam season I [pushed myself far too hard, early and late], and I fell asleep in the actual exam.",
+       "better": "During exam season I *burned the candle at both ends*, and I fell asleep in the actual exam."},
+      {"plain": "My sister works a night shift and then studies all day; she's [completely overdoing it].",
+       "better": "My sister works a night shift and then studies all day; she's *burning the candle at both ends*."}
+    ],
+    "collocations": [
+      {"chunk": "been burning the candle at both ends", "frame": "you've been ___ for weeks"},
+      {"chunk": "can't keep burning the candle at both ends", "frame": "you can't keep ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Always about exhausting yourself with too much activity over time, usually as a warning; doing more than required for someone else is going the extra mile.",
+    "personal": [
+      "When did you last burn the candle at both ends, and what made you stop?",
+      "Who do you know who is always burning the candle at both ends?"
+    ],
+    "gesture": "",
+    "hook": "Picture a candle lit at both ends: twice the light, but it's gone in half the time.",
+    "forms": ["burn the candle at both ends", "burns the candle at both ends", "burned the candle at both ends", "burnt the candle at both ends", "burning the candle at both ends"]
+  },
+  {
+    "word": "chaotic",
+    "intents": [
+      "a complete mess where nothing is under control and everything happens at once",
+      "a restaurant kitchen on a busy night: pans everywhere, people shouting, orders lost",
+      "so disorganised that nobody knows what's going on or who's in charge"
+    ],
+    "ru_cue": "полный беспорядок, все вышло из-под контроля",
+    "plain": ["messy", "out of control", "a mess"],
+    "upgrades": [
+      {"plain": "The first day at the new office was [a total mess]: no desks, no passwords, no plan.",
+       "better": "The first day at the new office was *chaotic*: no desks, no passwords, no plan."},
+      {"plain": "Our wedding morning was completely [out of control], but we laughed about it later.",
+       "better": "Our wedding morning was completely *chaotic*, but we laughed about it later."},
+      {"plain": "Traffic was [all over the place] after the match.",
+       "better": "Traffic was *chaotic* after the match."}
+    ],
+    "collocations": [
+      {"chunk": "chaotic scenes", "frame": "___ scenes at the station"},
+      {"chunk": "a bit chaotic", "frame": "things are a bit ___ at home right now"}
+    ],
+    "ru_trap": "Russian 'хаотичный' can mean simply random ('хаотичный выбор'); English chaotic means wildly disordered, so say a *random* choice, not a chaotic one.",
+    "nuance": "Chaotic describes a scene or situation out of control; for the feeling of too much landing on you, use overwhelming.",
+    "personal": [
+      "What was the most chaotic morning you've ever had?",
+      "Whose home in your family is the most chaotic, and do you like it there?"
+    ],
+    "gesture": "Wave both arms in different directions at once and look around wildly.",
+    "hook": "Sounds like 'cake-otic': a toddler's party with cake on the walls, the dog and the ceiling.",
+    "forms": ["chaotic"]
+  },
+  {
+    "word": "desolate",
+    "intents": [
+      "empty, bleak and lonely, with no life or people anywhere",
+      "a grey beach in winter with nobody on it, just wind and a closed cafe",
+      "feeling utterly alone and empty inside, as if everyone has left you"
+    ],
+    "ru_cue": "безлюдный и мрачный, без единой живой души; или чувствующий себя всеми брошенным",
+    "plain": ["empty", "lonely", "bleak"],
+    "upgrades": [
+      {"plain": "The town centre was [completely empty and gloomy] after the factory closed.",
+       "better": "The town centre was *desolate* after the factory closed."},
+      {"plain": "When my best friend moved abroad, I felt [totally alone and empty] for weeks.",
+       "better": "When my best friend moved abroad, I felt *desolate* for weeks."},
+      {"plain": "We drove for hours through [empty, bleak] countryside without seeing a single house.",
+       "better": "We drove for hours through *desolate* countryside without seeing a single house."}
+    ],
+    "collocations": [
+      {"chunk": "a desolate landscape", "frame": "a ___ landscape"},
+      {"chunk": "bleak and desolate", "frame": "bleak and ___"},
+      {"chunk": "feel desolate", "frame": "felt utterly ___ after she left"}
+    ],
+    "ru_trap": "",
+    "nuance": "Desolate is emptiness that feels bleak and lonely; a quiet place that feels peaceful and pleasant is serene.",
+    "personal": [
+      "What is the most desolate place you have ever been to?",
+      "Who have you comforted when they felt desolate, and what helped?"
+    ],
+    "gesture": "",
+    "hook": "'Desolate' sounds like 'десять лет' (ten years): a village left empty for ten years, no one, nothing.",
+    "forms": ["desolate"]
+  },
+  {
+    "word": "luminous",
+    "intents": [
+      "glowing with a soft light, as if lit from inside",
+      "watch hands or a strip on the path that you can see in the dark because they glow",
+      "softly bright and radiant, like the moon over still water"
+    ],
+    "ru_cue": "мягко светящийся, словно изнутри",
+    "plain": ["glowing", "bright", "shining"],
+    "upgrades": [
+      {"plain": "My old watch has [glow-in-the-dark] hands, so I can check the time at night.",
+       "better": "My old watch has *luminous* hands, so I can check the time at night."},
+      {"plain": "After the snow, the whole garden looked [softly bright] in the moonlight.",
+       "better": "After the snow, the whole garden looked *luminous* in the moonlight."},
+      {"plain": "She was terrified before going on stage, but her performance was [glowing and beautiful].",
+       "better": "She was terrified before going on stage, but her performance was *luminous*."}
+    ],
+    "collocations": [
+      {"chunk": "luminous paint", "frame": "___ paint that glows in the dark"},
+      {"chunk": "a soft, luminous glow", "frame": "a soft, ___ glow"},
+      {"chunk": "a luminous dial", "frame": "a ___ dial you can read at night"}
+    ],
+    "ru_trap": "",
+    "nuance": "Luminous is about light that glows softly; a picture or memory that is clear and intense in the mind is vivid.",
+    "personal": [
+      "What is the most luminous sky you can remember?",
+      "Whose smile would you describe as luminous?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'LOO-min-us': a little nightlight in the loo that glows softly so you never need the big light.",
+    "forms": ["luminous"]
+  },
+  {
+    "word": "ephemeral",
+    "intents": [
+      "lasting only a very short time before it's gone",
+      "like snow that has melted by lunch, or a trend everyone has forgotten a month later",
+      "here for a beautiful moment and then vanishing for good"
+    ],
+    "ru_cue": "существующий лишь краткий миг, а потом бесследно исчезающий",
+    "plain": ["short-lived", "brief", "quick to disappear"],
+    "upgrades": [
+      {"plain": "Fame on the internet is [very short-lived]; next week nobody will remember you.",
+       "better": "Fame on the internet is *ephemeral*; next week nobody will remember you."},
+      {"plain": "The cherry blossom is [gone so quickly], two weeks at most.",
+       "better": "The cherry blossom is *ephemeral*, two weeks at most."},
+      {"plain": "I thought our holiday romance was real, but it turned out to be [over almost before it began].",
+       "better": "I thought our holiday romance was real, but it turned out to be *ephemeral*."}
+    ],
+    "collocations": [
+      {"chunk": "the ephemeral nature of fame", "frame": "the ___ nature of fame"},
+      {"chunk": "ephemeral beauty", "frame": "the ___ beauty of the blossom"}
+    ],
+    "ru_trap": "Russian 'эфемерный' often means unreal or illusory; English ephemeral means short-lived.",
+    "nuance": "Ephemeral stresses that something lasts only briefly; something that shrinks little by little dwindles.",
+    "personal": [
+      "What ephemeral pleasure do you look forward to every year?",
+      "Who do you know who chases every ephemeral trend?"
+    ],
+    "gesture": "",
+    "hook": "'Ephemeral' starts like 'эфир' (on air): a live broadcast, there for a moment and then gone.",
+    "forms": ["ephemeral"]
+  },
+  {
+    "word": "jump on the bandwagon",
+    "intents": [
+      "join in with something only because it has suddenly become popular",
+      "when every cafe in town starts selling the same trendy drink the moment it goes viral",
+      "copy a trend late, to look cool or make money, not because you believe in it"
+    ],
+    "ru_cue": "присоединиться к модному увлечению только потому, что все так делают",
+    "plain": ["follow the trend", "join the crowd", "copy everyone"],
+    "upgrades": [
+      {"plain": "Once the show became a hit, every shop [started copying the trend] with T-shirts.",
+       "better": "Once the show became a hit, every shop *jumped on the bandwagon* with T-shirts."},
+      {"plain": "I refuse to [just follow everyone] and buy the new phone.",
+       "better": "I refuse to *jump on the bandwagon* and buy the new phone."},
+      {"plain": "My uncle mocked electric cars for years, then [joined the trend] last month and now won't stop talking about it.",
+       "better": "My uncle mocked electric cars for years, then *jumped on the bandwagon* last month and now won't stop talking about it."}
+    ],
+    "collocations": [
+      {"chunk": "quick to jump on the bandwagon", "frame": "quick to ___"},
+      {"chunk": "refuse to jump on the bandwagon", "frame": "refuse to ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Slightly mocking: it suggests people join for popularity or profit, not because they really care.",
+    "personal": [
+      "When did you jump on the bandwagon with a trend you later regretted?",
+      "Who do you know who never jumps on the bandwagon, whatever is popular?"
+    ],
+    "gesture": "",
+    "hook": "Picture a parade wagon with a band on it; everyone leaps aboard only because the music is loud.",
+    "forms": ["jump on the bandwagon", "jumps on the bandwagon", "jumped on the bandwagon", "jumping on the bandwagon"]
+  },
+  {
+    "word": "relentless",
+    "intents": [
+      "never letting up, not even for a moment, with no break and no mercy",
+      "rain that pours for three days without a single pause",
+      "keeps pushing on and on, however tired everyone gets"
+    ],
+    "ru_cue": "не ослабевающий ни на минуту и не дающий передышки",
+    "plain": ["non-stop", "constant", "never-ending"],
+    "upgrades": [
+      {"plain": "The heat that August was [non-stop]; even the nights were hot.",
+       "better": "The heat that August was *relentless*; even the nights were hot."},
+      {"plain": "My boss's [constant, never-ending] pressure before the launch had me crying in the toilets.",
+       "better": "My boss's *relentless* pressure before the launch had me crying in the toilets."},
+      {"plain": "She trained at a [punishing, non-stop] pace and finally made the national team.",
+       "better": "She trained at a *relentless* pace and finally made the national team."}
+    ],
+    "collocations": [
+      {"chunk": "relentless pressure", "frame": "___ pressure"},
+      {"chunk": "a relentless pace", "frame": "kept up a ___ pace"},
+      {"chunk": "the relentless pursuit of", "frame": "the ___ pursuit of perfection"}
+    ],
+    "ru_trap": "",
+    "nuance": "Relentless means it never eases off and can feel cruel; about a person, it praises (or fears) their unstoppable drive.",
+    "personal": [
+      "When did you face relentless pressure, and how did you get through it?",
+      "Who do you know who is relentless once they set a goal?"
+    ],
+    "gesture": "",
+    "hook": "'Re-LENT-less': the boss who has never lent anyone a single day off.",
+    "forms": ["relentless"]
+  },
+  {
+    "word": "meticulous",
+    "intents": [
+      "extremely careful to get every tiny detail exactly right",
+      "someone who labels every jar, checks every figure twice and keeps every receipt",
+      "so precise and thorough that nothing is ever missed or left to chance"
+    ],
+    "ru_cue": "проверяющий каждую мелочь, чтобы все было идеально",
+    "plain": ["very careful", "thorough", "careful with details"],
+    "upgrades": [
+      {"plain": "My dad keeps [very careful, detailed] records of every bill.",
+       "better": "My dad keeps *meticulous* records of every bill."},
+      {"plain": "Thanks to her [very careful] planning, the surprise party went perfectly.",
+       "better": "Thanks to her *meticulous* planning, the surprise party went perfectly."},
+      {"plain": "He's [extremely careful about every detail] when he cooks, which drives me mad when I'm starving.",
+       "better": "He's *meticulous* when he cooks, which drives me mad when I'm starving."}
+    ],
+    "collocations": [
+      {"chunk": "meticulous attention to detail", "frame": "___ attention to detail"},
+      {"chunk": "meticulous planning", "frame": "___ planning"},
+      {"chunk": "meticulous about keeping records", "frame": "___ about keeping records"}
+    ],
+    "ru_trap": "",
+    "nuance": "Meticulous praises a person's careful way of working; for examining something closely to find faults, use scrutinise.",
+    "personal": [
+      "What are you meticulous about, even if you're relaxed about everything else?",
+      "Who is the most meticulous person you know, and how does it show?"
+    ],
+    "gesture": "",
+    "hook": "'METI-culous' sounds like 'метить' (to mark): he marks and labels every tiny detail.",
+    "forms": ["meticulous"]
+  },
+  {
+    "word": "resonate",
+    "intents": [
+      "strike a deep personal chord because it feels true to your own experience",
+      "when someone describes exactly what you went through and you think 'yes, that's me'",
+      "connect with people and stay meaningful to them long after they hear it"
+    ],
+    "ru_cue": "задевать за живое, потому что совпадает с твоим собственным опытом",
+    "plain": ["connect with", "mean a lot to", "strike a chord with"],
+    "upgrades": [
+      {"plain": "Her talk about moving to a new country really [meant a lot to me].",
+       "better": "Her talk about moving to a new country really *resonated* with me."},
+      {"plain": "The advert didn't [connect with] young people at all.",
+       "better": "The advert didn't *resonate* with young people at all."},
+      {"plain": "When my dad read that poem at grandma's funeral, it [touched everyone deeply].",
+       "better": "When my dad read that poem at grandma's funeral, it *resonated* with everyone."}
+    ],
+    "collocations": [
+      {"chunk": "resonate with young people", "frame": "___ with young people"},
+      {"chunk": "really resonated with me", "frame": "really ___ with me"},
+      {"chunk": "resonate deeply", "frame": "___ deeply with readers"}
+    ],
+    "ru_trap": "Russian 'резонировать' sounds technical or bookish; English resonate is everyday for ideas and takes *with*: it resonated with me (not 'it resonated me').",
+    "nuance": "Something resonates with you when it matches your own experience; when it simply brings a memory or feeling to mind, it evokes it.",
+    "personal": [
+      "What film or book has resonated with you most in the last year?",
+      "Which friend's advice still resonates with you, and what was it?"
+    ],
+    "gesture": "",
+    "hook": "'Re-SO-nate': like a guitar string that hums back when you sing its note, 'yes, me too'.",
+    "forms": ["resonate", "resonates", "resonated", "resonating"]
+  },
+  {
+    "word": "evoke",
+    "intents": [
+      "bring a memory, feeling or picture back into someone's mind",
+      "when the smell of pine calls up a clear picture of childhood holidays in your mind",
+      "call up a particular mood or time without describing it directly"
+    ],
+    "ru_cue": "заставлять в голове ожить картину, чувство или воспоминание",
+    "plain": ["bring back", "remind you of", "make you think of"],
+    "upgrades": [
+      {"plain": "The smell of the sea always [brings back] my childhood summers.",
+       "better": "The smell of the sea always *evokes* my childhood summers."},
+      {"plain": "His paintings [make you feel] the heat and dust of the desert.",
+       "better": "His paintings *evoke* the heat and dust of the desert."},
+      {"plain": "Hearing my late mum's favourite song in the shop [brought back] so many memories that I had to leave.",
+       "better": "Hearing my late mum's favourite song in the shop *evoked* so many memories that I had to leave."}
+    ],
+    "collocations": [
+      {"chunk": "evoke memories of childhood", "frame": "___ memories of childhood"},
+      {"chunk": "evoke a sense of calm", "frame": "___ a sense of calm"},
+      {"chunk": "evoke the atmosphere of", "frame": "___ the atmosphere of the 1960s"}
+    ],
+    "ru_trap": "Russian 'вызывать' covers both; use *cause* for problems or physical reactions (cause a headache) and *evoke* only for memories, images and feelings.",
+    "nuance": "Evoke brings an image or feeling into the mind; it never means causing a physical effect, and the wistful feeling itself is being nostalgic.",
+    "personal": [
+      "What smell evokes your childhood most strongly?",
+      "Which song evokes a particular person for you, and who is it?"
+    ],
+    "gesture": "",
+    "hook": "'E-VOKE' sounds like 'вокал' (vocals): one note of an old song and the whole memory sings back.",
+    "forms": ["evoke", "evokes", "evoked", "evoking"]
+  },
+  {
+    "word": "a blessing and a curse",
+    "intents": [
+      "a gift you live with, like a talent or a home, that is at the same time a burden to you",
+      "when your talent for remembering everything feels like a gift from heaven one day and a punishment the next",
+      "something in your life you feel lucky to have and fed up with in equal measure"
+    ],
+    "ru_cue": "дар, который одновременно и радует, и мучает",
+    "plain": ["good and bad at the same time", "has its ups and downs"],
+    "upgrades": [
+      {"plain": "Having a photographic memory is [a gift and a burden at once]: exams are easy, but I can't forget anything embarrassing.",
+       "better": "Having a photographic memory is *a blessing and a curse*: exams are easy, but I can't forget anything embarrassing."},
+      {"plain": "Being the eldest child was [lucky and unlucky at the same time]; I had more freedom, but I always got the blame.",
+       "better": "Being the eldest child was *a blessing and a curse*; I had more freedom, but I always got the blame."},
+      {"plain": "Living next to the beach is [heaven and hell at the same time] in summer.",
+       "better": "Living next to the beach is *a blessing and a curse* in summer."}
+    ],
+    "collocations": [
+      {"chunk": "both a blessing and a curse", "frame": "it's both ___"},
+      {"chunk": "a blessing and a curse rolled into one", "frame": "my big noisy family is ___ rolled into one"}
+    ],
+    "ru_trap": "",
+    "nuance": "Usually about something personal you live with (a trait, a home, a gadget) that you both value and suffer from; a double-edged sword is a tool or move whose effects can turn against you, and a blessing in disguise is bad luck that turns out well.",
+    "personal": [
+      "Which part of your personality is a blessing and a curse?",
+      "Whose job in your family is a blessing and a curse for them, and why?"
+    ],
+    "gesture": "",
+    "hook": "Picture a fairy granting your wish, and a little storm cloud following you everywhere ever since.",
+    "forms": ["a blessing and a curse", "blessing and a curse", "both a blessing and a curse"]
+  },
+  {
+    "word": "yearn",
+    "intents": [
+      "deeply and painfully want something you don't have, for a long time",
+      "when you've been stuck in a grey city for months and ache for the sea every single day",
+      "an aching wish for something far away that just won't go away"
+    ],
+    "ru_cue": "долго и мучительно мечтать о том, чего нет рядом",
+    "plain": ["really want", "miss", "long for"],
+    "upgrades": [
+      {"plain": "After six months in the city, I [really missed] the quiet of the countryside.",
+       "better": "After six months in the city, I *yearned* for the quiet of the countryside."},
+      {"plain": "He has always [wanted so badly] to see the Northern Lights.",
+       "better": "He has always *yearned* to see the Northern Lights."},
+      {"plain": "Stuck in hospital over New Year, she [desperately wanted] to be home with her kids.",
+       "better": "Stuck in hospital over New Year, she *yearned* to be home with her kids."}
+    ],
+    "collocations": [
+      {"chunk": "yearn for a quieter life", "frame": "___ for a quieter life"},
+      {"chunk": "yearn to go home", "frame": "___ to go home"}
+    ],
+    "ru_trap": "Russian 'тосковать по' tempts a direct object or 'yearn about'; English says yearn *for* something or yearn *to do* something.",
+    "nuance": "Yearn is a deep, lasting, often sad wanting; it can reach towards the future or something never had, while nostalgic only looks back.",
+    "personal": [
+      "What do you yearn for when you're away from home?",
+      "Which friend or relative yearns to live somewhere else, and where?"
+    ],
+    "gesture": "Reach one hand out slowly towards something far away and hold it there.",
+    "hook": "Sounds like 'year': year after year you keep aching for the same thing.",
+    "forms": ["yearn", "yearns", "yearned", "yearning"]
+  },
+  {
+    "word": "flourish",
+    "intents": [
+      "grow strong and healthy because the conditions are just right",
+      "when your herbs suddenly shoot up on a sunny windowsill",
+      "start doing really well and blossom once you're in the right place with the right support"
+    ],
+    "ru_cue": "бурно расти и развиваться, когда условия подходящие",
+    "plain": ["grow well", "do really well", "grow"],
+    "upgrades": [
+      {"plain": "Tomatoes [grow really well] in a warm, sunny spot.",
+       "better": "Tomatoes *flourish* in a warm, sunny spot."},
+      {"plain": "My son was miserable at his old school, but he's [really doing well] at the new one.",
+       "better": "My son was miserable at his old school, but he's *flourishing* at the new one."},
+      {"plain": "The little bakery has [grown and done really well] since it moved to the high street.",
+       "better": "The little bakery has *flourished* since it moved to the high street."}
+    ],
+    "collocations": [
+      {"chunk": "flourish under the new manager", "frame": "___ under the new manager"},
+      {"chunk": "the business began to flourish", "frame": "the business began to ___"},
+      {"chunk": "allowed to flourish", "frame": "talent is allowed to ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Flourish is growing well because conditions are good; doing well because of pressure or hardship is thriving on it.",
+    "personal": [
+      "Where or when did you flourish most, and why?",
+      "Who do you know who flourished after a big change in their life?"
+    ],
+    "gesture": "",
+    "hook": "'FLOUR-ish': add flour and yeast, and the dough rises big and healthy in a warm kitchen.",
+    "forms": ["flourish", "flourishes", "flourished", "flourishing"]
+  },
+  {
+    "word": "dwindle",
+    "intents": [
+      "slowly get smaller and smaller until hardly anything is left",
+      "when your savings shrink week by week while you're out of work",
+      "fade away bit by bit, like a crowd thinning out after the rain starts"
+    ],
+    "ru_cue": "постепенно таять, пока почти ничего не останется",
+    "plain": ["get smaller", "go down", "shrink"],
+    "upgrades": [
+      {"plain": "Our food supplies [started running low] by the third day of the hike.",
+       "better": "Our food supplies began to *dwindle* by the third day of the hike."},
+      {"plain": "The crowd [slowly got smaller] once it started raining.",
+       "better": "The crowd *dwindled* once it started raining."},
+      {"plain": "Only six people came to my book club last week; numbers have [been shrinking] all year and I'm scared it will close.",
+       "better": "Only six people came to my book club last week; numbers have been *dwindling* all year and I'm scared it will close."}
+    ],
+    "collocations": [
+      {"chunk": "dwindling numbers", "frame": "___ numbers"},
+      {"chunk": "dwindle to almost nothing", "frame": "___ to almost nothing"},
+      {"chunk": "dwindling supplies", "frame": "our ___ supplies"}
+    ],
+    "ru_trap": "",
+    "nuance": "Dwindle is a gradual, natural shrinking towards almost nothing; when someone limits something on purpose, they curb it.",
+    "personal": [
+      "What have you watched dwindle over the years: a hobby, your savings, your free time?",
+      "Which relative's circle of friends has dwindled over the years, and why?"
+    ],
+    "gesture": "Start with your hands wide apart and slowly bring them together until they almost touch.",
+    "hook": "'Dwindle' sounds like 'два-один-ноль' (two-one-zero): the count drops until nothing is left.",
+    "forms": ["dwindle", "dwindles", "dwindled", "dwindling"]
+  }
+]

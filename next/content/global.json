@@ -1,0 +1,1462 @@
+{
+ "themes": {
+  "work": {
+   "name": "Work and productivity",
+   "words": [
+    "commitment",
+    "cut corners",
+    "on the same page",
+    "go the extra mile",
+    "allocate",
+    "implement",
+    "prioritise",
+    "streamline",
+    "incentive",
+    "constraint",
+    "trade-off",
+    "autonomy",
+    "tedious",
+    "burn the candle at both ends"
+   ]
+  },
+  "study": {
+   "name": "Education and learning",
+   "words": [
+    "flunk out of",
+    "get the hang of",
+    "rudimentary",
+    "facilitate",
+    "second nature",
+    "a steep learning curve",
+    "nuance",
+    "food for thought",
+    "meticulous"
+   ]
+  },
+  "society": {
+   "name": "Environment and society",
+   "words": [
+    "prevalent",
+    "detrimental",
+    "sustainable",
+    "alleviate",
+    "underpin",
+    "curb",
+    "advocate",
+    "perpetuate",
+    "deter",
+    "offset",
+    "disparity",
+    "a wake-up call",
+    "dwindle"
+   ]
+  },
+  "tech": {
+   "name": "Technology and media",
+   "words": [
+    "enhance",
+    "ubiquitous",
+    "a double-edged sword",
+    "robust",
+    "take it with a pinch of salt",
+    "a grey area",
+    "drawback",
+    "backlash",
+    "immersive",
+    "jump on the bandwagon"
+   ]
+  },
+  "people": {
+   "name": "Relationships and people",
+   "words": [
+    "compassion",
+    "foster",
+    "hit the nail on the head",
+    "reconcile",
+    "consensus",
+    "see eye to eye",
+    "affinity",
+    "break the ice"
+   ]
+  },
+  "feelings": {
+   "name": "Feelings, memories and experiences",
+   "words": [
+    "profound",
+    "epiphany",
+    "vivid",
+    "exhilarating",
+    "desperate",
+    "mundane",
+    "overwhelming",
+    "nostalgic",
+    "ephemeral",
+    "resonate",
+    "evoke",
+    "yearn"
+   ]
+  },
+  "places": {
+   "name": "Cities, places and travel",
+   "words": [
+    "intricate",
+    "permeate",
+    "play it by ear",
+    "infrastructure",
+    "the best of both worlds",
+    "serene",
+    "chaotic",
+    "desolate",
+    "luminous",
+    "a blessing and a curse"
+   ]
+  },
+  "problems": {
+   "name": "Problems and solutions",
+   "words": [
+    "inadvertently",
+    "the tip of the iceberg",
+    "viable",
+    "pragmatic",
+    "futile",
+    "exacerbate",
+    "mitigate",
+    "undermine",
+    "hinder"
+   ]
+  },
+  "argue": {
+   "name": "Arguing a point",
+   "words": [
+    "conversely",
+    "arguably",
+    "notwithstanding",
+    "albeit",
+    "inherently",
+    "paradoxically",
+    "akin to",
+    "compelling",
+    "plausible",
+    "ambiguous",
+    "disparate",
+    "exemplify",
+    "implication",
+    "paradox",
+    "dichotomy"
+   ]
+  },
+  "data": {
+   "name": "Facts, figures and evidence",
+   "words": [
+    "predominantly",
+    "invariably",
+    "negligible",
+    "substantial",
+    "disproportionate",
+    "tangible",
+    "attribute",
+    "scrutinise",
+    "discrepancy",
+    "threshold",
+    "prevalence"
+   ]
+  },
+  "change": {
+   "name": "Change and progress",
+   "words": [
+    "impact",
+    "unprecedented",
+    "inevitable",
+    "pivotal",
+    "in the long run",
+    "out of the blue",
+    "overhaul",
+    "galvanise",
+    "catalyst",
+    "flourish"
+   ]
+  },
+  "challenge": {
+   "name": "Challenges and resilience",
+   "words": [
+    "thrive on",
+    "a blessing in disguise",
+    "bite the bullet",
+    "arduous",
+    "adversity",
+    "resilience",
+    "daunting",
+    "relentless"
+   ]
+  }
+ },
+ "word_themes": {
+  "enhance": [
+   "tech",
+   "work"
+  ],
+  "compassion": [
+   "people",
+   "feelings"
+  ],
+  "thrive on": [
+   "challenge",
+   "work"
+  ],
+  "impact": [
+   "change",
+   "society"
+  ],
+  "commitment": [
+   "work",
+   "people"
+  ],
+  "flunk out of": [
+   "study"
+  ],
+  "conversely": [
+   "argue"
+  ],
+  "arguably": [
+   "argue"
+  ],
+  "notwithstanding": [
+   "argue"
+  ],
+  "albeit": [
+   "argue"
+  ],
+  "a blessing in disguise": [
+   "challenge",
+   "feelings"
+  ],
+  "inherently": [
+   "argue"
+  ],
+  "predominantly": [
+   "data"
+  ],
+  "invariably": [
+   "data",
+   "argue"
+  ],
+  "inadvertently": [
+   "problems",
+   "people"
+  ],
+  "the tip of the iceberg": [
+   "problems",
+   "society"
+  ],
+  "paradoxically": [
+   "argue"
+  ],
+  "akin to": [
+   "argue"
+  ],
+  "ubiquitous": [
+   "tech",
+   "places"
+  ],
+  "prevalent": [
+   "society",
+   "data"
+  ],
+  "a double-edged sword": [
+   "tech"
+  ],
+  "detrimental": [
+   "society",
+   "problems"
+  ],
+  "negligible": [
+   "data"
+  ],
+  "substantial": [
+   "data",
+   "change"
+  ],
+  "viable": [
+   "problems",
+   "work"
+  ],
+  "cut corners": [
+   "work",
+   "problems"
+  ],
+  "sustainable": [
+   "society"
+  ],
+  "pragmatic": [
+   "problems",
+   "work"
+  ],
+  "compelling": [
+   "argue",
+   "tech"
+  ],
+  "plausible": [
+   "argue"
+  ],
+  "bite the bullet": [
+   "challenge",
+   "problems"
+  ],
+  "ambiguous": [
+   "argue",
+   "people"
+  ],
+  "disproportionate": [
+   "data",
+   "society"
+  ],
+  "disparate": [
+   "argue",
+   "people"
+  ],
+  "unprecedented": [
+   "change",
+   "tech"
+  ],
+  "robust": [
+   "tech",
+   "argue"
+  ],
+  "get the hang of": [
+   "study",
+   "work"
+  ],
+  "profound": [
+   "feelings",
+   "change"
+  ],
+  "inevitable": [
+   "change"
+  ],
+  "intricate": [
+   "places",
+   "study"
+  ],
+  "rudimentary": [
+   "study"
+  ],
+  "on the same page": [
+   "work",
+   "people"
+  ],
+  "arduous": [
+   "challenge",
+   "work"
+  ],
+  "futile": [
+   "problems",
+   "challenge"
+  ],
+  "tangible": [
+   "data",
+   "work"
+  ],
+  "pivotal": [
+   "change"
+  ],
+  "in the long run": [
+   "change",
+   "society"
+  ],
+  "exacerbate": [
+   "problems"
+  ],
+  "mitigate": [
+   "problems",
+   "society"
+  ],
+  "alleviate": [
+   "society",
+   "feelings"
+  ],
+  "take it with a pinch of salt": [
+   "tech",
+   "argue"
+  ],
+  "undermine": [
+   "problems",
+   "people"
+  ],
+  "underpin": [
+   "society",
+   "argue"
+  ],
+  "facilitate": [
+   "study",
+   "work"
+  ],
+  "hinder": [
+   "problems",
+   "study"
+  ],
+  "go the extra mile": [
+   "work",
+   "people"
+  ],
+  "curb": [
+   "society"
+  ],
+  "foster": [
+   "people",
+   "study"
+  ],
+  "allocate": [
+   "work"
+  ],
+  "implement": [
+   "work",
+   "change"
+  ],
+  "hit the nail on the head": [
+   "people",
+   "argue"
+  ],
+  "prioritise": [
+   "work"
+  ],
+  "advocate": [
+   "society",
+   "argue"
+  ],
+  "attribute": [
+   "data",
+   "argue"
+  ],
+  "exemplify": [
+   "argue"
+  ],
+  "out of the blue": [
+   "change",
+   "feelings"
+  ],
+  "perpetuate": [
+   "society"
+  ],
+  "scrutinise": [
+   "data",
+   "study"
+  ],
+  "overhaul": [
+   "change",
+   "work"
+  ],
+  "streamline": [
+   "work",
+   "tech"
+  ],
+  "second nature": [
+   "study"
+  ],
+  "deter": [
+   "society"
+  ],
+  "offset": [
+   "society",
+   "data"
+  ],
+  "galvanise": [
+   "change",
+   "society"
+  ],
+  "permeate": [
+   "places",
+   "feelings"
+  ],
+  "a steep learning curve": [
+   "study",
+   "work"
+  ],
+  "reconcile": [
+   "people"
+  ],
+  "incentive": [
+   "work",
+   "society"
+  ],
+  "consensus": [
+   "people",
+   "argue"
+  ],
+  "discrepancy": [
+   "data"
+  ],
+  "a grey area": [
+   "tech",
+   "argue"
+  ],
+  "disparity": [
+   "society",
+   "data"
+  ],
+  "implication": [
+   "argue",
+   "change"
+  ],
+  "constraint": [
+   "work",
+   "problems"
+  ],
+  "drawback": [
+   "tech",
+   "problems"
+  ],
+  "a wake-up call": [
+   "society",
+   "change"
+  ],
+  "catalyst": [
+   "change"
+  ],
+  "threshold": [
+   "data"
+  ],
+  "backlash": [
+   "tech",
+   "society"
+  ],
+  "play it by ear": [
+   "places",
+   "people"
+  ],
+  "trade-off": [
+   "work",
+   "problems"
+  ],
+  "autonomy": [
+   "work",
+   "people"
+  ],
+  "infrastructure": [
+   "places",
+   "society"
+  ],
+  "prevalence": [
+   "data",
+   "society"
+  ],
+  "the best of both worlds": [
+   "places"
+  ],
+  "adversity": [
+   "challenge"
+  ],
+  "resilience": [
+   "challenge",
+   "people"
+  ],
+  "paradox": [
+   "argue"
+  ],
+  "dichotomy": [
+   "argue"
+  ],
+  "see eye to eye": [
+   "people"
+  ],
+  "nuance": [
+   "study",
+   "argue"
+  ],
+  "epiphany": [
+   "feelings",
+   "study"
+  ],
+  "affinity": [
+   "people",
+   "places"
+  ],
+  "vivid": [
+   "feelings",
+   "places"
+  ],
+  "food for thought": [
+   "study",
+   "argue"
+  ],
+  "immersive": [
+   "tech",
+   "places"
+  ],
+  "exhilarating": [
+   "feelings",
+   "places"
+  ],
+  "daunting": [
+   "challenge",
+   "study"
+  ],
+  "desperate": [
+   "feelings",
+   "challenge"
+  ],
+  "mundane": [
+   "feelings",
+   "work"
+  ],
+  "break the ice": [
+   "people"
+  ],
+  "tedious": [
+   "work",
+   "study"
+  ],
+  "overwhelming": [
+   "feelings",
+   "challenge"
+  ],
+  "nostalgic": [
+   "feelings",
+   "places"
+  ],
+  "serene": [
+   "places",
+   "feelings"
+  ],
+  "burn the candle at both ends": [
+   "work",
+   "challenge"
+  ],
+  "chaotic": [
+   "places"
+  ],
+  "desolate": [
+   "places",
+   "feelings"
+  ],
+  "luminous": [
+   "places"
+  ],
+  "ephemeral": [
+   "feelings",
+   "tech"
+  ],
+  "jump on the bandwagon": [
+   "tech",
+   "society"
+  ],
+  "relentless": [
+   "challenge",
+   "work"
+  ],
+  "meticulous": [
+   "study",
+   "work"
+  ],
+  "resonate": [
+   "feelings",
+   "people"
+  ],
+  "evoke": [
+   "feelings",
+   "places"
+  ],
+  "a blessing and a curse": [
+   "places",
+   "tech"
+  ],
+  "yearn": [
+   "feelings",
+   "people"
+  ],
+  "flourish": [
+   "change",
+   "people"
+  ],
+  "dwindle": [
+   "society",
+   "data"
+  ]
+ },
+ "families": [
+  {
+   "words": [
+    "mitigate",
+    "alleviate"
+   ],
+   "kind": "synonym",
+   "why": "both make something bad less bad: alleviate = pain, suffering, pressure; mitigate = the harm or risk of something"
+  },
+  {
+   "words": [
+    "mitigate",
+    "alleviate",
+    "exacerbate"
+   ],
+   "kind": "opposite",
+   "why": "less bad vs worse: the same situations, opposite direction"
+  },
+  {
+   "words": [
+    "mitigate",
+    "curb"
+   ],
+   "kind": "synonym",
+   "why": "both reduce something harmful: curb limits it, mitigate softens its effects"
+  },
+  {
+   "words": [
+    "curb",
+    "deter"
+   ],
+   "kind": "synonym",
+   "why": "both keep bad behaviour down: curb limits it, deter puts people off doing it"
+  },
+  {
+   "words": [
+    "mitigate",
+    "offset"
+   ],
+   "kind": "synonym",
+   "why": "both reduce a harm's effect: offset balances it with something positive"
+  },
+  {
+   "words": [
+    "enhance",
+    "exacerbate"
+   ],
+   "kind": "opposite",
+   "why": "both 'make more so': enhance something good, exacerbate something already bad"
+  },
+  {
+   "words": [
+    "facilitate",
+    "hinder"
+   ],
+   "kind": "opposite",
+   "why": "make a process easier vs get in its way"
+  },
+  {
+   "words": [
+    "hinder",
+    "undermine"
+   ],
+   "kind": "synonym",
+   "why": "both damage progress: hinder slows it, undermine weakens it from below"
+  },
+  {
+   "words": [
+    "hinder",
+    "deter"
+   ],
+   "kind": "mixed",
+   "why": "both stop things happening: hinder blocks the process, deter discourages the person"
+  },
+  {
+   "words": [
+    "undermine",
+    "underpin"
+   ],
+   "kind": "mixed",
+   "why": "look alike (under-) but mean the opposite: weaken vs support from below"
+  },
+  {
+   "words": [
+    "facilitate",
+    "streamline"
+   ],
+   "kind": "synonym",
+   "why": "both make a process smoother: streamline by cutting steps out"
+  },
+  {
+   "words": [
+    "facilitate",
+    "foster",
+    "enhance"
+   ],
+   "kind": "synonym",
+   "why": "all mean helping something along: ease a process, grow it over time, improve what is already good"
+  },
+  {
+   "words": [
+    "foster",
+    "flourish"
+   ],
+   "kind": "lookalike",
+   "why": "both start with f- and are about growth: you foster something so that it flourishes"
+  },
+  {
+   "words": [
+    "flourish",
+    "thrive on"
+   ],
+   "kind": "synonym",
+   "why": "both mean doing very well: thrive on = do well because of hard conditions"
+  },
+  {
+   "words": [
+    "flourish",
+    "dwindle"
+   ],
+   "kind": "opposite",
+   "why": "grow strongly vs shrink steadily"
+  },
+  {
+   "words": [
+    "ubiquitous",
+    "prevalent",
+    "prevalence"
+   ],
+   "kind": "synonym",
+   "why": "all about how widespread something is: ubiquitous = literally everywhere, prevalent = common in a place or time"
+  },
+  {
+   "words": [
+    "prevalent",
+    "prevalence"
+   ],
+   "kind": "lookalike",
+   "why": "same root: adjective vs noun"
+  },
+  {
+   "words": [
+    "prevalent",
+    "predominantly"
+   ],
+   "kind": "lookalike",
+   "why": "both start pre- and mean 'mostly / common'"
+  },
+  {
+   "words": [
+    "ubiquitous",
+    "permeate"
+   ],
+   "kind": "synonym",
+   "why": "being everywhere vs spreading into every part"
+  },
+  {
+   "words": [
+    "ubiquitous",
+    "ambiguous"
+   ],
+   "kind": "lookalike",
+   "why": "sound alike (-iquitous / -iguous), unrelated meanings"
+  },
+  {
+   "words": [
+    "disparity",
+    "discrepancy"
+   ],
+   "kind": "synonym",
+   "why": "both differences: disparity = unfair gap between groups, discrepancy = things that should match but don't"
+  },
+  {
+   "words": [
+    "disparity",
+    "disparate"
+   ],
+   "kind": "lookalike",
+   "why": "same root: an unfair gap vs very different things"
+  },
+  {
+   "words": [
+    "disparate",
+    "desperate"
+   ],
+   "kind": "lookalike",
+   "why": "sound almost the same; very different vs hopeless"
+  },
+  {
+   "words": [
+    "desperate",
+    "desolate"
+   ],
+   "kind": "lookalike",
+   "why": "both des- and both bleak: hopeless and ready to try anything vs empty and abandoned"
+  },
+  {
+   "words": [
+    "disproportionate",
+    "disparity"
+   ],
+   "kind": "synonym",
+   "why": "both about inequality of size: too big or small relative to something vs a gap between groups"
+  },
+  {
+   "words": [
+    "negligible",
+    "substantial"
+   ],
+   "kind": "opposite",
+   "why": "too small to matter vs large and important"
+  },
+  {
+   "words": [
+    "substantial",
+    "disproportionate"
+   ],
+   "kind": "mixed",
+   "why": "both about size: large vs out of balance with something else"
+  },
+  {
+   "words": [
+    "inherently",
+    "invariably",
+    "inadvertently"
+   ],
+   "kind": "lookalike",
+   "why": "long in- adverbs ending -ly: by nature, always, by accident"
+  },
+  {
+   "words": [
+    "invariably",
+    "inevitable"
+   ],
+   "kind": "mixed",
+   "why": "look alike and overlap: always happens vs certain to happen"
+  },
+  {
+   "words": [
+    "inherently",
+    "predominantly"
+   ],
+   "kind": "lookalike",
+   "why": "both -ly adverbs of degree: by nature vs mostly"
+  },
+  {
+   "words": [
+    "conversely",
+    "paradoxically"
+   ],
+   "kind": "mixed",
+   "why": "both introduce a contrast: the opposite side vs a surprising contradiction"
+  },
+  {
+   "words": [
+    "notwithstanding",
+    "albeit"
+   ],
+   "kind": "synonym",
+   "why": "both concede a point: in spite of / although"
+  },
+  {
+   "words": [
+    "arguably",
+    "plausible"
+   ],
+   "kind": "mixed",
+   "why": "both hedge a claim: you can argue it vs it seems likely"
+  },
+  {
+   "words": [
+    "paradox",
+    "paradoxically"
+   ],
+   "kind": "lookalike",
+   "why": "same root: noun vs adverb"
+  },
+  {
+   "words": [
+    "paradox",
+    "dichotomy"
+   ],
+   "kind": "synonym",
+   "why": "both about two things in tension: self-contradiction vs a split into two opposites"
+  },
+  {
+   "words": [
+    "affinity",
+    "akin to"
+   ],
+   "kind": "lookalike",
+   "why": "both about kinship: a natural liking vs being similar"
+  },
+  {
+   "words": [
+    "compelling",
+    "plausible"
+   ],
+   "kind": "synonym",
+   "why": "both about convincing: plausible = believable, compelling = so strong you can't ignore it"
+  },
+  {
+   "words": [
+    "viable",
+    "plausible"
+   ],
+   "kind": "synonym",
+   "why": "both 'could work / could be true': viable = works in practice, plausible = seems true"
+  },
+  {
+   "words": [
+    "viable",
+    "sustainable",
+    "pragmatic"
+   ],
+   "kind": "synonym",
+   "why": "all about what works in practice: works at all, keeps working over time, a practical attitude"
+  },
+  {
+   "words": [
+    "viable",
+    "futile"
+   ],
+   "kind": "opposite",
+   "why": "can succeed vs has no chance"
+  },
+  {
+   "words": [
+    "ambiguous",
+    "a grey area"
+   ],
+   "kind": "synonym",
+   "why": "both unclear: ambiguous wording vs unclear rules"
+  },
+  {
+   "words": [
+    "impact",
+    "implication",
+    "implement"
+   ],
+   "kind": "lookalike",
+   "why": "all im-p...: an effect, a likely consequence, to put into action"
+  },
+  {
+   "words": [
+    "pivotal",
+    "profound"
+   ],
+   "kind": "synonym",
+   "why": "both 'very important': pivotal = everything turns on it, profound = deep in effect"
+  },
+  {
+   "words": [
+    "advocate",
+    "allocate"
+   ],
+   "kind": "lookalike",
+   "why": "rhyme (-ocate): argue for vs give out"
+  },
+  {
+   "words": [
+    "allocate",
+    "prioritise"
+   ],
+   "kind": "synonym",
+   "why": "both about deciding where time or resources go"
+  },
+  {
+   "words": [
+    "deter",
+    "detrimental"
+   ],
+   "kind": "lookalike",
+   "why": "both det-, both negative: discourage vs harmful"
+  },
+  {
+   "words": [
+    "incentive",
+    "deter"
+   ],
+   "kind": "opposite",
+   "why": "makes people act vs puts them off"
+  },
+  {
+   "words": [
+    "perpetuate",
+    "permeate"
+   ],
+   "kind": "lookalike",
+   "why": "per-...-ate: keep something going vs spread through it"
+  },
+  {
+   "words": [
+    "overhaul",
+    "streamline"
+   ],
+   "kind": "synonym",
+   "why": "both improve a system: rebuild it completely vs simplify it"
+  },
+  {
+   "words": [
+    "catalyst",
+    "galvanise",
+    "a wake-up call"
+   ],
+   "kind": "synonym",
+   "why": "all trigger change: a trigger, shock into action, a shock that makes you change"
+  },
+  {
+   "words": [
+    "epiphany",
+    "a wake-up call"
+   ],
+   "kind": "synonym",
+   "why": "both sudden realisations: an inner insight vs an outside shock"
+  },
+  {
+   "words": [
+    "consensus",
+    "on the same page",
+    "see eye to eye"
+   ],
+   "kind": "synonym",
+   "why": "all about agreeing: group agreement vs shared understanding vs personal agreement"
+  },
+  {
+   "words": [
+    "reconcile",
+    "consensus"
+   ],
+   "kind": "synonym",
+   "why": "both about reaching agreement: bring sides together vs the agreement itself"
+  },
+  {
+   "words": [
+    "cut corners",
+    "go the extra mile",
+    "meticulous"
+   ],
+   "kind": "opposite",
+   "why": "doing less than needed vs more than needed vs careful about every detail"
+  },
+  {
+   "words": [
+    "intricate",
+    "meticulous"
+   ],
+   "kind": "synonym",
+   "why": "both about detail: intricate things vs meticulous people"
+  },
+  {
+   "words": [
+    "intricate",
+    "rudimentary"
+   ],
+   "kind": "opposite",
+   "why": "complex and detailed vs basic and undeveloped"
+  },
+  {
+   "words": [
+    "tedious",
+    "mundane"
+   ],
+   "kind": "synonym",
+   "why": "both boring: tedious = long and repetitive, mundane = ordinary everyday"
+  },
+  {
+   "words": [
+    "tedious",
+    "arduous"
+   ],
+   "kind": "synonym",
+   "why": "both describe tough tasks: boring and slow vs hard and tiring"
+  },
+  {
+   "words": [
+    "arduous",
+    "daunting"
+   ],
+   "kind": "synonym",
+   "why": "both about hard tasks: daunting before you start, arduous while you do it"
+  },
+  {
+   "words": [
+    "daunting",
+    "overwhelming"
+   ],
+   "kind": "synonym",
+   "why": "both 'too much': daunting saps confidence beforehand, overwhelming is more than you can cope with"
+  },
+  {
+   "words": [
+    "resilience",
+    "robust"
+   ],
+   "kind": "synonym",
+   "why": "both withstand pressure: resilience = bounce back (people), robust = strong (systems, evidence)"
+  },
+  {
+   "words": [
+    "resilience",
+    "relentless"
+   ],
+   "kind": "lookalike",
+   "why": "both re-l... and about persistence: bounce back vs never stop"
+  },
+  {
+   "words": [
+    "get the hang of",
+    "second nature",
+    "a steep learning curve"
+   ],
+   "kind": "synonym",
+   "why": "stages of learning a skill: lots to learn, starting to manage, automatic"
+  },
+  {
+   "words": [
+    "a double-edged sword",
+    "a blessing and a curse"
+   ],
+   "kind": "synonym",
+   "why": "both: something with a good and a bad side"
+  },
+  {
+   "words": [
+    "a blessing in disguise",
+    "a blessing and a curse"
+   ],
+   "kind": "lookalike",
+   "why": "both 'a blessing...': bad that turns out good vs good and bad at once"
+  },
+  {
+   "words": [
+    "drawback",
+    "trade-off"
+   ],
+   "kind": "synonym",
+   "why": "both about downsides: a disadvantage vs giving one thing up to gain another"
+  },
+  {
+   "words": [
+    "the best of both worlds",
+    "trade-off"
+   ],
+   "kind": "opposite",
+   "why": "both advantages vs having to give one up"
+  },
+  {
+   "words": [
+    "take it with a pinch of salt",
+    "food for thought"
+   ],
+   "kind": "opposite",
+   "why": "how to treat what you hear: doubt it vs think about it seriously"
+  },
+  {
+   "words": [
+    "evoke",
+    "resonate"
+   ],
+   "kind": "synonym",
+   "why": "both about feelings and memories: evoke brings one to mind, resonate means it strikes a chord and stays"
+  },
+  {
+   "words": [
+    "vivid",
+    "luminous"
+   ],
+   "kind": "synonym",
+   "why": "both bright: vivid colours and images vs a soft glow"
+  },
+  {
+   "words": [
+    "yearn",
+    "nostalgic"
+   ],
+   "kind": "synonym",
+   "why": "both longing: yearn for anything, nostalgic for the past"
+  },
+  {
+   "words": [
+    "ephemeral",
+    "epiphany"
+   ],
+   "kind": "lookalike",
+   "why": "both eph-/epi- and both brief: lasting a short time vs a sudden realisation"
+  },
+  {
+   "words": [
+    "break the ice",
+    "bite the bullet"
+   ],
+   "kind": "lookalike",
+   "why": "short 'b... the ...' idioms: relax people at the start vs force yourself to do something unpleasant"
+  },
+  {
+   "words": [
+    "serene",
+    "chaotic",
+    "desolate"
+   ],
+   "kind": "mixed",
+   "why": "describing a place: calm vs disordered vs empty and bleak (serene and desolate are both quiet)"
+  }
+ ],
+ "speak": [
+  {
+   "id": "s1",
+   "theme": "work",
+   "prompt": "Describe a time you had too much to do at work or university. How did you decide what to do first, and was anything left out?"
+  },
+  {
+   "id": "s2",
+   "theme": "work",
+   "prompt": "Talk about someone you have worked with who always did more than they had to. What did they do, and how did others react?"
+  },
+  {
+   "id": "s3",
+   "theme": "work",
+   "prompt": "Some people prefer a job with lots of freedom, others prefer clear instructions. Which suits you better, and what are the downsides?"
+  },
+  {
+   "id": "s4",
+   "theme": "study",
+   "prompt": "Describe a skill you found hard at first but can now do without thinking. How long did it take, and what helped?"
+  },
+  {
+   "id": "s5",
+   "theme": "study",
+   "prompt": "Talk about a subject or course that turned out to be much harder than you expected. What made it difficult?"
+  },
+  {
+   "id": "s6",
+   "theme": "study",
+   "prompt": "Describe a book, talk or lesson that changed the way you think about something. Why did it stay with you?"
+  },
+  {
+   "id": "s7",
+   "theme": "society",
+   "prompt": "Talk about an environmental problem in the place where you grew up. What causes it, and what could reduce it?"
+  },
+  {
+   "id": "s8",
+   "theme": "society",
+   "prompt": "Should people be rewarded or punished to change their habits, for example plastic use or driving? Which works better, and why?"
+  },
+  {
+   "id": "s9",
+   "theme": "society",
+   "prompt": "Describe a moment that made you realise you needed to change a habit, such as how much you spend, waste or travel."
+  },
+  {
+   "id": "s10",
+   "theme": "tech",
+   "prompt": "Describe a piece of technology you use every day. In what ways has it made your life better, and in what ways worse?"
+  },
+  {
+   "id": "s11",
+   "theme": "tech",
+   "prompt": "Talk about a trend you saw spread online. Why do you think people joined in, and how long did it last?"
+  },
+  {
+   "id": "s12",
+   "theme": "tech",
+   "prompt": "How do you decide whether to believe something you read online? Give an example of a time you got it wrong or right."
+  },
+  {
+   "id": "s13",
+   "theme": "people",
+   "prompt": "Describe a time you disagreed with a friend or relative and later made up. How did you get back on good terms?"
+  },
+  {
+   "id": "s14",
+   "theme": "people",
+   "prompt": "Talk about someone you clicked with straight away. What did you have in common, and how did you first start talking?"
+  },
+  {
+   "id": "s15",
+   "theme": "people",
+   "prompt": "In a group, how do you usually reach a decision everyone accepts? Describe a time it worked well or badly."
+  },
+  {
+   "id": "s16",
+   "theme": "feelings",
+   "prompt": "Describe a place, song or smell that brings back strong memories. What does it remind you of, and how does it make you feel?"
+  },
+  {
+   "id": "s17",
+   "theme": "feelings",
+   "prompt": "Talk about one of the most exciting experiences of your life. What happened, and why was it so memorable?"
+  },
+  {
+   "id": "s18",
+   "theme": "feelings",
+   "prompt": "Describe a moment when you suddenly understood something about yourself. What led to it, and what changed afterwards?"
+  },
+  {
+   "id": "s19",
+   "theme": "places",
+   "prompt": "Describe a place you have visited that felt completely calm. What was it like, and how did it compare with where you live?"
+  },
+  {
+   "id": "s20",
+   "theme": "places",
+   "prompt": "Talk about the city you live in or know best. What are its good and bad sides, and would you like to live somewhere quieter?"
+  },
+  {
+   "id": "s21",
+   "theme": "places",
+   "prompt": "Do you prefer to plan a trip in detail or decide as you go? Describe a trip where your approach worked or went wrong."
+  },
+  {
+   "id": "s22",
+   "theme": "problems",
+   "prompt": "Describe a time a plan went badly wrong. What made it worse, and what did you learn?"
+  },
+  {
+   "id": "s23",
+   "theme": "problems",
+   "prompt": "Talk about a problem you solved in a practical, not perfect, way. Why did you choose that solution?"
+  },
+  {
+   "id": "s24",
+   "theme": "problems",
+   "prompt": "Describe a time you made a situation worse without meaning to. What happened, and how did you fix it?"
+  },
+  {
+   "id": "s25",
+   "theme": "argue",
+   "prompt": "Some people say it is better to have one career for life, others say it is better to change often. What is your view, and what would the other side say?"
+  },
+  {
+   "id": "s26",
+   "theme": "argue",
+   "prompt": "Talk about an opinion you used to hold but have changed. What convinced you, and do you still see some truth in your old view?"
+  },
+  {
+   "id": "s27",
+   "theme": "argue",
+   "prompt": "Is it better to grow up in a big family or a small one? Give your view, an example, and the strongest argument against it."
+  },
+  {
+   "id": "s28",
+   "theme": "data",
+   "prompt": "Describe a change you have noticed in your town or among people you know over the last ten years. How big is it, and what caused it?"
+  },
+  {
+   "id": "s29",
+   "theme": "data",
+   "prompt": "Talk about a time two pieces of information, such as a bill and a receipt, did not match. How did you notice and what did you do?"
+  },
+  {
+   "id": "s30",
+   "theme": "data",
+   "prompt": "Do people of different ages in your country spend their free time differently? Describe the main differences and what explains them."
+  },
+  {
+   "id": "s31",
+   "theme": "change",
+   "prompt": "Describe a turning point in your life. What triggered it, and how did things change afterwards?"
+  },
+  {
+   "id": "s32",
+   "theme": "change",
+   "prompt": "Talk about something that changed suddenly in your town, school or workplace. How did people react at first, and in the long term?"
+  },
+  {
+   "id": "s33",
+   "theme": "change",
+   "prompt": "Which recent change in daily life do you think is here to stay, and which will fade? Explain why."
+  },
+  {
+   "id": "s34",
+   "theme": "challenge",
+   "prompt": "Describe a difficult period in your life and how you got through it. What helped you keep going?"
+  },
+  {
+   "id": "s35",
+   "theme": "challenge",
+   "prompt": "Talk about something unpleasant you had to make yourself do. Why did you put it off, and how did it go?"
+  },
+  {
+   "id": "s36",
+   "theme": "challenge",
+   "prompt": "Describe a setback that turned out to be a good thing in the end. How did you see it then, and how do you see it now?"
+  }
+ ]
+}

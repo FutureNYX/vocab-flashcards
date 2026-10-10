@@ -1,0 +1,695 @@
+[
+  {
+    "word": "enhance",
+    "intents": [
+      "make something that is already good even better",
+      "add a small touch that brings out the best in something, like salt in a soup or a frame round a painting",
+      "raise the quality or value of something, such as your CV or your chances"
+    ],
+    "ru_cue": "сделать хорошее еще лучше, добавить ему ценности",
+    "plain": ["improve", "make better", "boost"],
+    "upgrades": [
+      {"plain": "A squeeze of lemon will really [make the flavour better].",
+       "better": "A squeeze of lemon will really *enhance* the flavour."},
+      {"plain": "She's doing an evening course to [improve] her chances of getting promoted.",
+       "better": "She's doing an evening course to *enhance* her chances of getting promoted."},
+      {"plain": "My sister's wedding photos looked flat, so I stayed up till 2 a.m. trying to [make the colours better] before she saw them.",
+       "better": "My sister's wedding photos looked flat, so I stayed up till 2 a.m. trying to *enhance* the colours before she saw them."}
+    ],
+    "collocations": [
+      {"chunk": "enhance the quality of", "frame": "___ the quality of"},
+      {"chunk": "enhance your chances of", "frame": "___ your chances of"},
+      {"chunk": "enhance the experience", "frame": "___ the experience"}
+    ],
+    "ru_trap": "",
+    "nuance": "For adding to something already good or neutral; to fix something bad, say improve: you enhance a flavour, you don't enhance a disaster.",
+    "personal": [
+      "What one small change would most enhance your daily routine?",
+      "Who do you know who enhances any party just by turning up?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'in hands': in a good chef's hands, a fine dish becomes even better.",
+    "forms": ["enhance", "enhances", "enhanced", "enhancing"]
+  },
+  {
+    "word": "compassion",
+    "intents": [
+      "a deep feeling of care for someone who is suffering, together with the wish to help",
+      "what a good nurse shows a frightened patient, even at the end of a long shift",
+      "the warm feeling that makes you stop for someone in pain instead of walking past"
+    ],
+    "ru_cue": "сердечное участие к тому, кому плохо, и желание помочь",
+    "plain": ["kindness", "sympathy", "care"],
+    "upgrades": [
+      {"plain": "The doctor gave us the bad news with real [kindness and care].",
+       "better": "The doctor gave us the bad news with real *compassion*."},
+      {"plain": "I'd failed my driving test for the third time, and my instructor treated me with [kindness] instead of lecturing me.",
+       "better": "I'd failed my driving test for the third time, and my instructor treated me with *compassion* instead of lecturing me."},
+      {"plain": "We need managers who show some [kindness towards] people who are struggling.",
+       "better": "We need managers who show some *compassion* for people who are struggling."}
+    ],
+    "collocations": [
+      {"chunk": "show compassion for", "frame": "show ___ for those who are suffering"},
+      {"chunk": "treat people with compassion", "frame": "treat patients with ___"},
+      {"chunk": "deep compassion", "frame": "deep ___ for others"}
+    ],
+    "ru_trap": "Russian 'сострадание к' tempts 'compassion to'; English says compassion *for* (or towards) someone.",
+    "nuance": "Stronger than sympathy: you are moved by someone's suffering and want to help, not just sorry for them.",
+    "personal": [
+      "When did someone's compassion make a hard day easier for you?",
+      "Who in your family shows the most compassion to strangers?"
+    ],
+    "gesture": "",
+    "hook": "Com-PASSION: 'with passion' for helping someone in pain.",
+    "forms": ["compassion"]
+  },
+  {
+    "word": "thrive on",
+    "intents": [
+      "do your best work under pressure, as if the stress gives you energy",
+      "when deadlines, crowds or competition make you better instead of wearing you out",
+      "need something hard or hectic in order to feel alive and do well"
+    ],
+    "ru_cue": "черпать силы именно в том, что другим тяжело, и расцветать от этого",
+    "plain": ["do well under", "love", "get energy from"],
+    "upgrades": [
+      {"plain": "Some people [do really well under] pressure; I just panic.",
+       "better": "Some people *thrive on* pressure; I just panic."},
+      {"plain": "My dad [gets his energy from] arguments at dinner, which drives my mum mad.",
+       "better": "My dad *thrives on* arguments at dinner, which drives my mum mad."},
+      {"plain": "Small cafes [do well because of] their regulars.",
+       "better": "Small cafes *thrive on* their regulars."}
+    ],
+    "collocations": [
+      {"chunk": "thrive on pressure", "frame": "___ pressure"},
+      {"chunk": "thrive on a challenge", "frame": "___ a challenge"},
+      {"chunk": "seem to thrive on chaos", "frame": "seems to ___ chaos"}
+    ],
+    "ru_trap": "Russian 'благодаря' tempts 'thrive thanks to' or 'thrive from'; English says thrive *on* something.",
+    "nuance": "What you thrive on is usually something others find hard (pressure, chaos); flourish just means grow well in good conditions.",
+    "personal": [
+      "What kind of pressure do you thrive on, and what kind breaks you?",
+      "Who do you know who seems to thrive on chaos?"
+    ],
+    "gesture": "",
+    "hook": "'Thrive' sounds like 'драйв': she gets her драйв from pressure.",
+    "forms": ["thrive on", "thrives on", "thrived on", "throve on", "thriving on"]
+  },
+  {
+    "word": "impact",
+    "intents": [
+      "the strong effect that one thing has on another",
+      "how much a change really changed people's lives, for better or worse",
+      "the mark a good teacher leaves on a child for years afterwards"
+    ],
+    "ru_cue": "сильное воздействие, заметный след, который что-то оставляет",
+    "plain": ["effect", "influence"],
+    "upgrades": [
+      {"plain": "Rising rents have had a big [effect] on young people.",
+       "better": "Rising rents have had a big *impact* on young people."},
+      {"plain": "Losing the contract had a serious [effect] on the whole team, and two people lost their jobs.",
+       "better": "Losing the contract had a serious *impact* on the whole team, and two people lost their jobs."},
+      {"plain": "The new manager [made a big difference] in her first month: sales went up by a third.",
+       "better": "The new manager made a big *impact* in her first month: sales went up by a third."}
+    ],
+    "collocations": [
+      {"chunk": "have a big impact on", "frame": "have a big ___ on"},
+      {"chunk": "make an impact", "frame": "make an ___"},
+      {"chunk": "the environmental impact of", "frame": "the environmental ___ of"}
+    ],
+    "ru_trap": "Russian 'оказать влияние' tempts 'render an impact'; English says *have* (or make) an impact *on* something.",
+    "nuance": "Stronger and more noticeable than effect; in IELTS writing 'have an impact on' is safe, while 'impact' as a verb sounds like business jargon.",
+    "personal": [
+      "What decision has had the biggest impact on your life so far?",
+      "Which teacher had the biggest impact on you, and how?"
+    ],
+    "gesture": "Punch a fist into your open palm: thud.",
+    "hook": "Im-PACT: picture a tightly packed snowball smacking a window and leaving a mark.",
+    "forms": ["impact", "impacts"]
+  },
+  {
+    "word": "commitment",
+    "intents": [
+      "a promise to keep giving your time and effort to something",
+      "what a puppy really is: a ten-year promise, not a weekend idea",
+      "the steady dedication of someone who trains every morning for years"
+    ],
+    "ru_cue": "обещание и готовность годами вкладывать в дело время и силы",
+    "plain": ["promise", "dedication", "big responsibility"],
+    "upgrades": [
+      {"plain": "Getting a dog is a huge [responsibility that lasts for years].",
+       "better": "Getting a dog is a huge *commitment*."},
+      {"plain": "I can't [promise anything] until I've seen my work schedule.",
+       "better": "I can't make a *commitment* until I've seen my work schedule."},
+      {"plain": "My mum drove me to swimming at six every morning for ten years; that's real [dedication].",
+       "better": "My mum drove me to swimming at six every morning for ten years; that's real *commitment*."}
+    ],
+    "collocations": [
+      {"chunk": "make a commitment to", "frame": "make a ___ to"},
+      {"chunk": "a long-term commitment", "frame": "a long-term ___"},
+      {"chunk": "work and family commitments", "frame": "work and family ___s"}
+    ],
+    "ru_trap": "Russian 'взять обязательство' tempts 'take a commitment'; English says *make* a commitment, and 'commitment to doing', not 'to do'.",
+    "nuance": "A commitment ties you to something over time, while a promise can be a one-off; plural 'commitments' means the things that fill your time.",
+    "personal": [
+      "What is the biggest commitment you have ever made?",
+      "Who do you know whose commitment to a hobby or job you admire?"
+    ],
+    "gesture": "",
+    "hook": "'Commit' sounds like 'комитет': you promised the committee you'd come every Monday for years.",
+    "forms": ["commitment", "commitments"]
+  },
+  {
+    "word": "flunk out of",
+    "intents": [
+      "be forced to leave university because your grades were too bad",
+      "when you miss so many exams that the college throws you out",
+      "fail so badly that you're no longer allowed to stay on the course"
+    ],
+    "ru_cue": "вылететь из вуза, потому что завалил экзамены",
+    "plain": ["fail and get kicked out of", "be thrown out of"],
+    "upgrades": [
+      {"plain": "He played video games all year and [got kicked out of university for failing].",
+       "better": "He played video games all year and *flunked out of* university."},
+      {"plain": "I was terrified I'd [fail and get thrown out of] medical school and have to tell my parents.",
+       "better": "I was terrified I'd *flunk out of* medical school and have to tell my parents."},
+      {"plain": "You won't [get thrown out of] the course for one bad essay.",
+       "better": "You won't *flunk out of* the course for one bad essay."}
+    ],
+    "collocations": [
+      {"chunk": "nearly flunk out of university", "frame": "nearly ___ university"},
+      {"chunk": "flunk out of college", "frame": "___ college in the first year"}
+    ],
+    "ru_trap": "'Flunk an exam' means fail one exam; leaving the university is 'flunk *out of*', never 'flunk from'.",
+    "nuance": "Informal. You drop out by choice; you flunk out because your grades forced you to leave.",
+    "personal": [
+      "Did you ever worry you might flunk out of a course? Which one?",
+      "Do you know anyone who flunked out of university and then did well anyway?"
+    ],
+    "gesture": "Jerk your thumb over your shoulder, like a bouncer throwing someone out of the door.",
+    "hook": "'Flunk' sounds like 'плюнь': плюнь на учебу, и вылетишь из университета.",
+    "forms": ["flunk out of", "flunks out of", "flunked out of", "flunking out of"]
+  },
+  {
+    "word": "conversely",
+    "intents": [
+      "introduce the opposite case: what's true for one side is reversed for the other",
+      "my brother loves the cold; I, the other way round, want somewhere hot",
+      "a formal way to flip a comparison and look at it from the reverse side"
+    ],
+    "ru_cue": "а у другой стороны все ровно наоборот",
+    "plain": ["on the other hand", "the other way round", "in contrast"],
+    "upgrades": [
+      {"plain": "Prices in the city keep rising; [on the other hand], village houses are getting cheaper.",
+       "better": "Prices in the city keep rising; *conversely*, village houses are getting cheaper."},
+      {"plain": "He talks non-stop when he's nervous. [On the other hand], I go completely silent, which made our first date very awkward.",
+       "better": "He talks non-stop when he's nervous. *Conversely*, I go completely silent, which made our first date very awkward."},
+      {"plain": "Some plants need full sun. [In contrast], ferns like deep shade.",
+       "better": "Some plants need full sun. *Conversely*, ferns like deep shade."}
+    ],
+    "collocations": [
+      {"chunk": "and conversely", "frame": "Stress causes poor sleep and, ___, poor sleep causes stress."},
+      {"chunk": "Conversely, ...", "frame": "Sales rose in the north. ___, they fell in the south."}
+    ],
+    "ru_trap": "Russian 'наоборот' also means 'quite the opposite!' when you contradict someone; *conversely* only compares two cases and never contradicts.",
+    "nuance": "Use it when two sides mirror each other (A rises, B falls); for a simple contrast or a different point, 'however' or 'on the other hand' is enough.",
+    "personal": [
+      "What gives you energy, and what, conversely, drains you?",
+      "Think of a family member who is your opposite: what do you love that they, conversely, can't stand?"
+    ],
+    "gesture": "Hold one hand palm up, then flip it palm down: the other way round.",
+    "hook": "ConVERSEly rhymes with 'reverse-ly': the same picture, reversed.",
+    "forms": ["conversely"]
+  },
+  {
+    "word": "arguably",
+    "intents": [
+      "you could reasonably claim this, though some people would disagree",
+      "when you call something the best ever but leave room for others to think differently",
+      "a careful way to make a bold claim without sounding too sure of yourself"
+    ],
+    "ru_cue": "пожалуй, можно смело сказать, хотя не все согласятся",
+    "plain": ["probably", "maybe", "I'd say"],
+    "upgrades": [
+      {"plain": "This is [probably] the best album they ever made, but my brother would fight me on that.",
+       "better": "This is *arguably* the best album they ever made, but my brother would fight me on that."},
+      {"plain": "Rain was, [I'd say], the main reason the crop failed.",
+       "better": "Rain was *arguably* the main reason the crop failed."},
+      {"plain": "Mobile phones are [maybe] the most important invention of the last fifty years.",
+       "better": "Mobile phones are *arguably* the most important invention of the last fifty years."}
+    ],
+    "collocations": [
+      {"chunk": "arguably the best", "frame": "___ the best player of her generation"},
+      {"chunk": "arguably the most important", "frame": "___ the most important invention of the century"}
+    ],
+    "ru_trap": "Not 'аргументированно' (with arguments): *arguably* means 'one could say', and it supports the claim rather than doubting it.",
+    "nuance": "It leans towards agreeing with the claim: it softens a strong statement, usually a superlative, rather than casting doubt on it.",
+    "personal": [
+      "What is arguably the best decision you have ever made?",
+      "Who is arguably the funniest person in your family?"
+    ],
+    "gesture": "",
+    "hook": "Arguably = 'argue-ably': you can say it, but someone could argue back.",
+    "forms": ["arguably"]
+  },
+  {
+    "word": "notwithstanding",
+    "intents": [
+      "a formal way to say 'in spite of' before a noun, such as the weather or the cost",
+      "the plan went ahead even though there was an obstacle in the way",
+      "this problem existed, but it didn't change the outcome (official, written style)"
+    ],
+    "ru_cue": "вопреки помехе, которая могла бы все испортить",
+    "plain": ["despite", "in spite of"],
+    "upgrades": [
+      {"plain": "[Despite] the terrible weather, the team played brilliantly.",
+       "better": "*Notwithstanding* the terrible weather, the team played brilliantly."},
+      {"plain": "She took the job [in spite of] the two-hour commute, and her kids hardly saw her that year.",
+       "better": "She took the job *notwithstanding* the two-hour commute, and her kids hardly saw her that year."},
+      {"plain": "[Despite] a slow start, the book sold well.",
+       "better": "*Notwithstanding* a slow start, the book sold well."}
+    ],
+    "collocations": [
+      {"chunk": "notwithstanding the fact that", "frame": "___ the fact that"},
+      {"chunk": "these difficulties notwithstanding", "frame": "These difficulties ___, the project was a success."}
+    ],
+    "ru_trap": "",
+    "nuance": "Formal and mostly written, and it can follow its noun ('these problems notwithstanding'); in speech, despite sounds more natural.",
+    "personal": [
+      "What did you once achieve notwithstanding a serious obstacle?",
+      "Who do you know who stays cheerful notwithstanding real hardship?"
+    ],
+    "gesture": "",
+    "hook": "'Not-with-standing': the rain was there, but it was not standing in our way.",
+    "forms": ["notwithstanding"]
+  },
+  {
+    "word": "albeit",
+    "intents": [
+      "add a small reservation to something positive: good, though a little expensive",
+      "a short 'although' followed by just an adjective or adverb, with no verb",
+      "admit a weak point in passing: he agreed, but not happily"
+    ],
+    "ru_cue": "с маленькой оговоркой: хорошо, но не без минуса",
+    "plain": ["although", "though", "but"],
+    "upgrades": [
+      {"plain": "The flat is lovely, [though it's] a bit small for two.",
+       "better": "The flat is lovely, *albeit* a bit small for two."},
+      {"plain": "He agreed to come to my brother's wedding, [but he wasn't happy about it].",
+       "better": "He agreed to come to my brother's wedding, *albeit* reluctantly."},
+      {"plain": "Sales improved, [although] more slowly than we'd hoped.",
+       "better": "Sales improved, *albeit* more slowly than we'd hoped."}
+    ],
+    "collocations": [
+      {"chunk": "albeit reluctantly", "frame": "He agreed, ___ reluctantly."},
+      {"chunk": "albeit briefly", "frame": "She smiled, ___ briefly."},
+      {"chunk": "albeit slowly", "frame": "Prices are rising, ___ slowly."}
+    ],
+    "ru_trap": "Russian 'хотя' starts a full clause; *albeit* takes no verb: 'albeit slowly', never 'albeit it was slow'.",
+    "nuance": "Shorter and more formal than although: it adds a quick qualifier to a word or phrase, never a full clause with its own verb.",
+    "personal": [
+      "What are you good at, albeit not as good as you'd like?",
+      "Who do you know who always helps, albeit with a lot of complaining?"
+    ],
+    "gesture": "",
+    "hook": "Albeit = 'all be it': all be it small, the flat is lovely.",
+    "forms": ["albeit"]
+  },
+  {
+    "word": "a blessing in disguise",
+    "intents": [
+      "something that seemed like bad luck at first but turned out well",
+      "when missing your train leads to meeting the love of your life on the next one",
+      "a setback you later feel grateful for, because it led to something better"
+    ],
+    "ru_cue": "неудача, которая потом оказалась удачей",
+    "plain": ["a good thing in the end", "lucky after all"],
+    "upgrades": [
+      {"plain": "Losing that job was [a good thing in the end]: I started my own business a month later.",
+       "better": "Losing that job was *a blessing in disguise*: I started my own business a month later."},
+      {"plain": "Being dumped two weeks before the holiday felt awful, but it turned out to be [lucky after all].",
+       "better": "Being dumped two weeks before the holiday felt awful, but it turned out to be *a blessing in disguise*."},
+      {"plain": "The power cut was [actually a good thing]; for once the whole family talked.",
+       "better": "The power cut was *a blessing in disguise*; for once the whole family talked."}
+    ],
+    "collocations": [
+      {"chunk": "turned out to be a blessing in disguise", "frame": "turned out to be ___"},
+      {"chunk": "was a blessing in disguise", "frame": "Getting rejected was ___: a better offer came a week later."}
+    ],
+    "ru_trap": "'Нет худа без добра' is a whole saying; in English the idiom is a noun phrase: 'it was a blessing in disguise'.",
+    "nuance": "Bad first, good later; a double-edged sword has a good and a bad side at the same time.",
+    "personal": [
+      "What setback in your life turned out to be a blessing in disguise?",
+      "Has a friend ever lost a job or a partner, and it was a blessing in disguise?"
+    ],
+    "gesture": "",
+    "hook": "Picture a present wrapped in ugly brown paper: you sigh, open it, and it's exactly what you wanted.",
+    "forms": ["a blessing in disguise", "blessing in disguise", "blessings in disguise"]
+  },
+  {
+    "word": "inherently",
+    "intents": [
+      "by its very nature, as a built-in part of what something is",
+      "when the danger comes from the activity itself, not from doing it badly, like climbing without ropes",
+      "describe a quality that belongs to the thing itself and can't be taken away"
+    ],
+    "ru_cue": "по самой своей природе, а не из-за обстоятельств",
+    "plain": ["by nature", "in itself", "naturally"],
+    "upgrades": [
+      {"plain": "Climbing without ropes is [by its very nature] dangerous.",
+       "better": "Climbing without ropes is *inherently* dangerous."},
+      {"plain": "There's nothing [in itself] wrong with changing your mind, Dad, so stop calling me a quitter.",
+       "better": "There's nothing *inherently* wrong with changing your mind, Dad, so stop calling me a quitter."},
+      {"plain": "Some jobs are [just naturally] stressful, whatever the pay.",
+       "better": "Some jobs are *inherently* stressful, whatever the pay."}
+    ],
+    "collocations": [
+      {"chunk": "nothing inherently wrong with", "frame": "there's nothing ___ wrong with"},
+      {"chunk": "inherently dangerous", "frame": "is ___ dangerous"},
+      {"chunk": "inherently unfair", "frame": "the system is ___ unfair"}
+    ],
+    "ru_trap": "",
+    "nuance": "About what something is at its core; invariably is about how often (always), predominantly about how much (mostly).",
+    "personal": [
+      "Is there an activity you think is inherently risky but still enjoy?",
+      "Do you know someone who is inherently calm, whatever happens?"
+    ],
+    "gesture": "",
+    "hook": "In-HERE-ntly: the quality is in here, built into the thing itself.",
+    "forms": ["inherently"]
+  },
+  {
+    "word": "predominantly",
+    "intents": [
+      "mainly; for the most part, though not entirely",
+      "describing what most of a group or place is made up of: mostly young people, mostly farmland",
+      "when nearly all, but not every one, of something is of one kind"
+    ],
+    "ru_cue": "когда почти все в группе одного типа, кроме немногих",
+    "plain": ["mostly", "mainly", "largely"],
+    "upgrades": [
+      {"plain": "The audience was [mostly] students.",
+       "better": "The audience was *predominantly* students."},
+      {"plain": "This region is [mainly] farmland.",
+       "better": "This region is *predominantly* farmland."},
+      {"plain": "I was nervous on my first day because the team was [mostly] men twice my age.",
+       "better": "I was nervous on my first day because the team was *predominantly* men twice my age."}
+    ],
+    "collocations": [
+      {"chunk": "a predominantly rural area", "frame": "a ___ rural area"},
+      {"chunk": "predominantly female", "frame": "the staff are ___ female"}
+    ],
+    "ru_trap": "",
+    "nuance": "A formal 'mostly', used for what something is made up of; invariably means always, with no exceptions.",
+    "personal": [
+      "Are your friends predominantly from school, from work, or from somewhere else?",
+      "What does your best friend predominantly spend money on?"
+    ],
+    "gesture": "",
+    "hook": "Pre-DOMINANT-ly: one kind dominates and makes up most of the crowd.",
+    "forms": ["predominantly"]
+  },
+  {
+    "word": "invariably",
+    "intents": [
+      "always, every single time, with no exceptions",
+      "when something happens so reliably you could bet on it: every time I wash the car, it rains",
+      "a habit or result that never once changes"
+    ],
+    "ru_cue": "каждый раз, без единого исключения",
+    "plain": ["always", "every time", "without fail"],
+    "upgrades": [
+      {"plain": "He [always] arrives ten minutes early.",
+       "better": "He *invariably* arrives ten minutes early."},
+      {"plain": "Plans made in a hurry [always] go wrong.",
+       "better": "Plans made in a hurry *invariably* go wrong."},
+      {"plain": "Family dinners at my aunt's [always] end with my uncle and my dad shouting about money.",
+       "better": "Family dinners at my aunt's *invariably* end with my uncle and my dad shouting about money."}
+    ],
+    "collocations": [
+      {"chunk": "almost invariably", "frame": "The answer is almost ___ no."},
+      {"chunk": "invariably ends in tears", "frame": "it ___ ends in tears"}
+    ],
+    "ru_trap": "",
+    "nuance": "A slightly formal 'always', often for patterns you've noticed, especially annoying ones; predominantly means mostly, not always.",
+    "personal": [
+      "What do you invariably forget when you pack for a trip?",
+      "What does someone in your family invariably say at dinner?"
+    ],
+    "gesture": "",
+    "hook": "In-VARI-ably: 'никаких вариантов', it's the same every single time.",
+    "forms": ["invariably"]
+  },
+  {
+    "word": "inadvertently",
+    "intents": [
+      "by accident, without meaning to, often causing a small problem",
+      "when you give away the surprise party because you forgot it was a secret",
+      "do something you never intended while you were busy doing something else"
+    ],
+    "ru_cue": "сделать что-то, не желая и даже не замечая этого",
+    "plain": ["by accident", "accidentally", "without meaning to"],
+    "upgrades": [
+      {"plain": "I [accidentally] deleted all my holiday photos while clearing space on my phone.",
+       "better": "I *inadvertently* deleted all my holiday photos while clearing space on my phone."},
+      {"plain": "She [accidentally] gave away the surprise, and my mum's face fell.",
+       "better": "She *inadvertently* gave away the surprise, and my mum's face fell."},
+      {"plain": "The email was [accidentally] sent to the whole office.",
+       "better": "The email was *inadvertently* sent to the whole office."}
+    ],
+    "collocations": [
+      {"chunk": "inadvertently gave away", "frame": "___ gave away the surprise"},
+      {"chunk": "was inadvertently sent", "frame": "was ___ sent to everyone"}
+    ],
+    "ru_trap": "",
+    "nuance": "More formal than by accident, and usually about a side effect of doing something else: you didn't notice, rather than you slipped.",
+    "personal": [
+      "What embarrassing thing have you once done inadvertently?",
+      "Has a friend ever inadvertently told you a secret about someone else?"
+    ],
+    "gesture": "",
+    "hook": "In-ADVERT-ently: you never meant to advertise the surprise, but you did.",
+    "forms": ["inadvertently"]
+  },
+  {
+    "word": "the tip of the iceberg",
+    "intents": [
+      "the small, visible part of a problem that is much bigger underneath",
+      "when one complaint turns out to be the first sign of hundreds more",
+      "what you can see now is nothing compared with what's hidden"
+    ],
+    "ru_cue": "то, что видно, лишь крошечная часть настоящей беды",
+    "plain": ["just the start", "only a small part of it"],
+    "upgrades": [
+      {"plain": "The damp patch was [only a small part of the problem]; the whole wall had to come down.",
+       "better": "The damp patch was just *the tip of the iceberg*; the whole wall had to come down."},
+      {"plain": "Those three complaints are [just the start]; hundreds more people are unhappy.",
+       "better": "Those three complaints are only *the tip of the iceberg*; hundreds more people are unhappy."},
+      {"plain": "Their row about the dishes was [just a small sign of much bigger problems] in their marriage.",
+       "better": "Their row about the dishes was just *the tip of the iceberg* in their marriage."}
+    ],
+    "collocations": [
+      {"chunk": "only the tip of the iceberg", "frame": "is only ___"},
+      {"chunk": "just the tip of the iceberg", "frame": "That's just ___; there's much worse to come."}
+    ],
+    "ru_trap": "Russian 'верхушка' tempts 'the top of the iceberg'; English says *the tip*.",
+    "nuance": "Always about a bigger problem hidden behind a small one, so usually negative; 'just the start' has no sense of something hidden.",
+    "personal": [
+      "Have you ever noticed a small problem that turned out to be the tip of the iceberg?",
+      "Has a friend ever mentioned one worry that was only the tip of the iceberg?"
+    ],
+    "gesture": "Hold one finger up just above a flat hand (the waterline), then sweep both arms wide below it to show the huge part underneath.",
+    "hook": "Picture a ship's lookout seeing a tiny white point above the waves, and the giant mass of ice under it.",
+    "forms": ["the tip of the iceberg", "tip of the iceberg"]
+  },
+  {
+    "word": "paradoxically",
+    "intents": [
+      "in a way that seems contradictory or impossible, yet is true",
+      "the word to open a sentence like 'the more I rush in the morning, the later I leave', flagging that it works strangely back to front",
+      "the result is the opposite of what common sense predicts, strange as that is"
+    ],
+    "ru_cue": "вопреки ожиданиям и здравому смыслу, но это правда",
+    "plain": ["strangely", "oddly enough", "ironically"],
+    "upgrades": [
+      {"plain": "[Strangely], adding more lanes often makes traffic worse.",
+       "better": "*Paradoxically*, adding more lanes often makes traffic worse."},
+      {"plain": "[Oddly enough], the more I revised the night before, the worse I did, and I nearly failed the year.",
+       "better": "*Paradoxically*, the more I revised the night before, the worse I did, and I nearly failed the year."},
+      {"plain": "Sleeping more can, [strangely], make you feel more tired at first.",
+       "better": "Sleeping more can, *paradoxically*, make you feel more tired at first."}
+    ],
+    "collocations": [
+      {"chunk": "paradoxically, the more", "frame": "___, the more choice people have, the less happy they are."},
+      {"chunk": "somewhat paradoxically", "frame": "somewhat ___, the quietest students wrote the best essays"}
+    ],
+    "ru_trap": "",
+    "nuance": "For a result that seems to contradict itself (less practice, better playing); ironically is for a result that mocks someone's intention.",
+    "personal": [
+      "What paradoxically makes you more tired the more you do it?",
+      "Do you know someone who, paradoxically, gets calmer as things get more stressful?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'пара доков': two doctors at the bedside, and the patient feels worse.",
+    "forms": ["paradoxically"]
+  },
+  {
+    "word": "akin to",
+    "intents": [
+      "very similar in nature to something else",
+      "when you compare one experience to another to explain it: talking to him is like talking to a wall",
+      "from the same family of feelings or things, though not identical"
+    ],
+    "ru_cue": "по сути очень похоже на что-то другое",
+    "plain": ["like", "similar to"],
+    "upgrades": [
+      {"plain": "Talking to my teenage son is [like] talking to a wall.",
+       "better": "Talking to my teenage son is *akin to* talking to a wall."},
+      {"plain": "Learning chess is [similar to] learning a new language.",
+       "better": "Learning chess is *akin to* learning a new language."},
+      {"plain": "The pain was [a bit like] a bad toothache.",
+       "better": "The pain was *akin to* a bad toothache."}
+    ],
+    "collocations": [
+      {"chunk": "something akin to", "frame": "something ___ panic"},
+      {"chunk": "more akin to", "frame": "more ___ a hobby than a job"},
+      {"chunk": "akin to talking to a wall", "frame": "is ___ talking to a wall"}
+    ],
+    "ru_trap": "Russian 'сродни чему-то' needs no preposition; English always needs *to*: 'akin to fear', not 'akin fear' or 'akin with'.",
+    "nuance": "More formal than like; it says two things share their nature, so it suits feelings, experiences and ideas rather than looks.",
+    "personal": [
+      "What do you do that feels akin to meditation?",
+      "Who do you know whose job is akin to being a referee all day?"
+    ],
+    "gesture": "",
+    "hook": "Akin = 'a kin': like relatives, two things akin to each other look alike.",
+    "forms": ["akin to"]
+  },
+  {
+    "word": "ubiquitous",
+    "intents": [
+      "seen absolutely everywhere, impossible to get away from",
+      "when you can't walk down a single street without seeing one, like coffee shops or phones",
+      "so common that it seems to be in every place at the same time"
+    ],
+    "ru_cue": "попадается на глаза буквально на каждом шагу",
+    "plain": ["everywhere", "really common"],
+    "upgrades": [
+      {"plain": "Coffee shops are [everywhere] now; there's one on every corner.",
+       "better": "Coffee shops are *ubiquitous* now; there's one on every corner."},
+      {"plain": "That song was [everywhere] the summer I got dumped, so I couldn't escape it.",
+       "better": "That song was *ubiquitous* the summer I got dumped, so I couldn't escape it."},
+      {"plain": "Smartphones are [in everyone's hands], even in tiny villages.",
+       "better": "Smartphones are *ubiquitous*, even in tiny villages."}
+    ],
+    "collocations": [
+      {"chunk": "have become ubiquitous", "frame": "have become ___ in modern life"},
+      {"chunk": "the ubiquitous smartphone", "frame": "the ___ smartphone"}
+    ],
+    "ru_trap": "",
+    "nuance": "Literally everywhere you look, usually things you can see; prevalent is about how common something is among people (an illness, a belief).",
+    "personal": [
+      "What is ubiquitous in your city that you wish would disappear?",
+      "Which friend's catchphrase has become ubiquitous in your group?"
+    ],
+    "gesture": "Point quickly in every direction around you: there, there, there, everywhere.",
+    "hook": "Sounds like 'у бика': у бика, у соседа, у бабушки, у каждого, it's simply everywhere.",
+    "forms": ["ubiquitous"]
+  },
+  {
+    "word": "prevalent",
+    "intents": [
+      "common among a particular group of people, or in a particular place or period",
+      "describing an illness, belief or habit that many people in a place share, like colds in winter",
+      "widespread enough to be a pattern, not just a few cases"
+    ],
+    "ru_cue": "широко встречается среди людей в каком-то месте или в какое-то время",
+    "plain": ["common", "widespread"],
+    "upgrades": [
+      {"plain": "Colds are much more [common] in winter.",
+       "better": "Colds are much more *prevalent* in winter."},
+      {"plain": "Anxiety is [very common] among students in exam season, and that year I was one of them.",
+       "better": "Anxiety is highly *prevalent* among students in exam season, and that year I was one of them."},
+      {"plain": "That kind of scam is [widespread] around the holidays.",
+       "better": "That kind of scam is *prevalent* around the holidays."}
+    ],
+    "collocations": [
+      {"chunk": "more prevalent among", "frame": "more ___ among older people"},
+      {"chunk": "highly prevalent", "frame": "highly ___ in the population"},
+      {"chunk": "most prevalent in", "frame": "is most ___ in winter"}
+    ],
+    "ru_trap": "Russian 'превалирующий' means dominant; English *prevalent* just means widespread or common.",
+    "nuance": "About how common something is in a population (diseases, beliefs, practices), often in formal writing; ubiquitous means visibly everywhere.",
+    "personal": [
+      "What bad habit is most prevalent among people your age?",
+      "What attitude was prevalent when your parents were young?"
+    ],
+    "gesture": "",
+    "hook": "Prevalent sounds like 'превалирует': it's what you find in most people around.",
+    "forms": ["prevalent", "more prevalent", "most prevalent"]
+  },
+  {
+    "word": "a double-edged sword",
+    "intents": [
+      "an advantage that can also turn against the person who has it",
+      "a tool or tactic, like advertising your business online, that brings success but can turn round and hurt you",
+      "a move that helps you but carries a built-in risk of backfiring on you"
+    ],
+    "ru_cue": "то, что помогает, но может ударить и по тебе самому",
+    "plain": ["good and bad", "has pros and cons"],
+    "upgrades": [
+      {"plain": "Lending money to friends [can help but can also backfire on you]: you might lose the money and the friend.",
+       "better": "Lending money to friends is *a double-edged sword*: you might lose the money and the friend."},
+      {"plain": "Offering big discounts [brings in customers but can backfire]; we were packed all week, still lost money, and I had to tell my staff there'd be no bonus.",
+       "better": "Offering big discounts is *a double-edged sword*; we were packed all week, still lost money, and I had to tell my staff there'd be no bonus."},
+      {"plain": "Cheap flights [help small islands but can also turn against them]: they bring money, but also crowds that damage them.",
+       "better": "Cheap flights are *a double-edged sword* for small islands: they bring money, but also crowds that damage them."}
+    ],
+    "collocations": [
+      {"chunk": "is a double-edged sword", "frame": "Social media is ___ for small businesses."},
+      {"chunk": "can be a double-edged sword", "frame": "Fame can be ___."},
+      {"chunk": "something of a double-edged sword", "frame": "something of ___"}
+    ],
+    "ru_trap": "Russian 'палка о двух концах' tempts 'a stick with two ends'; English says *a double-edged sword*.",
+    "nuance": "The good and the bad come together, and the bad can hit the user; a blessing in disguise is bad first and good later.",
+    "personal": [
+      "What in your life is a double-edged sword: a skill, a habit, a gadget?",
+      "Whose strong personality in your family is a double-edged sword?"
+    ],
+    "gesture": "Swing an imaginary sword forward, then wince as the back edge 'cuts' your own shoulder.",
+    "hook": "Picture a blade sharp on both sides: swing it at a problem and the back edge nicks your own arm.",
+    "forms": ["a double-edged sword", "double-edged sword", "a double edged sword", "double edged sword", "double-edged swords"]
+  },
+  {
+    "word": "detrimental",
+    "intents": [
+      "harmful to something such as your health, sleep or reputation",
+      "when a habit like skipping breakfast quietly does real harm to your health",
+      "describing an effect that damages something rather than helping it"
+    ],
+    "ru_cue": "плохо сказывается на чем-то, наносит ущерб",
+    "plain": ["bad for", "harmful to"],
+    "upgrades": [
+      {"plain": "Too much screen time is [bad for] your sleep.",
+       "better": "Too much screen time is *detrimental* to your sleep."},
+      {"plain": "The scandal was [really bad for] his reputation, and he lost half his clients.",
+       "better": "The scandal was seriously *detrimental* to his reputation, and he lost half his clients."},
+      {"plain": "My dad keeps telling me that night shifts are [harmful to] my health, and we argue about it every Sunday.",
+       "better": "My dad keeps telling me that night shifts are *detrimental* to my health, and we argue about it every Sunday."}
+    ],
+    "collocations": [
+      {"chunk": "detrimental to your health", "frame": "___ to your health"},
+      {"chunk": "have a detrimental effect on", "frame": "have a ___ effect on"},
+      {"chunk": "prove detrimental to", "frame": "proved ___ to small farmers"}
+    ],
+    "ru_trap": "Russian 'вредный для' tempts 'detrimental for'; English says detrimental *to* (or 'a detrimental effect on').",
+    "nuance": "A formal word for harmful, used of effects (on health, morale, the environment); exacerbate is a verb for making an existing problem worse.",
+    "personal": [
+      "Which of your habits is most detrimental to your sleep?",
+      "What does someone in your family do that you think is detrimental to their health?"
+    ],
+    "gesture": "",
+    "hook": "Detri-MENTAL sounds like 'debt-ri-mental': debts are bad for your mental health.",
+    "forms": ["detrimental"]
+  }
+]

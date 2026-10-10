@@ -1,0 +1,671 @@
+[
+  {
+    "word": "backlash",
+    "intents": [
+      "a wave of angry public reaction against a decision or change",
+      "when a company changes something and crowds of customers push back hard and loudly",
+      "the angry pushback that makes people regret what they announced"
+    ],
+    "ru_cue": "резкое недовольство публики после нового решения или поступка",
+    "plain": ["angry reaction", "people got angry", "lots of complaints"],
+    "upgrades": [
+      {"plain": "When the school changed the uniform, there was [a big angry reaction] from parents.",
+       "better": "When the school changed the uniform, there was a *backlash* from parents."},
+      {"plain": "His joke at the wedding caused [a wave of anger] online, and his sister still hasn't forgiven him.",
+       "better": "His joke at the wedding caused a *backlash* online, and his sister still hasn't forgiven him."},
+      {"plain": "The café raised its prices and quickly backed down after [regulars got angry and complained].",
+       "better": "The café raised its prices and quickly backed down after a *backlash* from regulars."}
+    ],
+    "collocations": [
+      {"chunk": "a backlash against the decision", "frame": "a ___ against the decision"},
+      {"chunk": "face a backlash from", "frame": "face a ___ from"},
+      {"chunk": "provoke a fierce backlash", "frame": "provoke a fierce ___"}
+    ],
+    "ru_trap": "Russian 'реакция на' tempts 'a backlash on'; English says a backlash against or over something.",
+    "nuance": "Always negative and collective: many people turning against something, not one person's reply.",
+    "personal": [
+      "Can you remember a decision at your school or work that caused a backlash?",
+      "Has anyone you know ever faced a backlash for something they said or posted?"
+    ],
+    "gesture": "",
+    "hook": "Back + lash: crack a whip and it lashes back into your own face.",
+    "forms": ["backlash", "backlashes"]
+  },
+  {
+    "word": "play it by ear",
+    "intents": [
+      "decide what to do as things happen, instead of planning ahead",
+      "when you've booked nothing for the weekend and will just see what the weather does",
+      "stay flexible and react to the situation rather than fix a plan"
+    ],
+    "ru_cue": "ничего не планировать заранее и решать по ходу дела",
+    "plain": ["see how it goes", "decide later", "improvise"],
+    "upgrades": [
+      {"plain": "We haven't booked anything for Saturday, so let's just [see how it goes].",
+       "better": "We haven't booked anything for Saturday, so let's just *play it by ear*."},
+      {"plain": "I don't know how long the meeting will last, so I'll [decide on the day] about dinner.",
+       "better": "I don't know how long the meeting will last, so I'll *play it by ear* about dinner."},
+      {"plain": "My mum wanted a full schedule for her visit, but with a newborn we had to [take each hour as it came].",
+       "better": "My mum wanted a full schedule for her visit, but with a newborn we had to *play it by ear*."}
+    ],
+    "collocations": [
+      {"chunk": "let's just play it by ear", "frame": "let's just ___"},
+      {"chunk": "we'll have to play it by ear", "frame": "we'll have to ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Keep the 'it': 'play by ear' alone means playing music without notes. Casual, not for formal writing.",
+    "personal": [
+      "When did you last play it by ear on a trip, and how did it turn out?",
+      "Who do you know who always plays it by ear and never makes plans?"
+    ],
+    "gesture": "Cup a hand behind your ear, then shrug and wave the other hand forward: we'll see.",
+    "hook": "A musician with no sheet music just listens and plays along; you have no plan and follow what happens.",
+    "forms": ["play it by ear", "plays it by ear", "played it by ear", "playing it by ear"]
+  },
+  {
+    "word": "trade-off",
+    "intents": [
+      "giving up some of one good thing to get more of another",
+      "when the cheaper flight saves money but leaves at four in the morning, so you have to choose",
+      "the price you pay in one area for a gain in another, like speed against quality"
+    ],
+    "ru_cue": "выигрываешь в одном, но обязательно теряешь в другом",
+    "plain": ["compromise", "you can't have both"],
+    "upgrades": [
+      {"plain": "The cheaper flight leaves at four in the morning; that's [the price you pay] for saving money.",
+       "better": "The cheaper flight leaves at four in the morning; that's the *trade-off* for saving money."},
+      {"plain": "Moving closer to work means a smaller flat, and we argued for weeks about whether [giving up the space for the time] was worth it.",
+       "better": "Moving closer to work means a smaller flat, and we argued for weeks about whether the *trade-off* was worth it."},
+      {"plain": "There's always [a balance you have to strike] between speed and quality.",
+       "better": "There's always a *trade-off* between speed and quality."}
+    ],
+    "collocations": [
+      {"chunk": "a trade-off between cost and quality", "frame": "a ___ between cost and quality"},
+      {"chunk": "the trade-off is worth it", "frame": "the ___ is worth it"},
+      {"chunk": "an acceptable trade-off", "frame": "an acceptable ___"}
+    ],
+    "ru_trap": "Russian 'компромисс' covers both; in English a compromise is people meeting halfway, a trade-off is giving up one quality for another.",
+    "nuance": "A trade-off is a choice between two good things; a drawback is just the downside of one thing.",
+    "personal": [
+      "What trade-off did you make when you chose where to live or study?",
+      "What trade-off has someone in your family made for their job?"
+    ],
+    "gesture": "Hold both hands out like scales; lift one as the other sinks.",
+    "hook": "A market trader: 'I'll trade you this off for that': you only get one thing by handing over another.",
+    "forms": ["trade-off", "trade-offs", "tradeoff", "tradeoffs"]
+  },
+  {
+    "word": "autonomy",
+    "intents": [
+      "the freedom to make your own decisions without anyone controlling you",
+      "when your boss lets your team run its own budget and nobody checks every step",
+      "being in charge of your own work or life instead of answering to someone above you"
+    ],
+    "ru_cue": "свобода самому решать, как действовать, без чужого контроля",
+    "plain": ["freedom", "independence", "control over"],
+    "upgrades": [
+      {"plain": "What I love about working from home is [being free to decide things myself].",
+       "better": "What I love about working from home is the *autonomy*."},
+      {"plain": "Teachers want more [freedom to decide] how they run their classes.",
+       "better": "Teachers want more *autonomy* over how they run their classes."},
+      {"plain": "When he lost his licence, my grandad felt he'd lost [his independence], and he hated asking us for lifts.",
+       "better": "When he lost his licence, my grandad felt he'd lost his *autonomy*, and he hated asking us for lifts."}
+    ],
+    "collocations": [
+      {"chunk": "a degree of autonomy", "frame": "a degree of ___"},
+      {"chunk": "full autonomy over the budget", "frame": "full ___ over the budget"},
+      {"chunk": "give staff more autonomy", "frame": "give staff more ___"}
+    ],
+    "ru_trap": "Russian 'автономность' of a phone or laptop is 'battery life' in English, not autonomy.",
+    "nuance": "Autonomy is the right to decide for yourself; independence can also just mean not needing help or money.",
+    "personal": [
+      "How much autonomy do you have in your study or work right now?",
+      "Who do you know who would hate to lose their autonomy?"
+    ],
+    "gesture": "",
+    "hook": "Auto, as in automobile: it moves by itself, and with autonomy you steer yourself.",
+    "forms": ["autonomy"]
+  },
+  {
+    "word": "infrastructure",
+    "intents": [
+      "the roads, pipes, power lines and internet a town needs to work",
+      "when a new housing estate goes up but there are no buses, no school and a weak water supply",
+      "the basic physical systems under everyday life that you only notice when they fail"
+    ],
+    "ru_cue": "дороги, транспорт, связь, водопровод и все, без чего город не может работать",
+    "plain": ["roads and services", "basic facilities"],
+    "upgrades": [
+      {"plain": "The town needs better [roads, pipes and transport] before more houses are built.",
+       "better": "The town needs better *infrastructure* before more houses are built."},
+      {"plain": "The government is spending billions on [roads, railways and bridges].",
+       "better": "The government is spending billions on *infrastructure*."},
+      {"plain": "We moved to the village for some peace, but [the internet and the buses] are so bad that I nearly missed my own job interview.",
+       "better": "We moved to the village for some peace, but the *infrastructure* is so bad that I nearly missed my own job interview."}
+    ],
+    "collocations": [
+      {"chunk": "transport infrastructure", "frame": "transport ___"},
+      {"chunk": "ageing infrastructure", "frame": "ageing ___"},
+      {"chunk": "investment in infrastructure", "frame": "investment in ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Usually uncountable and physical: the roads, networks and utilities themselves, not the services run on them.",
+    "personal": [
+      "What is the worst thing about the infrastructure where you live?",
+      "Who do you know who complains most about local infrastructure, and what about?"
+    ],
+    "gesture": "",
+    "hook": "Infra means 'below': the structure below the city, all the pipes and cables under the street.",
+    "forms": ["infrastructure", "infrastructures"]
+  },
+  {
+    "word": "prevalence",
+    "intents": [
+      "how common something is across a whole group or area",
+      "when doctors count how many office workers out of every hundred have back pain",
+      "the share of people or places affected by something, often a problem"
+    ],
+    "ru_cue": "то, насколько часто что-то встречается среди людей или в каком-то месте",
+    "plain": ["how common", "how widespread", "number of cases"],
+    "upgrades": [
+      {"plain": "Doctors are worried about [how common back pain is] among office workers.",
+       "better": "Doctors are worried about the *prevalence* of back pain among office workers."},
+      {"plain": "The surveyor was surprised by [how many old flats had damp].",
+       "better": "The surveyor was surprised by the *prevalence* of damp in old flats."},
+      {"plain": "My essay was due in an hour and I still couldn't find any figures on [how common the illness is] in each region.",
+       "better": "My essay was due in an hour and I still couldn't find any figures on the *prevalence* of the illness in each region."}
+    ],
+    "collocations": [
+      {"chunk": "the prevalence of obesity", "frame": "the ___ of obesity"},
+      {"chunk": "a high prevalence of", "frame": "a high ___ of"},
+      {"chunk": "the rising prevalence of", "frame": "the rising ___ of"}
+    ],
+    "ru_trap": "",
+    "nuance": "The noun behind prevalent: it measures how common something is (high, low, rising), so it suits figures and studies.",
+    "personal": [
+      "Which habit do you think has the highest prevalence among people your age?",
+      "Has anyone you know, like a doctor or a teacher, talked about the prevalence of a problem at their work?"
+    ],
+    "gesture": "",
+    "hook": "Like Russian 'превалировать': the thing that prevails and turns up everywhere you look.",
+    "forms": ["prevalence"]
+  },
+  {
+    "word": "the best of both worlds",
+    "intents": [
+      "getting the advantages of two different options at once, without their usual downsides",
+      "when you live near fields and woods but are still only twenty minutes from the city centre",
+      "a happy situation where you don't have to choose between two good things"
+    ],
+    "ru_cue": "получить плюсы двух разных вариантов сразу и не мириться с их минусами",
+    "plain": ["the good parts of both", "both advantages"],
+    "upgrades": [
+      {"plain": "Living just outside the city gives you [the good parts of town and country].",
+       "better": "Living just outside the city gives you *the best of both worlds*."},
+      {"plain": "Working two days at home and three in the office is [perfect, because I get the advantages of each].",
+       "better": "Working two days at home and three in the office is *the best of both worlds*."},
+      {"plain": "My parents argued for years about the city or a village, and a cottage near the station finally gave them [what each of them wanted].",
+       "better": "My parents argued for years about the city or a village, and a cottage near the station finally gave them *the best of both worlds*."}
+    ],
+    "collocations": [
+      {"chunk": "it gives you the best of both worlds", "frame": "it gives you ___"},
+      {"chunk": "you can't have the best of both worlds", "frame": "you can't have ___"}
+    ],
+    "ru_trap": "Russian has no article here; English always keeps it: the best of both worlds.",
+    "nuance": "Only for a happy mix of two options; if you must give one up to get the other, it's a trade-off instead.",
+    "personal": [
+      "Is there anything in your life that gives you the best of both worlds?",
+      "Who do you know who seems to have the best of both worlds?"
+    ],
+    "gesture": "",
+    "hook": "Picture two planets, and you pick the ripest fruit from each without leaving your chair.",
+    "forms": ["the best of both worlds", "best of both worlds"]
+  },
+  {
+    "word": "adversity",
+    "intents": [
+      "a long stretch of serious hardship and bad luck that you have to get through",
+      "the hardship a family faces when it loses its home and then its income",
+      "the tough conditions life throws at you: the hardship itself, not how well you cope"
+    ],
+    "ru_cue": "долгие тяжелые испытания, через которые приходится проходить",
+    "plain": ["hard times", "difficulties", "a tough time"],
+    "upgrades": [
+      {"plain": "She stayed cheerful through years of [hard times].",
+       "better": "She stayed cheerful through years of *adversity*."},
+      {"plain": "The team showed real courage [when everything was going against them].",
+       "better": "The team showed real courage in the face of *adversity*."},
+      {"plain": "My dad never talks about the [tough times] he went through as a child, but I think it's why he never gives up.",
+       "better": "My dad never talks about the *adversity* he went through as a child, but I think it's why he never gives up."}
+    ],
+    "collocations": [
+      {"chunk": "in the face of adversity", "frame": "in the face of ___"},
+      {"chunk": "overcome great adversity", "frame": "overcome great ___"},
+      {"chunk": "years of adversity", "frame": "years of ___"}
+    ],
+    "ru_trap": "Russian 'невзгоды' is plural, but English adversity is usually uncountable: 'years of adversity', not 'adversities'.",
+    "nuance": "Adversity is the hardship you face; resilience is your ability to bounce back from it.",
+    "personal": [
+      "What adversity have you faced that made you stronger?",
+      "Who in your family dealt with adversity in a way you admire?"
+    ],
+    "gesture": "",
+    "hook": "'Ад-versity': a university in hell (ад) where every course is hardship.",
+    "forms": ["adversity", "adversities"]
+  },
+  {
+    "word": "resilience",
+    "intents": [
+      "the ability to bounce back quickly after a setback or a shock",
+      "when you fail an exam, feel awful for a day, then pick yourself up and try again",
+      "the inner toughness that lets a person or a community recover instead of breaking"
+    ],
+    "ru_cue": "умение быстро прийти в себя и снова встать на ноги после удара",
+    "plain": ["toughness", "being able to bounce back"],
+    "upgrades": [
+      {"plain": "Children build [the ability to bounce back] by failing sometimes and trying again.",
+       "better": "Children build *resilience* by failing sometimes and trying again."},
+      {"plain": "After losing her job and her flat in the same month, her [ability to pick herself up] amazed all of us.",
+       "better": "After losing her job and her flat in the same month, her *resilience* amazed all of us."},
+      {"plain": "The team showed real [toughness] after going two goals down.",
+       "better": "The team showed real *resilience* after going two goals down."}
+    ],
+    "collocations": [
+      {"chunk": "build resilience", "frame": "build ___"},
+      {"chunk": "show remarkable resilience", "frame": "show remarkable ___"},
+      {"chunk": "emotional resilience", "frame": "emotional ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Resilience is recovering after a blow; robust describes something strong enough not to be damaged in the first place.",
+    "personal": [
+      "When did you need the most resilience in your life so far?",
+      "Who is the person with the most resilience that you know?"
+    ],
+    "gesture": "Press your palm down on an imaginary spring, then let your hand bounce back up.",
+    "hook": "'Резил-' sounds like резина (rubber): rubber gets squashed and springs back into shape.",
+    "forms": ["resilience"]
+  },
+  {
+    "word": "paradox",
+    "intents": [
+      "a situation that sounds as if it contradicts itself but turns out to be true",
+      "a situation like this one: the busiest person you know is always the one who has time to help",
+      "a strange contradiction in a fact or statement that makes you stop and puzzle over it"
+    ],
+    "ru_cue": "явное противоречие, которое при этом оказывается правдой",
+    "plain": ["contradiction", "strange thing", "it's odd that"],
+    "upgrades": [
+      {"plain": "It's [a puzzling contradiction] that the busiest people often find time to help.",
+       "better": "It's a *paradox* that the busiest people often find time to help."},
+      {"plain": "[The odd contradiction] is that spending less took more effort.",
+       "better": "The *paradox* is that spending less took more effort."},
+      {"plain": "Here's [the strange contradiction]: the more I tried to relax before my exam, the more nervous I got.",
+       "better": "Here's the *paradox*: the more I tried to relax before my exam, the more nervous I got."}
+    ],
+    "collocations": [
+      {"chunk": "it's a paradox that", "frame": "it's a ___ that"},
+      {"chunk": "the paradox is that", "frame": "the ___ is that"},
+      {"chunk": "the paradox of choice", "frame": "the ___ of choice"}
+    ],
+    "ru_trap": "",
+    "nuance": "Paradox is the noun for the contradiction itself; paradoxically introduces one inside a sentence.",
+    "personal": [
+      "What paradox have you noticed in your own habits?",
+      "Which person you know is a walking paradox, and why?"
+    ],
+    "gesture": "",
+    "hook": "'Пара доков': a pair of doctors say opposite things, and somehow both are right.",
+    "forms": ["paradox", "paradoxes"]
+  },
+  {
+    "word": "dichotomy",
+    "intents": [
+      "splitting something into two opposite camps as if there were nothing in between",
+      "when someone insists you're either a city person or a country person and can't be a bit of each",
+      "a sharp either-or contrast between two ideas, like work against rest or art against craft"
+    ],
+    "ru_cue": "деление на две противоположности, как будто третьего не дано",
+    "plain": ["split", "division into two", "either-or"],
+    "upgrades": [
+      {"plain": "There's [a false either-or] between working hard and resting well.",
+       "better": "There's a false *dichotomy* between working hard and resting well."},
+      {"plain": "The film explores [the split] between duty and desire.",
+       "better": "The film explores the *dichotomy* between duty and desire."},
+      {"plain": "My dad keeps insisting I'm either 'creative' or 'good at maths', and I'm tired of [that black-and-white split].",
+       "better": "My dad keeps insisting I'm either 'creative' or 'good at maths', and I'm tired of that *dichotomy*."}
+    ],
+    "collocations": [
+      {"chunk": "a false dichotomy", "frame": "a false ___"},
+      {"chunk": "the dichotomy between duty and desire", "frame": "the ___ between duty and desire"},
+      {"chunk": "a simple dichotomy", "frame": "a simple ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "A dichotomy is a two-way split into opposites; a disparity is an unfair gap between groups.",
+    "personal": [
+      "Which dichotomy do people wrongly apply to you, like 'sporty or clever'?",
+      "Who do you know who sees everything as a dichotomy, with no middle ground?"
+    ],
+    "gesture": "Chop one hand straight down in front of you, then push the two halves apart.",
+    "hook": "Di = two, -tomy = cut, as in a surgeon's operation: one knife stroke, two opposite halves.",
+    "forms": ["dichotomy", "dichotomies"]
+  },
+  {
+    "word": "see eye to eye",
+    "intents": [
+      "share the same opinion as someone, often said of two people who usually clash",
+      "when you and your sister, who argue about everything, finally hold the same opinion on something",
+      "have matching views on something people often argue about, like money or politics"
+    ],
+    "ru_cue": "иметь одинаковое мнение с кем-то, особенно в спорном вопросе",
+    "plain": ["agree", "have the same opinion"],
+    "upgrades": [
+      {"plain": "We don't [agree] about politics, but we get on well.",
+       "better": "We don't *see eye to eye* about politics, but we get on well."},
+      {"plain": "My mum and my wife have never [agreed about anything], so Christmas dinner is always tense.",
+       "better": "My mum and my wife have never *seen eye to eye*, so Christmas dinner is always tense."},
+      {"plain": "My brother and I [have completely different opinions] on how to raise kids, so we just avoid the subject.",
+       "better": "My brother and I don't *see eye to eye* on how to raise kids, so we just avoid the subject."}
+    ],
+    "collocations": [
+      {"chunk": "don't see eye to eye on money", "frame": "don't ___ on money"},
+      {"chunk": "never really saw eye to eye", "frame": "never really ___"},
+      {"chunk": "see eye to eye with his father", "frame": "___ with his father"}
+    ],
+    "ru_trap": "Russian 'сходиться в чем-то' tempts 'see eye to eye in'; English says on or about: see eye to eye on money.",
+    "nuance": "About opinions, and mostly used in the negative ('we don't see eye to eye'); on the same page is about sharing an understanding of a plan.",
+    "personal": [
+      "On what topic do you rarely see eye to eye with people your age?",
+      "Which family member do you never see eye to eye with, and about what?"
+    ],
+    "gesture": "Point two fingers at your own eyes, then level them at someone else's eyes at the same height.",
+    "hook": "Two people exactly the same height, eyes level, looking at the world from the same spot.",
+    "forms": ["see eye to eye", "sees eye to eye", "saw eye to eye", "seen eye to eye", "seeing eye to eye"]
+  },
+  {
+    "word": "nuance",
+    "intents": [
+      "a small, subtle difference in meaning, tone or feeling that's easy to miss",
+      "when a joke stops being funny after translation because something delicate gets lost",
+      "the fine shades in what someone says that a quick summary leaves out"
+    ],
+    "ru_cue": "тонкое, едва заметное отличие в смысле или интонации",
+    "plain": ["subtle difference", "small detail", "shade of meaning"],
+    "upgrades": [
+      {"plain": "Jokes often lose their [subtle meaning] when you translate them.",
+       "better": "Jokes often lose their *nuance* when you translate them."},
+      {"plain": "The argument has more [fine detail] than the headline suggests.",
+       "better": "The argument has more *nuance* than the headline suggests."},
+      {"plain": "I missed [the small shift] in her tone when she said 'fine', and we ended up having a huge row.",
+       "better": "I missed the *nuance* in her tone when she said 'fine', and we ended up having a huge row."}
+    ],
+    "collocations": [
+      {"chunk": "every nuance of the original", "frame": "every ___ of the original"},
+      {"chunk": "lose nuance in translation", "frame": "lose ___ in translation"},
+      {"chunk": "the debate lacked nuance", "frame": "the debate lacked ___"}
+    ],
+    "ru_trap": "Russian 'есть один нюанс' means 'there's a catch'; English nuance is a subtle shade of meaning, never a problem.",
+    "nuance": "A compliment to precision: a nuance is a delicate shade, not a hidden problem or a big difference.",
+    "personal": [
+      "Which nuance of English do you still find hardest to hear?",
+      "Who do you know who always picks up the nuance in what people say?"
+    ],
+    "gesture": "",
+    "hook": "'New ounce': one new ounce of salt changes the soup only slightly, but a good cook notices.",
+    "forms": ["nuance", "nuances"]
+  },
+  {
+    "word": "epiphany",
+    "intents": [
+      "a moment when something important suddenly becomes clear and changes how you see things",
+      "when you're washing up and it hits you that you don't want that job at all",
+      "a lightbulb moment that comes from inside you, not from a shock or a warning"
+    ],
+    "ru_cue": "миг, когда тебя вдруг осеняет и все видится по-новому",
+    "plain": ["sudden realisation", "it suddenly hit me"],
+    "upgrades": [
+      {"plain": "Standing on the beach, I [suddenly realised] I didn't want that job at all.",
+       "better": "Standing on the beach, I had an *epiphany*: I didn't want that job at all."},
+      {"plain": "[The sudden realisation] came while he was washing up.",
+       "better": "The *epiphany* came while he was washing up."},
+      {"plain": "At four in the morning, the night before my deadline, I had [a sudden flash of understanding] about how to fix the whole essay.",
+       "better": "At four in the morning, the night before my deadline, I had an *epiphany* about how to fix the whole essay."}
+    ],
+    "collocations": [
+      {"chunk": "have an epiphany", "frame": "have an ___"},
+      {"chunk": "a sudden epiphany", "frame": "a sudden ___"},
+      {"chunk": "had an epiphany about my career", "frame": "had an ___ about my career"}
+    ],
+    "ru_trap": "",
+    "nuance": "An epiphany comes from inside, in a flash; a wake-up call is a shock from outside that warns you.",
+    "personal": [
+      "When did you last have an epiphany, and what was it about?",
+      "Has anyone you know had an epiphany that changed their life?"
+    ],
+    "gesture": "Freeze, then flick your fingers open beside your head like a lightbulb switching on.",
+    "hook": "'Эпи-фонарь': a lantern (фонарь) suddenly lights up in your head.",
+    "forms": ["epiphany", "epiphanies"]
+  },
+  {
+    "word": "affinity",
+    "intents": [
+      "a natural feeling of connection with something or someone, as if it just suits you",
+      "when you walk into a town for the first time and feel strangely at home",
+      "being naturally drawn to something, like languages, animals or numbers"
+    ],
+    "ru_cue": "естественная тяга к чему-то, ощущение, что тебе это по-настоящему близко",
+    "plain": ["natural liking", "connection", "feel at home with"],
+    "upgrades": [
+      {"plain": "I've always had [a natural connection] with cats; they seem to trust me.",
+       "better": "I've always had an *affinity* with cats; they seem to trust me."},
+      {"plain": "He has [a natural feel] for languages.",
+       "better": "He has a natural *affinity* for languages."},
+      {"plain": "My parents wanted me to study law, but I'd always felt [drawn to] art, and telling them was the hardest conversation of my life.",
+       "better": "My parents wanted me to study law, but I'd always felt an *affinity* with art, and telling them was the hardest conversation of my life."}
+    ],
+    "collocations": [
+      {"chunk": "a natural affinity for", "frame": "a natural ___ for"},
+      {"chunk": "feel an affinity with", "frame": "feel an ___ with"},
+      {"chunk": "share an affinity for", "frame": "share an ___ for"}
+    ],
+    "ru_trap": "Russian 'к' tempts 'affinity to'; English says an affinity with or for something.",
+    "nuance": "A calm, natural fit rather than strong love or desire; you can feel an affinity with a place, a style or a group of people.",
+    "personal": [
+      "What subject or place have you always felt an affinity with?",
+      "Who do you know who has a real affinity for animals or children?"
+    ],
+    "gesture": "",
+    "hook": "'A fin-ity': a fish's fin just belongs in water, a natural fit.",
+    "forms": ["affinity", "affinities"]
+  },
+  {
+    "word": "vivid",
+    "intents": [
+      "so clear and bright in your mind that you can almost see it again",
+      "when a friend describes a market so well that you can picture every stall",
+      "full of strong colour and sharp detail, like a dream you remember perfectly"
+    ],
+    "ru_cue": "такой яркий и четкий, что легко представить перед глазами",
+    "plain": ["clear", "bright", "very detailed"],
+    "upgrades": [
+      {"plain": "She gave such a [detailed, clear] description that I could picture the room.",
+       "better": "She gave such a *vivid* description that I could picture the room."},
+      {"plain": "The dream was so [real and clear] that she wrote it down.",
+       "better": "The dream was so *vivid* that she wrote it down."},
+      {"plain": "I still have a [very clear] memory of the moment I forgot my lines in the school play.",
+       "better": "I still have a *vivid* memory of the moment I forgot my lines in the school play."}
+    ],
+    "collocations": [
+      {"chunk": "a vivid memory of", "frame": "a ___ memory of"},
+      {"chunk": "a vivid imagination", "frame": "a ___ imagination"},
+      {"chunk": "a vivid description", "frame": "a ___ description"}
+    ],
+    "ru_trap": "Russian 'яркий' also covers a bright lamp or a lively person; for light say bright, keep vivid for colours, memories and descriptions.",
+    "nuance": "Vivid is about how clearly something appears to the eye or the mind; luminous is about light actually glowing.",
+    "personal": [
+      "What is your most vivid childhood memory?",
+      "Who do you know with the most vivid imagination?"
+    ],
+    "gesture": "",
+    "hook": "Vivid sounds like 'видел' (saw): you remember it as if you had just seen it.",
+    "forms": ["vivid"]
+  },
+  {
+    "word": "food for thought",
+    "intents": [
+      "an idea that's worth turning over in your head for a while after you hear it",
+      "when a friend's passing comment about your screen time keeps you reflecting all the way home",
+      "something that doesn't give you an answer but makes you reconsider"
+    ],
+    "ru_cue": "то, над чем стоит хорошенько поразмыслить",
+    "plain": ["something to think about", "made me think"],
+    "upgrades": [
+      {"plain": "Her comment about spending less time online really [made me think].",
+       "better": "Her comment about spending less time online really gave me *food for thought*."},
+      {"plain": "The talk gave everyone [a lot to think about].",
+       "better": "The talk gave everyone plenty of *food for thought*."},
+      {"plain": "My teacher's remark that I only work when someone's watching stung, but it was [something worth thinking about].",
+       "better": "My teacher's remark that I only work when someone's watching stung, but it was *food for thought*."}
+    ],
+    "collocations": [
+      {"chunk": "plenty of food for thought", "frame": "plenty of ___"},
+      {"chunk": "it gave me food for thought", "frame": "it gave me ___"}
+    ],
+    "ru_trap": "No article: 'that's food for thought', not 'a food for thought'.",
+    "nuance": "Slow and open: it gives you material to reflect on, unlike an epiphany, which is a sudden answer.",
+    "personal": [
+      "What gave you real food for thought recently?",
+      "Who do you know whose advice usually gives you food for thought?"
+    ],
+    "gesture": "",
+    "hook": "Picture a sandwich for your brain: something to chew on slowly.",
+    "forms": ["food for thought"]
+  },
+  {
+    "word": "immersive",
+    "intents": [
+      "making you feel you're right inside it, so the real world around you fades away",
+      "when a video game pulls you in so deeply that you forget to eat",
+      "surrounding you on every side with sound, images or a language, so you're in it rather than watching"
+    ],
+    "ru_cue": "дающий ощущение, что ты сам внутри происходящего",
+    "plain": ["absorbing", "really realistic", "you feel like you're there"],
+    "upgrades": [
+      {"plain": "The game [pulls you in] so much that I forget to eat.",
+       "better": "The game is so *immersive* that I forget to eat."},
+      {"plain": "The course offers [a week where you hear nothing but Spanish].",
+       "better": "The course offers an *immersive* week in Spanish."},
+      {"plain": "I dragged my dad to the exhibition expecting him to be bored, but it felt so [much like being inside the scene] that he didn't want to leave.",
+       "better": "I dragged my dad to the exhibition expecting him to be bored, but it was so *immersive* that he didn't want to leave."}
+    ],
+    "collocations": [
+      {"chunk": "an immersive experience", "frame": "an ___ experience"},
+      {"chunk": "a truly immersive world", "frame": "the game creates a truly ___ world"},
+      {"chunk": "immersive theatre", "frame": "___ theatre"}
+    ],
+    "ru_trap": "",
+    "nuance": "About being surrounded and drawn inside (games, theatre, language courses); vivid only describes clear images.",
+    "personal": [
+      "What is the most immersive book, game or film you have ever experienced?",
+      "Who do you know who learned a language through an immersive stay abroad?"
+    ],
+    "gesture": "",
+    "hook": "'Им-МОРЕ-сив': you're under the sea (море), and water surrounds you on every side.",
+    "forms": ["immersive"]
+  },
+  {
+    "word": "exhilarating",
+    "intents": [
+      "making you feel thrilled, breathless and full of energy",
+      "when you race down a hill on a bike with the wind in your face and can't stop grinning",
+      "so exciting that you feel more alive than usual, often with a bit of speed or danger"
+    ],
+    "ru_cue": "вызывающий бурный восторг и ощущение, что ты по-настоящему жив",
+    "plain": ["exciting", "thrilling", "amazing"],
+    "upgrades": [
+      {"plain": "Swimming in the sea in winter is freezing but [really exciting].",
+       "better": "Swimming in the sea in winter is freezing but *exhilarating*."},
+      {"plain": "The ride down the hill was [so exciting I couldn't stop laughing].",
+       "better": "The ride down the hill was *exhilarating*."},
+      {"plain": "After months of rehearsals and nearly quitting twice, singing on that stage was [an amazing feeling].",
+       "better": "After months of rehearsals and nearly quitting twice, singing on that stage was *exhilarating*."}
+    ],
+    "collocations": [
+      {"chunk": "an exhilarating experience", "frame": "an ___ experience"},
+      {"chunk": "an exhilarating ride", "frame": "an ___ ride"},
+      {"chunk": "find the speed exhilarating", "frame": "find the speed ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Stronger and more physical than exciting (speed, cold water, height). The experience is exhilarating; you feel exhilarated.",
+    "personal": [
+      "What is the most exhilarating thing you have ever done?",
+      "Who do you know who finds dangerous sports exhilarating?"
+    ],
+    "gesture": "",
+    "hook": "Ex-HILL-arating: flying down a hill, the wind blows the breath right out of you.",
+    "forms": ["exhilarating"]
+  },
+  {
+    "word": "daunting",
+    "intents": [
+      "so big or hard that it shakes your confidence before you even start",
+      "when you look at the huge pile of forms on day one and wonder whether you can even begin",
+      "making you feel small and unsure, like looking up at a mountain you're about to climb"
+    ],
+    "ru_cue": "такой сложный на вид, что заранее пропадает уверенность в себе",
+    "plain": ["scary", "intimidating", "a lot"],
+    "upgrades": [
+      {"plain": "Starting a new job is [scary], especially in the first week.",
+       "better": "Starting a new job is *daunting*, especially in the first week."},
+      {"plain": "The thought of giving a speech at my sister's wedding was [really scary], and I nearly said no.",
+       "better": "The thought of giving a speech at my sister's wedding was *daunting*, and I nearly said no."},
+      {"plain": "The task seemed [so scary that we didn't even want to start] until we split it up.",
+       "better": "The task seemed *daunting* until we split it up."}
+    ],
+    "collocations": [
+      {"chunk": "a daunting task", "frame": "a ___ task"},
+      {"chunk": "a daunting prospect", "frame": "a ___ prospect"},
+      {"chunk": "seemed daunting at first", "frame": "seemed ___ at first"}
+    ],
+    "ru_trap": "",
+    "nuance": "Daunting is how a task looks before you start; arduous is how hard it is to keep going once you have.",
+    "personal": [
+      "What task feels most daunting to you right now?",
+      "Who do you know who took on something daunting and managed it?"
+    ],
+    "gesture": "Lean back and slowly look up, as if at a huge wall right in front of you.",
+    "hook": "'Донт' (don't): the mountain looks down at you and says 'don't even try'.",
+    "forms": ["daunting"]
+  },
+  {
+    "word": "desperate",
+    "intents": [
+      "so worried and out of options that you'll try anything",
+      "when you've been lost in the rain for hours and would get on any bus at all",
+      "needing something urgently and badly, like sleep, work or help, right now"
+    ],
+    "ru_cue": "когда все варианты кончились и ты готов на что угодно",
+    "plain": ["really need", "very worried", "willing to try anything"],
+    "upgrades": [
+      {"plain": "After three hours lost in the rain, we [really, really wanted] to find a bus stop.",
+       "better": "After three hours lost in the rain, we were *desperate* to find a bus stop."},
+      {"plain": "He [badly needed] work after six months without a job.",
+       "better": "He was *desperate* for work after six months without a job."},
+      {"plain": "She sounded [panicked and helpless] on the phone, so I drove straight over.",
+       "better": "She sounded *desperate* on the phone, so I drove straight over."}
+    ],
+    "collocations": [
+      {"chunk": "desperate for a decent night's sleep", "frame": "___ for a decent night's sleep"},
+      {"chunk": "desperate to get home", "frame": "___ to get home"},
+      {"chunk": "a desperate attempt", "frame": "a ___ attempt"}
+    ],
+    "ru_trap": "Russian 'отчаянный' can mean daring ('отчаянный парень'); English desperate never means brave, only hopeless or in urgent need.",
+    "nuance": "Urgent and anxious: you need it now and will try anything; yearn is a slow, deep longing.",
+    "personal": [
+      "When were you last desperate for something, and what did you do?",
+      "Who do you know who once made a desperate attempt to fix a mistake?"
+    ],
+    "gesture": "",
+    "hook": "'Despair-ate': despair ate up all your options, so you grab at anything.",
+    "forms": ["desperate"]
+  }
+]

@@ -1,0 +1,701 @@
+[
+  {
+    "word": "tangible",
+    "intents": [
+      "real enough that you can actually see it, count it or point to it",
+      "after months of hard work you finally have results you can show people, not just hopes",
+      "the difference between a vague promise and something you could hold in your hand"
+    ],
+    "ru_cue": "такой, который реально можно увидеть, пощупать или измерить",
+    "plain": ["real", "concrete", "visible"],
+    "upgrades": [
+      {"plain": "After three months at the gym I finally saw [real, visible] results.",
+       "better": "After three months at the gym I finally saw *tangible* results."},
+      {"plain": "My manager said that if I can't show [real] progress by Friday, the project goes to someone else.",
+       "better": "My manager said that if I can't show *tangible* progress by Friday, the project goes to someone else."},
+      {"plain": "The council keeps promising 'improvements', but I want to see [real, concrete] benefits for our street, not just words.",
+       "better": "The council keeps promising 'improvements', but I want to see *tangible* benefits for our street, not just words."}
+    ],
+    "collocations": [
+      {"chunk": "tangible results", "frame": "___ results"},
+      {"chunk": "tangible benefits", "frame": "___ benefits"},
+      {"chunk": "no tangible evidence", "frame": "no ___ evidence"}
+    ],
+    "ru_trap": "",
+    "nuance": "About whether something is real and visible, not how big it is: a small but measurable gain is tangible; a big one is substantial.",
+    "personal": [
+      "What tangible result have you seen from your English study this year?",
+      "Who do you know who prefers tangible rewards, like money, to praise?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'танго': in a tango you hold your partner tight, solid and real in your hands.",
+    "forms": ["tangible"]
+  },
+  {
+    "word": "pivotal",
+    "intents": [
+      "so central at a key moment that the whole outcome turns on it",
+      "describing a moment or decision that was crucial in sending your whole life in a new direction",
+      "playing the part without which the result would have been completely different"
+    ],
+    "ru_cue": "настолько важный, что от него зависит, куда все повернется",
+    "plain": ["key", "very important", "crucial"],
+    "upgrades": [
+      {"plain": "My chemistry teacher played a [really important] role in my decision to study medicine.",
+       "better": "My chemistry teacher played a *pivotal* role in my decision to study medicine."},
+      {"plain": "That last-minute save was [what decided] the whole match.",
+       "better": "That last-minute save was *pivotal* to the whole match."},
+      {"plain": "Tomorrow's interview is [hugely important] for my career, so please don't call me tonight.",
+       "better": "Tomorrow's interview is *pivotal* for my career, so please don't call me tonight."}
+    ],
+    "collocations": [
+      {"chunk": "play a pivotal role", "frame": "play a ___ role"},
+      {"chunk": "a pivotal moment", "frame": "a ___ moment"}
+    ],
+    "ru_trap": "",
+    "nuance": "Stronger than 'important': the outcome hinges on it. A catalyst sets change off; something pivotal is the point the whole result depends on.",
+    "personal": [
+      "What was a pivotal moment in your own education?",
+      "Who played a pivotal role in making you the person you are today?"
+    ],
+    "gesture": "Plant one foot and swing your whole body round on it.",
+    "hook": "Sounds like 'пиво-тал': the whole party turned on one thing, whether the пиво arrived.",
+    "forms": ["pivotal"]
+  },
+  {
+    "word": "in the long run",
+    "intents": [
+      "over many years, rather than right now",
+      "it costs more or hurts today, but years from now you'll be glad you did it",
+      "when you look past the short-term pain to how things finally turn out"
+    ],
+    "ru_cue": "если смотреть не на сегодня, а на много лет вперед",
+    "plain": ["eventually", "over time", "later on"],
+    "upgrades": [
+      {"plain": "Good shoes are cheaper [over time].",
+       "better": "Good shoes are cheaper *in the long run*."},
+      {"plain": "I know leaving the band hurts now, but [years from now] you'll be glad you finished your degree.",
+       "better": "I know leaving the band hurts now, but *in the long run* you'll be glad you finished your degree."},
+      {"plain": "Fixing the roof properly now will save us money [later on].",
+       "better": "Fixing the roof properly now will save us money *in the long run*."}
+    ],
+    "collocations": [
+      {"chunk": "pay off in the long run", "frame": "pay off ___"},
+      {"chunk": "cheaper in the long run", "frame": "cheaper ___"},
+      {"chunk": "worth it in the long run", "frame": "worth it ___"}
+    ],
+    "ru_trap": "Russian 'в долгосрочной перспективе' tempts 'in the long perspective'; English says *in the long run* (or 'in the long term').",
+    "nuance": "Weighs the later payoff against a cost now; 'eventually' only says something happens later, with no trade-off.",
+    "personal": [
+      "What habit of yours will pay off in the long run?",
+      "Which friend or relative made a sacrifice that paid off in the long run?"
+    ],
+    "gesture": "",
+    "hook": "Picture a marathon: the sprinters lead at first, but the steady runner wins in the long run.",
+    "forms": ["in the long run", "over the long run"]
+  },
+  {
+    "word": "exacerbate",
+    "intents": [
+      "make a bad situation even worse",
+      "add fuel to a problem that is already there",
+      "your attempt to deal with some trouble only makes it bigger"
+    ],
+    "ru_cue": "сделать и без того плохую ситуацию еще хуже",
+    "plain": ["make worse", "worsen"],
+    "upgrades": [
+      {"plain": "Scratching the bite will only [make the itching worse].",
+       "better": "Scratching the bite will only *exacerbate* the itching."},
+      {"plain": "Mum and Dad were already arguing, and my stupid joke only [made things worse].",
+       "better": "Mum and Dad were already arguing, and my stupid joke only *exacerbated* the situation."},
+      {"plain": "Cold air can [make a cough worse].",
+       "better": "Cold air can *exacerbate* a cough."}
+    ],
+    "collocations": [
+      {"chunk": "exacerbate the problem", "frame": "___ the problem"},
+      {"chunk": "further exacerbate", "frame": "further ___"},
+      {"chunk": "exacerbate tensions", "frame": "___ tensions"}
+    ],
+    "ru_trap": "",
+    "nuance": "Only for something already bad: you can't exacerbate a good mood. Perpetuate keeps a problem going; exacerbate makes it worse.",
+    "personal": [
+      "What tends to exacerbate your stress before an exam?",
+      "Who do you know whose 'help' usually exacerbates a problem?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'eggs are bait': throwing eggs at a bear only makes it angrier.",
+    "forms": ["exacerbate", "exacerbates", "exacerbated", "exacerbating"]
+  },
+  {
+    "word": "mitigate",
+    "intents": [
+      "reduce the damage or risk that something bad will cause",
+      "you can't stop the flood, but sandbags make the damage less serious",
+      "take steps so a problem hits less hard, even though it's still there"
+    ],
+    "ru_cue": "уменьшить вред или риск от чего-то плохого",
+    "plain": ["reduce", "lessen", "limit"],
+    "upgrades": [
+      {"plain": "Sandbags [reduced] the worst of the flood damage.",
+       "better": "Sandbags *mitigated* the worst of the flood damage."},
+      {"plain": "I missed the deadline, but telling my boss early helped [limit] the damage.",
+       "better": "I missed the deadline, but telling my boss early helped *mitigate* the damage."},
+      {"plain": "Keeping some savings [reduces] the risk if you lose your job.",
+       "better": "Keeping some savings *mitigates* the risk if you lose your job."}
+    ],
+    "collocations": [
+      {"chunk": "mitigate the risk", "frame": "___ the risk"},
+      {"chunk": "mitigate the impact", "frame": "___ the impact"},
+      {"chunk": "mitigate the effects of", "frame": "___ the effects of"}
+    ],
+    "ru_trap": "",
+    "nuance": "For harm, risk and impact (mitigate the damage); for pain, pressure or suffering use alleviate; to stop something growing, use curb.",
+    "personal": [
+      "What do you do to mitigate the stress of exam week?",
+      "Who do you know who is good at mitigating the damage after a mistake?"
+    ],
+    "gesture": "",
+    "hook": "Think 'mitt': a baseball mitt doesn't stop the hard ball, it just mitigates the damage to your hand.",
+    "forms": ["mitigate", "mitigates", "mitigated", "mitigating"]
+  },
+  {
+    "word": "alleviate",
+    "intents": [
+      "ease pain, suffering or pressure so someone feels better",
+      "your back aches all day, and a hot bath finally takes the edge off",
+      "ease the hardship or worry that struggling people feel, so life weighs on them less"
+    ],
+    "ru_cue": "облегчить боль, страдания или нагрузку",
+    "plain": ["ease", "relieve", "help with"],
+    "upgrades": [
+      {"plain": "A hot bath helps [ease] the pain in my back.",
+       "better": "A hot bath helps *alleviate* the pain in my back."},
+      {"plain": "When Dad was ill, my sister moving in [took a lot of the pressure off] me.",
+       "better": "When Dad was ill, my sister moving in *alleviated* a lot of the pressure on me."},
+      {"plain": "A few kind words from the nurse [eased] my mum's fear before the operation.",
+       "better": "A few kind words from the nurse *alleviated* my mum's fear before the operation."}
+    ],
+    "collocations": [
+      {"chunk": "alleviate the pain", "frame": "___ the pain"},
+      {"chunk": "alleviate poverty", "frame": "___ poverty"},
+      {"chunk": "alleviate the symptoms", "frame": "___ the symptoms"}
+    ],
+    "ru_trap": "",
+    "nuance": "For pain, suffering, pressure, symptoms or poverty: you alleviate what people feel; you mitigate the damage or risk of an event.",
+    "personal": [
+      "What alleviates your stress after a hard day?",
+      "Who has alleviated a burden for you when you really needed it?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'all-elevate': lift all the weight off someone's shoulders, and the pain eases.",
+    "forms": ["alleviate", "alleviates", "alleviated", "alleviating"]
+  },
+  {
+    "word": "take it with a pinch of salt",
+    "intents": [
+      "don't believe everything someone tells you; stay a little doubtful",
+      "your friend swears the fish he caught was as big as a car",
+      "listen to a claim but assume it's probably exaggerated"
+    ],
+    "ru_cue": "не верить до конца, слушать с долей сомнения",
+    "plain": ["not fully believe it", "be doubtful about it"],
+    "upgrades": [
+      {"plain": "He says he never gets nervous, but I [don't really believe that].",
+       "better": "He says he never gets nervous, but I *take that with a pinch of salt*."},
+      {"plain": "Online reviews are useful, but [don't believe everything you read].",
+       "better": "Online reviews are useful, but *take them with a pinch of salt*."},
+      {"plain": "My ex told everyone the break-up was my fault, so I hope people [don't believe all of it].",
+       "better": "My ex told everyone the break-up was my fault, so I hope people *take it with a pinch of salt*."}
+    ],
+    "collocations": [
+      {"chunk": "take everything he says with a pinch of salt", "frame": "take everything he says ___"},
+      {"chunk": "I'd take those figures with a pinch of salt", "frame": "I'd take those figures ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Mild doubt, not rejection: you still listen, you just assume it may be exaggerated. Americans say 'a grain of salt'.",
+    "personal": [
+      "What kind of advice do you always take with a pinch of salt?",
+      "Whose stories in your family do you take with a pinch of salt?"
+    ],
+    "gesture": "Pinch some imaginary salt and sprinkle it in the air, raising one eyebrow.",
+    "hook": "A pinch of salt makes a strange dish easier to swallow, just as a little doubt makes a tall story easier to swallow.",
+    "forms": ["take it with a pinch of salt", "takes it with a pinch of salt", "took it with a pinch of salt", "taken it with a pinch of salt", "taking it with a pinch of salt", "take that with a pinch of salt", "take them with a pinch of salt", "with a pinch of salt", "take it with a grain of salt", "with a grain of salt"]
+  },
+  {
+    "word": "undermine",
+    "intents": [
+      "slowly weaken someone's confidence, trust or authority",
+      "one parent says no, and the other says 'oh, go on then' right in front of the kids",
+      "eat away at the base of something until it can no longer hold up"
+    ],
+    "ru_cue": "постепенно ослабить чью-то уверенность, доверие или авторитет",
+    "plain": ["weaken", "damage"],
+    "upgrades": [
+      {"plain": "Correcting her in front of everyone will [knock] her confidence.",
+       "better": "Correcting her in front of everyone will *undermine* her confidence."},
+      {"plain": "Every time I say no, my mum says yes to the kids, and it completely [destroys] my authority.",
+       "better": "Every time I say no, my mum says yes to the kids, and it completely *undermines* my authority."},
+      {"plain": "Missing deadlines [weakens] your case for promotion.",
+       "better": "Missing deadlines *undermines* your case for promotion."}
+    ],
+    "collocations": [
+      {"chunk": "undermine confidence", "frame": "___ confidence"},
+      {"chunk": "undermine someone's authority", "frame": "___ someone's authority"},
+      {"chunk": "undermine trust", "frame": "___ trust"}
+    ],
+    "ru_trap": "",
+    "nuance": "Weakens something from within, often gradually or behind the scenes; the opposite of underpin. Hinder only slows progress down.",
+    "personal": [
+      "Has anything ever undermined your confidence right before an exam?",
+      "Who do you know who undermines other people with 'jokes'?"
+    ],
+    "gesture": "Make small digging movements low down, then let your other forearm, held upright like a wall, slowly topple.",
+    "hook": "under + mine: soldiers dig a tunnel under the castle wall until the whole wall collapses.",
+    "forms": ["undermine", "undermines", "undermined", "undermining"]
+  },
+  {
+    "word": "underpin",
+    "intents": [
+      "be the solid base that something else rests on",
+      "the hidden support that a whole argument or relationship stands on",
+      "take this away from the bottom and everything built on top would fall apart"
+    ],
+    "ru_cue": "быть основой, на которой держится все остальное",
+    "plain": ["support", "be the basis of"],
+    "upgrades": [
+      {"plain": "Trust [is the basis of] every good friendship.",
+       "better": "Trust *underpins* every good friendship."},
+      {"plain": "Careful research [supports] her whole argument.",
+       "better": "Careful research *underpins* her whole argument."},
+      {"plain": "After he lied about the money, I realised honesty [was what our whole marriage rested on].",
+       "better": "After he lied about the money, I realised honesty *underpinned* our whole marriage."}
+    ],
+    "collocations": [
+      {"chunk": "be underpinned by research", "frame": "be ___ by research"},
+      {"chunk": "the values that underpin", "frame": "the values that ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "About foundations: it holds something up from below (the opposite of undermine). Foster helps something grow; underpin keeps it standing.",
+    "personal": [
+      "What value underpins the way you make big decisions?",
+      "What do you think underpins your best friend's success?"
+    ],
+    "gesture": "",
+    "hook": "under + pin: a steel pin under the shelf holds the whole thing up.",
+    "forms": ["underpin", "underpins", "underpinned", "underpinning"]
+  },
+  {
+    "word": "facilitate",
+    "intents": [
+      "make it easier for something to happen or for people to do something, by helping rather than doing it yourself",
+      "guide a group discussion along without taking sides yourself",
+      "be the helpful go-between who makes it easier for a meeting, a deal or learning to take place"
+    ],
+    "ru_cue": "сделать так, чтобы процесс шел легче и глаже",
+    "plain": ["make easier", "help", "run"],
+    "upgrades": [
+      {"plain": "The new app [makes it easier to book] a doctor's appointment.",
+       "better": "The new app *facilitates* booking a doctor's appointment."},
+      {"plain": "A neutral person can [help run] a difficult discussion.",
+       "better": "A neutral person can *facilitate* a difficult discussion."},
+      {"plain": "My boss asked me to [run] the workshop tomorrow, and I'm terrified.",
+       "better": "My boss asked me to *facilitate* the workshop tomorrow, and I'm terrified."}
+    ],
+    "collocations": [
+      {"chunk": "facilitate learning", "frame": "___ learning"},
+      {"chunk": "facilitate communication", "frame": "___ communication"},
+      {"chunk": "facilitate a discussion", "frame": "___ a discussion"}
+    ],
+    "ru_trap": "Russian 'способствовать чему-то' tempts 'facilitate to something'; English takes a direct object: facilitate the process.",
+    "nuance": "For processes and actions (booking, trade, a discussion); foster is for feelings and qualities that grow over time.",
+    "personal": [
+      "What tool or habit facilitates your studying the most?",
+      "Who do you know who is good at facilitating a tense meeting?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like French 'facile' (easy): to facilitate is to make it facile.",
+    "forms": ["facilitate", "facilitates", "facilitated", "facilitating"]
+  },
+  {
+    "word": "hinder",
+    "intents": [
+      "get in the way and slow down progress",
+      "heavy snow means the rescue team takes twice as long to reach people",
+      "make it harder for someone to move forward, without stopping them completely"
+    ],
+    "ru_cue": "мешать двигаться вперед, тормозить",
+    "plain": ["get in the way of", "slow down", "hold back"],
+    "upgrades": [
+      {"plain": "Heavy snow [slowed down] the rescue.",
+       "better": "Heavy snow *hindered* the rescue."},
+      {"plain": "Too many meetings [get in the way of] actual work.",
+       "better": "Too many meetings *hinder* actual work."},
+      {"plain": "I didn't get the job; I think my nerves [held me back] in the interview.",
+       "better": "I didn't get the job; I think my nerves *hindered* me in the interview."}
+    ],
+    "collocations": [
+      {"chunk": "hinder progress", "frame": "___ progress"},
+      {"chunk": "hinder the development of", "frame": "___ the development of"},
+      {"chunk": "seriously hinder", "frame": "seriously ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Slows or blocks progress; it doesn't weaken the thing itself (undermine) or make a problem worse (exacerbate).",
+    "personal": [
+      "What hinders your progress most when you study?",
+      "Who do you know whose plans were hindered by a lack of money or time?"
+    ],
+    "gesture": "Hold one arm out stiffly in front of you, as if blocking someone trying to walk past.",
+    "hook": "Sounds like 'hind leg': a dog hanging on to your hind leg hinders every step you take.",
+    "forms": ["hinder", "hinders", "hindered", "hindering"]
+  },
+  {
+    "word": "go the extra mile",
+    "intents": [
+      "do more than anyone expects or requires of you",
+      "a shop assistant drives your forgotten bag to your house after closing time",
+      "put in more effort than the job needs, just to do it really well for someone"
+    ],
+    "ru_cue": "сделать больше, чем от тебя требуется",
+    "plain": ["make an extra effort", "do more than you have to"],
+    "upgrades": [
+      {"plain": "She always [does more than she has to] for her students.",
+       "better": "She always *goes the extra mile* for her students."},
+      {"plain": "The hotel lost our booking, but they [really made an effort] and upgraded us for free.",
+       "better": "The hotel lost our booking, but they *went the extra mile* and upgraded us for free."},
+      {"plain": "If you want this job, you'll have to [do more than everyone else].",
+       "better": "If you want this job, you'll have to *go the extra mile*."}
+    ],
+    "collocations": [
+      {"chunk": "always go the extra mile", "frame": "always ___"},
+      {"chunk": "willing to go the extra mile", "frame": "willing to ___"},
+      {"chunk": "go the extra mile for customers", "frame": "___ for customers"}
+    ],
+    "ru_trap": "",
+    "nuance": "Praises effort beyond duty, usually to help someone; it's about doing more, not about being careful (meticulous).",
+    "personal": [
+      "When did you last go the extra mile at work or school?",
+      "Which teacher or colleague always goes the extra mile?"
+    ],
+    "gesture": "",
+    "hook": "Picture a runner who finishes the race, then jogs one more mile to carry a stranger's bag home.",
+    "forms": ["go the extra mile", "goes the extra mile", "went the extra mile", "gone the extra mile", "going the extra mile"]
+  },
+  {
+    "word": "curb",
+    "intents": [
+      "keep a bad habit or a growing problem under control",
+      "your spending on takeaways is getting out of hand, so you set yourself a limit",
+      "hold back an urge or a temper, like pulling on a horse's reins"
+    ],
+    "ru_cue": "держать в рамках и не давать разрастись чему-то вредному",
+    "plain": ["limit", "control", "cut down on"],
+    "upgrades": [
+      {"plain": "I'm trying to [control] my spending on takeaways.",
+       "better": "I'm trying to *curb* my spending on takeaways."},
+      {"plain": "He nearly lost his job for shouting at a client, so now he's learning to [control] his temper.",
+       "better": "He nearly lost his job for shouting at a client, so now he's learning to *curb* his temper."},
+      {"plain": "The council brought in parking charges to [cut down] traffic in the centre.",
+       "better": "The council brought in parking charges to *curb* traffic in the centre."}
+    ],
+    "collocations": [
+      {"chunk": "curb spending", "frame": "___ spending"},
+      {"chunk": "curb the spread of", "frame": "___ the spread of"},
+      {"chunk": "curb his temper", "frame": "___ his temper"}
+    ],
+    "ru_trap": "",
+    "nuance": "Restrains something that tends to grow (spending, a temper, traffic); mitigate softens damage, deter stops people before they start.",
+    "personal": [
+      "What habit would you most like to curb?",
+      "Who do you know who managed to curb a bad habit, and how?"
+    ],
+    "gesture": "Pull both fists back towards your chest, like tightening a horse's reins.",
+    "hook": "Sounds like 'kerb', the edge of the pavement that stops a car from going too far.",
+    "forms": ["curb", "curbs", "curbed", "curbing"]
+  },
+  {
+    "word": "foster",
+    "intents": [
+      "help a feeling, skill or relationship grow slowly over time",
+      "a teacher builds the kind of classroom where shy kids start to speak up",
+      "create the conditions in which something good, like trust or talent, can develop"
+    ],
+    "ru_cue": "создавать условия, в которых постепенно растет что-то хорошее",
+    "plain": ["encourage", "build", "help develop"],
+    "upgrades": [
+      {"plain": "Eating together every evening [helps build] a closer family.",
+       "better": "Eating together every evening *fosters* a closer family."},
+      {"plain": "Small classes [encourage] real discussion.",
+       "better": "Small classes *foster* real discussion."},
+      {"plain": "When the other teachers had given up on me, one patient tutor [built up] my confidence.",
+       "better": "When the other teachers had given up on me, one patient tutor *fostered* my confidence."}
+    ],
+    "collocations": [
+      {"chunk": "foster a sense of belonging", "frame": "___ a sense of belonging"},
+      {"chunk": "foster creativity", "frame": "___ creativity"},
+      {"chunk": "foster a love of", "frame": "___ a love of"}
+    ],
+    "ru_trap": "",
+    "nuance": "For feelings, skills and relationships that grow slowly; facilitate makes a process easier. A 'foster family' raises someone else's child.",
+    "personal": [
+      "What fostered your interest in English?",
+      "Who fostered your confidence when you were younger?"
+    ],
+    "gesture": "",
+    "hook": "Think of a foster parent: someone who takes in a child and helps it grow, day by day.",
+    "forms": ["foster", "fosters", "fostered", "fostering"]
+  },
+  {
+    "word": "allocate",
+    "intents": [
+      "decide how much money, time or space goes to each purpose",
+      "splitting the family budget: this much for rent, this much for food, this much for fun",
+      "hand out a fixed amount of something to particular people or tasks"
+    ],
+    "ru_cue": "решить, сколько денег, времени или места отдать на каждую цель",
+    "plain": ["give", "set aside", "assign"],
+    "upgrades": [
+      {"plain": "The council will [give out] the money next month.",
+       "better": "The council will *allocate* the money next month."},
+      {"plain": "We [set aside] an hour every evening for homework.",
+       "better": "We *allocate* an hour every evening to homework."},
+      {"plain": "We didn't [leave] enough time for testing, and the app crashed in front of the client.",
+       "better": "We didn't *allocate* enough time for testing, and the app crashed in front of the client."}
+    ],
+    "collocations": [
+      {"chunk": "allocate funds", "frame": "___ funds"},
+      {"chunk": "allocate time to", "frame": "___ time to"},
+      {"chunk": "allocate resources", "frame": "___ resources"}
+    ],
+    "ru_trap": "Russian 'выделить время на что-то' tempts 'allocate time on'; English says allocate time *to* or *for* something.",
+    "nuance": "About dividing up a limited amount among purposes; prioritise only decides what comes first, not how much each thing gets.",
+    "personal": [
+      "How much time do you allocate to English each week?",
+      "Who in your family decides how the money is allocated?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'a lot o' cake': you allocate the cake, one slice to each guest.",
+    "forms": ["allocate", "allocates", "allocated", "allocating"]
+  },
+  {
+    "word": "implement",
+    "intents": [
+      "actually put a plan or decision into practice",
+      "the plan was agreed months ago, and now someone has to make it really happen",
+      "the hard part after deciding: making new rules or a new system work in real life"
+    ],
+    "ru_cue": "воплотить принятый план или решение в жизнь",
+    "plain": ["carry out", "put into practice", "bring in"],
+    "upgrades": [
+      {"plain": "Planning a new diet is easy; the hard part is [actually putting it into practice].",
+       "better": "Planning a new diet is easy; the hard part is *implementing* it."},
+      {"plain": "The school [brought in] a new marking scheme.",
+       "better": "The school *implemented* a new marking scheme."},
+      {"plain": "If we don't [carry out] the new safety rules properly, someone is going to get hurt.",
+       "better": "If we don't *implement* the new safety rules properly, someone is going to get hurt."}
+    ],
+    "collocations": [
+      {"chunk": "implement a policy", "frame": "___ a policy"},
+      {"chunk": "implement changes", "frame": "___ changes"},
+      {"chunk": "fully implement", "frame": "fully ___"}
+    ],
+    "ru_trap": "Russian 'реализовать план' tempts 'realise a plan'; English says *implement* a plan ('realise' means understand).",
+    "nuance": "The doing after a decision (policies, systems, changes); advocate argues for a plan, facilitate makes it easier.",
+    "personal": [
+      "What change have you planned but never actually implemented?",
+      "Has a manager or teacher you know ever implemented a rule that everyone hated?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'имплант': the dentist doesn't just plan it, he actually puts it in.",
+    "forms": ["implement", "implements", "implemented", "implementing"]
+  },
+  {
+    "word": "hit the nail on the head",
+    "intents": [
+      "say exactly what the real issue is",
+      "a friend sums up in one sentence what you've been trying to explain for an hour",
+      "find the perfectly accurate words for what's really going on"
+    ],
+    "ru_cue": "точно назвать самую суть дела",
+    "plain": ["be exactly right", "say exactly the right thing"],
+    "upgrades": [
+      {"plain": "You're [exactly right]: it's not the money, it's the hours.",
+       "better": "You've *hit the nail on the head*: it's not the money, it's the hours."},
+      {"plain": "When Mum said I was only angry because I was homesick, she [was completely right], and I burst into tears.",
+       "better": "When Mum said I was only angry because I was homesick, she *hit the nail on the head*, and I burst into tears."},
+      {"plain": "That question [got right to the real point].",
+       "better": "That question *hit the nail on the head*."}
+    ],
+    "collocations": [
+      {"chunk": "you've hit the nail on the head", "frame": "you've ___"},
+      {"chunk": "really hit the nail on the head", "frame": "really ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Praises an accurate remark or diagnosis; it's about saying the right thing, not about agreeing (that's being on the same page).",
+    "personal": [
+      "When did someone hit the nail on the head about a problem of yours?",
+      "Who in your family usually hits the nail on the head about other people?"
+    ],
+    "gesture": "Bring an imaginary hammer down in one clean, precise strike.",
+    "hook": "One clean hammer blow right on the nail's head: no bent nail, no sore thumb, like 'попасть в точку'.",
+    "forms": ["hit the nail on the head", "hits the nail on the head", "hitting the nail on the head"]
+  },
+  {
+    "word": "prioritise",
+    "intents": [
+      "decide what matters most and deal with that first",
+      "with exams next week, studying comes before going out",
+      "put your tasks in order of importance when you can't do everything"
+    ],
+    "ru_cue": "решить, что важнее всего, и заняться этим в первую очередь",
+    "plain": ["put first", "focus on first"],
+    "upgrades": [
+      {"plain": "With exams next week, I need to [put studying before] going out.",
+       "better": "With exams next week, I need to *prioritise* studying over going out."},
+      {"plain": "At A&E they [deal first with] the most urgent cases.",
+       "better": "At A&E they *prioritise* the most urgent cases."},
+      {"plain": "I said yes to everything and missed my daughter's school play; I really need to learn to [decide what matters most].",
+       "better": "I said yes to everything and missed my daughter's school play; I really need to learn to *prioritise*."}
+    ],
+    "collocations": [
+      {"chunk": "prioritise safety over speed", "frame": "___ safety over speed"},
+      {"chunk": "learn to prioritise", "frame": "learn to ___"},
+      {"chunk": "prioritise your tasks", "frame": "___ your tasks"}
+    ],
+    "ru_trap": "Russian 'расставить приоритеты' tempts 'place priorities'; English says 'set priorities', or simply *prioritise*.",
+    "nuance": "Decides the order (what comes first); allocate divides up how much time or money each thing gets.",
+    "personal": [
+      "What do you prioritise on a busy weekday morning?",
+      "Who do you know who always prioritises family over work?"
+    ],
+    "gesture": "",
+    "hook": "'Prior' means 'before': the most important job goes before all the rest.",
+    "forms": ["prioritise", "prioritises", "prioritised", "prioritising", "prioritize", "prioritizes", "prioritized", "prioritizing"]
+  },
+  {
+    "word": "advocate",
+    "intents": [
+      "speak out publicly in favour of an idea or a change",
+      "a doctor who keeps telling everyone to walk thirty minutes a day",
+      "argue for a cause and try to win other people over to it"
+    ],
+    "ru_cue": "открыто выступать за какую-то идею и убеждать в ней других",
+    "plain": ["support", "argue for", "recommend"],
+    "upgrades": [
+      {"plain": "My doctor [recommends] walking for thirty minutes a day.",
+       "better": "My doctor *advocates* walking for thirty minutes a day."},
+      {"plain": "She has long [argued for] shorter working weeks.",
+       "better": "She has long *advocated* shorter working weeks."},
+      {"plain": "At the family meeting I was the only one who [spoke up for] selling the house, and everyone glared at me.",
+       "better": "At the family meeting I was the only one who *advocated* selling the house, and everyone glared at me."}
+    ],
+    "collocations": [
+      {"chunk": "strongly advocate", "frame": "strongly ___"},
+      {"chunk": "advocate for change", "frame": "___ for change"},
+      {"chunk": "advocate the use of", "frame": "___ the use of"}
+    ],
+    "ru_trap": "Russian 'адвокат' suggests a court lawyer; the English verb just means to argue publicly for an idea, no court involved.",
+    "nuance": "More active and public than 'support'. The verb ends in /eɪt/; the noun (an advocate, a supporter) ends in /ət/.",
+    "personal": [
+      "What change in education would you advocate?",
+      "Who do you know who advocates a healthy lifestyle a little too loudly?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'адвокат': a lawyer stands up and argues for his client, just as you advocate an idea.",
+    "forms": ["advocate", "advocates", "advocated", "advocating"]
+  },
+  {
+    "word": "attribute",
+    "intents": [
+      "say what caused something, or who deserves the credit for it",
+      "your grandmother says her long life is all thanks to her daily walk",
+      "explain a result by naming the reason behind it"
+    ],
+    "ru_cue": "сказать, что причина чего-то именно в этом",
+    "plain": ["put down to", "say it's because of", "blame on"],
+    "upgrades": [
+      {"plain": "She says her good health [is thanks to] swimming every morning.",
+       "better": "She *attributes* her good health to swimming every morning."},
+      {"plain": "The delay was [put down to] bad weather.",
+       "better": "The delay was *attributed* to bad weather."},
+      {"plain": "I failed my driving test, and I [blame it on] nerves, not bad driving!",
+       "better": "I failed my driving test, and I *attribute* it to nerves, not bad driving!"}
+    ],
+    "collocations": [
+      {"chunk": "attribute it to", "frame": "___ it to"},
+      {"chunk": "can be attributed to", "frame": "the delay can be ___ to bad weather"},
+      {"chunk": "largely attributed to", "frame": "largely ___ to"}
+    ],
+    "ru_trap": "Russian 'объяснять чем-то' tempts 'attribute by' or 'attribute with'; English always says attribute X *to* Y.",
+    "nuance": "Names a cause or source, neutrally, unlike 'blame'. The noun (AT-tribute) means a quality and is stressed on the first syllable.",
+    "personal": [
+      "What do you attribute your progress in English to?",
+      "To what does someone in your family attribute their success?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'a tribute': at the awards, the winner pays a tribute to her coach and attributes the win to him.",
+    "forms": ["attribute", "attributes", "attributed", "attributing"]
+  },
+  {
+    "word": "exemplify",
+    "intents": [
+      "be the perfect, typical case of a quality or style",
+      "your grandmother, who feeds every visitor, is the perfect example of what kindness looks like",
+      "if someone asks what this style looks like, you just point to this one building"
+    ],
+    "ru_cue": "быть типичным или образцовым воплощением чего-то",
+    "plain": ["be a good example of", "show", "be typical of"],
+    "upgrades": [
+      {"plain": "That building [is a perfect example of] the style of the period.",
+       "better": "That building *exemplifies* the style of the period."},
+      {"plain": "Her career [shows] what hard work can do.",
+       "better": "Her career *exemplifies* what hard work can do."},
+      {"plain": "My boss lost the file and blamed me; it [sums up] everything that's wrong with that office.",
+       "better": "My boss lost the file and blamed me; it *exemplifies* everything that's wrong with that office."}
+    ],
+    "collocations": [
+      {"chunk": "perfectly exemplify", "frame": "perfectly ___"},
+      {"chunk": "best exemplified by", "frame": "best ___ by"}
+    ],
+    "ru_trap": "",
+    "nuance": "The thing itself is the model case (she exemplifies kindness); a speaker gives an example, the example exemplifies.",
+    "personal": [
+      "What habit of yours exemplifies your personality?",
+      "Who do you know who exemplifies patience?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'экземпляр': this one copy shows exactly what all the others are like.",
+    "forms": ["exemplify", "exemplifies", "exemplified", "exemplifying"]
+  },
+  {
+    "word": "out of the blue",
+    "intents": [
+      "suddenly, with no warning and no reason you could see",
+      "an old friend you haven't heard from in ten years rings you on a random Tuesday",
+      "happening from nowhere, at the moment you least expect it"
+    ],
+    "ru_cue": "совершенно неожиданно, словно из ниоткуда",
+    "plain": ["suddenly", "unexpectedly"],
+    "upgrades": [
+      {"plain": "She called me [unexpectedly] after ten years.",
+       "better": "She called me *out of the blue* after ten years."},
+      {"plain": "[Completely without warning], my boss told me I was being let go.",
+       "better": "*Out of the blue*, my boss told me I was being let go."},
+      {"plain": "The job offer came [from nowhere].",
+       "better": "The job offer came *out of the blue*."}
+    ],
+    "collocations": [
+      {"chunk": "came out of the blue", "frame": "came ___"},
+      {"chunk": "rang me completely out of the blue", "frame": "she rang me completely ___ after ten years"},
+      {"chunk": "called me out of the blue", "frame": "called me ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "About surprise timing with no warning; unprecedented means it has never happened before, not that it was unexpected.",
+    "personal": [
+      "What is the most surprising thing that has happened to you out of the blue?",
+      "Who has got in touch with you out of the blue after a long time?"
+    ],
+    "gesture": "",
+    "hook": "A clear blue sky, then a bolt of lightning from nowhere: 'как гром среди ясного неба'.",
+    "forms": ["out of the blue"]
+  }
+]

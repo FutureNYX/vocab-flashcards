@@ -1,0 +1,707 @@
+[
+  {
+    "word": "negligible",
+    "intents": [
+      "so small that it makes no real difference and you can safely ignore it",
+      "when a price goes up by one penny and nobody would even notice",
+      "describing a risk, effect or cost too tiny to worry about"
+    ],
+    "ru_cue": "настолько мало, что можно не принимать в расчет",
+    "plain": ["tiny", "very small", "hardly any"],
+    "upgrades": [
+      {"plain": "Don't panic about the scratch, the damage is [so small it doesn't matter].",
+       "better": "Don't panic about the scratch, the damage is *negligible*."},
+      {"plain": "I switched banks to save money, and the savings turned out to be [almost nothing]. I felt so silly.",
+       "better": "I switched banks to save money, and the savings turned out to be *negligible*. I felt so silly."},
+      {"plain": "The risk is [really tiny] if you follow the instructions.",
+       "better": "The risk is *negligible* if you follow the instructions."}
+    ],
+    "collocations": [
+      {"chunk": "have a negligible effect on", "frame": "have a ___ effect on"},
+      {"chunk": "the risk is negligible", "frame": "the risk is ___"},
+      {"chunk": "at negligible cost", "frame": "at ___ cost"}
+    ],
+    "ru_trap": "",
+    "nuance": "Stronger than 'small': small enough to ignore completely. The opposite of substantial.",
+    "personal": [
+      "What is one habit of yours whose effect on your health is probably negligible?",
+      "Who do you know who worries about risks that are negligible?"
+    ],
+    "gesture": "Pinch your thumb and finger until they almost touch, then flick the tiny thing away.",
+    "hook": "Sounds like 'neglect-able': so small you can simply neglect it.",
+    "forms": ["negligible"]
+  },
+  {
+    "word": "substantial",
+    "intents": [
+      "large enough in amount or size to really matter",
+      "when the discount is nearly half the price, not just a few pounds",
+      "describing a big sum of money, a big rise in prices or a filling meal"
+    ],
+    "ru_cue": "немалый по размеру или количеству, ощутимый",
+    "plain": ["big", "large", "a lot of"],
+    "upgrades": [
+      {"plain": "They offered me a [big] pay rise, so I'm staying.",
+       "better": "They offered me a *substantial* pay rise, so I'm staying."},
+      {"plain": "The house needs [a lot of] work before we can move in, and the baby is due in May.",
+       "better": "The house needs *substantial* work before we can move in, and the baby is due in May."},
+      {"plain": "The bank wants a [large] deposit before they'll give us the mortgage.",
+       "better": "The bank wants a *substantial* deposit before they'll give us the mortgage."}
+    ],
+    "collocations": [
+      {"chunk": "a substantial amount of", "frame": "a ___ amount of"},
+      {"chunk": "a substantial increase in", "frame": "a ___ increase in"},
+      {"chunk": "a substantial sum of money", "frame": "a ___ sum of money"}
+    ],
+    "ru_trap": "Russian 'существенный' often means 'important'; English substantial is mainly about size or amount (a substantial sum, not a substantial remark).",
+    "nuance": "Mainly about amount or size; for a deep emotional or intellectual effect, profound fits better.",
+    "personal": [
+      "What was the last substantial purchase you made, and was it worth it?",
+      "Who in your family has made a substantial change to their life recently?"
+    ],
+    "gesture": "",
+    "hook": "Think 'substance': something with real weight in your hands, a big solid portion.",
+    "forms": ["substantial"]
+  },
+  {
+    "word": "viable",
+    "intents": [
+      "describing a plan or business that could actually work and survive in real life, not just on paper",
+      "when you check whether a plan is possible with the money and time you really have",
+      "an option you could really go with, because it would succeed in practice"
+    ],
+    "ru_cue": "такой, что действительно может сработать на практике",
+    "plain": ["workable", "possible", "realistic"],
+    "upgrades": [
+      {"plain": "Cycling to work isn't [a realistic option] if there's nowhere safe to leave the bike.",
+       "better": "Cycling to work isn't a *viable* option if there's nowhere safe to leave the bike."},
+      {"plain": "We put all our savings into the café idea, but on that budget it was never [going to work].",
+       "better": "We put all our savings into the café idea, but on that budget it was never *viable*."},
+      {"plain": "We need a [workable] alternative to the ferry.",
+       "better": "We need a *viable* alternative to the ferry."}
+    ],
+    "collocations": [
+      {"chunk": "a viable option", "frame": "a ___ option"},
+      {"chunk": "a viable alternative to", "frame": "a ___ alternative to"},
+      {"chunk": "economically viable", "frame": "economically ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Asks 'will it work in practice?'; plausible asks 'does it sound true?', sustainable asks 'can it last?'",
+    "personal": [
+      "Is working from home a viable option in your job or studies?",
+      "Which friend of yours has a business idea that might actually be viable?"
+    ],
+    "gesture": "",
+    "hook": "Latin 'vita' (life), as in 'vital': a viable plan has a heartbeat, it can live in the real world.",
+    "forms": ["viable"]
+  },
+  {
+    "word": "cut corners",
+    "intents": [
+      "skip steps to save time or money, so the work ends up done badly",
+      "when builders use cheap materials to finish early and the roof leaks a year later",
+      "do a job the quick, careless way instead of doing it properly"
+    ],
+    "ru_cue": "экономить время или деньги в ущерб качеству",
+    "plain": ["do a rushed job", "skimp", "do it the cheap way"],
+    "upgrades": [
+      {"plain": "The builders [did a cheap, rushed job] on the roof, and it leaked within a year.",
+       "better": "The builders *cut corners* on the roof, and it leaked within a year."},
+      {"plain": "I [rushed through the boring parts] of my dissertation, and my supervisor spotted it straight away. So embarrassing.",
+       "better": "I *cut corners* on my dissertation, and my supervisor spotted it straight away. So embarrassing."},
+      {"plain": "Never [skip steps] when you're wiring a house.",
+       "better": "Never *cut corners* when you're wiring a house."}
+    ],
+    "collocations": [
+      {"chunk": "cut corners on safety", "frame": "___ on safety"},
+      {"chunk": "refuse to cut corners", "frame": "refuse to ___"},
+      {"chunk": "cut corners to save money", "frame": "___ to save money"}
+    ],
+    "ru_trap": "Russian 'срезать угол' is a literal shortcut on foot; English cut corners always means doing a job badly to save time or money.",
+    "nuance": "Always negative: quality is lost. Making a process simpler without losing quality is streamline.",
+    "personal": [
+      "When did you cut corners on something and regret it later?",
+      "Who do you know who never cuts corners, even on tiny jobs?"
+    ],
+    "gesture": "Slice your hand diagonally across the corner of the table, as if trimming it off.",
+    "hook": "Picture a builder snipping the corners off every brick to finish faster, and the wall starting to wobble.",
+    "forms": ["cut corners", "cuts corners", "cutting corners"]
+  },
+  {
+    "word": "sustainable",
+    "intents": [
+      "able to keep going for years without running out of energy, money or resources",
+      "a pace or habit you could keep up for a long time without burning out",
+      "farming or fishing that doesn't use up nature faster than it can recover"
+    ],
+    "ru_cue": "такой, что может продолжаться долго, не истощая силы и ресурсы",
+    "plain": ["long-lasting", "can last", "eco-friendly"],
+    "upgrades": [
+      {"plain": "Working seventy hours a week just isn't [something you can keep up]; my wife barely sees me.",
+       "better": "Working seventy hours a week just isn't *sustainable*; my wife barely sees me."},
+      {"plain": "The farm uses [eco-friendly] methods that keep the soil healthy.",
+       "better": "The farm uses *sustainable* methods that keep the soil healthy."},
+      {"plain": "The charity needs an income [that will last], not one big gift.",
+       "better": "The charity needs a *sustainable* income, not one big gift."}
+    ],
+    "collocations": [
+      {"chunk": "sustainable development", "frame": "___ development"},
+      {"chunk": "not sustainable in the long term", "frame": "not ___ in the long term"},
+      {"chunk": "from sustainable sources", "frame": "from ___ sources"}
+    ],
+    "ru_trap": "Russian 'устойчивое развитие' tempts 'stable development'; English says sustainable development.",
+    "nuance": "About lasting without using things up; viable is only about whether something works at all.",
+    "personal": [
+      "Honestly, is your current sleep schedule sustainable?",
+      "Who do you know who has found a sustainable way to stay fit?"
+    ],
+    "gesture": "",
+    "hook": "Like the sustain pedal on a piano: it keeps the note going and going without fading.",
+    "forms": ["sustainable"]
+  },
+  {
+    "word": "pragmatic",
+    "intents": [
+      "dealing with problems in a practical, realistic way rather than chasing the ideal",
+      "describing someone sensible who fixes what they can afford now and leaves the rest for next year",
+      "describing someone who asks 'what actually works?' instead of 'what's perfect?'"
+    ],
+    "ru_cue": "решающий задачи практично, без идеализма",
+    "plain": ["practical", "realistic", "sensible"],
+    "upgrades": [
+      {"plain": "Let's be [practical]: we can't afford a new kitchen, so we'll just paint it.",
+       "better": "Let's be *pragmatic*: we can't afford a new kitchen, so we'll just paint it."},
+      {"plain": "Mum wanted the perfect wedding, but Dad took a [realistic] view and booked the village hall.",
+       "better": "Mum wanted the perfect wedding, but Dad took a *pragmatic* view and booked the village hall."},
+      {"plain": "Her advice was [practical] rather than comforting.",
+       "better": "Her advice was *pragmatic* rather than comforting."}
+    ],
+    "collocations": [
+      {"chunk": "take a pragmatic approach", "frame": "take a ___ approach"},
+      {"chunk": "a pragmatic solution to", "frame": "a ___ solution to"},
+      {"chunk": "for purely pragmatic reasons", "frame": "for purely ___ reasons"}
+    ],
+    "ru_trap": "",
+    "nuance": "Usually a compliment in English (sensible, realistic), not 'cold and calculating'; the opposite is idealistic.",
+    "personal": [
+      "In which part of your life are you most pragmatic?",
+      "Who is the most pragmatic person in your family?"
+    ],
+    "gesture": "",
+    "hook": "Same root as Russian 'прагматик': the person who asks 'does it work?', not 'is it beautiful?'",
+    "forms": ["pragmatic"]
+  },
+  {
+    "word": "compelling",
+    "intents": [
+      "so convincing that you can't really argue against it",
+      "when the evidence is so strong that the jury agrees in ten minutes",
+      "a story so gripping that you have to know what happens next",
+      "describing a reason so strong and convincing that you feel you have to act on it"
+    ],
+    "ru_cue": "настолько убедительный или захватывающий, что невозможно отмахнуться",
+    "plain": ["convincing", "strong", "gripping"],
+    "upgrades": [
+      {"plain": "She made a [really convincing] case for the extra funding, and the boss said yes on the spot.",
+       "better": "She made a *compelling* case for the extra funding, and the boss said yes on the spot."},
+      {"plain": "I can't see any [good] reason to move house.",
+       "better": "I can't see any *compelling* reason to move house."},
+      {"plain": "The plot was so [gripping that I had to know what happened next] that I watched it all in one night and was a wreck at work the next day.",
+       "better": "The plot was so *compelling* that I watched it all in one night and was a wreck at work the next day."}
+    ],
+    "collocations": [
+      {"chunk": "make a compelling case for", "frame": "make a ___ case for"},
+      {"chunk": "no compelling reason to", "frame": "no ___ reason to"},
+      {"chunk": "compelling evidence", "frame": "___ evidence"}
+    ],
+    "ru_trap": "",
+    "nuance": "Stronger than plausible: plausible only sounds possible, compelling makes you believe it or keep watching.",
+    "personal": [
+      "What is the most compelling book or series you've ever finished in one go?",
+      "Who do you know who can make a compelling case for almost anything?"
+    ],
+    "gesture": "",
+    "hook": "Sounds like 'kom-PELmeni': a plate of пельмени so good you can't stop until it's empty.",
+    "forms": ["compelling"]
+  },
+  {
+    "word": "plausible",
+    "intents": [
+      "sounds believable and could be true, though you can't be sure",
+      "when someone's excuse sounds reasonable until you check the dates",
+      "an explanation that makes enough sense to accept for now"
+    ],
+    "ru_cue": "похоже на правду, хотя не доказано",
+    "plain": ["believable", "likely", "reasonable"],
+    "upgrades": [
+      {"plain": "His excuse sounded [believable] until we checked the dates.",
+       "better": "His excuse sounded *plausible* until we checked the dates."},
+      {"plain": "In the interview I struggled to give a [believable] reason for leaving my last job.",
+       "better": "In the interview I struggled to give a *plausible* reason for leaving my last job."},
+      {"plain": "That's a [reasonable] explanation for the noise.",
+       "better": "That's a *plausible* explanation for the noise."}
+    ],
+    "collocations": [
+      {"chunk": "a plausible explanation for", "frame": "a ___ explanation for"},
+      {"chunk": "it seems plausible that", "frame": "it seems ___ that"},
+      {"chunk": "a plausible excuse", "frame": "a ___ excuse"}
+    ],
+    "ru_trap": "",
+    "nuance": "Only says something sounds true, often with a hint of doubt; compelling means it actually convinces you.",
+    "personal": [
+      "What is the most plausible excuse you've ever used to get out of something?",
+      "Who do you know who can make any story sound plausible?"
+    ],
+    "gesture": "",
+    "hook": "Think 'applause-ible': a story good enough to get applause, even if it's made up.",
+    "forms": ["plausible"]
+  },
+  {
+    "word": "bite the bullet",
+    "intents": [
+      "finally make yourself do the unpleasant thing you've been putting off",
+      "when you stop delaying and book the dentist, even though you dread it",
+      "accept the pain of a hard decision because there's no way around it"
+    ],
+    "ru_cue": "собраться с духом и сделать неприятное, но неизбежное дело",
+    "plain": ["just do it", "make myself do it", "get it over with"],
+    "upgrades": [
+      {"plain": "I finally [made myself call] the dentist after three weeks of toothache.",
+       "better": "I finally *bit the bullet* and called the dentist after three weeks of toothache."},
+      {"plain": "We'll have to [accept the cost] and buy a new boiler before winter.",
+       "better": "We'll have to *bite the bullet* and buy a new boiler before winter."},
+      {"plain": "I [forced myself] to tell my parents I was dropping out, and my hands were shaking.",
+       "better": "I *bit the bullet* and told my parents I was dropping out, and my hands were shaking."}
+    ],
+    "collocations": [
+      {"chunk": "finally bit the bullet and", "frame": "finally ___ and"},
+      {"chunk": "had to bite the bullet and pay", "frame": "had to ___ and pay"},
+      {"chunk": "decided to bite the bullet", "frame": "decided to ___ and"}
+    ],
+    "ru_trap": "",
+    "nuance": "About forcing yourself through something unpleasant you've been avoiding, not about doing extra (go the extra mile).",
+    "personal": [
+      "What is something you need to bite the bullet and do this month?",
+      "When did someone you know bite the bullet and make a big change?"
+    ],
+    "gesture": "Clench your teeth, squeeze your eyes shut, then give one firm nod: go.",
+    "hook": "Picture a soldier biting on a bullet while the doctor works: it hurts, but he gets it over with.",
+    "forms": ["bite the bullet", "bites the bullet", "bit the bullet", "biting the bullet", "bitten the bullet"]
+  },
+  {
+    "word": "ambiguous",
+    "intents": [
+      "could be understood in more than one way, so you're not sure what's meant",
+      "when her reply 'maybe, we'll see' leaves you not knowing if she's coming",
+      "wording that two people can read and come away with different meanings"
+    ],
+    "ru_cue": "можно понять по-разному, и неясно, что имелось в виду",
+    "plain": ["unclear", "vague", "could mean two things"],
+    "upgrades": [
+      {"plain": "The instructions were [unclear], so half the class did the wrong task.",
+       "better": "The instructions were *ambiguous*, so half the class did the wrong task."},
+      {"plain": "He texted 'we need to talk', which was so [unclear] that I didn't sleep all night.",
+       "better": "He texted 'we need to talk', which was so *ambiguous* that I didn't sleep all night."},
+      {"plain": "The contract was [vague] about who pays for repairs.",
+       "better": "The contract was *ambiguous* about who pays for repairs."}
+    ],
+    "collocations": [
+      {"chunk": "deliberately ambiguous", "frame": "deliberately ___"},
+      {"chunk": "an ambiguous ending", "frame": "an ___ ending"},
+      {"chunk": "ambiguous wording", "frame": "___ wording"}
+    ],
+    "ru_trap": "Don't mix it up with ambitious (амбициозный); ambiguous means двусмысленный.",
+    "nuance": "About words or signals with more than one possible meaning; a situation where the rules are unclear is a grey area.",
+    "personal": [
+      "When did an ambiguous message from someone make you worry for nothing?",
+      "Who do you know who gives ambiguous answers when they don't want to commit?"
+    ],
+    "gesture": "",
+    "hook": "'Ambi' means both, as in ambidextrous: words that point both ways at once, like a sign with two arrows.",
+    "forms": ["ambiguous"]
+  },
+  {
+    "word": "disproportionate",
+    "intents": [
+      "far too big (or too small) compared with what it should match",
+      "when a teenager is grounded for a month for coming home ten minutes late",
+      "taking up an oversized, unfair share of the money, time or work"
+    ],
+    "ru_cue": "слишком большой по сравнению с тем, чему должен соответствовать",
+    "plain": ["too much", "over the top", "way bigger than it should be"],
+    "upgrades": [
+      {"plain": "Being grounded for a month for one late night felt [way over the top].",
+       "better": "Being grounded for a month for one late night felt *disproportionate*."},
+      {"plain": "Rent takes [a huge, unfair] share of my salary.",
+       "better": "Rent takes a *disproportionate* share of my salary."},
+      {"plain": "She does [far more than her fair share] of the housework, and she's had enough.",
+       "better": "She does a *disproportionate* amount of the housework, and she's had enough."}
+    ],
+    "collocations": [
+      {"chunk": "disproportionate to the offence", "frame": "___ to the offence"},
+      {"chunk": "a disproportionate share of", "frame": "a ___ share of"},
+      {"chunk": "a disproportionate amount of time", "frame": "a ___ amount of time"}
+    ],
+    "ru_trap": "Russian 'несоразмерный с...' tempts 'with'; English says disproportionate to something.",
+    "nuance": "One thing out of scale with another; a gap between groups (rich and poor) is a disparity.",
+    "personal": [
+      "When did you have a disproportionate reaction to something small?",
+      "Who do you know who spends a disproportionate amount of money on one hobby?"
+    ],
+    "gesture": "",
+    "hook": "Picture a tiny head on a giant body: everything out of proportion.",
+    "forms": ["disproportionate"]
+  },
+  {
+    "word": "disparate",
+    "intents": [
+      "so different from each other that they seem to have nothing in common",
+      "when a team is a farmer, a lawyer and a DJ who somehow have to work together",
+      "a random mix of unrelated things that don't fit into one picture"
+    ],
+    "ru_cue": "совершенно разные, ничем не связанные между собой",
+    "plain": ["very different", "completely unrelated", "mixed"],
+    "upgrades": [
+      {"plain": "The committee brought together [very different] groups who rarely agree.",
+       "better": "The committee brought together *disparate* groups who rarely agree."},
+      {"plain": "Her interests are [all over the place], from welding to ballet.",
+       "better": "Her interests are wildly *disparate*, from welding to ballet."},
+      {"plain": "At our wedding, our two [completely different] families had to share one table, and I was terrified.",
+       "better": "At our wedding, our two *disparate* families had to share one table, and I was terrified."}
+    ],
+    "collocations": [
+      {"chunk": "bring together disparate groups", "frame": "bring together ___ groups"},
+      {"chunk": "from disparate sources", "frame": "from ___ sources"},
+      {"chunk": "seemingly disparate", "frame": "link two seemingly ___ ideas"}
+    ],
+    "ru_trap": "",
+    "nuance": "Describes things that are unlike each other; disparity is an unfair gap between groups (pay, wealth).",
+    "personal": [
+      "Which two disparate interests of yours would surprise people?",
+      "Who do you know whose friends come from totally disparate backgrounds?"
+    ],
+    "gesture": "",
+    "hook": "'dis-PAR-ate' sounds like 'не пара' (not a pair): these things are no match for each other at all.",
+    "forms": ["disparate"]
+  },
+  {
+    "word": "unprecedented",
+    "intents": [
+      "has never happened before, with nothing like it in the past to compare",
+      "when even the oldest people in the village can't remember a summer this hot",
+      "a record level of something that breaks with all of history"
+    ],
+    "ru_cue": "такого раньше никогда не случалось",
+    "plain": ["never seen before", "record", "like never before"],
+    "upgrades": [
+      {"plain": "The heat this summer was [like nothing anyone had seen before].",
+       "better": "The heat this summer was *unprecedented*."},
+      {"plain": "After the advert, demand reached [record] levels and we sold out in a day.",
+       "better": "After the advert, demand reached *unprecedented* levels and we sold out in a day."},
+      {"plain": "She won by a [never-before-seen] margin, and her coach was in tears.",
+       "better": "She won by an *unprecedented* margin, and her coach was in tears."}
+    ],
+    "collocations": [
+      {"chunk": "reach unprecedented levels", "frame": "reach ___ levels"},
+      {"chunk": "on an unprecedented scale", "frame": "on an ___ scale"},
+      {"chunk": "in unprecedented times", "frame": "in ___ times"}
+    ],
+    "ru_trap": "",
+    "nuance": "Means there is no earlier example at all; something merely sudden or unexpected is out of the blue.",
+    "personal": [
+      "What was an unprecedented moment in your own life, a first of its kind?",
+      "Who do you know who achieved something unprecedented in their family?"
+    ],
+    "gesture": "",
+    "hook": "Think 'un-PRESIDENT-ed': something so new that no president before ever had to deal with it.",
+    "forms": ["unprecedented"]
+  },
+  {
+    "word": "robust",
+    "intents": [
+      "strong and solid enough to take rough treatment without breaking",
+      "boots that can survive years of hiking through mud and rocks",
+      "an argument, system or evidence that stands up to tough testing and criticism"
+    ],
+    "ru_cue": "крепкий, выдерживает нагрузки и критику",
+    "plain": ["strong", "sturdy", "solid"],
+    "upgrades": [
+      {"plain": "These boots are [really strong] and will last for years.",
+       "better": "These boots are *robust* and will last for years."},
+      {"plain": "The examiner tore into my thesis, but my argument was [strong enough] to survive it.",
+       "better": "The examiner tore into my thesis, but my argument was *robust* enough to survive it."},
+      {"plain": "My grandmother is in [really good] health at ninety.",
+       "better": "My grandmother is in *robust* health at ninety."}
+    ],
+    "collocations": [
+      {"chunk": "in robust health", "frame": "in ___ health"},
+      {"chunk": "a robust defence of", "frame": "a ___ defence of"},
+      {"chunk": "a robust system", "frame": "a ___ system that rarely fails"}
+    ],
+    "ru_trap": "",
+    "nuance": "Stresses not breaking under pressure; resilience is about bouncing back after something has gone wrong.",
+    "personal": [
+      "What is the most robust thing you own, something that has survived everything?",
+      "Who do you know who is in robust health despite their age?"
+    ],
+    "gesture": "Bang your fist firmly on the table, then flex your arm: solid.",
+    "hook": "'RO-bust' sounds like 'robot bust': a solid metal robot statue you can drop without a scratch.",
+    "forms": ["robust"]
+  },
+  {
+    "word": "get the hang of",
+    "intents": [
+      "start to be able to do something after a few clumsy tries",
+      "when the new software finally clicks after a week of fumbling",
+      "pick up how a skill works through practice, so it stops feeling awkward"
+    ],
+    "ru_cue": "после нескольких попыток начать справляться с чем-то",
+    "plain": ["learn how to do it", "get used to it", "figure it out"],
+    "upgrades": [
+      {"plain": "Driving felt impossible at first, but I [learned how to do it] in a month.",
+       "better": "Driving felt impossible at first, but I *got the hang of* it in a month."},
+      {"plain": "Don't worry, you'll [figure the machine out] by Friday.",
+       "better": "Don't worry, you'll *get the hang of* the machine by Friday."},
+      {"plain": "I nearly cried over my first three loaves, but now I've finally [learned how to make] bread.",
+       "better": "I nearly cried over my first three loaves, but now I've finally *got the hang of* making bread."}
+    ],
+    "collocations": [
+      {"chunk": "once you get the hang of it", "frame": "once you ___ it"},
+      {"chunk": "never quite got the hang of", "frame": "never quite ___"},
+      {"chunk": "starting to get the hang of it", "frame": "starting to ___ it"}
+    ],
+    "ru_trap": "",
+    "nuance": "The moment a skill starts to work for you; once it is fully automatic it has become second nature.",
+    "personal": [
+      "What is something you got the hang of recently that once felt impossible?",
+      "Who taught you something patiently until you got the hang of it?"
+    ],
+    "gesture": "",
+    "hook": "Picture hanging a picture: crooked five times, then on the sixth try you get the hang of it.",
+    "forms": ["get the hang of", "gets the hang of", "got the hang of", "getting the hang of", "gotten the hang of", "get the hang of it", "got the hang of it"]
+  },
+  {
+    "word": "profound",
+    "intents": [
+      "very deep and serious, reaching right into how someone thinks or lives",
+      "describing an effect that goes very deep, like losing a parent changing how someone sees everything",
+      "describing a very deep feeling, a heavy silence or a deep knowledge of a subject"
+    ],
+    "ru_cue": "настолько глубокий, что меняет человека или его жизнь",
+    "plain": ["deep", "big", "huge"],
+    "upgrades": [
+      {"plain": "Losing his dad had a [really deep] effect on the way he lives.",
+       "better": "Losing his dad had a *profound* effect on the way he lives."},
+      {"plain": "There was a [deep] silence after she read the letter out.",
+       "better": "There was a *profound* silence after she read the letter out."},
+      {"plain": "My grandmother has a [deep] knowledge of plants: she can name every weed in the garden.",
+       "better": "My grandmother has a *profound* knowledge of plants: she can name every weed in the garden."}
+    ],
+    "collocations": [
+      {"chunk": "have a profound effect on", "frame": "have a ___ effect on"},
+      {"chunk": "a profound understanding of", "frame": "a ___ understanding of"},
+      {"chunk": "a profound sense of loss", "frame": "a ___ sense of loss"}
+    ],
+    "ru_trap": "",
+    "nuance": "About depth, emotional or intellectual; for a large amount or size use substantial.",
+    "personal": [
+      "Which book or film had a profound effect on you?",
+      "Who has had the most profound influence on your life?"
+    ],
+    "gesture": "",
+    "hook": "'pro-FOUND': found at the very bottom of the deepest ocean.",
+    "forms": ["profound"]
+  },
+  {
+    "word": "inevitable",
+    "intents": [
+      "certain to happen sooner or later, whatever anyone does",
+      "when you have three small kids, so a messy house is bound to happen no matter how hard you try",
+      "the result everyone could see coming, with no way to avoid it"
+    ],
+    "ru_cue": "то, что обязательно случится, как ни старайся",
+    "plain": ["bound to happen", "unavoidable", "certain"],
+    "upgrades": [
+      {"plain": "With three kids in the house, a bit of mess is [bound to happen].",
+       "better": "With three kids in the house, a bit of mess is *inevitable*."},
+      {"plain": "After all those delays, missing the deadline was [unavoidable], but I still dreaded telling the client.",
+       "better": "After all those delays, missing the deadline was *inevitable*, but I still dreaded telling the client."},
+      {"plain": "It's [certain] that prices will go up again.",
+       "better": "It's *inevitable* that prices will go up again."}
+    ],
+    "collocations": [
+      {"chunk": "it is inevitable that", "frame": "it is ___ that"},
+      {"chunk": "the inevitable happened", "frame": "the ___ happened"},
+      {"chunk": "an inevitable part of", "frame": "an ___ part of growing up"}
+    ],
+    "ru_trap": "",
+    "nuance": "About one outcome that can't be avoided; something that happens every single time happens invariably.",
+    "personal": [
+      "What is one inevitable part of your week that you'd love to skip?",
+      "Who do you know who is always late, so that waiting for them is inevitable?"
+    ],
+    "gesture": "",
+    "hook": "'in-EVIT-able' sounds like 'can't-evict-able': you can't evict it, it moves in no matter what.",
+    "forms": ["inevitable"]
+  },
+  {
+    "word": "intricate",
+    "intents": [
+      "full of tiny details and parts that all link together",
+      "describing lace, a carving or a watch's gears that took hours of fine work",
+      "a plot or pattern so detailed that you need a second look to follow it"
+    ],
+    "ru_cue": "из множества мелких деталей, сложно переплетенных между собой",
+    "plain": ["detailed", "complicated", "fiddly"],
+    "upgrades": [
+      {"plain": "The cake was covered in [really detailed] patterns that must have taken hours.",
+       "better": "The cake was covered in *intricate* patterns that must have taken hours."},
+      {"plain": "The plot is [really complicated], so I had to read it twice.",
+       "better": "The plot is *intricate*, so I had to read it twice."},
+      {"plain": "My grandfather spent a whole winter on that [detailed] model ship, and the cat knocked it over in a second.",
+       "better": "My grandfather spent a whole winter on that *intricate* model ship, and the cat knocked it over in a second."}
+    ],
+    "collocations": [
+      {"chunk": "intricate patterns", "frame": "___ patterns"},
+      {"chunk": "an intricate design", "frame": "an ___ design"},
+      {"chunk": "in intricate detail", "frame": "in ___ detail"}
+    ],
+    "ru_trap": "Sounds like 'интрига' or intriguing, but intricate means detailed and complex, not interesting.",
+    "nuance": "Describes the thing (many fine connected parts); the careful person who makes it is meticulous.",
+    "personal": [
+      "What is the most intricate thing you've ever made or repaired?",
+      "Who do you know who loves intricate work, like knitting, models or puzzles?"
+    ],
+    "gesture": "With your fingertips, weave tiny loops in the air, as if threading fine lace.",
+    "hook": "'in-TRICK-ate': a magician's trick box packed with tiny hidden gears and springs.",
+    "forms": ["intricate"]
+  },
+  {
+    "word": "rudimentary",
+    "intents": [
+      "only the most basic level, with nothing more advanced added",
+      "when you can order food in a language and that's about it",
+      "simple and undeveloped, like a first version or a shelter with only the bare essentials"
+    ],
+    "ru_cue": "самый начальный уровень, только азы",
+    "plain": ["basic", "simple", "very basic"],
+    "upgrades": [
+      {"plain": "My Spanish is [pretty basic]: I can order food and not much else.",
+       "better": "My Spanish is *rudimentary*: I can order food and not much else."},
+      {"plain": "The cabin only had [very basic] plumbing, and my sister refused to stay.",
+       "better": "The cabin only had *rudimentary* plumbing, and my sister refused to stay."},
+      {"plain": "My [basic] first aid was enough until the ambulance arrived, and I've never been so relieved.",
+       "better": "My *rudimentary* first aid was enough until the ambulance arrived, and I've never been so relieved."}
+    ],
+    "collocations": [
+      {"chunk": "a rudimentary knowledge of", "frame": "a ___ knowledge of"},
+      {"chunk": "only rudimentary equipment", "frame": "only ___ equipment"},
+      {"chunk": "in a rudimentary form", "frame": "in a ___ form"}
+    ],
+    "ru_trap": "False friend: Russian 'рудиментарный' means a useless leftover; English rudimentary means basic, at beginner level.",
+    "nuance": "Stronger than 'basic': only the first, undeveloped stage, often a little crude.",
+    "personal": [
+      "What skill do you have only a rudimentary grasp of, but would like to improve?",
+      "Who do you know who built something impressive with rudimentary tools?"
+    ],
+    "gesture": "",
+    "hook": "'RUDE-imentary': a rude caveman with only the basics, a stick and a grunt.",
+    "forms": ["rudimentary"]
+  },
+  {
+    "word": "on the same page",
+    "intents": [
+      "share one understanding of the plan, so nobody works from different ideas",
+      "when you check that you and your partner both mean the cheap hotel before you book",
+      "both clear about what was agreed, so there are no mix-ups later"
+    ],
+    "ru_cue": "одинаково понимать план и договоренности",
+    "plain": ["in agreement", "agree", "understand each other"],
+    "upgrades": [
+      {"plain": "Before we start, let's make sure we [all understand the plan the same way].",
+       "better": "Before we start, let's make sure we're all *on the same page*."},
+      {"plain": "My husband and I [were working from two different plans] for the budget, and the wedding planner got caught in the middle.",
+       "better": "My husband and I weren't *on the same page* about the budget, and the wedding planner got caught in the middle."},
+      {"plain": "A quick call [made sure we all understood the plan the same way] before the meeting.",
+       "better": "A quick call got us all *on the same page* before the meeting."}
+    ],
+    "collocations": [
+      {"chunk": "make sure we're on the same page", "frame": "make sure we're ___"},
+      {"chunk": "get everyone on the same page", "frame": "get everyone ___"},
+      {"chunk": "not on the same page about", "frame": "not ___ about the budget"}
+    ],
+    "ru_trap": "",
+    "nuance": "About sharing one understanding of a plan or the facts; see eye to eye is about agreeing in opinion.",
+    "personal": [
+      "When did a mix-up happen because you weren't on the same page with someone?",
+      "Who are you usually on the same page with without even talking?"
+    ],
+    "gesture": "",
+    "hook": "Picture two people reading one book, both fingers on the very same line.",
+    "forms": ["on the same page"]
+  },
+  {
+    "word": "arduous",
+    "intents": [
+      "very hard and tiring, needing effort over a long time",
+      "a long climb or journey where you keep having to stop and rest",
+      "a task that drains your strength, like restoring an old boat over a whole winter"
+    ],
+    "ru_cue": "очень тяжелый и долгий, требующий сил до самого конца",
+    "plain": ["hard", "tough", "exhausting"],
+    "upgrades": [
+      {"plain": "The climb was [really hard], and we had to stop three times on the way up.",
+       "better": "The climb was *arduous*, and we had to stop three times on the way up."},
+      {"plain": "It was a [long, exhausting] journey across the moor in the rain.",
+       "better": "It was an *arduous* journey across the moor in the rain."},
+      {"plain": "After an [exhausting] year of night classes, I finally got my degree, and my mum cried.",
+       "better": "After an *arduous* year of night classes, I finally got my degree, and my mum cried."}
+    ],
+    "collocations": [
+      {"chunk": "an arduous journey", "frame": "an ___ journey"},
+      {"chunk": "an arduous task", "frame": "an ___ task"},
+      {"chunk": "long and arduous", "frame": "long and ___"}
+    ],
+    "ru_trap": "",
+    "nuance": "Hard because it takes long, tiring effort; tedious is boring, daunting is scary before you start.",
+    "personal": [
+      "What was the most arduous journey you've ever made?",
+      "Who do you know who went through an arduous process to get where they are?"
+    ],
+    "gesture": "Trudge on the spot, leaning forward, and wipe your forehead.",
+    "hook": "'ARD-uous' sounds like 'hard-uous', or Russian 'ад' (hell): a long climb through hell.",
+    "forms": ["arduous"]
+  },
+  {
+    "word": "futile",
+    "intents": [
+      "pointless, because it has no chance of working whatever you do",
+      "when you keep arguing with someone who never changes their mind",
+      "like chasing a bus that has already turned the corner"
+    ],
+    "ru_cue": "все равно ничего не выйдет, зря стараться",
+    "plain": ["pointless", "useless", "a waste of time"],
+    "upgrades": [
+      {"plain": "Arguing with him is [pointless]; he never changes his mind.",
+       "better": "Arguing with him is *futile*; he never changes his mind."},
+      {"plain": "We searched for her ring for three days, but it was [no use]. She was heartbroken.",
+       "better": "We searched for her ring for three days, but it was *futile*. She was heartbroken."},
+      {"plain": "It's [a waste of time] watering the garden in full sun.",
+       "better": "It's *futile* to water the garden in full sun."}
+    ],
+    "collocations": [
+      {"chunk": "a futile attempt to", "frame": "a ___ attempt to"},
+      {"chunk": "their efforts proved futile", "frame": "their efforts proved ___"},
+      {"chunk": "it is futile to", "frame": "it is ___ to"}
+    ],
+    "ru_trap": "",
+    "nuance": "Pointless because success is impossible; something merely boring or unimportant isn't futile.",
+    "personal": [
+      "What is something you once tried that turned out to be completely futile?",
+      "Who in your family keeps making futile attempts to change someone else?"
+    ],
+    "gesture": "",
+    "hook": "'FEW-tile': trying to hold back a flood with a few tiles. Pointless.",
+    "forms": ["futile"]
+  }
+]
