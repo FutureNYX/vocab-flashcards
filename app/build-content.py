@@ -80,4 +80,4 @@ for w_ in warns: print("warn ", w_)
 if errors:
     sys.exit(1)
 open(os.path.join(HERE, "content.js"), "w", encoding="utf-8", newline="\n").write(js)
-print(f"ok: {len(out['words'])} words, {len(glob_['families'])} families, {len(glob_['speak'])} speak prompts -> next/content.js")
+print(f"ok: {len(out['words'])} words, {len(glob_['families'])} families, {len(glob_['speak'])} speak prompts -> app/content.js")
