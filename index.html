@@ -679,7 +679,7 @@ function answerParts(){
 /* The rule under Got it is shown until it has been read a few times. */
 function ruleHTML(){
   S.ruleShown = (S.ruleShown || 0) + 1;
-  return S.ruleShown <= 12 ? '<div class="rule">Got it = you said it before tapping Show.</div>' : '';
+  return S.ruleShown <= 12 ? '<div class="rule">Got it = you said it before tapping Reveal answer.</div>' : '';
 }
 
 /* Hints are never shown on their own (11 Oct 2026, his call: on a bus, reading the cue can take
@@ -837,7 +837,7 @@ function renderSay(){
     body().insertAdjacentHTML('beforeend', `<div class="mic-wrap" id="micWrap"><span class="mic-lbl" id="micLbl"></span>` +
       `<button class="mic-round" id="mic" aria-label="Say it">${micIcon}</button></div>`);
   }
-  setActions(`<button class="btn-main" id="show">Show</button>`);
+  setActions(`<button class="btn-main" id="show">Reveal answer</button>`);
   shownAt = performance.now(); resumed = false;
   startHints();
   const mine = card;
@@ -855,7 +855,8 @@ function renderSay(){
     say(card.entry.word);
     if(card.ctx) card.ctx.filled = true;
     revealCard('', true);
-    setActions(`<button class="ans miss" id="no">Missed</button><button class="ans got" id="yes">Got it</button>`);
+    /* Got it on the left, Missed on the right under the thumb: after Reveal answer, Missed is the likely one */
+    setActions(`<button class="ans got" id="yes">Got it</button><button class="ans miss" id="no">Missed</button>`);
     $('no').onclick = () => answer({ok:false, latency, noSpeed, hints: hintsUsed}, 'miss');
     $('yes').onclick = () => answer({ok:true, latency, noSpeed, hints: hintsUsed}, 'got');
   };
@@ -895,9 +896,9 @@ function renderSay(){
         if(card !== mine || settled) return;
         mic(why === 'time' ? 'more' : 'idle');
         if(why === 'idle' && !said) status('Didn’t catch that. Tap the mic again.');
-        if(why === 'error' && !said) status('Couldn’t listen just now. Tap Show.');
+        if(why === 'error' && !said) status('Couldn’t listen just now. Tap Reveal answer.');
       }});
-    } catch(e){ micOff = true; if(card === mine){ const w = $('micWrap'); if(w) w.remove(); status('The microphone is off. Tap Show.'); } }
+    } catch(e){ micOff = true; if(card === mine){ const w = $('micWrap'); if(w) w.remove(); status('The microphone is off. Tap Reveal answer.'); } }
   };
   mic('idle');
   $('show').onclick = reveal;
