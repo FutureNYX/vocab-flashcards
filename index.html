@@ -178,7 +178,15 @@ textarea{ min-height:96px; resize:none; font-size:18px; }
 .ans{ flex:1; display:grid; place-items:center; font-size:19px; font-weight:650; border-radius:16px; }
 .ans.miss{ color:var(--light); opacity:.55; }
 .ans.got{ color:var(--light-top); text-shadow:0 0 6px rgba(235,203,130,.9), 0 0 20px rgba(235,203,130,.6), 0 0 40px rgba(235,203,130,.35); }
-/* say it out loud: the mic sits left of Show; listening, it glows like a lantern */
+/* say it out loud: "Say it" sits right of Show, where the thumb is, lit as the main way to answer;
+   listening, the mic glows like a lantern */
+.say-btn{ flex:1; display:flex; align-items:center; justify-content:center; gap:9px; border-radius:16px;
+  background:var(--light); color:var(--on-light); font-weight:700; font-size:17px; padding:16px;
+  box-shadow:0 0 18px rgba(235,203,130,.28); }
+.say-btn svg{ width:22px; height:22px; fill:var(--on-light); }
+.say-btn.on{ animation:micGlow 1.4s ease-in-out infinite; }
+.say-btn:disabled{ opacity:.6; }
+.say-tip{ font-size:12.5px; line-height:1.45; color:var(--ink-muted); text-align:center; padding:6px 20px 0; }
 .mic-btn{ flex:0 0 62px; display:grid; place-items:center; border-radius:50%; background:var(--card-2); border:1px solid var(--edge); }
 .mic-btn svg{ width:26px; height:26px; fill:var(--light); }
 .mic-btn.on{ background:var(--light); border-color:var(--light-top); box-shadow:0 0 18px rgba(235,203,130,.55); animation:micGlow 1.4s ease-in-out infinite; }
@@ -737,14 +745,16 @@ function heardVerdict(entry, text){
 
 function renderSay(){
   retrievalCard('<div class="heard" id="heard"></div>');
+  S.sayTip = (S.sayTip || 0) + 1;
+  if(!micOff && S.sayTip <= 20) body().insertAdjacentHTML('beforeend', '<div class="say-tip">Tap Say it and say the word out loud. Or say it to yourself and tap Show.</div>');
   shownAt = performance.now(); resumed = false;
   startHints();
   let heard = '', onset = 0, busy = false;
   const status = html => { const el = $('heard'); if(el) el.innerHTML = html; };
   const idle = () => {
     busy = false; status('');
-    setActions((micOff ? '' : `<button class="mic-btn" id="mic" aria-label="Say it">${micIcon}</button>`) +
-      `<button class="btn-main" id="show">Show</button>`);
+    setActions(`<button class="btn-main" id="show">Show</button>` +
+      (micOff ? '' : `<button class="say-btn" id="mic">${micIcon}Say it</button>`));
     $('show').onclick = reveal;
     if($('mic')) $('mic').onclick = record;
   };
@@ -760,17 +770,17 @@ function renderSay(){
   const record = async () => {
     if(busy) return; busy = true;
     const mine = card;
-    setActions(`<button class="mic-btn on" id="mic" aria-label="Stop">${micIcon}</button><button class="btn-main" id="show">Show</button>`);
+    setActions(`<button class="btn-main" id="show">Show</button><button class="say-btn on" id="mic">${micIcon}Listening</button>`);
     $('show').onclick = reveal;
     $('mic').onclick = () => Rec.cancel();
-    status('<span class="listening">Listening</span>');
+    status('');
     let got;
-    try{ got = await Rec.listen(() => { stopHints(); status('<span class="listening">Listening</span>'); }); }
+    try{ got = await Rec.listen(() => stopHints()); }
     catch(e){ micOff = true; if(card === mine){ idle(); status('The microphone is off. Tap Show.'); } return; }
     if(card !== mine) return;
     if(!got){ idle(); status('Didn’t catch that. Tap the mic again.'); return; }
     status('<span class="dots"><i></i><i></i><i></i></span>');
-    $('mic').classList.remove('on'); $('mic').disabled = true;
+    $('mic').classList.remove('on'); $('mic').disabled = true; $('mic').innerHTML = `${micIcon}Checking`;
     try{ heard = await transcribe(got.wav); }
     catch(e){ if(card === mine){ idle(); status('Couldn’t check that just now. Tap Show.'); } return; }
     if(card !== mine) return;
