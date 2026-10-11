@@ -664,15 +664,18 @@ function addWordFlies(){
 }
 function answerParts(){
   const e = card.entry;
+  /* The sentence sits on the answer screen itself, under the word, so "say it three times, then
+     the sentence" happens here, once. (A Tester card's cue already is the sentence, now filled.) */
   let sent = '';
-  if(card.answerSentence){
+  if(card.ctx) sent = '';
+  else if(card.answerSentence){
     sent = card.answerSentence.includes('*') ? marked(card.answerSentence)
       : esc(card.answerSentence).replace(new RegExp(esc(e.word), 'i'), m => `<b>${m}</b>`);
-  }
+  } else if(e.ex) sent = marked(e.ex);
   const top = `<div class="reveal" style="display:flex;flex-direction:column;gap:12px">${wordHTML(e.word)}` +
-    (card.stage <= 1 && e.ru ? `<div class="ru-line">${esc(e.ru)}</div>` : '') + `</div>`;
-  const more = (sent ? `<div class="sent">${sent}</div>` : '') +
-    (card.stage > 1 && e.ru ? `<div class="ru-line">${esc(e.ru)}</div>` : '') +
+    (card.stage <= 1 && e.ru ? `<div class="ru-line">${esc(e.ru)}</div>` : '') +
+    (sent ? `<div class="sent">${sent}</div>` : '') + `</div>`;
+  const more = (card.stage > 1 && e.ru ? `<div class="ru-line">${esc(e.ru)}</div>` : '') +
     (e.nuance ? `<div class="note">${marked(e.nuance)}</div>` : '') + clip(e.word);
   return {top, more};
 }
@@ -708,7 +711,8 @@ function retrievalCard(extra){
 }
 function revealCard(extraTop, withRule){
   const {top, more} = answerParts();
-  setCard(`<div class="stage">${cueHTML()}${extraTop || ''}${top}${more ? '<div class="more-cue">&#8964;</div>' : ''}</div>
+  setCard(`<div class="instr">Say it three times, then say the sentence.</div>
+    <div class="stage">${cueHTML()}${extraTop || ''}${top}${more ? '<div class="more-cue">&#8964;</div>' : ''}</div>
     ${withRule ? ruleHTML() : ''}
     ${more ? `<div class="more">${more}</div>` : ''}
     <button class="speak-btn" id="hear" aria-label="Hear it">${speakerIcon}</button>`, true);

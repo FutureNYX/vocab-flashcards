@@ -704,7 +704,9 @@ Session.prototype.answer = function(res){
       // not a lapse: it just shows recognition didn't carry over to producing it
       w.cueLog = {}; w.cueMiss = {};
       w.stage = STAGE.MEET; w.introDay = today; w.ivl = 0; w.due = today + 1; w.lastDay = today;
-      this.insertAt(0, {kind:'meet', word: card.word});
+      // practice follows straight away; no "meet it again" screen, which repeated the answer
+      // screen just seen (11 Oct 2026): the answer screen now asks to say it three times
+      this.queueLearn(card.word);
     } else {
       w.stage = (g >= 3 && w.oldIvlDays >= T.MAX_IVL_DAYS) ? STAGE.USE : STAGE.RECALL;
       w.introDay = today - T.FAMILY_HOLD_MAX;
