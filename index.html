@@ -205,6 +205,19 @@ textarea{ min-height:96px; resize:none; font-size:18px; }
 @keyframes micGlow{ 0%,100%{box-shadow:0 0 10px rgba(235,203,130,.35)} 50%{box-shadow:0 0 26px rgba(235,203,130,.75)} }
 .x-btn{ font-size:22px; padding:0 22px; }
 .ans.got[id="enter"]{ font-size:34px; }
+.tester-btn{ position:absolute; top:calc(var(--pad-top, 10px) + 10px); right:14px; z-index:6; cursor:pointer;
+  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  border:1px solid currentColor; border-radius:999px; padding:6px 11px; background:none; }
+.tester-btn.on{ color:var(--light); }
+#study.tester .left::after{ content:' · tester'; color:var(--light); }
+/* Tester: the answer as blanks, one line per word, each as long as its word; what you say fills them */
+.blanks{ display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-end; gap:10px 14px; margin-top:16px; }
+.blank{ display:inline-block; min-width:var(--w); height:38px; padding:0 4px; border-bottom:2px solid var(--muted);
+  font-family:var(--serif); font-variation-settings:'opsz' 36; font-size:26px; line-height:36px; color:var(--bright);
+  text-align:center; white-space:nowrap; transition:color .2s, border-color .2s; }
+.blank.filled{ animation:heardIn .25s ease-out; }
+.blank.ok{ color:var(--light); border-bottom-color:var(--light); text-shadow:0 0 12px rgba(235,203,130,.5); }
+.blank.miss{ color:var(--ink-muted); }
 .heard{ min-height:24px; margin-top:6px; font-size:15px; color:var(--ink-muted); text-align:center; }
 .heard .said{ font-family:var(--serif); font-variation-settings:'opsz' 36; font-size:26px; color:var(--bright); }
 .heard .said.flash{ display:inline-block; animation:heardIn .35s ease-out; }
@@ -330,6 +343,7 @@ textarea{ min-height:96px; resize:none; font-size:18px; }
   <div class="jar" id="jar" aria-hidden="true"><svg viewBox="0 0 110 150"><rect x="30" y="2" width="50" height="12" rx="3" fill="#3A4B3F"/><path d="M28 16h54c10 8 18 20 18 40v70c0 12-8 20-20 20H30c-12 0-20-8-20-20V56c0-20 8-32 18-40z" fill="rgba(200,230,210,.06)" stroke="rgba(220,235,225,.32)" stroke-width="2"/></svg></div>
   <div class="caught" id="caught"></div>
   <div class="tap" id="tap">Tap to start</div>
+  <button class="tester-btn" id="testerBtn" aria-pressed="false">Tester</button>
 </section>
 
 <section id="study" class="screen">
@@ -673,6 +687,35 @@ function revealCard(extraTop, withRule){
    on screen and it keeps listening (try again) until it's right, 20 s go by with nothing said, or Show.
    Speech goes to Deepgram nova-3 through the Voice Transcriber Worker's /live relay, so the Deepgram
    key never reaches this public page and the Worker caps the minutes. */
+/* Tester mode: new ideas he wants to try on his phone before they become the app. Its own key,
+   never the progress key. Now: Say cards show the answer as blanks (Hangman, but whole words). */
+let TESTER = false;
+try{ TESTER = localStorage.getItem('vocab.tester') === '1'; }catch(e){}
+function paintTester(){
+  const b = $('testerBtn'); if(b){ b.classList.toggle('on', TESTER); b.setAttribute('aria-pressed', TESTER); b.textContent = TESTER ? 'Tester on' : 'Tester'; }
+  $('study').classList.toggle('tester', TESTER);
+}
+$('testerBtn').addEventListener('click', ev => {
+  ev.stopPropagation(); TESTER = !TESTER;
+  try{ localStorage.setItem('vocab.tester', TESTER ? '1' : '0'); }catch(e){}
+  paintTester();
+});
+paintTester();
+/* One line per word of the answer, as long as that word, so a phrase shows how many words it has. */
+function blanksHTML(word){
+  return `<div class="blanks" id="blanks">${word.split(/\s+/).filter(Boolean)
+    .map(w => `<span class="blank" style="--w:calc(${Math.max(w.length, 2)} * .5em + 10px)"></span>`).join('')}</div>`;
+}
+/* Fill the lines with what was heard: the last words said, one per line. */
+function fillBlanks(words, cls){
+  const slots = [...document.querySelectorAll('#blanks .blank')]; if(!slots.length) return;
+  const ws = words.slice(-slots.length);
+  slots.forEach((s, i) => {
+    const t = ws[i] || '';
+    if(s.textContent !== t){ s.textContent = t; s.classList.remove('filled'); void s.offsetWidth; if(t) s.classList.add('filled'); }
+    s.classList.toggle('ok', cls === 'ok'); s.classList.toggle('miss', cls === 'miss');
+  });
+}
 const LIVE = 'wss://voice-transcriber.elijahrobineau.workers.dev/live?app=vocab';
 const micIcon = '<svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
 let micOff = !(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && (window.AudioContext || window.webkitAudioContext) && window.WebSocket);
@@ -750,7 +793,8 @@ function fitWords(el, text){
 
 function renderSay(){
   Rec.cancel(); // a mic left on by the last card
-  retrievalCard('<div class="heard" id="heard"></div>');
+  const blanks = TESTER && !micOff;
+  retrievalCard((blanks ? blanksHTML(card.entry.word) : '') + '<div class="heard" id="heard"></div>');
   S.sayTip = (S.sayTip || 0) + 1;
   if(!micOff){
     body().classList.add('has-mic');
@@ -787,16 +831,21 @@ function renderSay(){
     const r = heardVerdict(card.entry, text);
     if(r === 'right' || (r === 'close' && !interim)){
       settled = true; Rec.cancel(); stopHints();
-      status(`<span class="said live ok" id="words"></span><div class="well">Well done</div>`);
-      fitWords($('words'), text);
+      if(blanks){ fillBlanks(card.entry.word.split(/\s+/), 'ok'); status('<div class="well">Well done</div>'); }
+      else { status(`<span class="said live ok" id="words"></span><div class="well">Well done</div>`); fitWords($('words'), text); }
       const w = $('micWrap'); if(w) w.remove();
       setActions('');
       const res = {ok:true, close: r === 'close' || attempts > 0, latency: firstAt - shownAt, noSpeed: resumed, hints: hintsUsed, spoken: true};
       setTimeout(() => { if(card === mine) answer(res, 'got'); }, 1100);
       return;
     }
-    if(!$('words')) status('<span class="said live" id="words"></span><div class="again" id="again"></div>');
-    fitWords($('words'), text);
+    if(blanks){
+      fillBlanks(text.split(/\s+/).filter(Boolean), ended ? 'miss' : '');
+      if(!$('again')) status('<div class="again" id="again"></div>');
+    } else {
+      if(!$('words')) status('<span class="said live" id="words"></span><div class="again" id="again"></div>');
+      fitWords($('words'), text);
+    }
     const a = $('again');
     if(ended){ attempts++; if(a) a.textContent = 'Not that one. Say it again.'; }
     else if(a) a.textContent = '';
