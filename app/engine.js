@@ -500,7 +500,7 @@ Session.prototype.makeCard = function(item){
       card.instruction = 'Type it.';
     }
   }
-  if(item.kind === 'probe'){ card.typed = false; card.instruction = 'Still know it? Say it.'; card.placement = true; }
+  if(item.kind === 'probe'){ card.typed = false; card.instruction = 'Say the word.'; card.placement = true; }
   return card;
 };
 
