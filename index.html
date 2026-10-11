@@ -187,6 +187,16 @@ textarea{ min-height:96px; resize:none; font-size:18px; }
 .say-btn.on{ animation:micGlow 1.4s ease-in-out infinite; }
 .say-btn:disabled{ opacity:.6; }
 .say-tip{ font-size:12.5px; line-height:1.45; color:var(--ink-muted); text-align:center; padding:6px 20px 0; }
+/* the live mic sits on the card, bottom right under the thumb, with a word to its left */
+.card-body.has-mic{ padding-bottom:90px; }
+.mic-wrap{ position:absolute; right:16px; bottom:16px; display:flex; align-items:center; gap:12px; }
+.mic-lbl{ font-size:14px; font-weight:600; color:var(--ink-muted); }
+.mic-round{ width:60px; height:60px; border-radius:50%; display:grid; place-items:center; background:var(--light);
+  box-shadow:0 0 16px rgba(235,203,130,.3); }
+.mic-round svg{ width:26px; height:26px; fill:var(--on-light); }
+.mic-wrap.on .mic-lbl{ color:var(--light); }
+.mic-wrap.on .mic-round{ animation:micGlow 1.4s ease-in-out infinite; }
+.heard .said.live{ display:block; white-space:nowrap; overflow:hidden; max-width:100%; }
 .mic-btn{ flex:0 0 62px; display:grid; place-items:center; border-radius:50%; background:var(--card-2); border:1px solid var(--edge); }
 .mic-btn svg{ width:26px; height:26px; fill:var(--light); }
 .mic-btn.on{ background:var(--light); border-color:var(--light-top); box-shadow:0 0 18px rgba(235,203,130,.55); animation:micGlow 1.4s ease-in-out infinite; }
@@ -658,122 +668,66 @@ function revealCard(extraTop, withRule){
   addWordFlies();
 }
 
-/* Say cards can be answered out loud: tap the mic once and it keeps listening.
-   Every word you say flashes on the card; the right one gets "Well done" and the
-   next card, so you just keep trying until it is right (or tap Show).
-   Each bit goes to the Voice Transcriber Worker (Gemini Flash-Lite), shared by all of Elijah's apps. */
-const TRANSCRIBE = 'https://voice-transcriber.elijahrobineau.workers.dev/transcribe?app=vocab&mode=word';
+/* Say cards can be answered out loud, live: tap the round mic on the card and your words appear on
+   the card as you say them. The right word gets "Well done" and the next card; anything else stays
+   on screen and it keeps listening (try again) until it's right, 20 s go by with nothing said, or Show.
+   Speech goes to Deepgram nova-3 through the Voice Transcriber Worker's /live relay, so the Deepgram
+   key never reaches this public page and the Worker caps the minutes. */
+const LIVE = 'wss://voice-transcriber.elijahrobineau.workers.dev/live?app=vocab';
 const micIcon = '<svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
-let micOff = !(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && (window.AudioContext || window.webkitAudioContext));
+let micOff = !(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && (window.AudioContext || window.webkitAudioContext) && window.WebSocket);
 
 const Rec = (() => {
-  let ctx = null, live = null;
-  /* Listens until speech has started and then stopped for a moment.
-     Resolves {wav, onset} (onset = performance.now() at first speech), or null if nothing was said. */
-  async function listen(onSpeech){
+  let ctx = null, stop = null;
+  /* Streams the mic as 16 kHz 16-bit PCM. onWords(finalText, interimText, ended) on every result
+     (ended = the speaker paused); onEnd(why) once: 'cancel' | 'idle' | 'time' | 'error'. */
+  async function live({onWords, onEnd}){
     if(!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
     if(ctx.state === 'suspended') await ctx.resume();
     const stream = await navigator.mediaDevices.getUserMedia({audio: {echoCancellation: true, noiseSuppression: true, autoGainControl: true}});
+    const ws = new WebSocket(LIVE); ws.binaryType = 'arraybuffer';
     const src = ctx.createMediaStreamSource(stream), proc = ctx.createScriptProcessor(2048, 1, 1);
-    const rate = ctx.sampleRate, bufMs = 2048 / rate * 1000, t0 = performance.now();
-    const pre = [], kept = [];
-    let floor = 0, nFloor = 0, loud = 0, quiet = 0, onset = 0, done = false;
-    return new Promise(resolve => {
-      const finish = ok => {
-        if(done) return; done = true; live = null;
-        proc.disconnect(); src.disconnect(); stream.getTracks().forEach(t => t.stop());
-        resolve(ok && kept.length ? {wav: toWav(kept, rate), onset} : null);
-      };
-      live = () => finish(false);
-      proc.onaudioprocess = ev => {
-        const d = new Float32Array(ev.inputBuffer.getChannelData(0));
-        let s = 0; for(let i = 0; i < d.length; i++) s += d[i] * d[i];
-        const rms = Math.sqrt(s / d.length), elapsed = performance.now() - t0;
-        if(elapsed < 250){ floor += rms; nFloor++; }
-        const thr = Math.max(0.012, (nFloor ? floor / nFloor : 0) * 3);
-        if(!onset){
-          pre.push(d); if(pre.length > Math.ceil(400 / bufMs)) pre.shift();
-          loud = rms > thr && elapsed >= 250 ? loud + 1 : 0;
-          if(loud * bufMs >= 90){ onset = performance.now() - loud * bufMs; kept.push(...pre); onSpeech && onSpeech(); }
-          else if(elapsed > 6000) finish(false);
-        } else {
-          kept.push(d);
-          quiet = rms > thr * 0.8 ? 0 : quiet + 1;
-          if(quiet * bufMs >= 850 || performance.now() - onset > 6000) finish(true);
-        }
-      };
-      src.connect(proc); proc.connect(ctx.destination);
-    });
-  }
-  /* 16 kHz mono 16-bit WAV: small enough to send in a moment */
-  function toWav(chunks, rate){
-    const len = chunks.reduce((n, c) => n + c.length, 0), all = new Float32Array(len);
-    let o = 0; chunks.forEach(c => { all.set(c, o); o += c.length; });
-    const step = rate / 16000, n = Math.floor(len / step), buf = new ArrayBuffer(44 + n * 2), v = new DataView(buf);
-    const str = (p, s) => { for(let i = 0; i < s.length; i++) v.setUint8(p + i, s.charCodeAt(i)); };
-    str(0, 'RIFF'); v.setUint32(4, 36 + n * 2, true); str(8, 'WAVEfmt '); v.setUint32(16, 16, true);
-    v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, 16000, true); v.setUint32(28, 32000, true);
-    v.setUint16(32, 2, true); v.setUint16(34, 16, true); str(36, 'data'); v.setUint32(40, n * 2, true);
-    for(let i = 0; i < n; i++){
-      let s = 0, a = Math.floor(i * step), b = Math.max(a + 1, Math.floor((i + 1) * step));
-      for(let j = a; j < b; j++) s += all[j];
-      const x = Math.max(-1, Math.min(1, s / (b - a)));
-      v.setInt16(44 + i * 2, x < 0 ? x * 0x8000 : x * 0x7FFF, true);
-    }
-    return new Blob([buf], {type: 'audio/wav'});
-  }
-  /* Keeps listening: each time something is said and followed by a short pause, onSegment(wav, onset)
-     gets that bit while listening carries on. Ends on cancel() ('cancel') or after 20 s of nothing said ('idle'). */
-  async function listenOn({onSpeech, onSegment, onEnd}){
-    if(!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
-    if(ctx.state === 'suspended') await ctx.resume();
-    const stream = await navigator.mediaDevices.getUserMedia({audio: {echoCancellation: true, noiseSuppression: true, autoGainControl: true}});
-    const src = ctx.createMediaStreamSource(stream), proc = ctx.createScriptProcessor(2048, 1, 1);
-    const rate = ctx.sampleRate, bufMs = 2048 / rate * 1000, t0 = performance.now();
-    let pre = [], kept = [], floor = 0, nFloor = 0, loud = 0, quiet = 0, onset = 0, lastActive = t0, done = false;
+    const step = ctx.sampleRate / 16000;
+    let done = false, finals = '', lastWords = performance.now(), pending = [];
     const finish = why => {
-      if(done) return; done = true; live = null;
-      proc.disconnect(); src.disconnect(); stream.getTracks().forEach(t => t.stop());
+      if(done) return; done = true; stop = null;
+      clearInterval(watch);
+      try{ proc.disconnect(); src.disconnect(); }catch(e){}
+      stream.getTracks().forEach(t => t.stop());
+      try{ if(ws.readyState === 1) ws.send('stop'); ws.close(); }catch(e){}
       onEnd && onEnd(why);
     };
-    live = () => finish('cancel');
+    stop = () => finish('cancel');
+    const watch = setInterval(() => { if(performance.now() - lastWords > 20000) finish('idle'); }, 1000);
     proc.onaudioprocess = ev => {
       if(done) return;
-      const d = new Float32Array(ev.inputBuffer.getChannelData(0));
-      let s = 0; for(let i = 0; i < d.length; i++) s += d[i] * d[i];
-      const rms = Math.sqrt(s / d.length), now = performance.now(), elapsed = now - t0;
-      if(elapsed < 250){ floor += rms; nFloor++; }
-      const thr = Math.max(0.012, (nFloor ? floor / nFloor : 0) * 3);
-      if(!onset){
-        pre.push(d); if(pre.length > Math.ceil(400 / bufMs)) pre.shift();
-        loud = rms > thr && elapsed >= 250 ? loud + 1 : 0;
-        if(loud * bufMs >= 90){ onset = now - loud * bufMs; kept = pre; pre = []; onSpeech && onSpeech(); }
-        else if(now - lastActive > 20000) finish('idle');
-      } else {
-        kept.push(d);
-        quiet = rms > thr * 0.8 ? 0 : quiet + 1;
-        if(quiet * bufMs >= 700 || now - onset > 6000){
-          const wav = toWav(kept, rate), at = onset;
-          kept = []; onset = 0; quiet = 0; loud = 0; lastActive = now;
-          onSegment(wav, at);
-        }
+      const d = ev.inputBuffer.getChannelData(0), n = Math.floor(d.length / step), out = new Int16Array(n);
+      for(let i = 0; i < n; i++){
+        let s = 0; const a = Math.floor(i * step), b = Math.max(a + 1, Math.floor((i + 1) * step));
+        for(let j = a; j < b; j++) s += d[j];
+        const x = Math.max(-1, Math.min(1, s / (b - a)));
+        out[i] = x < 0 ? x * 0x8000 : x * 0x7FFF;
       }
+      if(ws.readyState === 1){ pending.forEach(p => ws.send(p)); pending = []; ws.send(out.buffer); }
+      else if(ws.readyState === 0){ pending.push(out.buffer); if(pending.length > 80) pending.shift(); } // while it connects
     };
+    ws.onmessage = e => {
+      let j; try{ j = JSON.parse(e.data); }catch(err){ return; }
+      if(j.type !== 'Results' || done) return;
+      const t = ((((j.channel || {}).alternatives) || [])[0] || {}).transcript || '';
+      if(t) lastWords = performance.now();
+      if(j.is_final){
+        if(t) finals = (finals + ' ' + t).trim();
+        onWords(finals, '', !!j.speech_final);
+        if(j.speech_final) finals = '';
+      } else onWords(finals, t, false);
+    };
+    ws.onclose = ev => finish(ev.reason === 'time' ? 'time' : 'error');
     src.connect(proc); proc.connect(ctx.destination);
   }
-  return {listen, listenOn, cancel: () => live && live()};
+  return {live, cancel: () => stop && stop()};
 })();
 
-async function transcribe(wav){
-  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 12000);
-  try{
-    const r = await fetch(TRANSCRIBE, {method: 'POST', headers: {'Content-Type': 'audio/wav'}, body: wav, signal: ctl.signal});
-    const j = await r.json().catch(() => ({}));
-    if(r.status === 503 || r.status === 403) micOff = true;
-    if(!r.ok) throw new Error(j.error || r.status);
-    return String(j.text || '').trim();
-  } finally { clearTimeout(t); }
-}
 /* "it was arduous" still counts: try the whole answer, then every run of its words */
 function heardVerdict(entry, text){
   let best = E.checkTyped(entry, text);
@@ -786,23 +740,34 @@ function heardVerdict(entry, text){
     }
   return best;
 }
+/* Live words on one line: when a phrase runs past the edge, the oldest words drop off the front. */
+function fitWords(el, text){
+  if(!el) return;
+  const ws = text.split(/\s+/).filter(Boolean);
+  el.textContent = ws.join(' ');
+  while(ws.length > 1 && el.scrollWidth > el.clientWidth){ ws.shift(); el.textContent = '… ' + ws.join(' '); }
+}
 
 function renderSay(){
   Rec.cancel(); // a mic left on by the last card
   retrievalCard('<div class="heard" id="heard"></div>');
   S.sayTip = (S.sayTip || 0) + 1;
-  if(!micOff && S.sayTip <= 20) body().insertAdjacentHTML('beforeend', '<div class="say-tip">Tap Say it and say the word. Keep trying until it’s right, or tap Show.</div>');
+  if(!micOff){
+    body().classList.add('has-mic');
+    body().insertAdjacentHTML('beforeend', `<div class="mic-wrap" id="micWrap"><span class="mic-lbl" id="micLbl"></span>` +
+      `<button class="mic-round" id="mic" aria-label="Say it">${micIcon}</button></div>`);
+  }
+  setActions(`<button class="btn-main" id="show">Show</button>`);
   shownAt = performance.now(); resumed = false;
   startHints();
   const mine = card;
-  let busy = false, settled = false, attempts = 0, seq = 0, shownSeq = 0, waiting = 0;
+  let on = false, settled = false, attempts = 0, firstAt = 0, said = false;
   const status = html => { const el = $('heard'); if(el) el.innerHTML = html; };
-  const idle = () => {
-    busy = false;
-    setActions(`<button class="btn-main" id="show">Show</button>` +
-      (micOff ? '' : `<button class="say-btn" id="mic">${micIcon}Say it</button>`));
-    $('show').onclick = reveal;
-    if($('mic')) $('mic').onclick = record;
+  const mic = state => {
+    on = state === 'on';
+    const w = $('micWrap'), l = $('micLbl'); if(!w) return;
+    w.classList.toggle('on', on);
+    l.textContent = on ? 'Listening' : state === 'more' ? 'Tap to keep going' : S.sayTip <= 20 ? 'Tap to say it' : 'Say it';
   };
   const reveal = () => {
     settled = true; Rec.cancel(); stopHints();
@@ -813,50 +778,44 @@ function renderSay(){
     $('no').onclick = () => answer({ok:false, latency, noSpeed, hints: hintsUsed}, 'miss');
     $('yes').onclick = () => answer({ok:true, latency, noSpeed, hints: hintsUsed}, 'got');
   };
-  // One thing said: show it the moment it is back. The right word ends the card.
-  const heardBit = async (wav, at) => {
-    const my = ++seq;
-    if(!shownSeq) status('<span class="dots"><i></i><i></i><i></i></span>');
-    waiting++;
-    let text = '';
-    try{ text = await transcribe(wav); }
-    catch(e){ if(card === mine && !settled && !shownSeq) status('Couldn’t check that just now. Say it again, or tap Show.'); return; }
-    finally{ waiting--; }
+  const onWords = (finals, interim, ended) => {
     if(card !== mine || settled) return;
-    if(!text){ if(!shownSeq && !waiting) status(''); return; }
-    if(my < shownSeq) return; // an older bit came back after a newer one
-    shownSeq = my;
+    const text = (finals + ' ' + interim).trim();
+    if(!text) return;
+    if(!firstAt){ firstAt = performance.now(); stopHints(); }
+    said = true;
     const r = heardVerdict(card.entry, text);
-    if(r !== 'wrong'){
+    if(r === 'right' || (r === 'close' && !interim)){
       settled = true; Rec.cancel(); stopHints();
-      status(`<span class="said ok flash">“${esc(text)}”</span><div class="well">Well done</div>`);
+      status(`<span class="said live ok" id="words"></span><div class="well">Well done</div>`);
+      fitWords($('words'), text);
+      const w = $('micWrap'); if(w) w.remove();
       setActions('');
-      const res = {ok:true, close: r === 'close' || attempts > 0, latency: at - shownAt, noSpeed: resumed, hints: hintsUsed, spoken: true};
+      const res = {ok:true, close: r === 'close' || attempts > 0, latency: firstAt - shownAt, noSpeed: resumed, hints: hintsUsed, spoken: true};
       setTimeout(() => { if(card === mine) answer(res, 'got'); }, 1100);
       return;
     }
-    attempts++;
-    status(`<span class="said flash">“${esc(text)}”</span><div class="again">Not that one. Say it again.</div>`);
+    if(!$('words')) status('<span class="said live" id="words"></span><div class="again" id="again"></div>');
+    fitWords($('words'), text);
+    const a = $('again');
+    if(ended){ attempts++; if(a) a.textContent = 'Not that one. Say it again.'; }
+    else if(a) a.textContent = '';
   };
-  const record = async () => {
-    if(busy) return; busy = true;
-    setActions(`<button class="btn-main" id="show">Show</button><button class="say-btn on" id="mic">${micIcon}Listening</button>`);
-    $('show').onclick = reveal;
-    $('mic').onclick = () => Rec.cancel();
-    if(!shownSeq) status('');
+  const start = async () => {
+    if(on){ Rec.cancel(); return; }
+    mic('on');
     try{
-      await Rec.listenOn({
-        onSpeech: () => stopHints(),
-        onSegment: heardBit,
-        onEnd: why => {
-          if(card !== mine || settled) return;
-          idle();
-          if(why === 'idle' && !shownSeq) status('Didn’t catch that. Tap the mic again.');
-        },
-      });
-    } catch(e){ micOff = true; if(card === mine){ idle(); status('The microphone is off. Tap Show.'); } }
+      await Rec.live({onWords, onEnd: why => {
+        if(card !== mine || settled) return;
+        mic(why === 'time' ? 'more' : 'idle');
+        if(why === 'idle' && !said) status('Didn’t catch that. Tap the mic again.');
+        if(why === 'error' && !said) status('Couldn’t listen just now. Tap Show.');
+      }});
+    } catch(e){ micOff = true; if(card === mine){ const w = $('micWrap'); if(w) w.remove(); status('The microphone is off. Tap Show.'); } }
   };
-  idle();
+  mic('idle');
+  $('show').onclick = reveal;
+  if($('mic')) $('mic').onclick = start;
 }
 
 function renderTyped(){
