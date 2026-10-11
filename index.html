@@ -222,7 +222,8 @@ textarea{ min-height:96px; resize:none; font-size:18px; }
 .blank.filled{ animation:heardIn .25s ease-out; }
 /* Tester: the front as a sentence with the word missing, the meaning underneath */
 .ctx-sent .blank{ font-size:inherit; height:auto; line-height:1.15; margin:0 2px; vertical-align:baseline; }
-.ctx-def{ font-size:16px; line-height:1.45; color:var(--ink-muted); }
+.ctx-def{ font-size:16px; line-height:1.45; color:var(--ink); }
+.cue.ctx-sent{ font-size:20px; line-height:1.5; }
 .answered .ctx-def{ display:none; }
 .blank.ok{ color:var(--light); border-bottom-color:var(--light); text-shadow:0 0 12px rgba(235,203,130,.5); }
 .blank.miss{ color:var(--ink-muted); }
@@ -642,8 +643,9 @@ function ctxHTML(c, def, filled){
   const slots = c.form.split(/\s+/).map(w => filled
     ? `<span class="blank ok" style="--w:calc(${Math.max(w.length, 2)} * .5em + 10px)">${esc(w)}</span>`
     : `<span class="blank" style="--w:calc(${Math.max(w.length, 2)} * .5em + 10px)"></span>`).join(' ');
-  return `<div class="cue ctx-sent">${esc(c.pre)}<span class="blanks-in" id="blanks">${slots}</span>${esc(c.post)}</div>` +
-    `<div class="ctx-def">${esc(def)}</div>`;
+  /* the meaning first, small, then the sentence: read what it means, then meet it in use */
+  return `<div class="ctx-def">${esc(def)}</div>` +
+    `<div class="cue ctx-sent">${esc(c.pre)}<span class="blanks-in" id="blanks">${slots}</span>${esc(c.post)}</div>`;
 }
 function cueHTML(){
   const t = card.type;
