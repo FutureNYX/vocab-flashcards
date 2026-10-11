@@ -128,6 +128,10 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
 .hint{ min-height:30px; font-family:var(--serif); font-size:24px; letter-spacing:.14em; color:var(--light);
   text-shadow:0 0 12px rgba(235,203,130,.45); }
 .hint span{ animation:ignite .9s ease-out; display:inline-block; }
+/* the Hint button: only offered once you have been on a card a while, never pressed for you */
+.hint-btn{ display:block; margin:8px 0 0; font-family:var(--sans); font-size:13px; font-weight:600; letter-spacing:.06em;
+  color:var(--light); text-shadow:none; background:none; border:1px solid rgba(235,203,130,.45); border-radius:999px;
+  padding:6px 16px; cursor:pointer; animation:heardIn .4s ease-out; }
 
 /* the answer: the cue steps back, the word lights up */
 .answered .cue{ font-size:18px; color:var(--ink-muted); line-height:1.4; }
@@ -654,15 +658,22 @@ function ruleHTML(){
   return S.ruleShown <= 12 ? '<div class="rule">Got it = you said it before tapping Show.</div>' : '';
 }
 
-/* Hints are never asked for: they light up on their own when you are slow,
-   timed against your own speed on this kind of card. */
+/* Hints are never shown on their own (11 Oct 2026, his call: on a bus, reading the cue can take
+   longer than thinking). After a while a Hint button appears; each tap gives the next, smallest
+   step of the ladder (first sound, then more), and every hint taken lowers the grade as before. */
 let hintTimers = [], resumed = false;
 function startHints(){
   stopHints();
-  sess.hintTimes(card).forEach((ms, i) => hintTimers.push(setTimeout(() => {
-    hintsUsed = i + 1;
-    const el = $('hint'); if(el) el.innerHTML = `<span>${esc(card.hints[i])}</span>`;
-  }, ms)));
+  if(!card.hints || !card.hints.length) return;
+  const first = sess.hintTimes(card)[0] || 5000;
+  hintTimers.push(setTimeout(() => offerHint(), Math.max(7000, first * 1.3)));
+}
+function offerHint(shown){
+  const el = $('hint'); if(!el) return;
+  const more = hintsUsed < card.hints.length;
+  el.innerHTML = (shown ? `<span>${esc(shown)}</span>` : '') +
+    (more ? `<button class="hint-btn" id="hintBtn">${hintsUsed ? 'Another hint' : 'Hint'}</button>` : '');
+  if(more) $('hintBtn').onclick = ev => { ev.stopPropagation(); const i = hintsUsed++; offerHint(card.hints[i]); };
 }
 function stopHints(){ hintTimers.forEach(clearTimeout); hintTimers = []; }
 document.addEventListener('visibilitychange', () => { if(document.hidden){ resumed = true; Rec.cancel(); } });
