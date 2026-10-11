@@ -220,6 +220,10 @@ textarea{ min-height:96px; resize:none; font-size:18px; }
   font-family:var(--serif); font-variation-settings:'opsz' 36; font-size:26px; line-height:36px; color:var(--bright);
   text-align:center; white-space:nowrap; transition:color .2s, border-color .2s; }
 .blank.filled{ animation:heardIn .25s ease-out; }
+/* Tester: the front as a sentence with the word missing, the meaning underneath */
+.ctx-sent .blank{ font-size:inherit; height:auto; line-height:1.15; margin:0 2px; vertical-align:baseline; }
+.ctx-def{ font-size:16px; line-height:1.45; color:var(--ink-muted); }
+.answered .ctx-def{ display:none; }
 .blank.ok{ color:var(--light); border-bottom-color:var(--light); text-shadow:0 0 12px rgba(235,203,130,.5); }
 .blank.miss{ color:var(--ink-muted); }
 .heard{ min-height:24px; margin-top:6px; font-size:15px; color:var(--ink-muted); text-align:center; }
@@ -622,9 +626,29 @@ function render(){
   if(k === 'carry') return renderCarry();
 }
 
+/* Tester: one of the word's practice sentences (never the two held back as honest tests),
+   a different one each time, with the word cut out. Rotation lives under its own key. */
+function ctxFront(entry){
+  const all = entry.contexts || [], use = all.length >= 6 ? all.slice(0, -2) : all;
+  const good = use.filter(x => /\*[^*]+\*/.test(x));
+  if(!good.length) return null;
+  let rot = {}; try{ rot = JSON.parse(localStorage.getItem('vocab.tester.ctx') || '{}'); }catch(e){}
+  const i = (rot[entry.word] || 0) % good.length;
+  rot[entry.word] = i + 1; try{ localStorage.setItem('vocab.tester.ctx', JSON.stringify(rot)); }catch(e){}
+  const m = good[i].match(/^(.*?)\*([^*]+)\*(.*)$/);
+  return {pre: m[1], form: m[2], post: m[3]};
+}
+function ctxHTML(c, def, filled){
+  const slots = c.form.split(/\s+/).map(w => filled
+    ? `<span class="blank ok" style="--w:calc(${Math.max(w.length, 2)} * .5em + 10px)">${esc(w)}</span>`
+    : `<span class="blank" style="--w:calc(${Math.max(w.length, 2)} * .5em + 10px)"></span>`).join(' ');
+  return `<div class="cue ctx-sent">${esc(c.pre)}<span class="blanks-in" id="blanks">${slots}</span>${esc(c.post)}</div>` +
+    `<div class="ctx-def">${esc(def)}</div>`;
+}
 function cueHTML(){
   const t = card.type;
   let out;
+  if(card.ctx) return ctxHTML(card.ctx, card.cue, body().classList.contains('answered') || card.ctx.filled);
   if(t === 'upgrade') out = `<div class="cue">${struck(card.cue)}</div>`;
   else if(t === 'contrast') out = `<div class="cue">${gapped(card.cue)}</div><div class="options">One of: ${card.options.map(o => `<b>${esc(o)}</b>`).join(' · ')}</div>`;
   else if(t === 'cloze' || t === 'colloc' || /_{2,}/.test(card.cue || '')) out = `<div class="cue">${gapped(card.cue)}</div>`;
@@ -805,7 +829,8 @@ function fitWords(el, text){
 function renderSay(){
   Rec.cancel(); // a mic left on by the last card
   const blanks = TESTER && !micOff;
-  retrievalCard((blanks ? blanksHTML(card.entry.word) : '') + '<div class="heard" id="heard"></div>');
+  if(TESTER && !card.ctx && ['intent', 'ru', 'probe'].includes(card.type) && !/_{2,}/.test(card.cue || '')) card.ctx = ctxFront(card.entry);
+  retrievalCard((blanks && !card.ctx ? blanksHTML(card.entry.word) : '') + '<div class="heard" id="heard"></div>');
   S.sayTip = (S.sayTip || 0) + 1;
   if(!micOff){
     body().classList.add('has-mic');
@@ -828,6 +853,7 @@ function renderSay(){
     settled = true; Rec.cancel(); stopHints();
     const latency = performance.now() - shownAt, noSpeed = resumed;
     say(card.entry.word);
+    if(card.ctx) card.ctx.filled = true;
     revealCard('', true);
     setActions(`<button class="ans miss" id="no">Missed</button><button class="ans got" id="yes">Got it</button>`);
     $('no').onclick = () => answer({ok:false, latency, noSpeed, hints: hintsUsed}, 'miss');
@@ -842,7 +868,7 @@ function renderSay(){
     const r = heardVerdict(card.entry, text);
     if(r === 'right' || (r === 'close' && !interim)){
       settled = true; Rec.cancel(); stopHints();
-      if(blanks){ fillBlanks(card.entry.word.split(/\s+/), 'ok'); status('<div class="well">Well done</div>'); }
+      if(blanks){ fillBlanks((card.ctx ? card.ctx.form : card.entry.word).split(/\s+/), 'ok'); status('<div class="well">Well done</div>'); }
       else { status(`<span class="said live ok" id="words"></span><div class="well">Well done</div>`); fitWords($('words'), text); }
       const w = $('micWrap'); if(w) w.remove();
       setActions('');
