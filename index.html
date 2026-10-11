@@ -230,6 +230,8 @@ textarea{ min-height:96px; resize:none; font-size:18px; }
   padding:4px 10px; margin-right:10px; vertical-align:1px; }
 .intro-def{ font-size:16px; line-height:1.45; color:var(--ink); }
 .answered .reveal .ctx-sent{ color:var(--bright); font-size:19px; }
+.meet .ru-line{ color:var(--ink); font-size:17px; }
+.meet .clip{ margin-top:4px; }
 .answered .ctx-def{ display:none; }
 .blank.ok{ color:var(--light); border-bottom-color:var(--light); text-shadow:0 0 12px rgba(235,203,130,.5); }
 .blank.miss{ color:var(--ink-muted); }
@@ -939,9 +941,9 @@ function renderTyped(){
   inp.addEventListener('keydown', ev => { if(ev.key === 'Enter') check(); });
 }
 
-/* A new word is met in context (11 Oct 2026): the card says NEW WORD at the top; first the
-   meaning, small, and a sentence with the word missing, to guess out loud; then the word itself,
-   lit, back in its sentence, with the Russian, to say three times and then in the sentence. */
+/* A new word is met in context (11 Oct 2026): NEW WORD at the top, and everything at once, since
+   nobody can guess a word they have never seen: the word, lit, its Russian, the meaning, the word
+   in its sentence, and the clip at the bottom. Say it three times, then the sentence. */
 function splitAnchor(sent){
   const m = String(sent || '').match(/^(.*?)\*([^*]+)\*(.*)$/);
   return m ? {pre: m[1], form: m[2], post: m[3]} : null;
@@ -960,15 +962,16 @@ function renderIntro(){
     const chunks = (e.collocations || []).map(c => `<div>${esc(c.chunk)}</div>`).join('');
     const more = (chunks ? `<div class="chunks"><span class="lbl">goes with</span>${chunks}</div>` : '') +
       (e.ru_trap ? `<div class="trap">${marked(e.ru_trap)}</div>` : '') +
-      (e.nuance ? `<div class="note">${marked(e.nuance)}</div>` : '') + clip(e.word);
+      (e.nuance ? `<div class="note">${marked(e.nuance)}</div>` : '');
     setCard(`<div class="instr">${badge}${e.gesture ? 'Say it three times, with the movement. Then say the sentence.' : 'Say it three times, then say the sentence.'}</div>
       <div class="stage">
-        ${card.cue ? `<div class="intro-def">${esc(card.cue)}</div>` : ''}
-        <div class="reveal" style="display:flex;flex-direction:column;gap:12px">
+        <div class="reveal meet" style="display:flex;flex-direction:column;gap:12px">
           ${wordHTML(e.word)}
           <div class="ru-line">${esc(e.ru || '')}</div>
+          ${card.cue ? `<div class="intro-def">${esc(card.cue)}</div>` : ''}
           ${anchorHTML(anchor, true)}
           ${e.gesture ? `<div class="note">${esc(e.gesture)}</div>` : ''}
+          ${clip(e.word)}
         </div>
         ${more ? '<div class="more-cue">&#8964;</div>' : ''}
       </div>
@@ -980,11 +983,7 @@ function renderIntro(){
     setActions(`<button class="btn-main" id="nx">Next</button>`);
     $('nx').onclick = () => answer({}, 'on');
   };
-  if(card.meetOnly || !card.cue) return reveal();
-  setCard(`<div class="instr">${badge}Guess it out loud.</div>
-    <div class="stage"><div class="intro-def">${esc(card.cue)}</div>${anchorHTML(anchor, false)}<div class="pos">${esc(e.pos_full || '')}</div></div>`);
-  setActions(`<button class="btn-main" id="show">Show the word</button>`);
-  $('show').onclick = reveal;
+  reveal();
 }
 
 function renderHook(){
